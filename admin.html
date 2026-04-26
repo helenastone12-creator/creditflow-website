@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CréditFlow — Panel Admin</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{--navy:#0B1F45;--navy-mid:#142e60;--green:#00C896;--white:#fff;--bg:#F4F7FF;--slate:#8A9BBF;--text:#1a2b4a;--border:rgba(11,31,69,0.1);--radius:12px;--shadow:0 4px 24px rgba(11,31,69,0.08);--red:#e53e3e;--orange:#f6a623;}
+*{font-family:'Segoe UI',system-ui,sans-serif;}
+body{background:var(--bg);color:var(--text);min-height:100vh;}
+.screen{display:none;min-height:100vh;}
+.screen.active{display:flex;}
+
+/* LOADING */
+.loading-screen{position:fixed;inset:0;background:var(--navy);display:flex;align-items:center;justify-content:center;z-index:999;flex-direction:column;gap:16px;}
+.loading-logo{font-size:2rem;font-weight:800;color:var(--white);}
+.loading-logo span{color:var(--green);}
+.dots{display:flex;gap:8px;}
+.dots span{width:10px;height:10px;border-radius:50%;background:var(--green);animation:bounce 1.2s infinite;}
+.dots span:nth-child(2){animation-delay:0.2s;}
+.dots span:nth-child(3){animation-delay:0.4s;}
+@keyframes bounce{0%,80%,100%{transform:scale(0.8);opacity:0.5;}40%{transform:scale(1.2);opacity:1;}}
+@keyframes spin{to{transform:rotate(360deg);}}
+
+/* AUTH */
+#screen-auth{background:linear-gradient(135deg,var(--navy),var(--navy-mid));align-items:center;justify-content:center;padding:24px;}
+.auth-box{background:#fff;border-radius:20px;padding:48px 40px;width:100%;max-width:420px;box-shadow:0 32px 80px rgba(0,0,0,0.3);}
+.auth-logo{font-size:1.4rem;font-weight:800;color:var(--navy);text-align:center;margin-bottom:6px;}
+.auth-logo span{color:var(--green);}
+.auth-badge{background:rgba(229,62,62,0.1);color:var(--red);border:1px solid rgba(229,62,62,0.2);border-radius:50px;padding:4px 14px;font-size:0.75rem;font-weight:700;text-align:center;margin:0 auto 28px;display:inline-block;width:100%;}
+.form-field{margin-bottom:16px;}
+.form-field label{display:block;font-size:0.78rem;font-weight:700;color:var(--navy);margin-bottom:6px;}
+.form-field input{width:100%;padding:13px 16px;border:1.5px solid var(--border);border-radius:8px;font-size:0.92rem;outline:none;transition:all 0.2s;background:var(--bg);}
+.form-field input:focus{border-color:var(--green);background:#fff;}
+.btn-auth{width:100%;padding:14px;background:linear-gradient(135deg,var(--navy),var(--navy-mid));color:#fff;border:none;border-radius:50px;font-weight:700;font-size:0.95rem;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;margin-top:8px;}
+.btn-auth:hover{opacity:0.9;}
+.btn-auth:disabled{opacity:0.6;cursor:not-allowed;}
+.alert{border-radius:8px;padding:10px 14px;font-size:0.82rem;margin-bottom:14px;display:none;}
+.alert-error{background:#fff5f5;border:1px solid #feb2b2;color:var(--red);}
+.spinner{width:16px;height:16px;border:2px solid rgba(255,255,255,0.3);border-top-color:#fff;border-radius:50%;animation:spin 0.7s linear infinite;display:none;}
+
+/* TOPBAR */
+#screen-admin{flex-direction:column;}
+.topbar{background:var(--navy);height:64px;padding:0 24px;display:flex;align-items:center;justify-content:space-between;position:fixed;top:0;left:0;right:0;z-index:100;box-shadow:0 2px 16px rgba(0,0,0,0.2);}
+.topbar-logo{font-size:1.2rem;font-weight:800;color:#fff;}
+.topbar-logo span{color:var(--green);}
+.admin-badge{background:rgba(229,62,62,0.2);border:1px solid rgba(229,62,62,0.4);color:#fc8181;font-size:0.72rem;font-weight:700;padding:3px 10px;border-radius:50px;margin-left:10px;}
+.topbar-right{display:flex;align-items:center;gap:12px;}
+.logout-btn{background:rgba(255,255,255,0.1);border:none;color:rgba(255,255,255,0.8);font-size:0.78rem;cursor:pointer;padding:8px 14px;border-radius:50px;}
+.logout-btn:hover{background:rgba(255,255,255,0.2);}
+
+/* LAYOUT */
+.admin-layout{display:flex;padding-top:64px;min-height:100vh;}
+.sidebar{width:220px;flex-shrink:0;background:#fff;border-right:1px solid var(--border);padding:20px 0;position:fixed;top:64px;bottom:0;left:0;overflow-y:auto;}
+.sidebar-label{font-size:0.65rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--slate);padding:0 18px;margin-bottom:4px;margin-top:16px;}
+.nav-item{display:flex;align-items:center;gap:10px;padding:10px 18px;font-size:0.85rem;font-weight:500;color:var(--slate);cursor:pointer;transition:all 0.2s;border-left:3px solid transparent;}
+.nav-item:hover{background:var(--bg);color:var(--navy);}
+.nav-item.active{background:rgba(0,200,150,0.08);color:var(--navy);border-left-color:var(--green);font-weight:600;}
+.nav-icon{font-size:1rem;width:18px;text-align:center;}
+.nav-count{margin-left:auto;background:var(--red);color:#fff;font-size:0.65rem;font-weight:800;padding:2px 6px;border-radius:50px;}
+
+.admin-main{flex:1;margin-left:220px;padding:28px 24px;}
+.dash-section{display:none;}
+.dash-section.active{display:block;}
+
+/* PAGE HEADER */
+.page-header{margin-bottom:24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+.page-header h1{font-size:1.5rem;font-weight:800;color:var(--navy);}
+.page-header p{font-size:0.85rem;color:var(--slate);}
+
+/* STATS */
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:24px;}
+.stat-box{background:#fff;border-radius:var(--radius);padding:20px;border:1px solid var(--border);}
+.stat-box-icon{width:40px;height:40px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;margin-bottom:12px;}
+.stat-box-val{font-size:1.6rem;font-weight:800;color:var(--navy);}
+.stat-box-label{font-size:0.75rem;color:var(--slate);margin-top:2px;}
+
+/* TABLE */
+.table-card{background:#fff;border-radius:var(--radius);border:1px solid var(--border);overflow:hidden;}
+.table-header{padding:16px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;}
+.table-title{font-size:0.9rem;font-weight:700;color:var(--navy);}
+.search-input{padding:8px 14px;border:1.5px solid var(--border);border-radius:50px;font-size:0.82rem;outline:none;width:220px;transition:border-color 0.2s;}
+.search-input:focus{border-color:var(--green);}
+.data-table{width:100%;border-collapse:collapse;}
+.data-table th{background:var(--bg);padding:11px 16px;font-size:0.75rem;font-weight:700;color:var(--slate);text-align:left;text-transform:uppercase;letter-spacing:0.5px;border-bottom:1px solid var(--border);}
+.data-table td{padding:13px 16px;font-size:0.83rem;border-bottom:1px solid var(--border);color:var(--text);}
+.data-table tr:last-child td{border-bottom:none;}
+.data-table tr:hover td{background:#fafbff;}
+.data-table tr{cursor:pointer;}
+
+/* BADGES */
+.badge{display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:50px;font-size:0.72rem;font-weight:700;}
+.badge::before{content:'';width:6px;height:6px;border-radius:50%;}
+.badge-en_cours{background:rgba(246,166,35,0.12);color:#b45309;}.badge-en_cours::before{background:var(--orange);}
+.badge-accepte{background:rgba(0,200,150,0.12);color:#065f46;}.badge-accepte::before{background:var(--green);}
+.badge-refuse{background:rgba(229,62,62,0.1);color:#9b1c1c;}.badge-refuse::before{background:var(--red);}
+.badge-signe{background:rgba(59,130,246,0.1);color:#1e40af;}.badge-signe::before{background:#3b82f6;}
+
+/* BUTTONS */
+.btn-sm{padding:6px 14px;border-radius:50px;font-size:0.75rem;font-weight:600;border:none;cursor:pointer;transition:all 0.2s;}
+.btn-navy{background:var(--navy);color:#fff;}.btn-navy:hover{opacity:0.85;}
+.btn-green{background:var(--green);color:var(--navy);}.btn-green:hover{background:#00dfa8;}
+.btn-outline{background:transparent;border:1.5px solid var(--border);color:var(--slate);}.btn-outline:hover{border-color:var(--navy);color:var(--navy);}
+.btn-red{background:rgba(229,62,62,0.1);color:var(--red);border:1px solid rgba(229,62,62,0.2);}.btn-red:hover{background:var(--red);color:#fff;}
+
+/* MODAL */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:200;align-items:center;justify-content:center;padding:24px;}
+.modal-overlay.open{display:flex;}
+.modal{background:#fff;border-radius:20px;width:100%;max-width:680px;max-height:90vh;overflow-y:auto;box-shadow:0 32px 80px rgba(0,0,0,0.3);}
+.modal-header{padding:24px 28px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
+.modal-title{font-size:1.1rem;font-weight:700;color:var(--navy);}
+.modal-close{background:none;border:none;font-size:1.4rem;color:var(--slate);cursor:pointer;line-height:1;}
+.modal-body{padding:28px;}
+.modal-footer{padding:16px 28px;border-top:1px solid var(--border);display:flex;gap:10px;justify-content:flex-end;}
+
+/* CHAT ADMIN */
+.admin-chat{background:var(--bg);border-radius:var(--radius);padding:16px;height:300px;overflow-y:auto;display:flex;flex-direction:column;gap:12px;margin-bottom:16px;}
+.msg{display:flex;gap:10px;max-width:85%;}
+.msg.mine{align-self:flex-end;flex-direction:row-reverse;}
+.msg-av{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.68rem;flex-shrink:0;}
+.bubble{padding:9px 13px;border-radius:10px;font-size:0.83rem;line-height:1.5;}
+.msg.other .bubble{background:#fff;border:1px solid var(--border);border-radius:3px 10px 10px 10px;}
+.msg.mine .bubble{background:var(--navy);color:#fff;border-radius:10px 3px 10px 10px;}
+.msg-time{font-size:0.62rem;color:var(--slate);margin-top:3px;}
+.chat-inp-row{display:flex;gap:10px;}
+.chat-inp{flex:1;padding:10px 16px;border:1.5px solid var(--border);border-radius:50px;font-size:0.85rem;outline:none;}
+.chat-inp:focus{border-color:var(--green);}
+.btn-send{width:38px;height:38px;border-radius:50%;background:var(--navy);border:none;color:#fff;cursor:pointer;font-size:0.9rem;flex-shrink:0;}
+
+/* STATUS SELECT */
+.status-select{padding:8px 14px;border:1.5px solid var(--border);border-radius:8px;font-size:0.85rem;outline:none;color:var(--navy);cursor:pointer;transition:border-color 0.2s;background:#fff;}
+.status-select:focus{border-color:var(--green);}
+
+/* INFO GRID */
+.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px;}
+.info-item{background:var(--bg);border-radius:8px;padding:12px 16px;}
+.info-item label{display:block;font-size:0.7rem;font-weight:700;color:var(--slate);margin-bottom:4px;text-transform:uppercase;letter-spacing:0.5px;}
+.info-item span{font-size:0.88rem;font-weight:600;color:var(--navy);}
+
+/* EMPTY */
+.empty{text-align:center;padding:48px 24px;color:var(--slate);}
+.empty .icon{font-size:3rem;margin-bottom:12px;}
+.empty p{font-size:0.88rem;}
+
+/* NOTIFICATION */
+.notif{position:fixed;bottom:24px;right:24px;background:var(--navy);color:#fff;padding:14px 20px;border-radius:12px;font-size:0.85rem;font-weight:500;z-index:999;transform:translateY(100px);opacity:0;transition:all 0.3s;box-shadow:var(--shadow);}
+.notif.show{transform:translateY(0);opacity:1;}
+.notif.green{background:var(--green);color:var(--navy);}
+
+/* RESPONSIVE */
+@media(max-width:1024px){.stats-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:768px){.admin-main{margin-left:0;padding:20px 16px;}.sidebar{display:none;}.stats-grid{grid-template-columns:1fr 1fr;}.info-grid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<div class="loading-screen" id="loadingScreen">
+  <div class="loading-logo">Crédit<span>Flow</span> <span style="font-size:0.9rem;color:rgba(255,255,255,0.5);">Admin</span></div>
+  <div class="dots"><span></span><span></span><span></span></div>
+</div>
+
+<div class="notif" id="notif"></div>
+
+<!-- AUTH -->
+<div id="screen-auth" class="screen">
+  <div class="auth-box">
+    <div class="auth-logo">Crédit<span>Flow</span></div>
+    <div class="auth-badge">🔐 Accès Administrateur</div>
+    <div class="alert alert-error" id="auth-error"></div>
+    <div class="form-field"><label>Email administrateur</label><input type="email" id="a-email" placeholder="admin@creditflow.eu" onkeydown="if(event.key==='Enter')doAdminLogin()"></div>
+    <div class="form-field"><label>Mot de passe</label><input type="password" id="a-pass" placeholder="••••••••" onkeydown="if(event.key==='Enter')doAdminLogin()"></div>
+    <button class="btn-auth" id="btn-login" onclick="doAdminLogin()">
+      <div class="spinner" id="login-sp"></div>
+      <span id="login-txt">Accéder au panel →</span>
+    </button>
+  </div>
+</div>
+
+<!-- ADMIN PANEL -->
+<div id="screen-admin" class="screen">
+  <div class="topbar">
+    <div style="display:flex;align-items:center;">
+      <div class="topbar-logo">Crédit<span>Flow</span></div>
+      <span class="admin-badge">ADMIN</span>
+    </div>
+    <div class="topbar-right">
+      <span style="font-size:0.78rem;color:rgba(255,255,255,0.5);" id="admin-email-display"></span>
+      <button class="logout-btn" onclick="doLogout()">⬅ Déconnexion</button>
+    </div>
+  </div>
+
+  <div class="admin-layout">
+    <div class="sidebar">
+      <div class="sidebar-label">Vue générale</div>
+      <div class="nav-item active" onclick="showSection('dashboard')"><span class="nav-icon">📊</span> Dashboard</div>
+      <div class="nav-item" onclick="showSection('simulations')"><span class="nav-icon">📊</span> Simulations<span class="nav-count" id="sim-count" style="display:none;"></span></div>
+      <div class="sidebar-label">Gestion</div>
+      <div class="nav-item" onclick="showSection('simulations')"><span class="nav-icon">🧮</span> Simulations<span class="nav-count" id="sim-count" style="display:none;"></span></div>
+      <div class="nav-item" onclick="showSection('clients')"><span class="nav-icon">👥</span> Clients<span class="nav-count" id="clients-count" style="display:none;"></span></div>
+      <div class="nav-item" onclick="showSection('dossiers')"><span class="nav-icon">📋</span> Dossiers</div>
+      <div class="nav-item" onclick="showSection('messages')"><span class="nav-icon">💬</span> Messages<span class="nav-count" id="msg-count" style="display:none;"></span></div>
+    </div>
+
+    <div class="admin-main">
+
+      <!-- DASHBOARD -->
+      <div class="dash-section active" id="section-dashboard">
+        <div class="page-header">
+          <div><h1>Dashboard Admin</h1><p id="dash-date"></p></div>
+          <button class="btn-sm btn-green" onclick="loadAll()">🔄 Actualiser</button>
+        </div>
+        <div class="stats-grid">
+          <div class="stat-box"><div class="stat-box-icon" style="background:rgba(11,31,69,0.08);">👥</div><div class="stat-box-val" id="stat-clients">--</div><div class="stat-box-label">Clients inscrits</div></div>
+          <div class="stat-box"><div class="stat-box-icon" style="background:rgba(246,166,35,0.12);">📋</div><div class="stat-box-val" id="stat-dossiers">--</div><div class="stat-box-label">Dossiers en cours</div></div>
+          <div class="stat-box"><div class="stat-box-icon" style="background:rgba(0,200,150,0.12);">✅</div><div class="stat-box-val" id="stat-acceptes">--</div><div class="stat-box-label">Dossiers acceptés</div></div>
+          <div class="stat-box"><div class="stat-box-icon" style="background:rgba(229,62,62,0.08);">💬</div><div class="stat-box-val" id="stat-msgs">--</div><div class="stat-box-label">Messages reçus</div></div>
+        </div>
+        <div class="table-card">
+          <div class="table-header"><span class="table-title">📋 Derniers dossiers</span><button class="btn-sm btn-navy" onclick="showSection('dossiers')">Voir tout →</button></div>
+          <div id="recent-dossiers"><div class="empty"><div class="icon">⏳</div><p>Chargement...</p></div></div>
+        </div>
+      </div>
+
+      <!-- SIMULATIONS -->
+      <div class="dash-section" id="section-simulations">
+        <div class="page-header">
+          <div><h1>Simulations reçues</h1><p>Toutes les demandes effectuées par les clients</p></div>
+          <button class="btn-sm btn-green" onclick="loadSimulations()">🔄 Actualiser</button>
+        </div>
+        <div class="table-card">
+          <div class="table-header"><span class="table-title">🧮 Demandes de simulation</span></div>
+          <div id="simulations-table"><div class="empty"><div class="icon">⏳</div><p>Chargement...</p></div></div>
+        </div>
+      </div>
+
+      <!-- SIMULATIONS -->
+      <div class="dash-section" id="section-simulations">
+        <div class="page-header">
+          <div><h1>Simulations reçues</h1><p>Toutes les demandes envoyées par les clients</p></div>
+          <button class="btn-sm btn-green" onclick="loadSimulations()">🔄 Actualiser</button>
+        </div>
+        <div class="table-card">
+          <div id="simulations-table"><div class="empty"><div class="icon">⏳</div><p>Chargement...</p></div></div>
+        </div>
+      </div>
+
+      <!-- CLIENTS -->
+      <div class="dash-section" id="section-clients">
+        <div class="page-header"><div><h1>Clients</h1><p>Liste de tous les clients inscrits</p></div></div>
+        <div class="table-card">
+          <div class="table-header">
+            <span class="table-title">👥 Tous les clients</span>
+            <input class="search-input" placeholder="🔍 Rechercher..." oninput="filterClients(this.value)">
+          </div>
+          <div id="clients-table"><div class="empty"><div class="icon">⏳</div><p>Chargement...</p></div></div>
+        </div>
+      </div>
+
+      <!-- DOSSIERS -->
+      <div class="dash-section" id="section-dossiers">
+        <div class="page-header"><div><h1>Dossiers de prêt</h1><p>Gérez et suivez tous les dossiers</p></div></div>
+        <div style="display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;">
+          <button class="btn-sm btn-navy" onclick="filterDossiers('all')">Tous</button>
+          <button class="btn-sm btn-outline" onclick="filterDossiers('en_cours')">⏳ En cours</button>
+          <button class="btn-sm btn-outline" onclick="filterDossiers('accepte')">✅ Acceptés</button>
+          <button class="btn-sm btn-outline" onclick="filterDossiers('refuse')">❌ Refusés</button>
+          <button class="btn-sm btn-outline" onclick="filterDossiers('signe')">🖊️ Signés</button>
+        </div>
+        <div class="table-card">
+          <div id="dossiers-table"><div class="empty"><div class="icon">⏳</div><p>Chargement...</p></div></div>
+        </div>
+      </div>
+
+      <!-- MESSAGES -->
+      <div class="dash-section" id="section-messages">
+        <div class="page-header"><div><h1>Messagerie</h1><p>Répondez aux clients</p></div></div>
+        <div style="display:grid;grid-template-columns:280px 1fr;gap:16px;height:600px;">
+          <div class="table-card" style="overflow-y:auto;">
+            <div style="padding:14px 16px;border-bottom:1px solid var(--border);font-size:0.85rem;font-weight:700;color:var(--navy);">Conversations</div>
+            <div id="conv-list"><div class="empty"><p>Aucune conversation</p></div></div>
+          </div>
+          <div class="table-card" style="display:flex;flex-direction:column;" id="chat-panel">
+            <div style="padding:16px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:12px;" id="chat-client-header">
+              <div style="font-size:0.88rem;color:var(--slate);">Sélectionnez une conversation</div>
+            </div>
+            <div class="admin-chat" id="admin-chat-msgs"></div>
+            <div style="padding:14px 20px;border-top:1px solid var(--border);">
+              <div class="chat-inp-row">
+                <input class="chat-inp" id="admin-chat-inp" placeholder="Écrivez votre réponse..." onkeydown="if(event.key==='Enter')sendAdminMsg()">
+                <button class="btn-send" onclick="sendAdminMsg()">➤</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- MODAL DOSSIER -->
+<div class="modal-overlay" id="modal-dossier">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title" id="modal-title">Détail du dossier</div>
+      <button class="modal-close" onclick="closeModal('modal-dossier')">✕</button>
+    </div>
+    <div class="modal-body" id="modal-body"></div>
+    <div class="modal-footer" id="modal-footer"></div>
+  </div>
+</div>
+
+<script>
+const SUPABASE_URL = 'https://fsflgwbcaietfwrtofbs.supabase.co';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZzZmxnd2JjYWlldGZ3cnRvZmJzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzcxOTkyODMsImV4cCI6MjA5Mjc3NTI4M30.60v27ULp8h8IgvJWjC473etnfNZoZ3GBxK5Aq74mkbU';
+const { createClient } = supabase;
+const sb = createClient(SUPABASE_URL, SUPABASE_KEY);
+
+let allClients = [], allDossiers = [], allMessages = [];
+let selectedDossierId = null;
+
+// INIT
+window.addEventListener('load', async () => {
+  try {
+    const { data: { session } } = await sb.auth.getSession();
+    if (session) { await initAdmin(session.user); }
+    else { showAuth(); }
+  } catch(e) { showAuth(); }
+  document.getElementById('loadingScreen').style.display = 'none';
+  document.getElementById('dash-date').textContent = new Date().toLocaleDateString('fr-FR', {weekday:'long',day:'numeric',month:'long',year:'numeric'});
+});
+
+function showAuth() { document.getElementById('screen-auth').classList.add('active'); }
+function showAdminPanel() { document.getElementById('screen-admin').classList.add('active'); document.getElementById('screen-auth').classList.remove('active'); }
+
+async function initAdmin(user) {
+  document.getElementById('admin-email-display').textContent = user.email;
+  showAdminPanel();
+  await loadAll();
+  await loadSimulations();
+  await loadSimulations();
+}
+
+// AUTH
+async function doAdminLogin() {
+  const email = document.getElementById('a-email').value.trim();
+  const pass = document.getElementById('a-pass').value;
+  if (!email || !pass) { showErr('auth-error', 'Remplissez tous les champs.'); return; }
+  setBtn(true);
+  const { data, error } = await sb.auth.signInWithPassword({ email, password: pass });
+  setBtn(false);
+  if (error) { showErr('auth-error', 'Identifiants incorrects.'); return; }
+  await initAdmin(data.user);
+}
+
+async function doLogout() {
+  await sb.auth.signOut();
+  document.getElementById('screen-admin').classList.remove('active');
+  showAuth();
+}
+
+function setBtn(loading) {
+  document.getElementById('btn-login').disabled = loading;
+  document.getElementById('login-sp').style.display = loading ? 'block' : 'none';
+  document.getElementById('login-txt').textContent = loading ? 'Connexion...' : 'Accéder au panel →';
+}
+function showErr(id, msg) { const el = document.getElementById(id); el.textContent = msg; el.style.display = 'block'; }
+
+// NOUVEAU SUPABASE POUR SIMULATIONS
+const SIM_URL = 'https://fsflgwbcaietfwrtofbs.supabase.co';
+const SIM_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZzZmxnd2JjYWlldGZ3cnRvZmJzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzcxOTkyODMsImV4cCI6MjA5Mjc3NTI4M30.60v27ULp8h8IgvJWjC473etnfNZoZ3GBxK5Aq74mkbU';
+
+async function loadSimulations() {
+  const res = await fetch(SIM_URL + '/rest/v1/simulations?select=*&order=created_at.desc', {
+    headers: { 'apikey': SIM_KEY, 'Authorization': 'Bearer ' + SIM_KEY }
+  });
+  const data = await res.json();
+  const container = document.getElementById('simulations-table');
+  if (!data || !data.length) {
+    container.innerHTML = '<div class="empty"><div class="icon">📭</div><p>Aucune simulation reçue pour le moment.</p></div>';
+    return;
+  }
+  // Badge count
+  document.getElementById('sim-count').textContent = data.length;
+  document.getElementById('sim-count').style.display = 'inline';
+  // Render table
+  container.innerHTML = `
+  <table class="data-table">
+    <thead><tr><th>Date</th><th>Projet</th><th>Montant</th><th>Mensualité</th><th>Durée</th></tr></thead>
+    <tbody>${data.map(s => `<tr>
+      <td>${fmtDate(s.created_at)}</td>
+      <td><strong>${s.projet || '--'}</strong></td>
+      <td style="color:var(--navy);font-weight:600;">${s.montant || '--'}</td>
+      <td>${s.mensualite || '--'}</td>
+      <td>${s.duree || '--'}</td>
+    </tr>`).join('')}</tbody>
+  </table>`;
+}
+
+
+// LOAD SIMULATIONS
+var allSimulations = [];
+async function loadSimulations() {
+  const { data: sims } = await sb.from('simulations').select('*').order('created_at', { ascending: false });
+  allSimulations = sims || [];
+  if (allSimulations.length > 0) {
+    document.getElementById('sim-count').textContent = allSimulations.length;
+    document.getElementById('sim-count').style.display = 'inline';
+  }
+  if (!allSimulations.length) {
+    document.getElementById('simulations-table').innerHTML = '<div class="empty"><div class="icon">📭</div><p>Aucune simulation reçue pour le moment</p></div>';
+    return;
+  }
+  document.getElementById('simulations-table').innerHTML = `
+  <table class="data-table">
+    <thead><tr><th>Date</th><th>Projet</th><th>Montant</th><th>Mensualité</th><th>Durée</th></tr></thead>
+    <tbody>${allSimulations.map(s => `<tr>
+      <td>${fmtDate(s.created_at)}</td>
+      <td><span class="badge badge-en_cours">${s.projet || '--'}</span></td>
+      <td style="font-weight:700;color:var(--navy);">${s.montant || '--'}</td>
+      <td style="color:var(--green);font-weight:600;">${s.mensualite || '--'}</td>
+      <td>${s.duree || '--'}</td>
+    </tr>`).join('')}</tbody>
+  </table>`;
+}
+
+async function loadAll() {
+  const [{ data: profiles }, { data: dossiers }, { data: messages }] = await Promise.all([
+    sb.from('profiles').select('*').order('created_at', { ascending: false }),
+    sb.from('dossiers').select('*, profiles(prenom, nom)').order('created_at', { ascending: false }),
+    sb.from('messages').select('*').order('created_at', { ascending: false })
+  ]);
+
+  allClients = profiles || [];
+  allDossiers = dossiers || [];
+  allMessages = messages || [];
+
+  // Stats
+  document.getElementById('stat-clients').textContent = allClients.length;
+  document.getElementById('stat-dossiers').textContent = allDossiers.filter(d => d.statut === 'en_cours').length;
+  document.getElementById('stat-acceptes').textContent = allDossiers.filter(d => d.statut === 'accepte').length;
+  document.getElementById('stat-msgs').textContent = allMessages.filter(m => m.expediteur === 'client').length;
+
+  // Badges
+  const newMsgs = allMessages.filter(m => m.expediteur === 'client').length;
+  if (newMsgs > 0) { document.getElementById('msg-count').textContent = newMsgs; document.getElementById('msg-count').style.display = 'inline'; }
+
+  renderRecentDossiers();
+  renderClientsTable(allClients);
+  renderDossiersTable(allDossiers);
+  renderConvList();
+}
+
+// RECENT DOSSIERS
+function renderRecentDossiers() {
+  const d = allDossiers.slice(0, 5);
+  if (!d.length) { document.getElementById('recent-dossiers').innerHTML = '<div class="empty"><div class="icon">📭</div><p>Aucun dossier</p></div>'; return; }
+  document.getElementById('recent-dossiers').innerHTML = `
+  <table class="data-table">
+    <thead><tr><th>Client</th><th>Type</th><th>Montant</th><th>Statut</th><th>Date</th></tr></thead>
+    <tbody>${d.map(dos => `<tr onclick="openDossier('${dos.id}')">
+      <td><strong>${dos.profiles?.prenom || '--'} ${dos.profiles?.nom || ''}</strong></td>
+      <td>${dos.type_pret || '--'}</td>
+      <td>${num(dos.montant)} €</td>
+      <td><span class="badge badge-${dos.statut}">${labelS(dos.statut)}</span></td>
+      <td>${fmtDate(dos.created_at)}</td>
+    </tr>`).join('')}</tbody>
+  </table>`;
+}
+
+// CLIENTS TABLE
+function renderClientsTable(clients) {
+  if (!clients.length) { document.getElementById('clients-table').innerHTML = '<div class="empty"><div class="icon">👥</div><p>Aucun client inscrit</p></div>'; return; }
+  document.getElementById('clients-table').innerHTML = `
+  <table class="data-table">
+    <thead><tr><th>Nom</th><th>Téléphone</th><th>Dossiers</th><th>Actions</th></tr></thead>
+    <tbody>${clients.map(c => {
+      const dos = allDossiers.filter(d => d.user_id === c.id);
+      return `<tr>
+        <td><strong>${c.prenom || '--'} ${c.nom || ''}</strong></td>
+        <td>${c.telephone || '--'}</td>
+        <td>${dos.length > 0 ? `<span class="badge badge-${dos[0].statut}">${dos.length} dossier${dos.length>1?'s':''}</span>` : '<span style="color:var(--slate);font-size:0.78rem;">Aucun</span>'}</td>
+        <td><button class="btn-sm btn-navy" onclick="openClientDossiers('${c.id}')">Voir dossiers</button></td>
+      </tr>`;
+    }).join('')}</tbody>
+  </table>`;
+}
+
+function filterClients(q) {
+  const filtered = allClients.filter(c =>
+    (c.prenom + ' ' + c.nom + ' ' + (c.telephone || '')).toLowerCase().includes(q.toLowerCase())
+  );
+  renderClientsTable(filtered);
+}
+
+// DOSSIERS TABLE
+function renderDossiersTable(dossiers) {
+  if (!dossiers.length) { document.getElementById('dossiers-table').innerHTML = '<div class="empty"><div class="icon">📭</div><p>Aucun dossier</p></div>'; return; }
+  document.getElementById('dossiers-table').innerHTML = `
+  <table class="data-table">
+    <thead><tr><th>Client</th><th>Type</th><th>Montant</th><th>Durée</th><th>Statut</th><th>Date</th><th>Actions</th></tr></thead>
+    <tbody>${dossiers.map(dos => `<tr>
+      <td><strong>${dos.profiles?.prenom || '--'} ${dos.profiles?.nom || ''}</strong></td>
+      <td>${dos.type_pret || '--'}</td>
+      <td>${num(dos.montant)} €</td>
+      <td>${dos.duree} ans</td>
+      <td><span class="badge badge-${dos.statut}">${labelS(dos.statut)}</span></td>
+      <td>${fmtDate(dos.created_at)}</td>
+      <td><button class="btn-sm btn-navy" onclick="openDossier('${dos.id}')">Gérer</button></td>
+    </tr>`).join('')}</tbody>
+  </table>`;
+}
+
+function filterDossiers(statut) {
+  const filtered = statut === 'all' ? allDossiers : allDossiers.filter(d => d.statut === statut);
+  renderDossiersTable(filtered);
+}
+
+// OPEN DOSSIER MODAL
+function openDossier(id) {
+  const dos = allDossiers.find(d => d.id === id);
+  if (!dos) return;
+  const msgs = allMessages.filter(m => m.dossier_id === id);
+  const M = calcM(dos.montant, dos.duree);
+
+  document.getElementById('modal-title').textContent = `Dossier — ${dos.profiles?.prenom || ''} ${dos.profiles?.nom || ''}`;
+  document.getElementById('modal-body').innerHTML = `
+    <div class="info-grid">
+      <div class="info-item"><label>Type de prêt</label><span>${dos.type_pret || '--'}</span></div>
+      <div class="info-item"><label>Montant</label><span>${num(dos.montant)} €</span></div>
+      <div class="info-item"><label>Durée</label><span>${dos.duree} ans</span></div>
+      <div class="info-item"><label>Mensualité estimée</label><span>${num(Math.round(M))} €/mois</span></div>
+      <div class="info-item"><label>Statut actuel</label><span><span class="badge badge-${dos.statut}">${labelS(dos.statut)}</span></span></div>
+      <div class="info-item"><label>Date de création</label><span>${fmtDate(dos.created_at)}</span></div>
+    </div>
+    <div style="margin-bottom:20px;">
+      <label style="display:block;font-size:0.78rem;font-weight:700;color:var(--navy);margin-bottom:8px;">🔄 Changer le statut</label>
+      <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
+        <select class="status-select" id="new-statut" onchange="">
+          <option value="en_cours" ${dos.statut==='en_cours'?'selected':''}>⏳ En cours d'analyse</option>
+          <option value="accepte" ${dos.statut==='accepte'?'selected':''}>✅ Accepté</option>
+          <option value="refuse" ${dos.statut==='refuse'?'selected':''}>❌ Refusé</option>
+          <option value="signe" ${dos.statut==='signe'?'selected':''}>🖊️ Signé</option>
+          <option value="verse" ${dos.statut==='verse'?'selected':''}>💶 Fonds versés</option>
+        </select>
+        <button class="btn-sm btn-green" onclick="updateStatut('${id}')">Mettre à jour</button>
+      </div>
+    </div>
+    <div>
+      <div style="font-size:0.78rem;font-weight:700;color:var(--navy);margin-bottom:10px;">💬 Messages (${msgs.length})</div>
+      <div class="admin-chat" id="modal-chat">
+        ${msgs.length === 0 ? '<div style="text-align:center;color:var(--slate);font-size:0.83rem;padding:20px;">Aucun message</div>' :
+          msgs.map(m => {
+            const mine = m.expediteur === 'conseiller';
+            return `<div class="msg ${mine?'mine':'other'}">
+              <div class="msg-av" style="${mine?'background:linear-gradient(135deg,#0B1F45,#142e60);color:#fff;':'background:linear-gradient(135deg,var(--green),#00a87d);color:#0B1F45;'}">${mine?'SL':'C'}</div>
+              <div><div class="bubble">${m.contenu}</div><div class="msg-time">${fmtTime(m.created_at)}</div></div>
+            </div>`;
+          }).join('')}
+      </div>
+      <div class="chat-inp-row" style="margin-top:12px;">
+        <input class="chat-inp" id="modal-reply" placeholder="Répondre au client..." onkeydown="if(event.key==='Enter')replyFromModal('${id}')">
+        <button class="btn-send" onclick="replyFromModal('${id}')">➤</button>
+      </div>
+    </div>`;
+
+  document.getElementById('modal-footer').innerHTML = `<button class="btn-sm btn-outline" onclick="closeModal('modal-dossier')">Fermer</button>`;
+  document.getElementById('modal-dossier').classList.add('open');
+
+  setTimeout(() => {
+    const chat = document.getElementById('modal-chat');
+    if (chat) chat.scrollTop = chat.scrollHeight;
+  }, 100);
+}
+
+async function updateStatut(dossierId) {
+  const newStatut = document.getElementById('new-statut').value;
+  const { error } = await sb.from('dossiers').update({ statut: newStatut }).eq('id', dossierId);
+  if (!error) {
+    showNotif('✅ Statut mis à jour !', 'green');
+    await loadAll();
+    closeModal('modal-dossier');
+  } else { showNotif('❌ Erreur lors de la mise à jour'); }
+}
+
+async function replyFromModal(dossierId) {
+  const inp = document.getElementById('modal-reply');
+  const text = inp.value.trim();
+  if (!text) return;
+  inp.value = '';
+  const { data } = await sb.from('messages').insert({ dossier_id: dossierId, expediteur: 'conseiller', contenu: text }).select().single();
+  if (data) {
+    allMessages.push(data);
+    const chat = document.getElementById('modal-chat');
+    const div = document.createElement('div');
+    div.className = 'msg mine';
+    div.innerHTML = `<div class="msg-av" style="background:linear-gradient(135deg,#0B1F45,#142e60);color:#fff;">SL</div><div><div class="bubble">${text}</div><div class="msg-time">À l'instant</div></div>`;
+    chat.appendChild(div);
+    chat.scrollTop = chat.scrollHeight;
+    showNotif('✅ Message envoyé !', 'green');
+  }
+}
+
+// CONV LIST
+function renderConvList() {
+  const dossierIds = [...new Set(allMessages.map(m => m.dossier_id))];
+  if (!dossierIds.length) { document.getElementById('conv-list').innerHTML = '<div class="empty"><p>Aucun message</p></div>'; return; }
+  document.getElementById('conv-list').innerHTML = dossierIds.map(did => {
+    const dos = allDossiers.find(d => d.id === did);
+    const lastMsg = allMessages.filter(m => m.dossier_id === did).pop();
+    const clientMsgs = allMessages.filter(m => m.dossier_id === did && m.expediteur === 'client').length;
+    return `<div style="display:flex;align-items:center;gap:12px;padding:14px 16px;border-bottom:1px solid var(--border);cursor:pointer;transition:background 0.2s;" onmouseover="this.style.background='var(--bg)'" onmouseout="this.style.background=''" onclick="openConv('${did}')">
+      <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--green),#00a87d);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.75rem;color:var(--navy);flex-shrink:0;">${(dos?.profiles?.prenom?.[0]||'?')+(dos?.profiles?.nom?.[0]||'')}</div>
+      <div style="flex:1;min-width:0;">
+        <div style="font-size:0.83rem;font-weight:700;color:var(--navy);">${dos?.profiles?.prenom||'--'} ${dos?.profiles?.nom||''}</div>
+        <div style="font-size:0.72rem;color:var(--slate);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${lastMsg?.contenu||''}</div>
+      </div>
+      ${clientMsgs>0?`<div style="background:var(--red);color:#fff;font-size:0.65rem;font-weight:800;width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;">${clientMsgs}</div>`:''}
+    </div>`;
+  }).join('');
+}
+
+function openConv(dossierId) {
+  selectedDossierId = dossierId;
+  const dos = allDossiers.find(d => d.id === dossierId);
+  const msgs = allMessages.filter(m => m.dossier_id === dossierId);
+  document.getElementById('chat-client-header').innerHTML = `
+    <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--green),#00a87d);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.75rem;color:var(--navy);">${(dos?.profiles?.prenom?.[0]||'?')+(dos?.profiles?.nom?.[0]||'')}</div>
+    <div><div style="font-size:0.88rem;font-weight:700;color:var(--navy);">${dos?.profiles?.prenom||'--'} ${dos?.profiles?.nom||''}</div><div style="font-size:0.72rem;color:var(--green);">● Actif</div></div>`;
+  const container = document.getElementById('admin-chat-msgs');
+  container.innerHTML = msgs.map(m => {
+    const mine = m.expediteur === 'conseiller';
+    return `<div class="msg ${mine?'mine':'other'}">
+      <div class="msg-av" style="${mine?'background:linear-gradient(135deg,#0B1F45,#142e60);color:#fff;':'background:linear-gradient(135deg,var(--green),#00a87d);color:#0B1F45;'}">${mine?'SL':(dos?.profiles?.prenom?.[0]||'C')}</div>
+      <div><div class="bubble">${m.contenu}</div><div class="msg-time">${fmtTime(m.created_at)}</div></div>
+    </div>`;
+  }).join('') || '<div style="text-align:center;color:var(--slate);font-size:0.83rem;padding:20px;">Aucun message</div>';
+  container.scrollTop = container.scrollHeight;
+}
+
+async function sendAdminMsg() {
+  if (!selectedDossierId) { showNotif('Sélectionnez d\'abord une conversation.'); return; }
+  const inp = document.getElementById('admin-chat-inp');
+  const text = inp.value.trim();
+  if (!text) return;
+  inp.value = '';
+  const { data } = await sb.from('messages').insert({ dossier_id: selectedDossierId, expediteur: 'conseiller', contenu: text }).select().single();
+  if (data) {
+    allMessages.push(data);
+    const container = document.getElementById('admin-chat-msgs');
+    const div = document.createElement('div');
+    div.className = 'msg mine';
+    div.innerHTML = `<div class="msg-av" style="background:linear-gradient(135deg,#0B1F45,#142e60);color:#fff;">SL</div><div><div class="bubble">${text}</div><div class="msg-time">À l'instant</div></div>`;
+    container.appendChild(div);
+    container.scrollTop = container.scrollHeight;
+    showNotif('✅ Message envoyé !', 'green');
+    renderConvList();
+  }
+}
+
+function openClientDossiers(clientId) {
+  const dos = allDossiers.filter(d => d.user_id === clientId);
+  showSection('dossiers');
+  renderDossiersTable(dos);
+}
+
+// HELPERS
+function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+function calcM(P, dur) { const n=dur*12, r=0.035/12; return P*(r*Math.pow(1+r,n))/(Math.pow(1+r,n)-1); }
+function num(n) { return Number(n).toLocaleString('fr-FR'); }
+function labelS(s) { return {en_cours:"En cours",accepte:'Accepté',refuse:'Refusé',signe:'Signé',verse:'Versé'}[s]||s; }
+function fmtDate(d) { return new Date(d).toLocaleDateString('fr-FR',{day:'2-digit',month:'2-digit',year:'numeric'}); }
+function fmtTime(d) { return new Date(d).toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'}); }
+function showNotif(msg, type='') {
+  const el = document.getElementById('notif');
+  el.textContent = msg; el.className = 'notif show' + (type?' '+type:'');
+  setTimeout(() => el.className = 'notif', 3000);
+}
+function showSection(id) {
+  document.querySelectorAll('.dash-section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  document.getElementById('section-'+id).classList.add('active');
+  const map = {dashboard:0,simulations:1,clients:2,dossiers:3,messages:4};
+  document.querySelectorAll('.nav-item')[map[id]]?.classList.add('active');
+}
+</script>
+</body>
+</html>

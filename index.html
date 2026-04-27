@@ -698,11 +698,11 @@
 <div id="page-home" class="page active">
 
   <!-- HERO -->
-  <section style="position:relative;width:100%;min-height:520px;overflow:hidden;display:flex;flex-direction:column;">
+  <section style="position:relative;width:100%;min-height:520px;overflow:hidden;display:flex;flex-direction:column;background:linear-gradient(135deg,var(--navy),var(--navy-mid));">
     <!-- Photo de fond -->
     <div style="position:absolute;inset:0;z-index:0;">
-      <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=1400&q=80" alt="hero" style="width:100%;height:100%;object-fit:cover;object-position:center top;">
-      <div style="position:absolute;inset:0;background:linear-gradient(to bottom, rgba(11,31,69,0.55) 0%, rgba(11,31,69,0.35) 50%, rgba(11,31,69,0.7) 100%);"></div>
+      <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=1400&q=80" alt="" loading="eager" style="width:100%;height:100%;object-fit:cover;object-position:center top;" onerror="this.style.display='none'">
+      <div style="position:absolute;inset:0;background:linear-gradient(to bottom, rgba(11,31,69,0.65) 0%, rgba(11,31,69,0.45) 40%, rgba(11,31,69,0.8) 100%);"></div>
     </div>
 
     <!-- Contenu texte -->
@@ -1714,7 +1714,24 @@ function selectTile(el, type) {
 }
 function continuerSim() {
   if (!selectedTileType) { alert('Veuillez sélectionner un type de financement.'); return; }
-  showPage('simulateur');
+  // Aller au simulateur sans reset
+  document.querySelectorAll('.page').forEach(function(p) { p.classList.remove('active'); });
+  document.getElementById('page-simulateur').classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  // Pré-remplir le projet et aller directement à l'étape 2
+  var labels = { immobilier: 'Immobilier', auto: 'Auto / Moto', personnel: 'Prêt personnel', travaux: 'Travaux' };
+  simData.projet = labels[selectedTileType] || selectedTileType;
+  // Cocher la bonne tuile à l'étape 1
+  setTimeout(function() {
+    var choices = document.querySelectorAll('#step-1 .sim-choice');
+    choices.forEach(function(c) {
+      if (c.textContent.indexOf(simData.projet) !== -1) {
+        c.classList.add('selected');
+      }
+    });
+    // Aller directement à l'étape 2
+    goStep(2);
+  }, 100);
 }
 
 // PAGE NAVIGATION

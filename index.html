@@ -219,6 +219,7 @@
   .sim-tile.selected .sim-tile-icon { color: var(--green); }
   .sim-tile-label { font-size: 0.85rem; font-weight: 600; color: var(--navy); }
   .sim-tile.selected .sim-tile-label { color: var(--green); }
+  .sim-disclaimer { font-size: 0.72rem; color: rgba(255,255,255,0.45); text-align: center; }
   .btn-sim-continue {
     width: 100%; background: var(--green); color: var(--navy); border: none;
     padding: 14px; border-radius: 50px; font-family: var(--font-body); font-weight: 700;
@@ -698,26 +699,35 @@
 <div id="page-home" class="page active">
 
   <!-- HERO -->
-  <section style="position:relative;width:100%;min-height:520px;overflow:hidden;display:flex;flex-direction:column;background:linear-gradient(135deg,var(--navy),var(--navy-mid));">
-    <!-- Photo de fond -->
+  <section style="position:relative;width:100%;min-height:600px;overflow:hidden;display:flex;flex-direction:column;justify-content:space-between;background:linear-gradient(135deg,#0B1F45 0%,#142e60 50%,#0d3268 100%);">
+    <!-- Fond décoratif CSS (fonctionne sans internet) -->
     <div style="position:absolute;inset:0;z-index:0;">
-      <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=1400&q=80" alt="" loading="eager" style="width:100%;height:100%;object-fit:cover;object-position:center top;" onerror="this.style.display='none'">
-      <div style="position:absolute;inset:0;background:linear-gradient(to bottom, rgba(11,31,69,0.65) 0%, rgba(11,31,69,0.45) 40%, rgba(11,31,69,0.8) 100%);"></div>
+      <!-- Cercles lumineux -->
+      <div style="position:absolute;top:-120px;right:-80px;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(0,200,150,0.18) 0%,transparent 65%);pointer-events:none;"></div>
+      <div style="position:absolute;bottom:-150px;left:-100px;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(0,100,200,0.15) 0%,transparent 65%);pointer-events:none;"></div>
+      <div style="position:absolute;top:30%;right:20%;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(0,200,150,0.10) 0%,transparent 65%);pointer-events:none;"></div>
+      <!-- Grille de points -->
+      <div style="position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,0.07) 1px,transparent 1px);background-size:32px 32px;pointer-events:none;"></div>
+      <!-- Lignes diagonales décoratives -->
+      <div style="position:absolute;top:0;right:0;width:55%;height:100%;background:linear-gradient(135deg,transparent 40%,rgba(0,200,150,0.04) 50%,transparent 60%);pointer-events:none;"></div>
+      <!-- Overlay gauche pour lisibilité du texte -->
+      <div style="position:absolute;inset:0;background:linear-gradient(to right,rgba(11,31,69,0.6) 0%,rgba(11,31,69,0.2) 60%,transparent 100%);pointer-events:none;"></div>
     </div>
 
-    <!-- Contenu texte -->
-    <div style="position:relative;z-index:1;padding:80px 24px 40px;max-width:680px;">
-      <div class="hero-badge fade-up" style="margin-bottom:20px;">🇪🇺 Plateforme européenne de confiance</div>
-      <h1 class="fade-up delay-1" style="font-size:clamp(1.8rem,4vw,3rem);font-weight:800;color:#fff;line-height:1.2;margin-bottom:16px;">Financez vos projets avec CréditFlow</h1>
-      <p class="fade-up delay-2" style="font-size:1rem;color:rgba(255,255,255,0.85);line-height:1.6;margin-bottom:0;max-width:500px;">Simulez votre projet et obtenez une réponse de principe immédiate. Sans engagement, 100% en ligne.</p>
-    </div>
+    <!-- Layout principal -->
+    <div style="position:relative;z-index:1;display:flex;align-items:center;justify-content:space-between;padding:100px 48px 60px;gap:40px;flex-wrap:wrap;min-height:600px;">
+      
+      <!-- Texte gauche -->
+      <div style="flex:1;min-width:280px;max-width:480px;">
+        <div class="hero-badge fade-up" style="margin-bottom:20px;">🇪🇺 Plateforme européenne de confiance</div>
+        <h1 class="fade-up delay-1" style="font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:800;color:#fff;line-height:1.2;margin-bottom:16px;">Financez vos projets avec CréditFlow</h1>
+        <p class="fade-up delay-2" style="font-size:1rem;color:rgba(255,255,255,0.8);line-height:1.7;max-width:400px;">Simulez votre projet et obtenez une réponse de principe immédiate. Sans engagement, 100% en ligne.</p>
+      </div>
 
-    <!-- Carte taux + simulateur -->
-    <div style="position:relative;z-index:1;padding:0 24px 40px;display:flex;gap:16px;flex-wrap:wrap;align-items:flex-start;max-width:900px;">
-
-      <!-- Carte simulation uniquement -->
-    <div style="position:relative;z-index:1;padding:0 24px 40px;max-width:500px;width:100%;">
-      <div style="background:rgba(11,31,69,0.85);backdrop-filter:blur(10px);border-radius:16px;padding:24px;box-shadow:0 8px 32px rgba(0,0,0,0.2);border:1px solid rgba(255,255,255,0.1);">
+      <!-- Cartes droite -->
+      <div style="display:flex;flex-direction:column;gap:16px;flex:0 0 auto;width:100%;max-width:460px;">
+        <!-- Carte simulation -->
+      <div style="background:rgba(11,31,69,0.88);backdrop-filter:blur(12px);border-radius:16px;padding:24px;box-shadow:0 8px 40px rgba(0,0,0,0.25);border:1px solid rgba(255,255,255,0.12);">
         <div style="font-size:0.85rem;font-weight:700;color:#fff;margin-bottom:4px;">Besoin de financement ?</div>
         <div style="font-size:0.75rem;color:rgba(255,255,255,0.55);margin-bottom:16px;">Commencez votre simulation</div>
         <div class="sim-tiles-grid">
@@ -738,7 +748,7 @@
             <div class="sim-tile-label">Travaux</div>
           </div>
         </div>
-        <div class="sim-disclaimer" style="margin:14px 0 10px;">Simulation gratuite · Sans engagement · Taux indicatif 3,5 %</div>
+        <div class="sim-disclaimer" style="margin:12px 0 10px;font-size:0.72rem;">Simulation gratuite · Sans engagement · Taux indicatif 3,5 %</div>
         <button class="btn-sim-continue" onclick="continuerSim()" style="width:100%;">Continuer →</button>
       </div>
     </div>
@@ -1671,7 +1681,7 @@
     </div>
   </div>
   <div class="footer-bottom">
-    <p>© 2025 CréditFlow SAS — Établissement de crédit agréé ACPR n° 12345 — RCS Paris 123 456 789</p>
+    <p>© 2026 CréditFlow SAS — Établissement de crédit agréé ACPR n° 12345 — RCS Paris 123 456 789</p>
     <div class="footer-legal">
       <a href="#" onclick="showPage('mentions');return false;">Mentions légales</a>
       <a href="#" onclick="showPage('cgu');return false;">CGU</a>
@@ -1761,7 +1771,7 @@ function toggleFaq(btn) {
 // CONTACT FORM
 function submitForm() {
   var check = document.getElementById('rgpdCheck');
-  if (!check || !check.checked) { alert('Veuillez accepter la politique de confidentialite.'); return; }
+  if (!check || !check.checked) { alert('Veuillez accepter la politique de confidentialité.'); return; }
   document.getElementById('contactForm').style.display = 'none';
   document.getElementById('formSuccess').style.display = 'block';
 }
@@ -1775,12 +1785,12 @@ function initReveal() {
   document.querySelectorAll('.reveal').forEach(function(el) { observer.observe(el); });
 }
 
-// SIMULAT€ 3 ETAPES
+// SIMULATEUR 3 ETAPES
 var simData = { projet: null, montant: null, duree: null };
 var stepTitles = {
-  1: { title: 'Votre projet', subtitle: 'Selectionnez le type de financement' },
-  2: { title: 'Montant souhaite', subtitle: 'Saisissez le montant de votre credit' },
-  3: { title: 'Duree de remboursement', subtitle: 'Choisissez la duree souhaitee' }
+  1: { title: 'Votre projet', subtitle: 'Sélectionnez le type de financement' },
+  2: { title: 'Montant souhaité', subtitle: 'Saisissez le montant de votre crédit' },
+  3: { title: 'Durée de remboursement', subtitle: 'Choisissez la durée souhaitée' }
 };
 
 function selectChoice(el, type, value) {
@@ -1828,7 +1838,7 @@ function showResultat() {
   var t = document.getElementById('step-title');
   var s = document.getElementById('step-subtitle');
   if (t) t.textContent = 'Votre simulation';
-  if (s) s.textContent = 'Resume de votre demande';
+  if (s) s.textContent = 'Résumé de votre demande';
   var rp = document.getElementById('res-projet');
   var rm = document.getElementById('res-montant');
   var rd = document.getElementById('res-duree');
@@ -1888,7 +1898,7 @@ function resetSim() {
   goStep(1);
 }
 
-// SIMULAT€ STEP 3
+// SIMULATEUR STEP 3
 var TAUX = 0.035;
 
 function calcMensualite(P, n) {

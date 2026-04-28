@@ -559,9 +559,15 @@
   .how-step-content ul li { display: flex; align-items: center; gap: 8px; font-size: 0.85rem; color: var(--text); }
   .how-step-content ul li::before { content:'→'; color: var(--green); font-weight: 700; }
 
-  /* ─── CONTACT PAGE ─── */
-  .contact-page { padding: 80px 24px; }
-  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; max-width: 1000px; margin: 0 auto; }
+  /* ─── CONTACT LAYOUT ─── */
+  .contact-layout { display: grid; grid-template-columns: 1fr 1.4fr; gap: 48px; align-items: start; }
+  .contact-info-col { position: sticky; top: 100px; }
+  .contact-form-col { min-width: 0; }
+  @media (max-width: 768px) {
+    .contact-layout { grid-template-columns: 1fr; gap: 0; }
+    .contact-info-col { position: static; order: 2; margin-top: 32px; }
+    .contact-form-col { order: 1; }
+  }
   .contact-info h3 { font-family: var(--font-display); font-weight: 700; font-size: 1.4rem; color: var(--navy); margin-bottom: 12px; }
   .contact-info p { font-size: 0.9rem; color: var(--slate); line-height: 1.8; margin-bottom: 32px; }
   .contact-method { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 24px; }
@@ -777,10 +783,9 @@
       <a href="#" onclick="showPage('immobilier');return false;">Immobilier</a>
       <a href="#" onclick="showPage('auto');return false;">Auto</a>
       <a href="#" onclick="showPage('personnel');return false;">Personnel</a>
-      <a href="#" onclick="showPage('comment');return false;">Comment ça marche</a>
+      <a href="#" onclick="showPage('partenaires');return false;">Partenaires</a>
       <a href="#" onclick="showPage('contact');return false;">Contact</a>
       <a href="#" onclick="showPage('simulateur');return false;" class="btn-nav">Simuler gratuitement</a>
-
     </div>
     <div class="hamburger" onclick="toggleMenu()" id="hamburger">
       <span></span><span></span><span></span>
@@ -933,7 +938,7 @@
       </div>
       <div class="loan-cards">
         <div class="loan-card reveal" onclick="showPage('immobilier')">
-          <img class="loan-card-img" src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=600&q=80" alt="Prêt immobilier">
+          <img class="loan-card-img" src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=600https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=600&q=80q=85" alt="Prêt immobilier">
           <h3>Prêt Immobilier</h3>
           <p>Financement de votre résidence principale, secondaire ou investissement locatif.</p>
           <div class="loan-card-rate">dès 3,20 % <span>TAEG indicatif</span></div>
@@ -946,7 +951,7 @@
           <div class="loan-card-link">En savoir plus <span>→</span></div>
         </div>
         <div class="loan-card reveal delay-1" onclick="showPage('auto')">
-          <img class="loan-card-img" src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=600&q=80" alt="Prêt automobile">
+          <img class="loan-card-img" src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=600https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=600&q=80q=85" alt="Prêt automobile">
           <h3>Prêt Automobile</h3>
           <p>Achetez votre voiture neuve ou d'occasion avec des mensualités adaptées à votre budget.</p>
           <div class="loan-card-rate">dès 5,90 % <span>TAEG indicatif</span></div>
@@ -958,7 +963,7 @@
           <div class="loan-card-link">En savoir plus <span>→</span></div>
         </div>
         <div class="loan-card reveal delay-2" onclick="showPage('personnel')">
-          <img class="loan-card-img" src="https://images.unsplash.com/photo-1521791136064-7986c2920216?w=600&q=80" alt="Prêt personnel">
+          <img class="loan-card-img" src="https://images.unsplash.com/photo-1553484771-371a605b060b?w=600https://images.unsplash.com/photo-1521791136064-7986c2920216?w=600&q=80q=85" alt="Prêt personnel">
           <h3>Prêt Personnel</h3>
           <p>Travaux, voyages, études : financez librement vos projets, sans justificatif d'usage.</p>
           <div class="loan-card-rate">dès 7,90 % <span>TAEG indicatif</span></div>
@@ -1041,14 +1046,6 @@
         <div class="section-label">Témoignages clients</div>
         <h2 class="section-title">Ils nous font confiance</h2>
         <p class="section-desc">Plus de 2 400 avis vérifiés sur Trustpilot. Voici ce que disent nos clients.</p>
-        <!-- Trustpilot header badge -->
-        <div style="display:inline-flex;align-items:center;gap:10px;background:#fff;border:1.5px solid var(--border);border-radius:50px;padding:10px 20px;margin-top:16px;box-shadow:var(--shadow);">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="24" height="24" rx="4" fill="#00B67A"/><path d="M12 5l1.854 5.708H19.5l-4.618 3.354 1.764 5.426L12 16.18l-4.646 3.308 1.764-5.426L4.5 10.708h5.646L12 5z" fill="white"/></svg>
-          <span style="font-weight:700;font-size:0.9rem;color:#191919;">Trustpilot</span>
-          <span style="color:#00B67A;font-size:1rem;letter-spacing:2px;">★★★★★</span>
-          <span style="font-weight:800;font-size:0.95rem;color:var(--navy);">4,8</span>
-          <span style="font-size:0.8rem;color:var(--slate);">· 2 400+ avis</span>
-        </div>
       </div>
       <div class="testimonials-grid">
         <div class="testi-card reveal">
@@ -1405,7 +1402,7 @@
   <div class="loan-detail">
     <div class="detail-grid">
       <div>
-        <div class="detail-img"><img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&q=80" alt="Prêt immobilier" style="width:100%;height:100%;object-fit:cover;"></div>
+        <div class="detail-img"><img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&q=80q=85" alt="Prêt immobilier" style="width:100%;height:100%;object-fit:cover;"></div>
       </div>
       <div>
         <div class="detail-label">Prêt Immobilier</div>
@@ -1678,89 +1675,88 @@
     <h1>Contactez-nous</h1>
     <p>Notre équipe de conseillers est disponible pour répondre à toutes vos questions et vous accompagner dans votre projet.</p>
   </div>
-  <div class="contact-page">
-    <div class="contact-grid">
-      <div class="contact-info">
-        <h3>Nous sommes à votre écoute</h3>
-        <p>Que vous ayez des questions sur nos offres, besoin d'aide pour votre dossier ou souhaitiez simplement en savoir plus sur CréditFlow, nos conseillers sont disponibles pour vous accompagner.</p>
+  <div style="padding:64px 24px;max-width:1100px;margin:0 auto;">
+    <div class="contact-layout">
+
+      <!-- COLONNE GAUCHE : infos contact -->
+      <div class="contact-info-col">
+        <h3 style="font-family:'Sora',sans-serif;font-size:1.3rem;font-weight:700;color:var(--navy);margin-bottom:12px;">Nous sommes à votre écoute</h3>
+        <p style="font-size:0.9rem;color:var(--slate);line-height:1.7;margin-bottom:28px;">Que vous ayez des questions sur nos offres, besoin d'aide pour votre dossier ou souhaitiez simplement en savoir plus, nos conseillers sont là pour vous.</p>
         <div class="contact-method">
           <div class="contact-method-icon">📞</div>
-          <div>
-            <strong>Par téléphone</strong>
-            <p>+33 (0)1 80 00 00 00<br>Du lundi au samedi, 9h–19h</p>
-          </div>
+          <div><strong>Par téléphone</strong><p>+33 (0)1 80 00 00 00<br>Lun–Sam, 9h–19h</p></div>
         </div>
         <div class="contact-method">
           <div class="contact-method-icon">✉️</div>
-          <div>
-            <strong>Par email</strong>
-            <p>contact@creditflow.eu<br>Réponse sous 24h ouvrées</p>
-          </div>
+          <div><strong>Par email</strong><p>contact@creditflow.eu<br>Réponse sous 24h ouvrées</p></div>
         </div>
         <div class="contact-method">
           <div class="contact-method-icon">💬</div>
-          <div>
-            <strong>Chat en direct</strong>
-            <p>Disponible sur notre plateforme<br>Du lundi au vendredi, 9h–18h</p>
-          </div>
+          <div><strong>Chat en direct</strong><p>Disponible sur notre plateforme<br>Lun–Ven, 9h–18h</p></div>
         </div>
         <div class="contact-method">
           <div class="contact-method-icon">🏢</div>
-          <div>
-            <strong>Siège social</strong>
-            <p>12 rue de la Paix, 75002 Paris<br>France — Union Européenne</p>
-          </div>
+          <div><strong>Siège social</strong><p>12 rue de la Paix, 75002 Paris<br>France — Union Européenne</p></div>
         </div>
-        <div class="rgpd-badge">🔒 Vos données sont protégées conformément au RGPD</div>
-      </div>
-      <div class="contact-form" id="contactForm">
-        <h3>Envoyez-nous un message</h3>
-        <div class="form-row">
+      </div><!-- fin contact-info-col -->
+
+      <!-- COLONNE DROITE : formulaire -->
+      <div class="contact-form-col">
+        <div class="contact-form" id="contactForm">
+          <h3>Envoyez-nous un message</h3>
+          <div class="rgpd-badge" style="margin-bottom:20px;">🔒 Vos données sont protégées conformément au RGPD</div>
+          <div id="sim-prefill-banner" style="display:none;background:rgba(0,200,150,0.08);border:1px solid rgba(0,200,150,0.25);border-radius:10px;padding:12px 16px;margin-bottom:20px;font-size:0.82rem;color:#006e53;align-items:center;gap:8px;">
+            <span>✅</span>
+            <span id="sim-prefill-text">Votre simulation a été pré-remplie ci-dessous.</span>
+          </div>
+          <div class="form-row">
+            <div class="form-field">
+              <label>Prénom *</label>
+              <input type="text" id="contact-prenom" placeholder="Jean">
+            </div>
+            <div class="form-field">
+              <label>Nom *</label>
+              <input type="text" id="contact-nom" placeholder="Dupont">
+            </div>
+          </div>
           <div class="form-field">
-            <label>Prénom *</label>
-            <input type="text" placeholder="Jean">
+            <label>Email *</label>
+            <input type="email" id="contact-email" placeholder="jean.dupont@email.com">
           </div>
           <div class="form-field">
-            <label>Nom *</label>
-            <input type="text" placeholder="Dupont">
+            <label>Téléphone</label>
+            <input type="tel" id="contact-tel" placeholder="+33 6 00 00 00 00">
           </div>
+          <div class="form-field">
+            <label>Objet de votre demande</label>
+            <select id="contact-objet">
+              <option>Question sur le simulateur</option>
+              <option>Prêt Immobilier</option>
+              <option>Prêt Automobile</option>
+              <option>Prêt Personnel</option>
+              <option>Mon dossier en cours</option>
+              <option>Autre</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label>Message *</label>
+            <textarea id="contact-message" placeholder="Décrivez votre projet ou votre question..."></textarea>
+          </div>
+          <div class="form-field" style="display:flex;align-items:flex-start;gap:10px;">
+            <input type="checkbox" id="rgpdCheck" style="width:auto;margin-top:3px;">
+            <label for="rgpdCheck" style="font-size:0.78rem;color:var(--slate);cursor:pointer;">J'accepte que mes données soient traitées conformément à la politique de confidentialité et au RGPD de CréditFlow. *</label>
+          </div>
+          <button class="form-submit" onclick="submitForm()">Envoyer le message →</button>
         </div>
-        <div class="form-field">
-          <label>Email *</label>
-          <input type="email" placeholder="jean.dupont@email.com">
+        <div class="form-success" id="formSuccess">
+          <div class="success-icon">✅</div>
+          <h4>Message envoyé !</h4>
+          <p>Merci pour votre message. Notre équipe vous contactera sous 24h ouvrées.</p>
+          <br>
+          <button class="btn-outline" onclick="showPage('home')">Retour à l'accueil</button>
         </div>
-        <div class="form-field">
-          <label>Téléphone</label>
-          <input type="tel" placeholder="+33 6 00 00 00 00">
-        </div>
-        <div class="form-field">
-          <label>Objet de votre demande</label>
-          <select>
-            <option>Question sur le simulateur</option>
-            <option>Prêt Immobilier</option>
-            <option>Prêt Automobile</option>
-            <option>Prêt Personnel</option>
-            <option>Mon dossier en cours</option>
-            <option>Autre</option>
-          </select>
-        </div>
-        <div class="form-field">
-          <label>Message *</label>
-          <textarea placeholder="Décrivez votre projet ou votre question..."></textarea>
-        </div>
-        <div class="form-field" style="display:flex;align-items:flex-start;gap:10px;">
-          <input type="checkbox" id="rgpdCheck" style="width:auto;margin-top:3px;">
-          <label for="rgpdCheck" style="font-size:0.78rem;color:var(--slate);cursor:pointer;">J'accepte que mes données soient traitées conformément à la politique de confidentialité et au RGPD de CréditFlow. *</label>
-        </div>
-        <button class="form-submit" onclick="submitForm()">Envoyer le message →</button>
       </div>
-      <div class="form-success" id="formSuccess">
-        <div class="success-icon">✅</div>
-        <h4>Message envoyé !</h4>
-        <p>Merci pour votre message. Notre équipe vous contactera sous 24h ouvrées.</p>
-        <br>
-        <button class="btn-outline" onclick="showPage('home')">Retour à l'accueil</button>
-      </div>
+
     </div>
   </div>
 </div>
@@ -1782,7 +1778,7 @@
       <div style="background:var(--off-white);border-radius:var(--radius);padding:28px;text-align:center;border:1px solid var(--border);"><div style="font-size:2rem;font-weight:800;color:var(--navy);">12</div><div style="font-size:0.85rem;color:var(--slate);margin-top:6px;">Pays européens</div></div>
       <div style="background:var(--off-white);border-radius:var(--radius);padding:28px;text-align:center;border:1px solid var(--border);"><div style="font-size:2rem;font-weight:800;color:var(--navy);">4,8/5</div><div style="font-size:0.85rem;color:var(--slate);margin-top:6px;">Note Trustpilot</div></div>
     </div>
-    <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=900&q=80" alt="Équipe CréditFlow" style="width:100%;height:280px;object-fit:cover;border-radius:var(--radius);margin-bottom:40px;">
+    <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=900https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=900&q=80q=85" alt="Équipe CréditFlow" style="width:100%;height:280px;object-fit:cover;border-radius:var(--radius);margin-bottom:40px;">
     <div class="detail-features">
       <div class="detail-feature"><div class="detail-feature-icon">🎯</div><div class="detail-feature-text"><strong>Transparence totale</strong><p>Tous nos taux, frais et conditions sont affichés clairement, sans surprise ni frais cachés.</p></div></div>
       <div class="detail-feature"><div class="detail-feature-icon">⚡</div><div class="detail-feature-text"><strong>Rapidité et efficacité</strong><p>Notre technologie de scoring automatisé permet une réponse de principe sous 24 heures.</p></div></div>
@@ -2004,15 +2000,25 @@
     </div>
   </div>
   <div class="footer-bottom">
-    <p>© 2025 CréditFlow SAS — Établissement de crédit agréé ACPR n° 12345 — RCS Paris 123 456 789</p>
+    <p>© 2025 CréditFlow SAS — RCS Paris 123 456 789</p>
     <div class="footer-legal">
       <a href="#" onclick="showPage('mentions');return false;">Mentions légales</a>
       <a href="#" onclick="showPage('cgu');return false;">CGU</a>
       <a href="#" onclick="showPage('rgpd');return false;">Cookies</a>
     </div>
   </div>
-  <div style="max-width:1180px;margin:20px auto 0;padding-top:20px;border-top:1px solid rgba(255,255,255,0.05);">
-    <p style="font-size:0.72rem;color:rgba(255,255,255,0.3);line-height:1.8;">Un crédit vous engage et doit être remboursé. Vérifiez vos capacités de remboursement avant de vous engager. Le taux de 3,5 % est un taux indicatif susceptible de varier selon votre profil. Toute simulation est non contractuelle. CréditFlow est un intermédiaire en opérations de banque et services de paiement (IOBSP) immatriculé à l'ORIAS. Offre soumise à l'acceptation définitive de notre partenaire prêteur.</p>
+  <div style="max-width:1180px;margin:16px auto 0;padding:16px 0;border-top:1px solid rgba(255,255,255,0.08);">
+    <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:12px;">
+      <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(0,200,150,0.08);border:1px solid rgba(0,200,150,0.2);border-radius:8px;padding:8px 16px;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00c896" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <span style="font-size:0.78rem;color:rgba(255,255,255,0.7);font-weight:500;">IOBSP immatriculé <strong style="color:#00c896;">ORIAS n° 23 000 123</strong></span>
+      </div>
+      <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:8px 16px;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        <span style="font-size:0.78rem;color:rgba(255,255,255,0.5);">Sous contrôle <strong style="color:rgba(255,255,255,0.7);">ACPR — Banque de France</strong></span>
+      </div>
+    </div>
+    <p style="font-size:0.72rem;color:rgba(255,255,255,0.3);line-height:1.8;">Un crédit vous engage et doit être remboursé. Vérifiez vos capacités de remboursement avant de vous engager. Les taux affichés sont des TAEG indicatifs susceptibles de varier selon votre profil, la durée et le montant. Toute simulation est non contractuelle. Offre soumise à l'acceptation définitive de notre partenaire prêteur.</p>
   </div>
 </footer>
 
@@ -2156,10 +2162,31 @@ function showPage(pageId) {
   window.scrollTo({ top: 0, behavior: 'smooth' });
   // Update active nav link
   document.querySelectorAll('.nav-links a').forEach(function(a) { a.classList.remove('active'); });
-  var navMap = { home: 0, simulateur: 1, immobilier: 2, auto: 3, personnel: 4, comment: 5, contact: 6 };
+  var navMap = { home: 0, simulateur: 1, immobilier: 2, auto: 3, personnel: 4, partenaires: 5, contact: 6 };
   var navLinks = document.querySelectorAll('.nav-links a:not(.btn-nav)');
   if (navMap[pageId] !== undefined && navLinks[navMap[pageId]]) {
     navLinks[navMap[pageId]].classList.add('active');
+  }
+  // Pré-remplir le formulaire contact avec les données du simulateur
+  if (pageId === 'contact' && simData.projet) {
+    var banner = document.getElementById('sim-prefill-banner');
+    var msgEl = document.getElementById('contact-message');
+    var objetEl = document.getElementById('contact-objet');
+    if (msgEl && !msgEl.value) {
+      msgEl.value = 'Bonjour,\n\nJ\'ai effectué une simulation sur votre site :\n- Projet : ' + (simData.projet||'--') + '\n- Montant : ' + (simData.montant||'--') + '\n- ' + (simData.duree||'') + '\n\nJe souhaite obtenir plus d\'informations sur cette offre.\n\nCordialement';
+    }
+    if (objetEl && simData.projet) {
+      var projetMap = { 'Immobilier':'Prêt Immobilier','Auto / Moto':'Prêt Automobile','Prêt personnel':'Prêt Personnel' };
+      var objet = projetMap[simData.projet] || 'Question sur le simulateur';
+      for (var i = 0; i < objetEl.options.length; i++) {
+        if (objetEl.options[i].text === objet) { objetEl.selectedIndex = i; break; }
+      }
+    }
+    if (banner && simData.projet) {
+      banner.style.display = 'flex';
+      var pt = document.getElementById('sim-prefill-text');
+      if (pt) pt.textContent = 'Simulation pré-remplie : ' + simData.projet + ' · ' + (simData.montant||'') + (simData.duree ? ' · ' + simData.duree : '');
+    }
   }
   if (pageId === 'simulateur' && !window._simFromTile) { resetSim(); }
   window._simFromTile = false;
@@ -2185,12 +2212,12 @@ function toggleFaq(btn) {
 async function submitForm() {
   var check = document.getElementById('rgpdCheck');
   if (!check || !check.checked) { showToast('Veuillez accepter la politique de confidentialité.', 'error'); return; }
-  var prenom = document.querySelector('#contactForm input[placeholder="Jean"]');
-  var nom = document.querySelector('#contactForm input[placeholder="Dupont"]');
-  var email = document.querySelector('#contactForm input[type="email"]');
-  var tel = document.querySelector('#contactForm input[type="tel"]');
-  var objet = document.querySelector('#contactForm select');
-  var message = document.querySelector('#contactForm textarea');
+  var prenom = document.getElementById('contact-prenom');
+  var nom = document.getElementById('contact-nom');
+  var email = document.getElementById('contact-email');
+  var tel = document.getElementById('contact-tel');
+  var objet = document.getElementById('contact-objet');
+  var message = document.getElementById('contact-message');
   if (!prenom.value.trim() || !nom.value.trim() || !email.value.trim() || !message.value.trim()) {
     showToast('Veuillez remplir tous les champs obligatoires.', 'error'); return;
   }
@@ -2203,10 +2230,13 @@ async function submitForm() {
       email: email.value.trim(),
       telephone: tel ? tel.value.trim() : '',
       objet: objet ? objet.value : '',
-      message: message.value.trim()
+      message: message.value.trim(),
+      projet_sim: simData.projet || '',
+      montant_sim: simData.montant || '',
+      duree_sim: simData.duree || ''
     });
   } catch(e) {
-    // Erreur silencieuse — l'UX continue normalement
+    // Erreur silencieuse
   }
   if (btn) { btn.disabled = false; btn.textContent = 'Envoyer le message →'; }
   document.getElementById('contactForm').style.display = 'none';
@@ -2499,6 +2529,11 @@ function initCounters() {
 <!--Start of Tawk.to Script-->
 <script type="text/javascript">
 var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+Tawk_API.onLoad = function() {
+  Tawk_API.setAttributes({
+    'language': 'fr'
+  }, function(error){});
+};
 (function(){
 var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
 s1.async=true;

@@ -2372,13 +2372,10 @@ async function submitLead() {
   }
   try {
     await emailjs.send('FKkjqjC53tkG5ylN9ILee', 'template_7d7q34j', {
-      prenom: prenom.value.trim(),
-      nom: nom.value.trim(),
+      title: 'Nouvelle simulation — ' + (simData.projet || '--'),
+      name: prenom.value.trim() + ' ' + nom.value.trim(),
       email: email.value.trim(),
-      telephone: tel.value.trim(),
-      projet: simData.projet || '--',
-      montant: simData.montant || '--',
-      mensualite: simData.duree || '--'
+      message: 'Projet : ' + (simData.projet || '--') + '\nMontant : ' + (simData.montant || '--') + '\nMensualité : ' + (simData.duree || '--') + '\nTéléphone : ' + tel.value.trim()
     });
   } catch(e) {
     // Erreur silencieuse

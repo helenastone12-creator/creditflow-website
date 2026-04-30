@@ -678,6 +678,9 @@
     .back-btn { font-size: 0.8rem; }
     .hero-badge { font-size: 0.72rem; padding: 6px 12px; }
     .about-stats-grid { grid-template-columns: 1fr !important; }
+    .sim-results-grid { grid-template-columns: 1fr !important; }
+    .grid-2col { grid-template-columns: 1fr !important; }
+    .engage-box { padding: 24px 20px !important; }
   }
   @media (max-width: 480px) {
     .security-grid { grid-template-columns: 1fr; }
@@ -1338,7 +1341,7 @@
         <p style="font-size:0.78rem;color:var(--slate);margin-bottom:20px;">Renseignez vos coordonnées, un conseiller vous contacte sous 24h.</p>
 
         <div id="sim-lead-form">
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;">
+          <div class="grid-2col" style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;">
             <div>
               <label style="display:block;font-size:0.75rem;font-weight:600;color:var(--navy);margin-bottom:5px;">Prénom *</label>
               <input id="lead-prenom" type="text" placeholder="Jean" style="width:100%;padding:11px 13px;border:1.5px solid var(--border);border-radius:8px;font-size:0.88rem;color:var(--navy);outline:none;background:var(--off-white);" onfocus="this.style.borderColor='var(--green)'" onblur="this.style.borderColor='var(--border)'">
@@ -1892,9 +1895,9 @@
       </div>
     </div>
     <!-- Engagements -->
-    <div style="background:linear-gradient(135deg,var(--navy),var(--navy-mid));border-radius:var(--radius);padding:40px;margin-bottom:40px;">
+    <div class="engage-box" style="background:linear-gradient(135deg,var(--navy),var(--navy-mid));border-radius:var(--radius);padding:40px;margin-bottom:40px;">
       <h3 style="color:#fff;font-family:'Sora',sans-serif;font-size:1.2rem;margin-bottom:24px;">Nos engagements envers vous</h3>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+      <div class="grid-2col" style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
         <div style="display:flex;gap:12px;align-items:flex-start;">
           <div style="width:28px;height:28px;border-radius:50%;background:rgba(0,200,150,0.2);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:0.8rem;">✓</div>
           <div><div style="font-size:0.88rem;font-weight:600;color:#fff;margin-bottom:3px;">Sélection rigoureuse</div><div style="font-size:0.78rem;color:rgba(255,255,255,0.5);">Chaque partenaire est audité annuellement sur 40+ critères de qualité.</div></div>
@@ -1927,7 +1930,7 @@
     <p>Notre engagement pour la protection de vos données personnelles.</p>
   </div>
   <div style="padding:72px 24px;max-width:860px;margin:0 auto;">
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:48px;">
+    <div class="grid-2col" style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:48px;">
       <div style="padding:24px;background:var(--off-white);border-radius:var(--radius);text-align:center;border:1px solid var(--border);"><div style="font-size:1.8rem;margin-bottom:10px;">🇪🇺</div><h4 style="color:var(--navy);margin-bottom:6px;font-size:0.95rem;">Conforme RGPD</h4><p style="color:var(--slate);font-size:0.8rem;margin:0;">Règlement UE 2016/679 pleinement appliqué</p></div>
       <div style="padding:24px;background:var(--off-white);border-radius:var(--radius);text-align:center;border:1px solid var(--border);"><div style="font-size:1.8rem;margin-bottom:10px;">🔐</div><h4 style="color:var(--navy);margin-bottom:6px;font-size:0.95rem;">SSL 256 bits</h4><p style="color:var(--slate);font-size:0.8rem;margin:0;">Standard bancaire de chiffrement</p></div>
       <div style="padding:24px;background:var(--off-white);border-radius:var(--radius);text-align:center;border:1px solid var(--border);"><div style="font-size:1.8rem;margin-bottom:10px;">👁️</div><h4 style="color:var(--navy);margin-bottom:6px;font-size:0.95rem;">DPO désigné</h4><p style="color:var(--slate);font-size:0.8rem;margin:0;">Délégué à la Protection des Données en poste</p></div>

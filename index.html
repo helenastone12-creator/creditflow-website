@@ -784,6 +784,7 @@
       <a href="#" onclick="showPage('contact');return false;">Contact</a>
       <a href="#" onclick="showPage('simulateur');return false;" class="btn-nav">Simuler gratuitement</a>
     </div>
+    <button id="lang-toggle" onclick="toggleLang()" title="Switch language" style="background:rgba(255,255,255,0.1);border:none;color:rgba(255,255,255,0.85);font-size:0.72rem;cursor:pointer;padding:6px 14px;border-radius:50px;font-weight:700;margin-right:8px;transition:background 0.2s;letter-spacing:0.5px;">🇬🇧 EN</button>
     <div class="hamburger" onclick="toggleMenu()" id="hamburger">
       <span></span><span></span><span></span>
     </div>
@@ -2542,6 +2543,140 @@ function initCounters() {
 }
 
 // INIT
+</script>
+
+<!-- ═══════════ LANGUAGE SYSTEM ═══════════ -->
+<script>
+var currentLang = 'fr';
+
+var TRANSLATIONS_EN = {
+  // Navigation
+  'Accueil': 'Home', 'Simulateur': 'Simulator', 'Immobilier': 'Real Estate',
+  'Auto': 'Auto', 'Personnel': 'Personal', 'Partenaires': 'Partners', 'Contact': 'Contact',
+  'Simuler gratuitement': 'Free Simulation',
+  '🏠 Accueil': '🏠 Home', '🧮 Simulateur': '🧮 Simulator',
+  '🏠 Prêt Immobilier': '🏠 Home Loan', '🚗 Prêt Auto': '🚗 Auto Loan',
+  '👤 Prêt Personnel': '👤 Personal Loan', '❓ Comment ça marche': '❓ How it works', '📞 Contact': '📞 Contact',
+
+  // Hero
+  'Financez vos projets avec Finooz': 'Finance your projects with Finooz',
+  'Simulez votre projet et obtenez une réponse de principe immédiate. Sans engagement, 100% en ligne.': 'Simulate your project and get an instant decision. No commitment, 100% online.',
+  'Besoin de financement ?': 'Need financing?',
+  'Commencez votre simulation': 'Start your simulation',
+  'Taux indicatif': 'Indicative rate',
+  'Pour 10 000 € sur 48 mois · Mensualités dès 220 €': 'For €10,000 over 48 months · From €220/month',
+  'Continuer →': 'Continue →',
+  'Simulation gratuite · Sans engagement': 'Free simulation · No commitment',
+
+  // Loan cards
+  'Nos solutions': 'Our solutions',
+  'Trouvez le financement adapté': 'Find the right financing',
+  'Que vous souhaitiez acheter un bien immobilier, financer un véhicule ou faire face à un projet personnel, Finooz vous accompagne.': 'Whether you want to buy real estate, finance a vehicle, or fund a personal project, Finooz is here for you.',
+  'Prêt Immobilier': 'Home Loan', 'Prêt Automobile': 'Auto Loan', 'Prêt Personnel': 'Personal Loan',
+  'Financement de votre résidence principale, secondaire ou investissement locatif.': 'Finance your primary residence, second home, or rental investment.',
+  'Achetez votre voiture neuve ou d\'occasion avec des mensualités adaptées à votre budget.': 'Buy your new or used car with monthly payments tailored to your budget.',
+  'Travaux, voyages, études : financez librement vos projets, sans justificatif d\'usage.': 'Home improvements, travel, studies: freely finance your projects, no documentation required.',
+  'TAEG indicatif': 'indicative APR', 'En savoir plus': 'Learn more',
+  'Jusqu\'à 500 000 €': 'Up to €500,000', 'Durée jusqu\'à 30 ans': 'Up to 30 years',
+  'Taux fixe ou variable': 'Fixed or variable rate', 'Remboursement anticipé': 'Early repayment',
+  'Jusqu\'à 75 000 €': 'Up to €75,000', 'Véhicule neuf, occasion ou électrique': 'New, used or electric vehicle',
+  'Réponse sous 24h': 'Response within 24h', 'De 1 000 à 75 000 €': 'From €1,000 to €75,000',
+  'Aucun justificatif requis': 'No documentation required', 'Mensualités modulables': 'Flexible monthly payments',
+
+  // How it works
+  'Comment ça marche ?': 'How does it work?', 'Simple, rapide, transparent': 'Simple, fast, transparent',
+  'De la simulation à l\'obtention de vos fonds — un processus simple, transparent et 100 % digital.': 'From simulation to receiving your funds — a simple, transparent and 100% digital process.',
+  'Simulez': 'Simulate', 'Renseignez votre projet, le montant et la durée souhaitée en quelques clics.': 'Enter your project, amount, and duration in a few clicks.',
+  'Constituez votre dossier': 'Build your file', 'Renseignez votre dossier en ligne en moins de 10 minutes.': 'Complete your online application in less than 10 minutes.',
+  'Obtenez une réponse': 'Get a response', 'Notre équipe analyse votre dossier et vous envoie une réponse de principe sous 24 heures. En cas d\'accord, une offre de prêt officielle vous est transmise par voie électronique. Vous disposez d\'un délai légal de réflexion de 14 jours.': 'Our team reviews your application and sends you a decision within 24 hours. If approved, an official loan offer is sent electronically. You have a 14-day legal cooling-off period.',
+  'Recevez vos fonds': 'Receive your funds',
+
+  // Security
+  'Votre sécurité, notre priorité': 'Your security, our priority',
+  'Plateforme certifiée et conforme aux réglementations européennes les plus strictes.': 'Platform certified and compliant with the strictest European regulations.',
+  'Chiffrement SSL 256 bits': 'SSL 256-bit encryption',
+  'Toutes vos données sont chiffrées avec le standard bancaire le plus élevé.': 'All your data is encrypted to the highest banking standard.',
+  'Conformité RGPD': 'GDPR Compliance',
+  'Vos données personnelles sont protégées conformément au règlement européen.': 'Your personal data is protected under European regulation.',
+  'Agréé ACPR': 'ACPR Approved',
+  'Établissement agréé par l\'Autorité de Contrôle Prudentiel et de Résolution.': 'Institution approved by the Prudential Supervision and Resolution Authority.',
+
+  // Simulator
+  'Votre projet': 'Your project', 'Sélectionnez le type de financement': 'Select the financing type',
+  'Montant souhaité': 'Desired amount', 'Saisissez le montant de votre crédit': 'Enter the loan amount',
+  'Durée de remboursement': 'Repayment period', 'Choisissez la durée souhaitée': 'Choose the desired duration',
+  'DEMANDEZ SANS ENGAGEMENT →': 'APPLY WITH NO COMMITMENT →',
+  'Votre demande': 'Your request', 'Plus qu\'une étape pour votre offre': 'One more step for your offer',
+
+  // Contact & forms
+  'Nous contacter': 'Contact us', 'Envoyez votre message': 'Send your message',
+  'Envoyer le message →': 'Send message →', 'Envoyer ma demande →': 'Send my request →',
+  'J\'accepte que mes données soient traitées conformément à la politique de confidentialité et au RGPD de Finooz. *': 'I agree that my data is processed in accordance with Finooz\'s privacy policy and GDPR. *',
+
+  // Testimonials
+  'Ce que disent nos clients': 'What our clients say',
+  'Plus de 48 000 clients nous font confiance': 'Over 48,000 clients trust us',
+
+  // FAQ
+  'Questions fréquentes': 'Frequently asked questions',
+  'Tout ce que vous devez savoir': 'Everything you need to know',
+
+  // CTA
+  'Prêt à financer votre projet ?': 'Ready to finance your project?',
+  'Simuler mon projet gratuitement →': 'Simulate my project for free →',
+
+  // Cookie
+  'Accepter': 'Accept', 'Refuser': 'Decline',
+
+  // Footer
+  'Financement en ligne, rapide et transparent': 'Online financing, fast and transparent',
+  'Produits': 'Products', 'Informations': 'Information',
+  'Mentions légales': 'Legal notice', 'Politique de confidentialité': 'Privacy policy', 'CGU': 'Terms of use',
+  'Tous droits réservés': 'All rights reserved',
+  'Un crédit vous engage et doit être remboursé. Vérifiez vos capacités de remboursement avant de vous engager.': 'A loan is a commitment that must be repaid. Check your repayment capacity before committing.',
+};
+
+function applyTranslations(dict) {
+  var walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
+    acceptNode: function(node) {
+      var tag = node.parentNode && node.parentNode.tagName;
+      if (tag === 'SCRIPT' || tag === 'STYLE' || tag === 'NOSCRIPT') return NodeFilter.FILTER_REJECT;
+      return NodeFilter.FILTER_ACCEPT;
+    }
+  });
+  var nodes = [];
+  while (walker.nextNode()) nodes.push(walker.currentNode);
+  nodes.forEach(function(node) {
+    var t = node.textContent.trim();
+    if (t && dict[t]) node.textContent = node.textContent.replace(t, dict[t]);
+  });
+  document.querySelectorAll('[placeholder]').forEach(function(el) {
+    if (dict[el.placeholder.trim()]) el.placeholder = dict[el.placeholder.trim()];
+  });
+}
+
+function detectAndApplyLang() {
+  var saved = localStorage.getItem('finooz_lang');
+  var browserLang = (navigator.language || navigator.userLanguage || 'fr').toLowerCase();
+  var lang = saved || (browserLang.startsWith('fr') ? 'fr' : 'en');
+  currentLang = lang;
+  document.documentElement.lang = lang;
+  var btn = document.getElementById('lang-toggle');
+  if (lang === 'en') {
+    applyTranslations(TRANSLATIONS_EN);
+    if (btn) btn.innerHTML = '🇫🇷 FR';
+  } else {
+    if (btn) btn.innerHTML = '🇬🇧 EN';
+  }
+}
+
+function toggleLang() {
+  var next = currentLang === 'fr' ? 'en' : 'fr';
+  localStorage.setItem('finooz_lang', next);
+  location.reload();
+}
+
+window.addEventListener('DOMContentLoaded', detectAndApplyLang);
 </script>
 
 </body>

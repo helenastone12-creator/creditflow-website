@@ -2953,14 +2953,30 @@ function applyTranslations(dict) {
       return NodeFilter.FILTER_ACCEPT;
     }
   });
+  // Sort keys longest-first so longer phrases are replaced before shorter substrings
+  var sortedKeys = Object.keys(dict).sort(function(a, b) { return b.length - a.length; });
+
   var nodes = [];
   while (walker.nextNode()) nodes.push(walker.currentNode);
   nodes.forEach(function(node) {
-    var t = node.textContent.trim();
-    if (t && dict[t]) node.textContent = node.textContent.replace(t, dict[t]);
+    var content = node.textContent;
+    var changed = false;
+    for (var i = 0; i < sortedKeys.length; i++) {
+      var fr = sortedKeys[i];
+      if (content.indexOf(fr) !== -1) {
+        content = content.split(fr).join(dict[fr]);
+        changed = true;
+      }
+    }
+    if (changed) node.textContent = content;
   });
   document.querySelectorAll('[placeholder]').forEach(function(el) {
-    if (dict[el.placeholder.trim()]) el.placeholder = dict[el.placeholder.trim()];
+    var ph = el.placeholder;
+    for (var i = 0; i < sortedKeys.length; i++) {
+      var fr = sortedKeys[i];
+      if (ph.indexOf(fr) !== -1) ph = ph.split(fr).join(dict[fr]);
+    }
+    el.placeholder = ph;
   });
 }
 

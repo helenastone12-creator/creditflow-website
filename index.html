@@ -2378,7 +2378,7 @@ async function submitLead() {
       message: 'Projet : ' + (simData.projet || '--') + '\nMontant : ' + (simData.montant || '--') + '\nMensualité : ' + (simData.duree || '--') + '\nTéléphone : ' + tel.value.trim()
     });
   } catch(e) {
-    // Erreur silencieuse
+    console.error('EmailJS erreur:', e);
   }
   if (btn) { btn.disabled = false; btn.textContent = 'Envoyer ma demande →'; }
   document.getElementById('sim-lead-form').style.display = 'none';

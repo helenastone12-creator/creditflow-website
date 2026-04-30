@@ -527,13 +527,37 @@ function openDossier(id) {
 
   document.getElementById('modal-title').textContent = `Dossier — ${dos.profiles?.prenom || ''} ${dos.profiles?.nom || ''}`;
   document.getElementById('modal-body').innerHTML = `
-    <div class="info-grid">
+    <div id="view-info" class="info-grid">
       <div class="info-item"><label>Type de prêt</label><span>${dos.type_pret || '--'}</span></div>
       <div class="info-item"><label>Montant</label><span>${num(dos.montant)} €</span></div>
       <div class="info-item"><label>Durée</label><span>${dos.duree} ans</span></div>
       <div class="info-item"><label>Mensualité estimée</label><span>${num(Math.round(M))} €/mois</span></div>
       <div class="info-item"><label>Statut actuel</label><span><span class="badge badge-${dos.statut}">${labelS(dos.statut)}</span></span></div>
       <div class="info-item"><label>Date de création</label><span>${fmtDate(dos.created_at)}</span></div>
+    </div>
+    <div id="edit-info" style="display:none;margin-bottom:20px;padding:16px;background:var(--bg);border-radius:var(--radius);">
+      <div style="font-size:0.78rem;font-weight:700;color:var(--navy);margin-bottom:12px;">✏️ Modifier les informations du dossier</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+        <div>
+          <label style="display:block;font-size:0.7rem;font-weight:700;color:var(--slate);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.5px;">Type de prêt</label>
+          <select id="edit-type-pret" class="status-select" style="width:100%;">
+            <option value="Immobilier" ${dos.type_pret==='Immobilier'?'selected':''}>Immobilier</option>
+            <option value="Auto / Moto" ${dos.type_pret==='Auto / Moto'?'selected':''}>Auto / Moto</option>
+            <option value="Prêt personnel" ${dos.type_pret==='Prêt personnel'?'selected':''}>Prêt personnel</option>
+            <option value="Travaux" ${dos.type_pret==='Travaux'?'selected':''}>Travaux</option>
+            <option value="Voyage" ${dos.type_pret==='Voyage'?'selected':''}>Voyage</option>
+            <option value="Autres" ${dos.type_pret==='Autres'?'selected':''}>Autres</option>
+          </select>
+        </div>
+        <div>
+          <label style="display:block;font-size:0.7rem;font-weight:700;color:var(--slate);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.5px;">Montant (€)</label>
+          <input type="number" id="edit-montant" value="${dos.montant || ''}" min="1000" style="width:100%;padding:8px 14px;border:1.5px solid var(--border);border-radius:8px;font-size:0.85rem;outline:none;background:#fff;color:var(--navy);">
+        </div>
+        <div>
+          <label style="display:block;font-size:0.7rem;font-weight:700;color:var(--slate);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.5px;">Durée (ans)</label>
+          <input type="number" id="edit-duree" value="${dos.duree || ''}" min="1" max="30" style="width:100%;padding:8px 14px;border:1.5px solid var(--border);border-radius:8px;font-size:0.85rem;outline:none;background:#fff;color:var(--navy);">
+        </div>
+      </div>
     </div>
     <div style="margin-bottom:20px;">
       <label style="display:block;font-size:0.78rem;font-weight:700;color:var(--navy);margin-bottom:8px;">🔄 Changer le statut</label>
@@ -566,7 +590,10 @@ function openDossier(id) {
       </div>
     </div>`;
 
-  document.getElementById('modal-footer').innerHTML = `<button class="btn-sm btn-outline" onclick="closeModal('modal-dossier')">Fermer</button>`;
+  document.getElementById('modal-footer').innerHTML = `
+    <button class="btn-sm btn-navy" id="btn-modifier" onclick="toggleEditDossier('${id}')">✏️ Modifier</button>
+    <button class="btn-sm btn-green" id="btn-save" style="display:none;" onclick="saveDossierEdit('${id}')">💾 Sauvegarder</button>
+    <button class="btn-sm btn-outline" onclick="closeModal('modal-dossier')">Fermer</button>`;
   document.getElementById('modal-dossier').classList.add('open');
 
   setTimeout(() => {
@@ -664,6 +691,48 @@ function openClientDossiers(clientId) {
   const dos = allDossiers.filter(d => d.user_id === clientId);
   showSection('dossiers');
   renderDossiersTable(dos);
+}
+
+// MODIFIER DOSSIER
+function toggleEditDossier(id) {
+  const view = document.getElementById('view-info');
+  const edit = document.getElementById('edit-info');
+  const btnModif = document.getElementById('btn-modifier');
+  const btnSave = document.getElementById('btn-save');
+  const isEditing = edit.style.display !== 'none';
+  if (isEditing) {
+    view.style.display = '';
+    edit.style.display = 'none';
+    btnModif.textContent = '✏️ Modifier';
+    btnSave.style.display = 'none';
+  } else {
+    view.style.display = 'none';
+    edit.style.display = 'block';
+    btnModif.textContent = '✕ Annuler';
+    btnSave.style.display = 'inline-flex';
+    document.getElementById('edit-montant').focus();
+  }
+}
+
+async function saveDossierEdit(dossierId) {
+  const typePret = document.getElementById('edit-type-pret').value;
+  const montant = parseInt(document.getElementById('edit-montant').value);
+  const duree = parseInt(document.getElementById('edit-duree').value);
+  if (!montant || montant <= 0) { showNotif('❌ Montant invalide'); return; }
+  if (!duree || duree <= 0 || duree > 30) { showNotif('❌ Durée invalide (1–30 ans)'); return; }
+  const btn = document.getElementById('btn-save');
+  btn.disabled = true;
+  btn.textContent = 'Sauvegarde...';
+  const { error } = await sb.from('dossiers').update({ type_pret: typePret, montant, duree }).eq('id', dossierId);
+  btn.disabled = false;
+  btn.textContent = '💾 Sauvegarder';
+  if (!error) {
+    showNotif('✅ Dossier mis à jour !', 'green');
+    await loadAll();
+    closeModal('modal-dossier');
+  } else {
+    showNotif('❌ Erreur lors de la mise à jour');
+  }
 }
 
 // HELPERS

@@ -83,9 +83,17 @@
   .delay-3 { animation-delay: 0.3s; }
   .delay-4 { animation-delay: 0.4s; }
 
-  /* ─── NAVBAR ─── */
+  /* ─── TOPBAR ORIAS ─── */
+  #topbar {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 101;
+    background: #071220;
+    padding: 7px 24px;
+    display: flex; align-items: center; justify-content: center;
+    gap: 20px; flex-wrap: wrap;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
   nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    position: fixed; top: 34px; left: 0; right: 0; z-index: 100;
     background: rgba(11,31,69,0.97);
     backdrop-filter: blur(16px);
     border-bottom: 1px solid rgba(255,255,255,0.07);
@@ -113,7 +121,7 @@
   .hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; padding:4px; }
   .hamburger span { display:block; width:24px; height:2px; background:var(--white); border-radius:2px; transition:0.3s; }
   .mobile-menu {
-    display:none; position:fixed; top:68px; left:0; right:0; z-index:99;
+    display:none; position:fixed; top:102px; left:0; right:0; z-index:99;
     background:var(--navy); padding:20px 24px; flex-direction:column; gap:4px;
     border-bottom: 1px solid rgba(255,255,255,0.1);
   }
@@ -253,18 +261,6 @@
     font-size: 0.95rem; cursor: pointer; transition: all 0.25s; display: flex; align-items: center; justify-content: center; gap: 8px;
   }
   .btn-sim-continue:hover { background: #00dfa8; transform: translateY(-1px); box-shadow: 0 6px 20px rgba(0,200,150,0.4); }
-  .hero-sim-card {
-    background: rgba(255,255,255,0.97); border-radius: 24px;
-    padding: 36px; box-shadow: var(--shadow-lg);
-    position: relative; overflow: hidden;
-  }
-  .hero-sim-card::before {
-    content:''; position:absolute; inset:-1px; border-radius:25px;
-    background: linear-gradient(135deg, rgba(0,200,150,0.4), rgba(11,31,69,0.1));
-    z-index:-1;
-  }
-  .sim-title { font-family: var(--font-display); font-weight: 700; font-size: 1.15rem; color: var(--navy); margin-bottom: 4px; }
-  .sim-subtitle { font-size: 0.82rem; color: var(--slate); margin-bottom: 24px; }
   .sim-cta-row { margin-top: 16px; }
   .btn-sim {
     width: 100%; background: var(--green); color: var(--navy); border: none;
@@ -350,7 +346,10 @@
   }
   .loan-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); border-color: rgba(0,200,150,0.3); }
   .loan-card:hover::before { transform: scaleX(1); }
-  .loan-card-img { width: 100%; height: 180px; object-fit: cover; border-radius: 12px; margin-bottom: 16px; }
+  .loan-card-img { width: 100%; height: 180px; object-fit: cover; border-radius: 12px; margin-bottom: 16px; background: linear-gradient(135deg, #e8f0fe 0%, #d0e8f5 100%); min-height: 180px; display: block; }
+  .loan-card-img[src=""], .loan-card-img:not([src]) { visibility: hidden; }
+  /* Fallback couleur si image externe indisponible */
+  .detail-img { background: linear-gradient(135deg, #e8f0fe 0%, #d0e8f5 100%); }
   .loan-card-icon { font-size: 2.4rem; margin-bottom: 16px; }
   .loan-card h3 { font-family: var(--font-display); font-weight: 700; font-size: 1.1rem; color: var(--navy); margin-bottom: 8px; letter-spacing: -0.2px; }
   .loan-card p { font-size: 0.9rem; color: var(--slate); line-height: 1.65; margin-bottom: 20px; font-weight: 400; }
@@ -761,19 +760,22 @@
   }
   .btn-cookie-decline:hover { border-color: rgba(255,255,255,0.5); color: var(--white); }
   @media (max-width: 768px) {
+    #topbar { display: none !important; }
+    nav { top: 0; }
+    .mobile-menu { top: 68px; }
     #toast-container { bottom: 16px; right: 16px; left: 16px; }
     .toast { max-width: 100%; }
     #scroll-top { bottom: 80px; right: 16px; }
     #cookie-banner { padding: 16px; }
   }
+  @media (min-width: 769px) { .hero-mobile { display: none !important; } }
+  @media (max-width: 768px) { .hero-desktop { display: none !important; } }
 </style>
-</head>
 <body>
 
 <!-- ═══════════ NAV ═══════════ -->
 <!-- ORIAS TOPBAR -->
-<div style="background:#071220;padding:7px 24px;display:flex;align-items:center;justify-content:center;gap:20px;flex-wrap:wrap;border-bottom:1px solid rgba(255,255,255,0.06);">
-  <span style="font-size:0.72rem;color:rgba(255,255,255,0.45);font-family:'Inter',sans-serif;display:flex;align-items:center;gap:6px;">
+<div id="topbar" style="">  <span style="font-size:0.72rem;color:rgba(255,255,255,0.45);font-family:'Inter',sans-serif;display:flex;align-items:center;gap:6px;">
     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="rgba(0,200,150,0.7)" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
     Intermédiaire en opérations de banque agréé ORIAS n° <strong style="color:rgba(255,255,255,0.65);">23 000 123</strong>
   </span>
@@ -820,7 +822,7 @@
   <a href="#" onclick="showPage('immobilier');toggleMenu();return false;">🏠 Prêt Immobilier</a>
   <a href="#" onclick="showPage('auto');toggleMenu();return false;">🚗 Prêt Auto</a>
   <a href="#" onclick="showPage('personnel');toggleMenu();return false;">👤 Prêt Personnel</a>
-  <a href="#" onclick="showPage('comment');toggleMenu();return false;">❓ Comment ça marche</a>
+  <a href="#" onclick="showPage('simulateur');toggleMenu();return false;">❓ Comment ça marche</a>
   <a href="#" onclick="showPage('contact');toggleMenu();return false;">📞 Contact</a>
 </div>
 
@@ -840,10 +842,6 @@
 
     <!-- ══ MOBILE (caché sur PC) ══ -->
     <div class="hero-mobile" style="position:relative;z-index:1;padding:90px 16px 40px;">
-      <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(0,200,150,0.12);border:1px solid rgba(0,200,150,0.3);border-radius:50px;padding:6px 14px;margin-bottom:20px;">
-        <span style="width:6px;height:6px;border-radius:50%;background:#00c896;flex-shrink:0;"></span>
-        <span style="font-size:0.68rem;font-weight:700;color:#00c896;letter-spacing:1px;text-transform:uppercase;">🇪🇺 Plateforme européenne</span>
-      </div>
       <h1 style="font-size:1.9rem;font-weight:900;color:#fff;line-height:1.2;margin-bottom:14px;">Financez vos projets avec Finooz</h1>
       <p style="font-size:0.95rem;color:rgba(255,255,255,0.72);line-height:1.7;margin-bottom:28px;">Simulez votre projet et obtenez une réponse de principe immédiate. Sans engagement, 100% en ligne.</p>
       <div style="background:rgba(11,31,69,0.88);border-radius:16px;padding:24px;border:1px solid rgba(255,255,255,0.12);">
@@ -880,15 +878,11 @@
     </div>
 
     <!-- ══ DESKTOP (caché sur mobile) ══ -->
-    <div class="hero-desktop" style="position:relative;z-index:1;padding:120px 0 72px;">
+    <div class="hero-desktop" style="position:relative;z-index:1;padding:140px 0 72px;">
       <div style="max-width:1100px;margin:0 auto;padding:0 40px;display:flex;align-items:center;gap:48px;">
 
         <!-- Texte gauche -->
         <div style="flex:1;min-width:0;">
-          <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(0,200,150,0.12);border:1px solid rgba(0,200,150,0.3);border-radius:50px;padding:6px 16px;margin-bottom:24px;">
-            <span style="width:7px;height:7px;border-radius:50%;background:#00c896;flex-shrink:0;"></span>
-            <span style="font-size:0.7rem;font-weight:700;color:#00c896;letter-spacing:1.5px;text-transform:uppercase;font-family:'Inter',sans-serif;">🇪🇺 Plateforme européenne</span>
-          </div>
           <h1 style="font-family:'Sora',sans-serif;font-size:clamp(2rem,3.5vw,3rem);font-weight:800;color:#fff;line-height:1.15;letter-spacing:-0.5px;margin-bottom:20px;">Financez vos projets<br>avec Finooz</h1>
           <p style="font-size:1rem;color:rgba(255,255,255,0.68);line-height:1.75;margin-bottom:32px;max-width:420px;font-family:'Inter',sans-serif;font-weight:400;">Simulez votre projet et obtenez une réponse de principe immédiate. Sans engagement, 100% en ligne.</p>
           <div style="background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);border-radius:14px;padding:20px 24px;">
@@ -960,7 +954,7 @@
       </div>
       <div class="loan-cards">
         <div class="loan-card reveal" onclick="showPage('immobilier')">
-          <img class="loan-card-img" loading="lazy" src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=600&q=80&auto=format" alt="Prêt immobilier">
+          <img class="loan-card-img" loading="lazy" src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=600&q=80&auto=format" alt="Prêt immobilier" onerror="this.style.background='linear-gradient(135deg,#0B1F45,#00C896)';this.src='';this.alt='';">
           <h3>Prêt Immobilier</h3>
           <p>Financement de votre résidence principale, secondaire ou investissement locatif.</p>
           <div class="loan-card-rate">dès 3,20 % <span>TAEG indicatif</span></div>
@@ -973,7 +967,7 @@
           <div class="loan-card-link">En savoir plus <span>→</span></div>
         </div>
         <div class="loan-card reveal delay-1" onclick="showPage('auto')">
-          <img class="loan-card-img" loading="lazy" src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=600&q=80&auto=format" alt="Prêt automobile">
+          <img class="loan-card-img" loading="lazy" src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=600&q=80&auto=format" alt="Prêt automobile" onerror="this.style.background='linear-gradient(135deg,#0B1F45,#1e3f7a)';this.src='';this.alt='';">
           <h3>Prêt Automobile</h3>
           <p>Achetez votre voiture neuve ou d'occasion avec des mensualités adaptées à votre budget.</p>
           <div class="loan-card-rate">dès 5,90 % <span>TAEG indicatif</span></div>
@@ -985,7 +979,7 @@
           <div class="loan-card-link">En savoir plus <span>→</span></div>
         </div>
         <div class="loan-card reveal delay-2" onclick="showPage('personnel')">
-          <img class="loan-card-img" loading="lazy" src="https://images.unsplash.com/photo-1553484771-371a605b060b?w=600&q=80&auto=format" alt="Prêt personnel">
+          <img class="loan-card-img" loading="lazy" src="https://images.unsplash.com/photo-1553484771-371a605b060b?w=600&q=80&auto=format" alt="Prêt personnel" onerror="this.style.background='linear-gradient(135deg,#142e60,#00C896)';this.src='';this.alt='';">
           <h3>Prêt Personnel</h3>
           <p>Travaux, voyages, études : financez librement vos projets, sans justificatif d'usage.</p>
           <div class="loan-card-rate">dès 7,90 % <span>TAEG indicatif</span></div>
@@ -2070,7 +2064,7 @@
 <script>
 // TOAST
 function showToast(msg, type) {
-  var type = type || 'success';
+  type = type || 'success';
   var icons = { success: '✅', error: '❌', info: 'ℹ️' };
   var container = document.getElementById('toast-container');
   var toast = document.createElement('div');
@@ -2152,7 +2146,7 @@ async function demanderSansEngagement() {
 // HERO TILES
 var selectedTileType = null;
 function selectTile(el, type) {
-  document.querySelectorAll('.sim-tile').forEach(function(t) { t.classList.remove('selected'); });
+  el.closest('.sim-tiles-grid, div[style*="grid-template-columns"]').querySelectorAll('.sim-tile').forEach(function(t) { t.classList.remove('selected'); });
   el.classList.add('selected');
   selectedTileType = type;
 }
@@ -2188,8 +2182,10 @@ function continuerSim() {
 
 // PAGE NAVIGATION
 function showPage(pageId) {
+  var target = document.getElementById('page-' + pageId);
+  if (!target) { console.warn('Page introuvable : ' + pageId); return; }
   document.querySelectorAll('.page').forEach(function(p) { p.classList.remove('active'); });
-  document.getElementById('page-' + pageId).classList.add('active');
+  target.classList.add('active');
   window.scrollTo({ top: 0, behavior: 'smooth' });
   // Update active nav link
   document.querySelectorAll('.nav-links a').forEach(function(a) { a.classList.remove('active'); });
@@ -2222,7 +2218,6 @@ function showPage(pageId) {
   if (pageId === 'simulateur' && !window._simFromTile) { resetSim(); }
   window._simFromTile = false;
 }
-
 // MOBILE MENU
 function toggleMenu() {
   document.getElementById('mobileMenu').classList.toggle('open');
@@ -2252,6 +2247,9 @@ async function submitForm() {
   if (!prenom.value.trim() || !nom.value.trim() || !email.value.trim() || !message.value.trim()) {
     showToast('Veuillez remplir tous les champs obligatoires.', 'error'); return;
   }
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim())) {
+    showToast('Veuillez saisir une adresse email valide.', 'error'); return;
+  }
   var btn = document.querySelector('#contactForm .form-submit');
   if (btn) { btn.disabled = true; btn.textContent = 'Envoi en cours...'; }
   try {
@@ -2275,11 +2273,11 @@ async function submitForm() {
 }
 
 // SCROLL REVEAL
-var observer = new IntersectionObserver(function(entries) {
+var revealObserver = new IntersectionObserver(function(entries) {
   entries.forEach(function(e) {
     if (e.isIntersecting) {
       e.target.classList.add('visible');
-      observer.unobserve(e.target); // stop watching once visible
+      revealObserver.unobserve(e.target); // stop watching once visible
     }
   });
 }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
@@ -2287,16 +2285,22 @@ var observer = new IntersectionObserver(function(entries) {
 function initReveal() {
   document.querySelectorAll('.reveal').forEach(function(el) {
     el.style.willChange = 'opacity, transform';
-    observer.observe(el);
+    revealObserver.observe(el);
   });
+  // Fallback : forcer la visibilité après 800ms si l'observer ne se déclenche pas
+  setTimeout(function() {
+    document.querySelectorAll('.reveal:not(.visible)').forEach(function(el) {
+      el.classList.add('visible');
+    });
+  }, 800);
 }
 
 // SIMULAT€ 3 ETAPES
 var simData = { projet: null, montant: null, duree: null };
 var stepTitles = {
-  1: { title: 'Votre projet', subtitle: 'Selectionnez le type de financement' },
-  2: { title: 'Montant souhaite', subtitle: 'Saisissez le montant de votre credit' },
-  3: { title: 'Duree de remboursement', subtitle: 'Choisissez la duree souhaitee' }
+  1: { title: 'Votre projet', subtitle: 'Sélectionnez le type de financement' },
+  2: { title: 'Montant souhaité', subtitle: 'Saisissez le montant de votre crédit' },
+  3: { title: 'Durée de remboursement', subtitle: 'Choisissez la durée souhaitée' }
 };
 
 function selectChoice(el, type, value) {
@@ -2374,6 +2378,9 @@ async function submitLead() {
   var rgpd = document.getElementById('lead-rgpd');
   if (!prenom.value.trim() || !nom.value.trim() || !email.value.trim() || !tel.value.trim()) {
     showToast('Veuillez remplir tous les champs obligatoires.', 'error'); return;
+  }
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim())) {
+    showToast('Veuillez saisir une adresse email valide.', 'error'); return;
   }
   if (!rgpd.checked) {
     showToast('Veuillez accepter la politique de confidentialité.', 'error'); return;

@@ -2153,7 +2153,7 @@ function continuerSim() {
 }
 
 // PAGE NAVIGATION
-function showPage(pageId) {
+function showPage(pageId, fromPopState) {
   var target = document.getElementById('page-' + pageId);
   if (!target) { console.warn('Page introuvable : ' + pageId); return; }
   document.querySelectorAll('.page').forEach(function(p) { p.classList.remove('active'); });
@@ -2165,6 +2165,10 @@ function showPage(pageId) {
   var navLinks = document.querySelectorAll('.nav-links a:not(.btn-nav)');
   if (navMap[pageId] !== undefined && navLinks[navMap[pageId]]) {
     navLinks[navMap[pageId]].classList.add('active');
+  }
+  // Mettre à jour l'historique du navigateur pour que le bouton retour fonctionne
+  if (!fromPopState) {
+    history.pushState({ page: pageId }, '', '#' + pageId);
   }
   // Pré-remplir le formulaire contact avec les données du simulateur
   if (pageId === 'contact' && simData.projet) {
@@ -2190,6 +2194,25 @@ function showPage(pageId) {
   if (pageId === 'simulateur' && !window._simFromTile) { resetSim(); }
   window._simFromTile = false;
 }
+
+// Bouton retour du navigateur / téléphone
+window.addEventListener('popstate', function(e) {
+  var pageId = (e.state && e.state.page) ? e.state.page : 'home';
+  showPage(pageId, true);
+});
+
+// Lire le hash à l'ouverture (lien direct ou rechargement)
+(function() {
+  var hash = window.location.hash.replace('#', '');
+  var validPages = ['home','simulateur','immobilier','auto','personnel','partenaires','contact','comment','about','mentions','confidentialite','cgu','presse'];
+  if (hash && validPages.indexOf(hash) !== -1) {
+    showPage(hash, true);
+    history.replaceState({ page: hash }, '', '#' + hash);
+  } else {
+    history.replaceState({ page: 'home' }, '', window.location.pathname);
+  }
+})();
+
 // MOBILE MENU
 function toggleMenu() {
   document.getElementById('mobileMenu').classList.toggle('open');

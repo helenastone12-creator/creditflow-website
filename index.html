@@ -2088,7 +2088,9 @@ window.addEventListener('load', function() {
 });
 </script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script>
+emailjs.init('oZiWNC5z2M4rydJCT');
 var SB_URL = 'https://fsflgwbcaietfwrtofbs.supabase.co';
 var SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZzZmxnd2JjYWlldGZ3cnRvZmJzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzcxOTkyODMsImV4cCI6MjA5Mjc3NTI4M30.60v27ULp8h8IgvJWjC473etnfNZoZ3GBxK5Aq74mkbU';
 var sbClient = null;
@@ -2364,6 +2366,19 @@ async function submitLead() {
       projet: simData.projet || '--',
       montant: simData.montant || '--',
       duree: simData.duree || '--'
+    });
+  } catch(e) {
+    // Erreur silencieuse
+  }
+  try {
+    await emailjs.send('FKkjqjC53tkG5ylN9ILee', 'template_7d7q34j', {
+      prenom: prenom.value.trim(),
+      nom: nom.value.trim(),
+      email: email.value.trim(),
+      telephone: tel.value.trim(),
+      projet: simData.projet || '--',
+      montant: simData.montant || '--',
+      mensualite: simData.duree || '--'
     });
   } catch(e) {
     // Erreur silencieuse

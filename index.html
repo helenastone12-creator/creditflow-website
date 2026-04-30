@@ -3,10 +3,19 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Finooz — Simulez votre prêt en ligne et obtenez une réponse immédiate. Immobilier, auto, personnel. Sans engagement, 100% en ligne.">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
 <title>Finooz — Financement en ligne, rapide et transparent</title>
+<!-- DNS prefetch pour les ressources externes -->
+<link rel="dns-prefetch" href="https://fonts.googleapis.com">
+<link rel="dns-prefetch" href="https://images.unsplash.com">
+<link rel="dns-prefetch" href="https://randomuser.me">
+<link rel="dns-prefetch" href="https://embed.tawk.to">
+<link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Sora:wght@700;800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Sora:wght@700;800&display=swap" rel="stylesheet"></noscript>
 <style>
   /* ─── RESET & BASE ─── */
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -688,7 +697,10 @@
     .footer-legal { flex-wrap: wrap; gap: 10px; }
   }
 
-  /* ─── SCROLL ANIMATIONS ─── */
+  /* ─── PERFORMANCE ─── */
+  .section { content-visibility: auto; contain-intrinsic-size: 0 500px; }
+  img { max-width: 100%; height: auto; }
+  * { -webkit-tap-highlight-color: transparent; }
   .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s, transform 0.6s; }
   .reveal.visible { opacity: 1; transform: translateY(0); }
 
@@ -948,7 +960,7 @@
       </div>
       <div class="loan-cards">
         <div class="loan-card reveal" onclick="showPage('immobilier')">
-          <img class="loan-card-img" src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=600https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=600&q=80q=85" alt="Prêt immobilier">
+          <img class="loan-card-img" loading="lazy" src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=600&q=80&auto=format" alt="Prêt immobilier">
           <h3>Prêt Immobilier</h3>
           <p>Financement de votre résidence principale, secondaire ou investissement locatif.</p>
           <div class="loan-card-rate">dès 3,20 % <span>TAEG indicatif</span></div>
@@ -961,7 +973,7 @@
           <div class="loan-card-link">En savoir plus <span>→</span></div>
         </div>
         <div class="loan-card reveal delay-1" onclick="showPage('auto')">
-          <img class="loan-card-img" src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=600https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=600&q=80q=85" alt="Prêt automobile">
+          <img class="loan-card-img" loading="lazy" src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=600&q=80&auto=format" alt="Prêt automobile">
           <h3>Prêt Automobile</h3>
           <p>Achetez votre voiture neuve ou d'occasion avec des mensualités adaptées à votre budget.</p>
           <div class="loan-card-rate">dès 5,90 % <span>TAEG indicatif</span></div>
@@ -973,7 +985,7 @@
           <div class="loan-card-link">En savoir plus <span>→</span></div>
         </div>
         <div class="loan-card reveal delay-2" onclick="showPage('personnel')">
-          <img class="loan-card-img" src="https://images.unsplash.com/photo-1553484771-371a605b060b?w=600https://images.unsplash.com/photo-1521791136064-7986c2920216?w=600&q=80q=85" alt="Prêt personnel">
+          <img class="loan-card-img" loading="lazy" src="https://images.unsplash.com/photo-1553484771-371a605b060b?w=600&q=80&auto=format" alt="Prêt personnel">
           <h3>Prêt Personnel</h3>
           <p>Travaux, voyages, études : financez librement vos projets, sans justificatif d'usage.</p>
           <div class="loan-card-rate">dès 7,90 % <span>TAEG indicatif</span></div>
@@ -1060,7 +1072,7 @@
       <div class="testimonials-grid">
         <div class="testi-card reveal">
           <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
-            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Marie-Louise" style="width:44px;height:44px;border-radius:50%;object-fit:cover;flex-shrink:0;">
+            <img loading="lazy" src="https://randomuser.me/api/portraits/women/44.jpg" alt="Marie-Louise" style="width:44px;height:44px;border-radius:50%;object-fit:cover;flex-shrink:0;">
             <div>
               <div class="testi-name">Marie-Louise D.</div>
               <div class="testi-info">Prêt Immobilier <span class="testi-badge">✓ Vérifié</span></div>
@@ -1072,7 +1084,7 @@
         </div>
         <div class="testi-card reveal delay-1">
           <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
-            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Thomas" style="width:44px;height:44px;border-radius:50%;object-fit:cover;flex-shrink:0;">
+            <img loading="lazy" src="https://randomuser.me/api/portraits/men/32.jpg" alt="Thomas" style="width:44px;height:44px;border-radius:50%;object-fit:cover;flex-shrink:0;">
             <div>
               <div class="testi-name">Thomas M.</div>
               <div class="testi-info">Prêt Auto <span class="testi-badge">✓ Vérifié</span></div>
@@ -1084,7 +1096,7 @@
         </div>
         <div class="testi-card reveal delay-2">
           <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
-            <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Sophie" style="width:44px;height:44px;border-radius:50%;object-fit:cover;flex-shrink:0;">
+            <img loading="lazy" src="https://randomuser.me/api/portraits/women/68.jpg" alt="Sophie" style="width:44px;height:44px;border-radius:50%;object-fit:cover;flex-shrink:0;">
             <div>
               <div class="testi-name">Sophie B.</div>
               <div class="testi-info">Prêt Personnel <span class="testi-badge">✓ Vérifié</span></div>
@@ -1096,7 +1108,7 @@
         </div>
         <div class="testi-card reveal">
           <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
-            <img src="https://randomuser.me/api/portraits/men/52.jpg" alt="Jean-Pierre" style="width:44px;height:44px;border-radius:50%;object-fit:cover;flex-shrink:0;">
+            <img loading="lazy" src="https://randomuser.me/api/portraits/men/52.jpg" alt="Jean-Pierre" style="width:44px;height:44px;border-radius:50%;object-fit:cover;flex-shrink:0;">
             <div>
               <div class="testi-name">Jean-Pierre L.</div>
               <div class="testi-info">Prêt Immobilier <span class="testi-badge">✓ Vérifié</span></div>
@@ -1108,7 +1120,7 @@
         </div>
         <div class="testi-card reveal delay-1">
           <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
-            <img src="https://randomuser.me/api/portraits/women/29.jpg" alt="Camille" style="width:44px;height:44px;border-radius:50%;object-fit:cover;flex-shrink:0;">
+            <img loading="lazy" src="https://randomuser.me/api/portraits/women/29.jpg" alt="Camille" style="width:44px;height:44px;border-radius:50%;object-fit:cover;flex-shrink:0;">
             <div>
               <div class="testi-name">Camille R.</div>
               <div class="testi-info">Prêt Auto <span class="testi-badge">✓ Vérifié</span></div>
@@ -1120,7 +1132,7 @@
         </div>
         <div class="testi-card reveal delay-2">
           <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
-            <img src="https://randomuser.me/api/portraits/men/76.jpg" alt="Alexandre" style="width:44px;height:44px;border-radius:50%;object-fit:cover;flex-shrink:0;">
+            <img loading="lazy" src="https://randomuser.me/api/portraits/men/76.jpg" alt="Alexandre" style="width:44px;height:44px;border-radius:50%;object-fit:cover;flex-shrink:0;">
             <div>
               <div class="testi-name">Alexandre N.</div>
               <div class="testi-info">Travaux <span class="testi-badge">✓ Vérifié</span></div>
@@ -1412,7 +1424,7 @@
   <div class="loan-detail">
     <div class="detail-grid">
       <div>
-        <div class="detail-img"><img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&q=80q=85" alt="Prêt immobilier" style="width:100%;height:100%;object-fit:cover;"></div>
+        <div class="detail-img"><img loading="lazy" src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&q=80&auto=format" alt="Prêt immobilier" style="width:100%;height:100%;object-fit:cover;"></div>
       </div>
       <div>
         <div class="detail-label">Prêt Immobilier</div>
@@ -1698,7 +1710,7 @@
         </div>
         <div class="contact-method">
           <div class="contact-method-icon">✉️</div>
-          <div><strong>Par email</strong><p>contact@finooz.eu<br>Réponse sous 24h ouvrées</p></div>
+          <div><strong>Par email</strong><p>contact@finooz.com<br>Réponse sous 24h ouvrées</p></div>
         </div>
         <div class="contact-method">
           <div class="contact-method-icon">💬</div>
@@ -1788,7 +1800,7 @@
       <div style="background:var(--off-white);border-radius:var(--radius);padding:28px;text-align:center;border:1px solid var(--border);"><div style="font-size:2rem;font-weight:800;color:var(--navy);">12</div><div style="font-size:0.85rem;color:var(--slate);margin-top:6px;">Pays européens</div></div>
       <div style="background:var(--off-white);border-radius:var(--radius);padding:28px;text-align:center;border:1px solid var(--border);"><div style="font-size:2rem;font-weight:800;color:var(--navy);">4,8/5</div><div style="font-size:0.85rem;color:var(--slate);margin-top:6px;">Note Trustpilot</div></div>
     </div>
-    <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=900https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=900&q=80q=85" alt="Équipe Finooz" style="width:100%;height:280px;object-fit:cover;border-radius:var(--radius);margin-bottom:40px;">
+    <img loading="lazy" src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=900&q=80&auto=format" alt="Équipe Finooz" style="width:100%;height:280px;object-fit:cover;border-radius:var(--radius);margin-bottom:40px;">
     <div class="detail-features">
       <div class="detail-feature"><div class="detail-feature-icon">🎯</div><div class="detail-feature-text"><strong>Transparence totale</strong><p>Tous nos taux, frais et conditions sont affichés clairement, sans surprise ni frais cachés.</p></div></div>
       <div class="detail-feature"><div class="detail-feature-icon">⚡</div><div class="detail-feature-text"><strong>Rapidité et efficacité</strong><p>Notre technologie de scoring automatisé permet une réponse de principe sous 24 heures.</p></div></div>
@@ -1807,7 +1819,7 @@
   </div>
   <div style="padding:80px 24px;max-width:860px;margin:0 auto;">
     <h3 style="color:var(--navy);margin-bottom:12px;font-size:1.3rem;">Contact presse</h3>
-    <p style="color:var(--slate);margin-bottom:32px;">Pour toute demande d'interview, d'information ou de visuels : <strong style="color:var(--navy);">presse@finooz.eu</strong> — Réponse garantie sous 24h ouvrées.</p>
+    <p style="color:var(--slate);margin-bottom:32px;">Pour toute demande d'interview, d'information ou de visuels : <strong style="color:var(--navy);">presse@finooz.com</strong> — Réponse garantie sous 24h ouvrées.</p>
     <h3 style="color:var(--navy);margin:0 0 20px;font-size:1.3rem;">Dernières actualités</h3>
     <div style="display:flex;flex-direction:column;gap:16px;margin-bottom:48px;">
       <div style="padding:24px;border:1.5px solid var(--border);border-radius:var(--radius);"><div style="font-size:0.75rem;color:var(--green);font-weight:700;margin-bottom:8px;">15 JANVIER 2025</div><h4 style="color:var(--navy);margin-bottom:8px;">Finooz franchit le cap des 48 000 clients en Europe</h4><p style="color:var(--slate);font-size:0.85rem;">La plateforme annonce une croissance de 65 % sur 2024 et son expansion dans 3 nouveaux pays européens.</p></div>
@@ -1828,7 +1840,7 @@
     <p>Informations légales relatives à l'éditeur et à l'hébergeur du site Finooz.</p>
   </div>
   <div style="padding:72px 24px;max-width:860px;margin:0 auto;">
-    <div style="margin-bottom:36px;"><h3 style="color:var(--navy);margin-bottom:14px;padding-bottom:10px;border-bottom:2px solid var(--green);display:inline-block;">1. Éditeur du site</h3><p style="color:var(--slate);line-height:1.9;">Le site <strong>finooz.eu</strong> est édité par <strong>Finooz SAS</strong>, société par actions simplifiée au capital de 500 000 €, immatriculée au RCS de Paris sous le numéro <strong>123 456 789</strong>.<br><br>Siège social : 12 rue de la Paix, 75002 Paris, France<br>TVA intracommunautaire : FR 12 123 456 789<br>Téléphone : +33 (0)1 80 00 00 00<br>Email : contact@finooz.eu<br>Directeur de la publication : Jean-Marc Leblanc, Président</p></div>
+    <div style="margin-bottom:36px;"><h3 style="color:var(--navy);margin-bottom:14px;padding-bottom:10px;border-bottom:2px solid var(--green);display:inline-block;">1. Éditeur du site</h3><p style="color:var(--slate);line-height:1.9;">Le site <strong>finooz.com</strong> est édité par <strong>Finooz SAS</strong>, société par actions simplifiée au capital de 500 000 €, immatriculée au RCS de Paris sous le numéro <strong>123 456 789</strong>.<br><br>Siège social : 12 rue de la Paix, 75002 Paris, France<br>TVA intracommunautaire : FR 12 123 456 789<br>Téléphone : +33 (0)1 80 00 00 00<br>Email : contact@finooz.com<br>Directeur de la publication : Jean-Marc Leblanc, Président</p></div>
     <div style="margin-bottom:36px;"><h3 style="color:var(--navy);margin-bottom:14px;padding-bottom:10px;border-bottom:2px solid var(--green);display:inline-block;">2. Agrément et supervision</h3><p style="color:var(--slate);line-height:1.9;">Finooz SAS est un intermédiaire en opérations de banque et services de paiement (IOBSP) immatriculé à l'ORIAS sous le numéro <strong>23 000 123</strong> (www.orias.fr). La société est soumise au contrôle de l'Autorité de Contrôle Prudentiel et de Résolution (ACPR), 4 Place de Budapest, 75436 Paris Cedex 09.</p></div>
     <div style="margin-bottom:36px;"><h3 style="color:var(--navy);margin-bottom:14px;padding-bottom:10px;border-bottom:2px solid var(--green);display:inline-block;">3. Hébergeur</h3><p style="color:var(--slate);line-height:1.9;"><strong>Hostinger International Ltd</strong><br>61 Lordou Vironos Street, 6023 Larnaca, Chypre<br>www.hostinger.com</p></div>
     <div style="margin-bottom:36px;"><h3 style="color:var(--navy);margin-bottom:14px;padding-bottom:10px;border-bottom:2px solid var(--green);display:inline-block;">4. Propriété intellectuelle</h3><p style="color:var(--slate);line-height:1.9;">L'ensemble des contenus présents sur le site (textes, images, graphismes, logo, icônes) est la propriété exclusive de Finooz SAS ou de ses partenaires. Toute reproduction, représentation ou diffusion, totale ou partielle, sans accord exprès et préalable est strictement interdite.</p></div>
@@ -1846,11 +1858,11 @@
   </div>
   <div style="padding:72px 24px;max-width:860px;margin:0 auto;">
     <div style="background:rgba(0,200,150,0.08);border:1px solid rgba(0,200,150,0.2);border-radius:var(--radius-sm);padding:16px 20px;margin-bottom:40px;font-size:0.85rem;color:#006e53;line-height:1.6;"><strong>Dernière mise à jour : 1er janvier 2025.</strong> Finooz s'engage à protéger votre vie privée conformément au RGPD — Règlement (UE) 2016/679 du Parlement européen.</div>
-    <div style="margin-bottom:36px;"><h3 style="color:var(--navy);margin-bottom:14px;padding-bottom:10px;border-bottom:2px solid var(--green);display:inline-block;">1. Responsable du traitement</h3><p style="color:var(--slate);line-height:1.9;"><strong>Finooz SAS</strong>, 12 rue de la Paix, 75002 Paris. Délégué à la Protection des Données (DPO) : <strong>dpo@finooz.eu</strong></p></div>
+    <div style="margin-bottom:36px;"><h3 style="color:var(--navy);margin-bottom:14px;padding-bottom:10px;border-bottom:2px solid var(--green);display:inline-block;">1. Responsable du traitement</h3><p style="color:var(--slate);line-height:1.9;"><strong>Finooz SAS</strong>, 12 rue de la Paix, 75002 Paris. Délégué à la Protection des Données (DPO) : <strong>dpo@finooz.com</strong></p></div>
     <div style="margin-bottom:36px;"><h3 style="color:var(--navy);margin-bottom:14px;padding-bottom:10px;border-bottom:2px solid var(--green);display:inline-block;">2. Données collectées</h3><p style="color:var(--slate);line-height:1.9;">Nous collectons les données suivantes :<br>• Données d'identification : nom, prénom, date de naissance, nationalité<br>• Données de contact : adresse email, numéro de téléphone, adresse postale<br>• Données financières : revenus, charges mensuelles, situation professionnelle<br>• Données de navigation : adresse IP, cookies, pages visitées, durée de session</p></div>
     <div style="margin-bottom:36px;"><h3 style="color:var(--navy);margin-bottom:14px;padding-bottom:10px;border-bottom:2px solid var(--green);display:inline-block;">3. Finalités du traitement</h3><p style="color:var(--slate);line-height:1.9;">Vos données sont utilisées pour : le traitement de votre demande de prêt, la gestion de la relation client, la lutte contre la fraude, l'amélioration de nos services et, avec votre consentement, l'envoi de communications commerciales.</p></div>
     <div style="margin-bottom:36px;"><h3 style="color:var(--navy);margin-bottom:14px;padding-bottom:10px;border-bottom:2px solid var(--green);display:inline-block;">4. Durée de conservation</h3><p style="color:var(--slate);line-height:1.9;">Données clients : 5 ans après la fin de la relation contractuelle. Données prospects : 3 ans. Données de navigation et cookies : 13 mois maximum.</p></div>
-    <div style="margin-bottom:36px;"><h3 style="color:var(--navy);margin-bottom:14px;padding-bottom:10px;border-bottom:2px solid var(--green);display:inline-block;">5. Vos droits</h3><p style="color:var(--slate);line-height:1.9;">Conformément au RGPD, vous disposez des droits d'accès, de rectification, d'effacement, de limitation, de portabilité et d'opposition. Pour exercer ces droits, contactez notre DPO : <strong>dpo@finooz.eu</strong>. En cas de litige, vous pouvez saisir la CNIL (www.cnil.fr).</p></div>
+    <div style="margin-bottom:36px;"><h3 style="color:var(--navy);margin-bottom:14px;padding-bottom:10px;border-bottom:2px solid var(--green);display:inline-block;">5. Vos droits</h3><p style="color:var(--slate);line-height:1.9;">Conformément au RGPD, vous disposez des droits d'accès, de rectification, d'effacement, de limitation, de portabilité et d'opposition. Pour exercer ces droits, contactez notre DPO : <strong>dpo@finooz.com</strong>. En cas de litige, vous pouvez saisir la CNIL (www.cnil.fr).</p></div>
   </div>
 </div>
 
@@ -1863,7 +1875,7 @@
   </div>
   <div style="padding:72px 24px;max-width:860px;margin:0 auto;">
     <div style="background:rgba(0,200,150,0.08);border:1px solid rgba(0,200,150,0.2);border-radius:var(--radius-sm);padding:16px 20px;margin-bottom:40px;font-size:0.85rem;color:#006e53;"><strong>Version en vigueur depuis le 1er janvier 2025.</strong> L'utilisation du site implique l'acceptation pleine et entière des présentes CGU.</div>
-    <div style="margin-bottom:32px;"><h3 style="color:var(--navy);margin-bottom:12px;padding-bottom:8px;border-bottom:2px solid var(--green);display:inline-block;">Article 1 — Objet</h3><p style="color:var(--slate);line-height:1.9;">Les présentes conditions générales définissent les modalités d'utilisation des services proposés par Finooz SAS sur le site finooz.eu. Finooz se réserve le droit de les modifier à tout moment.</p></div>
+    <div style="margin-bottom:32px;"><h3 style="color:var(--navy);margin-bottom:12px;padding-bottom:8px;border-bottom:2px solid var(--green);display:inline-block;">Article 1 — Objet</h3><p style="color:var(--slate);line-height:1.9;">Les présentes conditions générales définissent les modalités d'utilisation des services proposés par Finooz SAS sur le site finooz.com. Finooz se réserve le droit de les modifier à tout moment.</p></div>
     <div style="margin-bottom:32px;"><h3 style="color:var(--navy);margin-bottom:12px;padding-bottom:8px;border-bottom:2px solid var(--green);display:inline-block;">Article 2 — Accès aux services</h3><p style="color:var(--slate);line-height:1.9;">L'accès aux services de simulation est gratuit et ouvert à toute personne physique majeure résidant dans l'Union Européenne. L'accès à certains services peut nécessiter la création d'un compte utilisateur.</p></div>
     <div style="margin-bottom:32px;"><h3 style="color:var(--navy);margin-bottom:12px;padding-bottom:8px;border-bottom:2px solid var(--green);display:inline-block;">Article 3 — Simulations et offres de crédit</h3><p style="color:var(--slate);line-height:1.9;">Les simulations réalisées sur le site sont fournies à titre purement indicatif et ne constituent pas une offre de contrat. Le taux de 3,5 % est susceptible de varier selon le profil de l'emprunteur, la durée et le montant du prêt.</p></div>
     <div style="margin-bottom:32px;"><h3 style="color:var(--navy);margin-bottom:12px;padding-bottom:8px;border-bottom:2px solid var(--green);display:inline-block;">Article 4 — Obligations de l'utilisateur</h3><p style="color:var(--slate);line-height:1.9;">L'utilisateur s'engage à utiliser le site de manière loyale, à ne pas fournir d'informations fausses ou trompeuses, et à ne pas tenter de porter atteinte à la sécurité du site ou des données d'autres utilisateurs.</p></div>
@@ -1967,7 +1979,7 @@
     </div>
     <div style="background:linear-gradient(135deg,var(--navy),var(--navy-mid));border-radius:var(--radius);padding:28px;">
       <h3 style="color:var(--white);margin-bottom:10px;">Exercer vos droits</h3>
-      <p style="color:rgba(255,255,255,0.7);font-size:0.88rem;">Contactez notre DPO à l'adresse : <strong style="color:var(--green);">dpo@finooz.eu</strong><br>Réponse garantie sous 30 jours calendaires. Vous pouvez également saisir la CNIL : www.cnil.fr</p>
+      <p style="color:rgba(255,255,255,0.7);font-size:0.88rem;">Contactez notre DPO à l'adresse : <strong style="color:var(--green);">dpo@finooz.com</strong><br>Réponse garantie sous 30 jours calendaires. Vous pouvez également saisir la CNIL : www.cnil.fr</p>
     </div>
   </div>
 </div>
@@ -2117,13 +2129,14 @@ window.addEventListener('load', function() {
 <script>
 var SB_URL = 'https://fsflgwbcaietfwrtofbs.supabase.co';
 var SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZzZmxnd2JjYWlldGZ3cnRvZmJzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzcxOTkyODMsImV4cCI6MjA5Mjc3NTI4M30.60v27ULp8h8IgvJWjC473etnfNZoZ3GBxK5Aq74mkbU';
-var sbClient = supabase.createClient(SB_URL, SB_KEY);
+var sbClient = null;
+try { sbClient = supabase.createClient(SB_URL, SB_KEY); } catch(e) {}
 
 async function demanderSansEngagement() {
   var btn = document.getElementById('btn-step3');
   if (btn) { btn.disabled = true; btn.textContent = 'Envoi en cours...'; }
   try {
-    await sbClient.from('simulations').insert({
+    if(sbClient) await sbClient.from('simulations').insert({
       projet: simData.projet || '--',
       montant: simData.montant || '--',
       mensualite: simData.duree || '--',
@@ -2242,7 +2255,7 @@ async function submitForm() {
   var btn = document.querySelector('#contactForm .form-submit');
   if (btn) { btn.disabled = true; btn.textContent = 'Envoi en cours...'; }
   try {
-    await sbClient.from('contacts').insert({
+    if(sbClient) await sbClient.from('contacts').insert({
       prenom: prenom.value.trim(),
       nom: nom.value.trim(),
       email: email.value.trim(),
@@ -2368,7 +2381,7 @@ async function submitLead() {
   var btn = document.getElementById('btn-lead-submit');
   if (btn) { btn.disabled = true; btn.textContent = 'Envoi en cours...'; }
   try {
-    await sbClient.from('demandes').insert({
+    if(sbClient) await sbClient.from('demandes').insert({
       prenom: prenom.value.trim(),
       nom: nom.value.trim(),
       email: email.value.trim(),
@@ -2430,24 +2443,24 @@ function resetSim() {
 // SIMULAT€ STEP 3
 // TAUX PAR TYPE DE PROJET
 var TAUX_MAP = {
-  'Immobilier': 0.032,
-  'Auto / Moto': 0.059,
-  'Prêt personnel': 0.079,
-  'Travaux': 0.065,
-  'Voyage': 0.089,
-  'Autres': 0.095
+  'Immobilier': 0.035,
+  'Auto / Moto': 0.035,
+  'Prêt personnel': 0.035,
+  'Travaux': 0.035,
+  'Voyage': 0.035,
+  'Autres': 0.035
 };
 var TAUX_LABELS = {
-  'Immobilier': '3,20 %',
-  'Auto / Moto': '5,90 %',
-  'Prêt personnel': '7,90 %',
-  'Travaux': '6,50 %',
-  'Voyage': '8,90 %',
-  'Autres': '9,50 %'
+  'Immobilier': '3,5 %',
+  'Auto / Moto': '3,5 %',
+  'Prêt personnel': '3,5 %',
+  'Travaux': '3,5 %',
+  'Voyage': '3,5 %',
+  'Autres': '3,5 %'
 };
 
 function getTaux() {
-  return TAUX_MAP[simData.projet] || 0.079;
+  return 0.035;
 }
 
 function calcMensualite(P, n) {
@@ -2503,7 +2516,7 @@ function onMensualiteChange() {
   if (el) el.textContent = n + ' mois';
   // Afficher le bon TAEG
   var taegEl = document.querySelector('#step-3 .taeg-value');
-  if (taegEl) taegEl.textContent = TAUX_LABELS[simData.projet] || '7,90 %';
+  if (taegEl) taegEl.textContent = '3,5 %';
   // Sauvegarder
   simData.duree = m.toLocaleString('fr-FR',{minimumFractionDigits:2,maximumFractionDigits:2}) + ' € / mois sur ' + n + ' mois';
   var btn = document.getElementById('btn-step3');
@@ -2544,24 +2557,22 @@ function initCounters() {
 // INIT
 </script>
 <!-- ═══════════ LIVE CHAT TAWK.TO ═══════════ -->
-<!--Start of Tawk.to Script-->
-<script type="text/javascript">
-var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-Tawk_API.onLoad = function() {
-  Tawk_API.setAttributes({
-    'language': 'fr'
-  }, function(error){});
-};
-(function(){
-var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-s1.async=true;
-s1.src='https://embed.tawk.to/69eff79ea32b451c3853df1a/1jn8luhk2';
-s1.charset='UTF-8';
-s1.setAttribute('crossorigin','*');
-s0.parentNode.insertBefore(s1,s0);
-})();
+<script>
+window.addEventListener('load', function() {
+  setTimeout(function() {
+    var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+    Tawk_API.onLoad = function() {
+      Tawk_API.setAttributes({ 'language': 'fr' }, function(error){});
+    };
+    var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
+    s1.async = true;
+    s1.src = 'https://embed.tawk.to/69eff79ea32b451c3853df1a/1jn8luhk2';
+    s1.charset = 'UTF-8';
+    s1.setAttribute('crossorigin', '*');
+    s0.parentNode.insertBefore(s1, s0);
+  }, 3000); // Chargement différé de 3s après le chargement de la page
+});
 </script>
-<!--End of Tawk.to Script-->
 
 </body>
 </html>

@@ -2920,11 +2920,18 @@ var TRANSLATIONS_EN = {
 
   // Misc labels
   'Auto / Moto': 'Car / Motorbike',
+  'Prêt personnel': 'Personal Loan',
+  'Prêt Auto': 'Auto Loan',
   'Autre': 'Other',
   'Autres': 'Others',
   'Téléphone': 'Phone',
   'Complétez': 'Complete',
-  'Fin': 'End',
+  '✓ Vérifié': '✓ Verified',
+  '⚡ Simuler gratuitement': '⚡ Simulate for free',
+  '⚡ Démarrer ma simulation': '⚡ Start my simulation',
+  'La simulation prend 2 minutes. Gratuite, sans inscription, sans engagement.': 'The simulation takes 2 minutes. Free, no sign-up, no commitment.',
+  'La plateforme de prêt en ligne de référence en Europe. Transparence, rapidité et sécurité pour tous vos projets.': 'Europe\'s reference online lending platform. Transparency, speed and security for all your projects.',
+  '🔒 Conforme RGPD · Données sécurisées': '🔒 GDPR Compliant · Secure Data',
   'Le site': 'The website',
   'France — Union Européenne': 'France — European Union',
   'Siège social': 'Registered office',
@@ -2937,8 +2944,12 @@ var TRANSLATIONS_EN = {
 function applyTranslations(dict) {
   var walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
     acceptNode: function(node) {
-      var tag = node.parentNode && node.parentNode.tagName;
-      if (tag === 'SCRIPT' || tag === 'STYLE' || tag === 'NOSCRIPT') return NodeFilter.FILTER_REJECT;
+      var el = node.parentNode;
+      while (el) {
+        var tag = el.tagName && el.tagName.toUpperCase();
+        if (tag === 'SCRIPT' || tag === 'STYLE' || tag === 'NOSCRIPT' || tag === 'SVG') return NodeFilter.FILTER_REJECT;
+        el = el.parentElement;
+      }
       return NodeFilter.FILTER_ACCEPT;
     }
   });

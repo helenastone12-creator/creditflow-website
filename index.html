@@ -1160,7 +1160,7 @@
   <section class="section section-dark">
     <div class="container">
       <div class="section-header reveal">
-        <div class="section-label" style="color:var(--green)">Sécurité & Conformité</div>
+        <div id="sec-label" class="section-label" style="color:var(--green)">Sécurité & Conformité</div>
         <h2 id="sec-title" class="section-title light">Votre sécurité, notre priorité</h2>
         <p id="sec-desc" class="section-desc light">Plateforme certifiée et conforme aux réglementations européennes les plus strictes.</p>
       </div>
@@ -1207,24 +1207,24 @@
       </div>
       <div class="faq-list">
         <div class="faq-item">
-          <button class="faq-q" onclick="toggleFaq(this)">La simulation est-elle vraiment gratuite et sans engagement ? <span class="faq-chevron">▼</span></button>
-          <div class="faq-a">Oui, absolument. La simulation sur Finooz est entièrement gratuite et ne vous engage à rien. Vous pouvez simuler autant de scénarios que vous le souhaitez sans aucune obligation de souscrire.</div>
+          <button id="faq0-q" class="faq-q" onclick="toggleFaq(this)">La simulation est-elle vraiment gratuite et sans engagement ? <span class="faq-chevron">▼</span></button>
+          <div id="faq0-a" class="faq-a">Oui, absolument. La simulation sur Finooz est entièrement gratuite et ne vous engage à rien. Vous pouvez simuler autant de scénarios que vous le souhaitez sans aucune obligation de souscrire.</div>
         </div>
         <div class="faq-item">
-          <button class="faq-q" onclick="toggleFaq(this)">Quel est le délai pour obtenir une réponse ? <span class="faq-chevron">▼</span></button>
-          <div class="faq-a">Après soumission de votre dossier complet, vous recevez une réponse de principe sous 24 heures. En cas d'accord, les fonds peuvent être versés sur votre compte bancaire sous 3 à 5 jours ouvrés.</div>
+          <button id="faq1-q" class="faq-q" onclick="toggleFaq(this)">Quel est le délai pour obtenir une réponse ? <span class="faq-chevron">▼</span></button>
+          <div id="faq1-a" class="faq-a">Après soumission de votre dossier complet, vous recevez une réponse de principe sous 24 heures. En cas d'accord, les fonds peuvent être versés sur votre compte bancaire sous 3 à 5 jours ouvrés.</div>
         </div>
         <div class="faq-item">
-          <button class="faq-q" onclick="toggleFaq(this)">Le taux de 3,5 % est-il garanti ? <span class="faq-chevron">▼</span></button>
-          <div class="faq-a">Le taux de 3,5 % est un taux indicatif à partir duquel nous calculons nos simulations. Le taux final dépend de votre profil, de vos revenus, de votre situation professionnelle et du type de prêt. Il peut donc être différent à la hausse ou à la baisse.</div>
+          <button id="faq2-q" class="faq-q" onclick="toggleFaq(this)">Le taux de 3,5 % est-il garanti ? <span class="faq-chevron">▼</span></button>
+          <div id="faq2-a" class="faq-a">Le taux de 3,5 % est un taux indicatif à partir duquel nous calculons nos simulations. Le taux final dépend de votre profil, de vos revenus, de votre situation professionnelle et du type de prêt. Il peut donc être différent à la hausse ou à la baisse.</div>
         </div>
         <div class="faq-item">
-          <button class="faq-q" onclick="toggleFaq(this)">Quels documents sont nécessaires pour le dossier ? <span class="faq-chevron">▼</span></button>
-          <div class="faq-a">Pour un prêt personnel ou auto : pièce d'identité, 3 derniers bulletins de salaire, 3 derniers relevés bancaires. Pour un prêt immobilier, des documents supplémentaires liés au bien (compromis de vente, etc.) seront requis.</div>
+          <button id="faq3-q" class="faq-q" onclick="toggleFaq(this)">Quels documents sont nécessaires pour le dossier ? <span class="faq-chevron">▼</span></button>
+          <div id="faq3-a" class="faq-a">Pour un prêt personnel ou auto : pièce d'identité, 3 derniers bulletins de salaire, 3 derniers relevés bancaires. Pour un prêt immobilier, des documents supplémentaires liés au bien (compromis de vente, etc.) seront requis.</div>
         </div>
         <div class="faq-item">
-          <button class="faq-q" onclick="toggleFaq(this)">Puis-je rembourser mon prêt par anticipation ? <span class="faq-chevron">▼</span></button>
-          <div class="faq-a">Oui. Conformément à la législation européenne, vous pouvez rembourser votre prêt par anticipation, en totalité ou partiellement. Des indemnités de remboursement anticipé peuvent s'appliquer selon les conditions de votre contrat.</div>
+          <button id="faq4-q" class="faq-q" onclick="toggleFaq(this)">Puis-je rembourser mon prêt par anticipation ? <span class="faq-chevron">▼</span></button>
+          <div id="faq4-a" class="faq-a">Oui. Conformément à la législation européenne, vous pouvez rembourser votre prêt par anticipation, en totalité ou partiellement. Des indemnités de remboursement anticipé peuvent s'appliquer selon les conditions de votre contrat.</div>
         </div>
       </div>
     </div>
@@ -1987,39 +1987,39 @@
         </svg>
       </span>
       <p id="footer-tagline" class="footer-tagline">La plateforme de prêt en ligne de référence en Europe. Transparence, rapidité et sécurité pour tous vos projets.</p>
-      <div class="rgpd-badge">🔒 Conforme RGPD · Données sécurisées</div>
+      <div id="footer-rgpd-badge" class="rgpd-badge">🔒 Conforme RGPD · Données sécurisées</div>
     </div>
     <div class="footer-col">
-      <h5>Nos produits</h5>
+      <h5 id="footer-products-h">Nos produits</h5>
       <ul>
-        <li><a href="#" onclick="showPage('immobilier');return false;">Prêt Immobilier</a></li>
-        <li><a href="#" onclick="showPage('auto');return false;">Prêt Automobile</a></li>
-        <li><a href="#" onclick="showPage('personnel');return false;">Prêt Personnel</a></li>
-        <li><a href="#" onclick="showPage('simulateur');return false;">Simulateur</a></li>
+        <li><a id="fl-immo" href="#" onclick="showPage('immobilier');return false;">Prêt Immobilier</a></li>
+        <li><a id="fl-auto" href="#" onclick="showPage('auto');return false;">Prêt Automobile</a></li>
+        <li><a id="fl-personal" href="#" onclick="showPage('personnel');return false;">Prêt Personnel</a></li>
+        <li><a id="fl-sim" href="#" onclick="showPage('simulateur');return false;">Simulateur</a></li>
       </ul>
     </div>
     <div class="footer-col">
-      <h5>Informations</h5>
+      <h5 id="footer-info-h">Informations</h5>
       <ul>
-        <li><a href="#" onclick="showPage('comment');return false;">Comment ça marche</a></li>
-        <li><a href="#" onclick="showPage('contact');return false;">Contact</a></li>
-        <li><a href="#" onclick="showPage('about');return false;">À propos de nous</a></li>
-        <li><a href="#" onclick="showPage('partenaires');return false;">Partenaires bancaires</a></li>
-        <li><a href="#" onclick="showPage('presse');return false;">Espace presse</a></li>
+        <li><a id="fl-how" href="#" onclick="showPage('comment');return false;">Comment ça marche</a></li>
+        <li><a id="fl-contact" href="#" onclick="showPage('contact');return false;">Contact</a></li>
+        <li><a id="fl-about" href="#" onclick="showPage('about');return false;">À propos de nous</a></li>
+        <li><a id="fl-partners" href="#" onclick="showPage('partenaires');return false;">Partenaires bancaires</a></li>
+        <li><a id="fl-presse" href="#" onclick="showPage('presse');return false;">Espace presse</a></li>
       </ul>
     </div>
     <div class="footer-col">
-      <h5>Légal</h5>
+      <h5 id="footer-legal-h">Légal</h5>
       <ul>
-        <li><a href="#" onclick="showPage('mentions');return false;">Mentions légales</a></li>
-        <li><a href="#" onclick="showPage('confidentialite');return false;">Politique de confidentialité</a></li>
-        <li><a href="#" onclick="showPage('cgu');return false;">Conditions générales</a></li>
-        <li><a href="#" onclick="showPage('rgpd');return false;">RGPD</a></li>
+        <li><a id="fl-mentions" href="#" onclick="showPage('mentions');return false;">Mentions légales</a></li>
+        <li><a id="fl-privacy" href="#" onclick="showPage('confidentialite');return false;">Politique de confidentialité</a></li>
+        <li><a id="fl-cgu" href="#" onclick="showPage('cgu');return false;">Conditions générales</a></li>
+        <li><a id="fl-rgpdlnk" href="#" onclick="showPage('rgpd');return false;">RGPD</a></li>
       </ul>
     </div>
   </div>
   <div class="footer-bottom">
-    <p>© 2025 Finooz SAS — RCS Paris 123 456 789</p>
+    <p id="footer-copy">© 2025 Finooz SAS — RCS Paris 123 456 789</p>
     <div class="footer-legal">
       <a href="#" onclick="showPage('mentions');return false;">Mentions légales</a>
       <a href="#" onclick="showPage('cgu');return false;">CGU</a>
@@ -2030,14 +2030,14 @@
     <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:12px;">
       <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(0,200,150,0.08);border:1px solid rgba(0,200,150,0.2);border-radius:8px;padding:8px 16px;">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00c896" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-        <span style="font-size:0.78rem;color:rgba(255,255,255,0.7);font-weight:500;">IOBSP immatriculé <strong style="color:#00c896;">ORIAS n° 23 000 123</strong></span>
+        <span id="footer-orias-txt" style="font-size:0.78rem;color:rgba(255,255,255,0.7);font-weight:500;">IOBSP immatriculé <strong style="color:#00c896;">ORIAS n° 23 000 123</strong></span>
       </div>
       <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:8px 16px;">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-        <span style="font-size:0.78rem;color:rgba(255,255,255,0.5);">Sous contrôle <strong style="color:rgba(255,255,255,0.7);">ACPR — Banque de France</strong></span>
+        <span id="footer-acpr-txt" style="font-size:0.78rem;color:rgba(255,255,255,0.5);">Sous contrôle <strong style="color:rgba(255,255,255,0.7);">ACPR — Banque de France</strong></span>
       </div>
     </div>
-    <p style="font-size:0.72rem;color:rgba(255,255,255,0.3);line-height:1.8;">Un crédit vous engage et doit être remboursé. Vérifiez vos capacités de remboursement avant de vous engager. Les taux affichés sont des TAEG indicatifs susceptibles de varier selon votre profil, la durée et le montant. Toute simulation est non contractuelle. Offre soumise à l'acceptation définitive de notre partenaire prêteur.</p>
+    <p id="footer-disclaimer" style="font-size:0.72rem;color:rgba(255,255,255,0.3);line-height:1.8;">Un crédit vous engage et doit être remboursé. Vérifiez vos capacités de remboursement avant de vous engager. Les taux affichés sont des TAEG indicatifs susceptibles de varier selon votre profil, la durée et le montant. Toute simulation est non contractuelle. Offre soumise à l'acceptation définitive de notre partenaire prêteur.</p>
   </div>
 </footer>
 
@@ -2644,8 +2644,19 @@ var TRANSLATIONS = {
       btn: '⚡ Simuler gratuitement',
       advisor: 'Parler à un conseiller'
     },
-    faq: { title: 'Questions fréquentes' },
+    faq: {
+      title: 'Questions fréquentes',
+      items: [
+        { q: 'La simulation est-elle vraiment gratuite et sans engagement ?', a: 'Oui, absolument. La simulation sur Finooz est entièrement gratuite et ne vous engage à rien. Vous pouvez simuler autant de scénarios que vous le souhaitez sans aucune obligation de souscrire.' },
+        { q: 'Quel est le délai pour obtenir une réponse ?', a: 'Après soumission de votre dossier complet, vous recevez une réponse de principe sous 24 heures. En cas d\'accord, les fonds peuvent être versés sur votre compte bancaire sous 3 à 5 jours ouvrés.' },
+        { q: 'Le taux de 3,5 % est-il garanti ?', a: 'Le taux de 3,5 % est un taux indicatif à partir duquel nous calculons nos simulations. Le taux final dépend de votre profil, de vos revenus, de votre situation professionnelle et du type de prêt.' },
+        { q: 'Quels documents sont nécessaires pour le dossier ?', a: 'Pour un prêt personnel ou auto : pièce d\'identité, 3 derniers bulletins de salaire, 3 derniers relevés bancaires. Pour un prêt immobilier, des documents supplémentaires liés au bien seront requis.' },
+        { q: 'Puis-je rembourser mon prêt par anticipation ?', a: 'Oui. Conformément à la législation européenne, vous pouvez rembourser votre prêt par anticipation, en totalité ou partiellement. Des indemnités de remboursement anticipé peuvent s\'appliquer.' }
+      ]
+    },
+    trust: ['Données sécurisées<br>SSL 256 bits','Conforme<br>RGPD','4,8/5 sur<br>Trustpilot','Sans<br>engagement','Partenaires bancaires<br>certifiés','<span style="font-weight:800;font-size:1rem;color:var(--navy);">48 000+</span><br>Clients satisfaits','<span style="font-weight:800;font-size:1rem;color:var(--navy);">12 500+</span><br>Dossiers traités','<span style="font-weight:800;font-size:1rem;color:var(--navy);">4,8/5</span><br>Note Trustpilot','<span style="font-weight:800;font-size:1rem;color:var(--navy);">12 pays</span><br>En Europe'],
     security: {
+      label: 'Sécurité & Conformité',
       title: 'Votre sécurité, notre priorité',
       desc: 'Plateforme certifiée et conforme aux réglementations européennes les plus strictes.',
       items: [
@@ -2658,7 +2669,10 @@ var TRANSLATIONS = {
       tagline: 'La plateforme de prêt en ligne de référence en Europe. Transparence, rapidité et sécurité pour tous vos projets.',
       rgpd: '🔒 Conforme RGPD · Données sécurisées',
       products: 'Nos produits', info: 'Informations', legal: 'Légal',
-      disclaimer: 'Un crédit vous engage et doit être remboursé. Vérifiez vos capacités de remboursement avant de vous engager. Les taux affichés sont des TAEG indicatifs susceptibles de varier selon votre profil, la durée et le montant.'
+      orias: 'IOBSP immatriculé <strong style="color:#00c896;">ORIAS n° 23 000 123</strong>',
+      acpr: 'Sous contrôle <strong style="color:rgba(255,255,255,0.7);">ACPR — Banque de France</strong>',
+      disclaimer: 'Un crédit vous engage et doit être remboursé. Vérifiez vos capacités de remboursement avant de vous engager. Les taux affichés sont des TAEG indicatifs susceptibles de varier selon votre profil, la durée et le montant.',
+      links: { immo:'Prêt Immobilier', auto:'Prêt Automobile', personal:'Prêt Personnel', sim:'Simulateur', how:'Comment ça marche', contact:'Contact', about:'À propos de nous', partners:'Partenaires bancaires', presse:'Espace presse', mentions:'Mentions légales', privacy:'Politique de confidentialité', cgu:'Conditions générales', rgpdlnk:'RGPD' }
     },
     form: {
       firstName:'Prénom', lastName:'Nom', email:'Email', phone:'Téléphone',
@@ -2727,8 +2741,19 @@ var TRANSLATIONS = {
       btn: '⚡ Simulate for free',
       advisor: 'Speak to an advisor'
     },
-    faq: { title: 'Frequently asked questions' },
+    faq: {
+      title: 'Frequently asked questions',
+      items: [
+        { q: 'Is the simulation really free and non-binding?', a: 'Yes, absolutely. The Finooz simulation is completely free and does not commit you to anything. You can simulate as many scenarios as you wish with no obligation to subscribe.' },
+        { q: 'How long does it take to get a response?', a: 'After submitting your complete application, you receive a decision in principle within 24 hours. If approved, funds can be transferred to your bank account within 3 to 5 working days.' },
+        { q: 'Is the 3.5% rate guaranteed?', a: 'The 3.5% rate is an indicative rate used to calculate our simulations. The final rate depends on your profile, income, professional situation and loan type. It may differ upwards or downwards.' },
+        { q: 'What documents are needed for the application?', a: 'For a personal or car loan: ID document, last 3 pay slips, last 3 bank statements. For a mortgage, additional property-related documents (sale agreement, etc.) will be required.' },
+        { q: 'Can I repay my loan early?', a: 'Yes. Under European legislation, you can repay your loan early, in full or in part. Early repayment charges may apply depending on the terms of your contract.' }
+      ]
+    },
+    trust: ['Secure data<br>SSL 256 bits','GDPR<br>Compliant','4.8/5 on<br>Trustpilot','No<br>commitment','Certified banking<br>partners','<span style="font-weight:800;font-size:1rem;color:var(--navy);">48,000+</span><br>Satisfied clients','<span style="font-weight:800;font-size:1rem;color:var(--navy);">12,500+</span><br>Files processed','<span style="font-weight:800;font-size:1rem;color:var(--navy);">4.8/5</span><br>Trustpilot rating','<span style="font-weight:800;font-size:1rem;color:var(--navy);">12 countries</span><br>In Europe'],
     security: {
+      label: 'Security & Compliance',
       title: 'Your security, our priority',
       desc: 'Certified platform compliant with the strictest European regulations.',
       items: [
@@ -2741,7 +2766,10 @@ var TRANSLATIONS = {
       tagline: 'Europe\'s leading online lending platform. Transparency, speed and security for all your projects.',
       rgpd: '🔒 GDPR compliant · Secure data',
       products: 'Our products', info: 'Information', legal: 'Legal',
-      disclaimer: 'A loan is a commitment and must be repaid. Check your repayment capacity before committing. Rates shown are indicative APRs subject to change based on your profile, duration and amount.'
+      orias: 'IOBSP registered <strong style="color:#00c896;">ORIAS n° 23 000 123</strong>',
+      acpr: 'Under supervision of <strong style="color:rgba(255,255,255,0.7);">ACPR — Banque de France</strong>',
+      disclaimer: 'A loan is a commitment and must be repaid. Check your repayment capacity before committing. Rates shown are indicative APRs subject to change based on your profile, duration and amount.',
+      links: { immo:'Mortgage Loan', auto:'Car Loan', personal:'Personal Loan', sim:'Simulator', how:'How it works', contact:'Contact', about:'About us', partners:'Banking partners', presse:'Press room', mentions:'Legal notice', privacy:'Privacy policy', cgu:'Terms & conditions', rgpdlnk:'GDPR' }
     },
     form: {
       firstName:'First name', lastName:'Last name', email:'Email', phone:'Phone',
@@ -2810,8 +2838,19 @@ var TRANSLATIONS = {
       btn: '⚡ Kostenlos simulieren',
       advisor: 'Mit einem Berater sprechen'
     },
-    faq: { title: 'Häufig gestellte Fragen' },
+    faq: {
+      title: 'Häufig gestellte Fragen',
+      items: [
+        { q: 'Ist die Simulation wirklich kostenlos und unverbindlich?', a: 'Ja, absolut. Die Simulation auf Finooz ist vollständig kostenlos und verpflichtet Sie zu nichts. Sie können beliebig viele Szenarien simulieren, ohne eine Verpflichtung einzugehen.' },
+        { q: 'Wie lange dauert es, eine Antwort zu erhalten?', a: 'Nach Einreichung Ihres vollständigen Antrags erhalten Sie innerhalb von 24 Stunden eine Grundsatzentscheidung. Bei Zustimmung können die Mittel innerhalb von 3 bis 5 Werktagen auf Ihr Bankkonto überwiesen werden.' },
+        { q: 'Ist der Zinssatz von 3,5 % garantiert?', a: 'Der Zinssatz von 3,5 % ist ein Richtzins, auf dessen Grundlage wir unsere Simulationen berechnen. Der endgültige Zinssatz hängt von Ihrem Profil, Ihrem Einkommen, Ihrer beruflichen Situation und der Kreditart ab.' },
+        { q: 'Welche Dokumente werden für den Antrag benötigt?', a: 'Für einen Personal- oder Autokredit: Ausweisdokument, letzte 3 Gehaltsabrechnungen, letzte 3 Kontoauszüge. Für einen Immobilienkredit werden zusätzliche Unterlagen zum Objekt benötigt.' },
+        { q: 'Kann ich mein Darlehen vorzeitig zurückzahlen?', a: 'Ja. Gemäß europäischer Gesetzgebung können Sie Ihr Darlehen vorzeitig, ganz oder teilweise, zurückzahlen. Vorfälligkeitsentschädigungen können gemäß den Bedingungen Ihres Vertrags anfallen.' }
+      ]
+    },
+    trust: ['Sichere Daten<br>SSL 256 Bit','DSGVO-<br>konform','4,8/5 auf<br>Trustpilot','Ohne<br>Verpflichtung','Zertifizierte<br>Bankpartner','<span style="font-weight:800;font-size:1rem;color:var(--navy);">48.000+</span><br>Zufriedene Kunden','<span style="font-weight:800;font-size:1rem;color:var(--navy);">12.500+</span><br>Bearbeitete Anträge','<span style="font-weight:800;font-size:1rem;color:var(--navy);">4,8/5</span><br>Trustpilot-Bewertung','<span style="font-weight:800;font-size:1rem;color:var(--navy);">12 Länder</span><br>In Europa'],
     security: {
+      label: 'Sicherheit & Compliance',
       title: 'Ihre Sicherheit, unsere Priorität',
       desc: 'Zertifizierte Plattform, konform mit den strengsten europäischen Vorschriften.',
       items: [
@@ -2824,7 +2863,10 @@ var TRANSLATIONS = {
       tagline: 'Europas führende Online-Kreditplattform. Transparenz, Schnelligkeit und Sicherheit für alle Ihre Projekte.',
       rgpd: '🔒 DSGVO-konform · Sichere Daten',
       products: 'Unsere Produkte', info: 'Informationen', legal: 'Rechtliches',
-      disclaimer: 'Ein Kredit ist eine Verpflichtung und muss zurückgezahlt werden. Prüfen Sie Ihre Rückzahlungsfähigkeit. Die angezeigten Zinssätze sind indikative Jahreszinssätze.'
+      orias: 'IOBSP-registriert <strong style="color:#00c896;">ORIAS Nr. 23 000 123</strong>',
+      acpr: 'Unter Aufsicht der <strong style="color:rgba(255,255,255,0.7);">ACPR — Banque de France</strong>',
+      disclaimer: 'Ein Kredit ist eine Verpflichtung und muss zurückgezahlt werden. Prüfen Sie Ihre Rückzahlungsfähigkeit. Die angezeigten Zinssätze sind indikative Jahreszinssätze.',
+      links: { immo:'Immobilienkredit', auto:'Autokredit', personal:'Privatkredit', sim:'Simulator', how:'So funktioniert\'s', contact:'Kontakt', about:'Über uns', partners:'Bankpartner', presse:'Pressebereich', mentions:'Impressum', privacy:'Datenschutzrichtlinie', cgu:'AGB', rgpdlnk:'DSGVO' }
     },
     form: {
       firstName:'Vorname', lastName:'Nachname', email:'E-Mail', phone:'Telefon',
@@ -2893,8 +2935,19 @@ var TRANSLATIONS = {
       btn: '⚡ Simuloi ilmaiseksi',
       advisor: 'Puhu neuvonantajalle'
     },
-    faq: { title: 'Usein kysytyt kysymykset' },
+    faq: {
+      title: 'Usein kysytyt kysymykset',
+      items: [
+        { q: 'Onko simulaatio todella ilmainen ja sitoumukseton?', a: 'Kyllä, ehdottomasti. Finoozin simulaatio on täysin ilmainen eikä sido sinua mihinkään. Voit simuloida niin monta skenaariota kuin haluat ilman velvoitetta.' },
+        { q: 'Kuinka kauan vastauksen saaminen kestää?', a: 'Täydellisen hakemuksen jättämisen jälkeen saat periaatepäätöksen 24 tunnin kuluessa. Hyväksynnän jälkeen varat voidaan siirtää tilillesi 3–5 arkipäivän kuluessa.' },
+        { q: 'Onko 3,5 %:n korko taattu?', a: '3,5 %:n korko on viitekorko, jonka perusteella laskemme simulaatiomme. Lopullinen korko riippuu profiilista, tuloista, ammatillisesta tilanteesta ja lainatyypistä.' },
+        { q: 'Mitä asiakirjoja tarvitaan hakemukseen?', a: 'Henkilökohtaiseen tai autolainaan: henkilöllisyystodistus, 3 viimeistä palkkatodistusta, 3 viimeistä tiliottetta. Asuntolainaan tarvitaan lisäksi kiinteistöön liittyviä asiakirjoja.' },
+        { q: 'Voinko maksaa lainani takaisin ennenaikaisesti?', a: 'Kyllä. Eurooppalaisen lainsäädännön mukaisesti voit maksaa lainasi takaisin ennenaikaisesti, kokonaan tai osittain. Ennenaikaisesta takaisinmaksusta voi aiheutua kuluja sopimuksesi ehtojen mukaan.' }
+      ]
+    },
+    trust: ['Suojattu tieto<br>SSL 256-bit','GDPR-<br>yhteensopiva','4,8/5<br>Trustpilotissa','Sitoumus-<br>ton','Sertifioidut<br>pankkikumppanit','<span style="font-weight:800;font-size:1rem;color:var(--navy);">48 000+</span><br>Tyytyväistä asiakasta','<span style="font-weight:800;font-size:1rem;color:var(--navy);">12 500+</span><br>Käsiteltyä hakemusta','<span style="font-weight:800;font-size:1rem;color:var(--navy);">4,8/5</span><br>Trustpilot-arvio','<span style="font-weight:800;font-size:1rem;color:var(--navy);">12 maata</span><br>Euroopassa'],
     security: {
+      label: 'Turvallisuus & Vaatimustenmukaisuus',
       title: 'Turvallisuutesi on prioriteettimme',
       desc: 'Sertifioitu alusta, joka täyttää Euroopan tiukimmat säädökset.',
       items: [
@@ -2907,7 +2960,10 @@ var TRANSLATIONS = {
       tagline: 'Euroopan johtava verkkolainausalusta. Läpinäkyvyys, nopeus ja turvallisuus kaikissa projekteissasi.',
       rgpd: '🔒 GDPR-yhteensopiva · Turvalliset tiedot',
       products: 'Tuotteemme', info: 'Tietoa', legal: 'Juridiikka',
-      disclaimer: 'Laina on sitoumus ja se on maksettava takaisin. Tarkista takaisinmaksukykysi ennen sitoutumista. Näytetyt korot ovat viitteellisiä kokonaiskorkoja.'
+      orias: 'IOBSP rekisteröitynyt <strong style="color:#00c896;">ORIAS n° 23 000 123</strong>',
+      acpr: '<strong style="color:rgba(255,255,255,0.7);">ACPR — Banque de France</strong> valvonnassa',
+      disclaimer: 'Laina on sitoumus ja se on maksettava takaisin. Tarkista takaisinmaksukykysi ennen sitoutumista. Näytetyt korot ovat viitteellisiä kokonaiskorkoja.',
+      links: { immo:'Asuntolaina', auto:'Autolaina', personal:'Henkilökohtainen laina', sim:'Simulaattori', how:'Miten se toimii', contact:'Yhteystiedot', about:'Tietoa meistä', partners:'Pankkikumppanit', presse:'Lehdistötila', mentions:'Lakitiedot', privacy:'Tietosuojakäytäntö', cgu:'Yleiset ehdot', rgpdlnk:'GDPR' }
     },
     form: {
       firstName:'Etunimi', lastName:'Sukunimi', email:'Sähköposti', phone:'Puhelin',
@@ -2976,8 +3032,19 @@ var TRANSLATIONS = {
       btn: '⚡ Simulera gratis',
       advisor: 'Tala med en rådgivare'
     },
-    faq: { title: 'Vanliga frågor' },
+    faq: {
+      title: 'Vanliga frågor',
+      items: [
+        { q: 'Är simuleringen verkligen gratis och icke-bindande?', a: 'Ja, absolut. Simuleringen på Finooz är helt gratis och förbinder dig inte till något. Du kan simulera hur många scenarier du vill utan någon skyldighet att teckna.' },
+        { q: 'Hur lång tid tar det att få svar?', a: 'Efter inlämning av din fullständiga ansökan får du ett principbeslut inom 24 timmar. Vid godkännande kan medel överföras till ditt bankkonto inom 3 till 5 arbetsdagar.' },
+        { q: 'Är räntan på 3,5 % garanterad?', a: 'Räntan på 3,5 % är en indikativ ränta som vi använder för att beräkna våra simuleringar. Den slutliga räntan beror på din profil, inkomst, yrkessituation och lånetyp.' },
+        { q: 'Vilka dokument behövs för ansökan?', a: 'För ett privat- eller billån: ID-handling, de 3 senaste lönespecifikationerna, de 3 senaste kontoutdragen. För ett bolån krävs ytterligare fastighetsrelaterade handlingar.' },
+        { q: 'Kan jag betala tillbaka mitt lån i förtid?', a: 'Ja. Enligt europeisk lagstiftning kan du betala tillbaka ditt lån i förtid, helt eller delvis. Förtidsbetalningsavgifter kan tillkomma beroende på ditt avtals villkor.' }
+      ]
+    },
+    trust: ['Säkra data<br>SSL 256 bit','GDPR-<br>anpassad','4,8/5 på<br>Trustpilot','Utan<br>åtagande','Certifierade<br>bankpartners','<span style="font-weight:800;font-size:1rem;color:var(--navy);">48 000+</span><br>Nöjda kunder','<span style="font-weight:800;font-size:1rem;color:var(--navy);">12 500+</span><br>Behandlade ärenden','<span style="font-weight:800;font-size:1rem;color:var(--navy);">4,8/5</span><br>Trustpilot-betyg','<span style="font-weight:800;font-size:1rem;color:var(--navy);">12 länder</span><br>I Europa'],
     security: {
+      label: 'Säkerhet & Efterlevnad',
       title: 'Din säkerhet, vår prioritet',
       desc: 'Certifierad plattform som uppfyller de strängaste europeiska reglerna.',
       items: [
@@ -2990,7 +3057,10 @@ var TRANSLATIONS = {
       tagline: 'Europas ledande plattform för onlinelån. Transparens, snabbhet och säkerhet för alla dina projekt.',
       rgpd: '🔒 GDPR-kompatibel · Säker data',
       products: 'Våra produkter', info: 'Information', legal: 'Juridik',
-      disclaimer: 'Ett lån är ett åtagande och måste återbetalas. Kontrollera din återbetalningsförmåga innan du förbinder dig. Visade räntor är indikativa effektiva räntor.'
+      orias: 'IOBSP registrerat <strong style="color:#00c896;">ORIAS n° 23 000 123</strong>',
+      acpr: 'Under tillsyn av <strong style="color:rgba(255,255,255,0.7);">ACPR — Banque de France</strong>',
+      disclaimer: 'Ett lån är ett åtagande och måste återbetalas. Kontrollera din återbetalningsförmåga innan du förbinder dig. Visade räntor är indikativa effektiva räntor.',
+      links: { immo:'Bolån', auto:'Billån', personal:'Privatlån', sim:'Simulator', how:'Hur det fungerar', contact:'Kontakt', about:'Om oss', partners:'Bankpartners', presse:'Pressrum', mentions:'Juridisk information', privacy:'Sekretesspolicy', cgu:'Allmänna villkor', rgpdlnk:'GDPR' }
     },
     form: {
       firstName:'Förnamn', lastName:'Efternamn', email:'E-post', phone:'Telefon',
@@ -3059,8 +3129,19 @@ var TRANSLATIONS = {
       btn: '⚡ Simular gratuitamente',
       advisor: 'Falar com um consultor'
     },
-    faq: { title: 'Perguntas frequentes' },
+    faq: {
+      title: 'Perguntas frequentes',
+      items: [
+        { q: 'A simulação é mesmo gratuita e sem compromisso?', a: 'Sim, absolutamente. A simulação no Finooz é totalmente gratuita e não o compromete a nada. Pode simular tantos cenários quantos desejar sem qualquer obrigação de subscrever.' },
+        { q: 'Qual é o prazo para obter uma resposta?', a: 'Após a submissão do seu processo completo, recebe uma resposta de princípio em 24 horas. Em caso de acordo, os fundos podem ser transferidos para a sua conta bancária em 3 a 5 dias úteis.' },
+        { q: 'A taxa de 3,5 % é garantida?', a: 'A taxa de 3,5 % é uma taxa indicativa a partir da qual calculamos as nossas simulações. A taxa final depende do seu perfil, rendimentos, situação profissional e tipo de empréstimo.' },
+        { q: 'Que documentos são necessários para o processo?', a: 'Para um empréstimo pessoal ou automóvel: documento de identidade, 3 últimos recibos de vencimento, 3 últimos extratos bancários. Para um crédito habitação, serão necessários documentos adicionais relativos ao imóvel.' },
+        { q: 'Posso reembolsar o meu empréstimo antecipadamente?', a: 'Sim. De acordo com a legislação europeia, pode reembolsar o seu empréstimo antecipadamente, total ou parcialmente. Podem ser aplicadas indemnizações de reembolso antecipado conforme as condições do seu contrato.' }
+      ]
+    },
+    trust: ['Dados seguros<br>SSL 256 bits','Conforme<br>RGPD','4,8/5 no<br>Trustpilot','Sem<br>compromisso','Parceiros bancários<br>certificados','<span style="font-weight:800;font-size:1rem;color:var(--navy);">48 000+</span><br>Clientes satisfeitos','<span style="font-weight:800;font-size:1rem;color:var(--navy);">12 500+</span><br>Processos tratados','<span style="font-weight:800;font-size:1rem;color:var(--navy);">4,8/5</span><br>Classificação Trustpilot','<span style="font-weight:800;font-size:1rem;color:var(--navy);">12 países</span><br>Na Europa'],
     security: {
+      label: 'Segurança & Conformidade',
       title: 'A sua segurança, a nossa prioridade',
       desc: 'Plataforma certificada e em conformidade com as regulamentações europeias mais rigorosas.',
       items: [
@@ -3073,7 +3154,10 @@ var TRANSLATIONS = {
       tagline: 'A plataforma de empréstimo online de referência na Europa. Transparência, rapidez e segurança para todos os seus projetos.',
       rgpd: '🔒 Conforme RGPD · Dados seguros',
       products: 'Os nossos produtos', info: 'Informações', legal: 'Legal',
-      disclaimer: 'Um crédito implica um compromisso e deve ser reembolsado. Verifique a sua capacidade de reembolso antes de se comprometer. As taxas apresentadas são TAEG indicativas sujeitas a variação.'
+      orias: 'IOBSP registado <strong style="color:#00c896;">ORIAS n° 23 000 123</strong>',
+      acpr: 'Sob controlo da <strong style="color:rgba(255,255,255,0.7);">ACPR — Banque de France</strong>',
+      disclaimer: 'Um crédito implica um compromisso e deve ser reembolsado. Verifique a sua capacidade de reembolso antes de se comprometer. As taxas apresentadas são TAEG indicativas sujeitas a variação.',
+      links: { immo:'Crédito Habitação', auto:'Crédito Automóvel', personal:'Crédito Pessoal', sim:'Simulador', how:'Como funciona', contact:'Contacto', about:'Sobre nós', partners:'Parceiros bancários', presse:'Imprensa', mentions:'Aviso legal', privacy:'Política de privacidade', cgu:'Condições gerais', rgpdlnk:'RGPD' }
     },
     form: {
       firstName:'Nome próprio', lastName:'Apelido', email:'Email', phone:'Telefone',
@@ -3142,8 +3226,19 @@ var TRANSLATIONS = {
       btn: '⚡ Simula gratuitamente',
       advisor: 'Parla con un consulente'
     },
-    faq: { title: 'Domande frequenti' },
+    faq: {
+      title: 'Domande frequenti',
+      items: [
+        { q: 'La simulazione è davvero gratuita e senza impegno?', a: 'Sì, assolutamente. La simulazione su Finooz è completamente gratuita e non ti vincola a nulla. Puoi simulare quanti scenari desideri senza alcun obbligo di sottoscrizione.' },
+        { q: 'Quanto tempo ci vuole per ricevere una risposta?', a: 'Dopo la presentazione del fascicolo completo, ricevi una risposta di principio entro 24 ore. In caso di accordo, i fondi possono essere accreditati sul tuo conto bancario entro 3-5 giorni lavorativi.' },
+        { q: 'Il tasso del 3,5 % è garantito?', a: 'Il tasso del 3,5 % è un tasso indicativo con cui calcoliamo le nostre simulazioni. Il tasso finale dipende dal tuo profilo, reddito, situazione professionale e tipo di prestito.' },
+        { q: 'Quali documenti sono necessari per la pratica?', a: 'Per un prestito personale o auto: documento d\'identità, ultime 3 buste paga, ultimi 3 estratti conto. Per un mutuo immobiliare saranno richiesti documenti aggiuntivi relativi all\'immobile.' },
+        { q: 'Posso rimborsare il mio prestito in anticipo?', a: 'Sì. Ai sensi della normativa europea, puoi rimborsare il tuo prestito in anticipo, in tutto o in parte. Potrebbero applicarsi penali di rimborso anticipato secondo le condizioni del contratto.' }
+      ]
+    },
+    trust: ['Dati sicuri<br>SSL 256 bit','Conforme<br>GDPR','4,8/5 su<br>Trustpilot','Senza<br>impegno','Partner bancari<br>certificati','<span style="font-weight:800;font-size:1rem;color:var(--navy);">48.000+</span><br>Clienti soddisfatti','<span style="font-weight:800;font-size:1rem;color:var(--navy);">12.500+</span><br>Pratiche elaborate','<span style="font-weight:800;font-size:1rem;color:var(--navy);">4,8/5</span><br>Valutazione Trustpilot','<span style="font-weight:800;font-size:1rem;color:var(--navy);">12 paesi</span><br>In Europa'],
     security: {
+      label: 'Sicurezza & Conformità',
       title: 'La tua sicurezza, la nostra priorità',
       desc: 'Piattaforma certificata e conforme alle normative europee più severe.',
       items: [
@@ -3156,7 +3251,10 @@ var TRANSLATIONS = {
       tagline: 'La piattaforma di prestiti online di riferimento in Europa. Trasparenza, rapidità e sicurezza per tutti i tuoi progetti.',
       rgpd: '🔒 Conforme GDPR · Dati sicuri',
       products: 'I nostri prodotti', info: 'Informazioni', legal: 'Legale',
-      disclaimer: 'Un prestito è un impegno e deve essere rimborsato. Verifica la tua capacità di rimborso prima di impegnarti. I tassi mostrati sono TAEG indicativi soggetti a variazione.'
+      orias: 'IOBSP registrato <strong style="color:#00c896;">ORIAS n° 23 000 123</strong>',
+      acpr: 'Sotto controllo <strong style="color:rgba(255,255,255,0.7);">ACPR — Banque de France</strong>',
+      disclaimer: 'Un prestito è un impegno e deve essere rimborsato. Verifica la tua capacità di rimborso prima di impegnarti. I tassi mostrati sono TAEG indicativi soggetti a variazione.',
+      links: { immo:'Mutuo Immobiliare', auto:'Prestito Auto', personal:'Prestito Personale', sim:'Simulatore', how:'Come funziona', contact:'Contatti', about:'Chi siamo', partners:'Partner bancari', presse:'Sala stampa', mentions:'Note legali', privacy:'Informativa privacy', cgu:'Condizioni generali', rgpdlnk:'GDPR' }
     },
     form: {
       firstName:'Nome', lastName:'Cognome', email:'Email', phone:'Telefono',
@@ -3225,8 +3323,19 @@ var TRANSLATIONS = {
       btn: '⚡ Simular gratis',
       advisor: 'Hablar con un asesor'
     },
-    faq: { title: 'Preguntas frecuentes' },
+    faq: {
+      title: 'Preguntas frecuentes',
+      items: [
+        { q: '¿La simulación es realmente gratuita y sin compromiso?', a: 'Sí, absolutamente. La simulación en Finooz es completamente gratuita y no te compromete a nada. Puedes simular tantos escenarios como desees sin ninguna obligación de contratar.' },
+        { q: '¿Cuánto tiempo se tarda en obtener una respuesta?', a: 'Tras la presentación de tu expediente completo, recibes una respuesta de principio en 24 horas. En caso de aprobación, los fondos pueden transferirse a tu cuenta bancaria en 3 a 5 días hábiles.' },
+        { q: '¿Está garantizado el tipo del 3,5 %?', a: 'El tipo del 3,5 % es un tipo indicativo a partir del cual calculamos nuestras simulaciones. El tipo final depende de tu perfil, ingresos, situación profesional y tipo de préstamo.' },
+        { q: '¿Qué documentos son necesarios para el expediente?', a: 'Para un préstamo personal o de automóvil: documento de identidad, las 3 últimas nóminas, los 3 últimos extractos bancarios. Para una hipoteca se requerirán documentos adicionales relacionados con el inmueble.' },
+        { q: '¿Puedo reembolsar mi préstamo anticipadamente?', a: 'Sí. De conformidad con la legislación europea, puedes reembolsar tu préstamo de forma anticipada, total o parcialmente. Podrán aplicarse comisiones de cancelación anticipada según las condiciones de tu contrato.' }
+      ]
+    },
+    trust: ['Datos seguros<br>SSL 256 bits','Conforme<br>RGPD','4,8/5 en<br>Trustpilot','Sin<br>compromiso','Socios bancarios<br>certificados','<span style="font-weight:800;font-size:1rem;color:var(--navy);">48.000+</span><br>Clientes satisfechos','<span style="font-weight:800;font-size:1rem;color:var(--navy);">12.500+</span><br>Expedientes tramitados','<span style="font-weight:800;font-size:1rem;color:var(--navy);">4,8/5</span><br>Puntuación Trustpilot','<span style="font-weight:800;font-size:1rem;color:var(--navy);">12 países</span><br>En Europa'],
     security: {
+      label: 'Seguridad & Cumplimiento',
       title: 'Tu seguridad, nuestra prioridad',
       desc: 'Plataforma certificada y conforme con las normativas europeas más estrictas.',
       items: [
@@ -3239,7 +3348,10 @@ var TRANSLATIONS = {
       tagline: 'La plataforma de préstamos online de referencia en Europa. Transparencia, rapidez y seguridad para todos tus proyectos.',
       rgpd: '🔒 Conforme RGPD · Datos seguros',
       products: 'Nuestros productos', info: 'Información', legal: 'Legal',
-      disclaimer: 'Un crédito es un compromiso y debe ser reembolsado. Verifica tu capacidad de devolución antes de comprometerte. Las tasas mostradas son TAE indicativas sujetas a variación.'
+      orias: 'IOBSP registrado <strong style="color:#00c896;">ORIAS n° 23 000 123</strong>',
+      acpr: 'Bajo supervisión de <strong style="color:rgba(255,255,255,0.7);">ACPR — Banque de France</strong>',
+      disclaimer: 'Un crédito es un compromiso y debe ser reembolsado. Verifica tu capacidad de devolución antes de comprometerte. Las tasas mostradas son TAE indicativas sujetas a variación.',
+      links: { immo:'Hipoteca', auto:'Préstamo Auto', personal:'Préstamo Personal', sim:'Simulador', how:'Cómo funciona', contact:'Contacto', about:'Sobre nosotros', partners:'Socios bancarios', presse:'Sala de prensa', mentions:'Aviso legal', privacy:'Política de privacidad', cgu:'Condiciones generales', rgpdlnk:'RGPD' }
     },
     form: {
       firstName:'Nombre', lastName:'Apellido', email:'Email', phone:'Teléfono',
@@ -3372,9 +3484,29 @@ function applyLang(code) {
   set('testi-desc', t.testimonials.desc);
   document.querySelectorAll('.testi-badge').forEach(function(el){ el.textContent = t.testimonials.verified; });
 
+  // Trust bar (9 items × 2 sets, DOM manipulation)
+  if (t.trust) {
+    document.querySelectorAll('.trust-item').forEach(function(item, idx) {
+      var i = idx % 9;
+      var iconWrap = item.querySelector('.trust-icon-wrap');
+      if (!iconWrap || !t.trust[i]) return;
+      while (item.lastChild && item.lastChild !== iconWrap) item.removeChild(item.lastChild);
+      var tmp = document.createElement('span');
+      tmp.innerHTML = t.trust[i];
+      while (tmp.firstChild) item.appendChild(tmp.firstChild);
+    });
+  }
+
   // Security
+  set('sec-label', t.security.label);
   set('sec-title', t.security.title);
   set('sec-desc', t.security.desc);
+  document.querySelectorAll('.sec-item').forEach(function(item, i) {
+    if (!t.security.items[i]) return;
+    var h4 = item.querySelector('h4'); var p = item.querySelector('p');
+    if (h4) h4.textContent = t.security.items[i].t;
+    if (p) p.textContent = t.security.items[i].d;
+  });
 
   // CTA
   set('cta-title', t.cta.title);
@@ -3384,9 +3516,38 @@ function applyLang(code) {
 
   // FAQ
   set('faq-title', t.faq.title);
+  if (t.faq.items) {
+    t.faq.items.forEach(function(item, i) {
+      var qEl = document.getElementById('faq'+i+'-q');
+      var aEl = document.getElementById('faq'+i+'-a');
+      if (qEl) {
+        var tn = qEl.firstChild;
+        if (tn && tn.nodeType === 3) tn.nodeValue = item.q + ' ';
+      }
+      if (aEl) aEl.textContent = item.a;
+    });
+  }
 
   // Footer
   set('footer-tagline', t.footer.tagline);
+  set('footer-products-h', t.footer.products);
+  set('footer-info-h', t.footer.info);
+  set('footer-legal-h', t.footer.legal);
+  var fb = document.getElementById('footer-rgpd-badge');
+  if (fb) fb.textContent = t.footer.rgpd;
+  var fo = document.getElementById('footer-orias-txt');
+  if (fo && t.footer.orias) fo.innerHTML = t.footer.orias;
+  var fa = document.getElementById('footer-acpr-txt');
+  if (fa && t.footer.acpr) fa.innerHTML = t.footer.acpr;
+  set('footer-disclaimer', t.footer.disclaimer);
+  if (t.footer.links) {
+    var fl = t.footer.links;
+    set('fl-immo', fl.immo); set('fl-auto', fl.auto); set('fl-personal', fl.personal); set('fl-sim', fl.sim);
+    set('fl-how', fl.how); set('fl-contact', fl.contact); set('fl-about', fl.about);
+    set('fl-partners', fl.partners); set('fl-presse', fl.presse);
+    set('fl-mentions', fl.mentions); set('fl-privacy', fl.privacy);
+    set('fl-cgu', fl.cgu); set('fl-rgpdlnk', fl.rgpdlnk);
+  }
 }
 
 function buildSwitcher(active) {

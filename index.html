@@ -3984,9 +3984,12 @@ function applyPageTranslations(t) {
     if (st3p) { var tn = st3p.firstChild; if (tn && tn.nodeType === 3) tn.nodeValue = s.monthlyDesc + ' '; }
     var rTitle = ps.querySelector('#recap-sim p');
     if (rTitle) rTitle.textContent = s.recapTitle;
-    var capLabels = ps.querySelectorAll('#recap-sim .flex-wrap > div:nth-child(1) > div:nth-child(2), #recap-sim .flex-wrap > div:nth-child(3) > div:nth-child(2), #recap-sim .flex-wrap > div:nth-child(5) > div:nth-child(2)');
-    var labelTexts = [s.capital, s.interets, s.total];
-    capLabels.forEach(function(el, i) { if (labelTexts[i]) el.textContent = labelTexts[i]; });
+    var flexCont = ps.querySelector('#recap-sim > div:first-child > div:last-child');
+    if (flexCont) {
+      var capDivs = flexCont.querySelectorAll('div > div:last-child');
+      var labelTexts = [s.capital, s.interets, s.total];
+      capDivs.forEach(function(el, i) { if (labelTexts[i]) el.textContent = labelTexts[i]; });
+    }
     var rowSpans = ps.querySelectorAll('#recap-sim > div:last-child > div > span:first-child');
     var rowLabels = [s.rowMensualites, s.rowTaeg, s.rowDuree];
     rowSpans.forEach(function(el, i) { if (rowLabels[i]) el.textContent = rowLabels[i]; });
@@ -4001,7 +4004,7 @@ function applyPageTranslations(t) {
       if (labels[i]) lbl.textContent = labels[i];
     });
     var rgpdLbl = ps.querySelector('label[for="lead-rgpd"]');
-    if (rgpdLbl) { var sp2 = rgpdLbl.querySelector('span'); if (sp2) { var tn2=rgpdLbl.firstChild; if(tn2&&tn2.nodeType===3) tn2.nodeValue=t.form.rgpdConsent.split('politique')[0]||t.form.rgpdConsent; } }
+    if (rgpdLbl) rgpdLbl.textContent = t.form.rgpdConsent;
     var resetBtn = ps.querySelector('#sim-lead-form button:last-of-type');
     if (resetBtn) resetBtn.textContent = t.form.restart;
     var succH3 = ps.querySelector('#sim-lead-success h3');

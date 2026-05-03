@@ -108,26 +108,6 @@
     transition: all 0.2s !important;
   }
   .btn-nav:hover { background: #00dfa8 !important; transform: translateY(-1px); box-shadow: 0 4px 16px rgba(0,200,150,0.4) !important; }
-  /* Flags */
-  .lang-flags { display:flex; align-items:center; gap:4px; }
-  .lang-flags button {
-    background:none; border:none; cursor:pointer; padding:3px;
-    font-size:1.45rem; line-height:1; border-radius:6px;
-    opacity:0.7; transition:opacity 0.2s, transform 0.15s;
-    filter: drop-shadow(0 1px 2px rgba(0,0,0,0.4));
-  }
-  .lang-flags button:hover, .lang-flags button.active-lang { opacity:1; transform:scale(1.15); }
-  @media (max-width: 768px) { .lang-flags { display:none; } }
-  .mobile-flags { display:flex; gap:12px; padding:18px 0; border-bottom:1px solid rgba(255,255,255,0.08); }
-  .mobile-flags button {
-    background:none; border:none; cursor:pointer; font-size:2rem; line-height:1;
-    opacity:0.7; transition:opacity 0.2s; filter: drop-shadow(0 1px 2px rgba(0,0,0,0.4));
-  }
-  .mobile-flags button:hover, .mobile-flags button.active-lang { opacity:1; }
-  /* Google Translate hidden select */
-  #gt-select-wrap { position:absolute; visibility:hidden; height:0; overflow:hidden; }
-  .goog-te-banner-frame { display:none !important; }
-  body { top: 0 !important; }
   .hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; padding:4px; }
   .hamburger span { display:block; width:24px; height:2px; background:var(--white); border-radius:2px; transition:0.3s; }
   .mobile-menu {
@@ -807,15 +787,7 @@
       <a href="#" onclick="showPage('contact');return false;">Contact</a>
       <a href="#" onclick="showPage('simulateur');return false;" class="btn-nav">Simuler gratuitement</a>
     </div>
-    <div class="lang-flags" id="langFlags">
-      <button onclick="switchLang('fr')" title="Français">🇫🇷</button>
-      <button onclick="switchLang('en')" title="English">🇬🇧</button>
-      <button onclick="switchLang('de')" title="Deutsch">🇩🇪</button>
-      <button onclick="switchLang('sv')" title="Svenska">🇸🇪</button>
-      <button onclick="switchLang('fi')" title="Suomi">🇫🇮</button>
-      <button onclick="switchLang('sk')" title="Slovenčina">🇸🇰</button>
-    </div>
-    <div class="hamburger" onclick="toggleMenu()" id="hamburger">
+<div class="hamburger" onclick="toggleMenu()" id="hamburger">
       <span></span><span></span><span></span>
     </div>
   </div>
@@ -828,14 +800,6 @@
   <a href="#" onclick="showPage('personnel');toggleMenu();return false;">Prêt Personnel</a>
   <a href="#" onclick="showPage('comment');toggleMenu();return false;">Comment ça marche</a>
   <a href="#" onclick="showPage('contact');toggleMenu();return false;">Contact</a>
-  <div class="mobile-flags">
-    <button onclick="switchLang('fr')" title="Français">🇫🇷</button>
-    <button onclick="switchLang('en')" title="English">🇬🇧</button>
-    <button onclick="switchLang('de')" title="Deutsch">🇩🇪</button>
-    <button onclick="switchLang('sv')" title="Svenska">🇸🇪</button>
-    <button onclick="switchLang('fi')" title="Suomi">🇫🇮</button>
-    <button onclick="switchLang('sk')" title="Slovenčina">🇸🇰</button>
-  </div>
 </div>
 
 <!-- ═══════════ HOME PAGE ═══════════ -->
@@ -2602,23 +2566,6 @@ function initCounters() {
 // INIT
 </script>
 
-<!-- Google Translate -->
-<div id="gt-select-wrap"><select id="gt-select" class="goog-te-combo"></select></div>
-<script>
-function googleTranslateElementInit() {
-  new google.translate.TranslateElement({ pageLanguage:'fr', includedLanguages:'en,de,sv,fi,sk', autoDisplay:false }, 'gt-select-wrap');
-}
-function switchLang(lang) {
-  // Mark active flag
-  document.querySelectorAll('.lang-flags button, .mobile-flags button').forEach(function(b){ b.classList.remove('active-lang'); });
-  document.querySelectorAll('.lang-flags button[onclick*="\''+lang+'\'"], .mobile-flags button[onclick*="\''+lang+'\'"]').forEach(function(b){ b.classList.add('active-lang'); });
-  if (lang === 'fr') { window.location.reload(); return; }
-  var sel = document.querySelector('.goog-te-combo');
-  if (sel) { sel.value = lang; sel.dispatchEvent(new Event('change')); }
-  else { setTimeout(function(){ switchLang(lang); }, 500); }
-}
-</script>
-<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
 </body>
 </html>

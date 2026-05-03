@@ -109,6 +109,33 @@
   }
   .btn-nav:hover { background: #00dfa8 !important; transform: translateY(-1px); box-shadow: 0 4px 16px rgba(0,200,150,0.4) !important; }
   .hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; padding:4px; }
+  /* Google Translate widget */
+  #google_translate_element { display:inline-flex; align-items:center; }
+  #google_translate_element .goog-te-gadget { margin:0; font-size:0; }
+  #google_translate_element .goog-te-gadget-simple {
+    background: rgba(255,255,255,0.1) !important;
+    border: 1px solid rgba(255,255,255,0.2) !important;
+    border-radius: 20px !important;
+    padding: 6px 12px !important;
+    font-size: 0.78rem !important;
+    color: #fff !important;
+    cursor: pointer;
+    display: flex; align-items: center; gap: 4px;
+  }
+  #google_translate_element .goog-te-gadget-simple span { color:#fff !important; }
+  #google_translate_element .goog-te-gadget-simple .goog-te-menu-value span { color:#fff !important; }
+  #google_translate_element img { display:none !important; }
+  .goog-te-banner-frame { display:none !important; }
+  body { top: 0 !important; }
+  .skiptranslate { display:none !important; }
+  #gt-mobile { display:none; }
+  .mobile-translate { padding: 16px 0; border-bottom: 1px solid rgba(255,255,255,0.08); }
+  .mobile-translate select {
+    background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+    color: #fff; border-radius: 8px; padding: 10px 12px; font-size:0.95rem;
+    width: 100%; cursor:pointer; outline:none;
+  }
+  .mobile-translate select option { background: #0B1F45; color:#fff; }
   .hamburger span { display:block; width:24px; height:2px; background:var(--white); border-radius:2px; transition:0.3s; }
   .mobile-menu {
     display:flex; flex-direction:column; gap:0;
@@ -787,6 +814,7 @@
       <a href="#" onclick="showPage('contact');return false;">Contact</a>
       <a href="#" onclick="showPage('simulateur');return false;" class="btn-nav">Simuler gratuitement</a>
     </div>
+    <div id="google_translate_element"></div>
     <div class="hamburger" onclick="toggleMenu()" id="hamburger">
       <span></span><span></span><span></span>
     </div>
@@ -800,6 +828,28 @@
   <a href="#" onclick="showPage('personnel');toggleMenu();return false;">Prêt Personnel</a>
   <a href="#" onclick="showPage('comment');toggleMenu();return false;">Comment ça marche</a>
   <a href="#" onclick="showPage('contact');toggleMenu();return false;">Contact</a>
+  <div class="mobile-translate">
+    <select onchange="doGTranslate(this.value)" id="mobile-lang-select">
+      <option value="fr|fr">Français</option>
+      <option value="fr|en">English</option>
+      <option value="fr|es">Español</option>
+      <option value="fr|de">Deutsch</option>
+      <option value="fr|it">Italiano</option>
+      <option value="fr|pt">Português</option>
+      <option value="fr|nl">Nederlands</option>
+      <option value="fr|ar">العربية</option>
+      <option value="fr|zh-CN">中文</option>
+      <option value="fr|ja">日本語</option>
+      <option value="fr|ko">한국어</option>
+      <option value="fr|ru">Русский</option>
+      <option value="fr|tr">Türkçe</option>
+      <option value="fr|pl">Polski</option>
+      <option value="fr|ro">Română</option>
+      <option value="fr|sv">Svenska</option>
+      <option value="fr|da">Dansk</option>
+      <option value="fr|fi">Suomi</option>
+    </select>
+  </div>
 </div>
 
 <!-- ═══════════ HOME PAGE ═══════════ -->
@@ -2565,6 +2615,35 @@ function initCounters() {
 
 // INIT
 </script>
+
+<!-- Google Translate -->
+<script type="text/javascript">
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({
+    pageLanguage: 'fr',
+    includedLanguages: 'en,es,de,it,pt,nl,ar,zh-CN,ja,ko,ru,tr,pl,ro,sv,da,fi',
+    layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+    autoDisplay: false
+  }, 'google_translate_element');
+}
+function doGTranslate(lang_pair) {
+  if (!lang_pair || lang_pair === 'fr|fr') {
+    var iframe = document.querySelector('.goog-te-banner-frame');
+    if (iframe) iframe.style.display = 'none';
+    var body = document.querySelector('body');
+    if (body) body.style.top = '0px';
+    window.location.reload();
+    return;
+  }
+  var lang = lang_pair.split('|')[1];
+  var select = document.querySelector('.goog-te-combo');
+  if (select) {
+    select.value = lang;
+    select.dispatchEvent(new Event('change'));
+  }
+}
+</script>
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
 </body>
 </html>

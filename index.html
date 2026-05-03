@@ -768,23 +768,22 @@
 <nav id="navbar">
   <div class="nav-inner">
     <div class="logo" onclick="showPage('home')" style="cursor:pointer;">
-      <svg width="175" height="46" viewBox="0 0 175 46" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <svg width="172" height="46" viewBox="0 0 172 46" fill="none" xmlns="http://www.w3.org/2000/svg">
         <defs>
-          <linearGradient id="nv-g1" x1="0" y1="0" x2="52" y2="46" gradientUnits="userSpaceOnUse">
+          <linearGradient id="nv-g" x1="0" y1="0" x2="38" y2="46" gradientUnits="userSpaceOnUse">
             <stop stop-color="#22D3A0"/>
-            <stop offset="1" stop-color="#06B6D4"/>
-          </linearGradient>
-          <linearGradient id="nv-g2" x1="14" y1="26" x2="64" y2="50" gradientUnits="userSpaceOnUse">
-            <stop stop-color="#0EA5E9"/>
+            <stop offset="0.5" stop-color="#06B6D4"/>
             <stop offset="1" stop-color="#2563EB"/>
           </linearGradient>
         </defs>
-        <!-- Swoosh supérieur (barre verticale + bras haut du F) -->
-        <path d="M6 42 C6 18 20 4 52 4 L52 14 C27 14 18 24 18 39 C18 43 13 45 6 42 Z" fill="url(#nv-g1)"/>
-        <!-- Swoosh inférieur (bras bas du F) -->
-        <path d="M18 39 C28 32 45 27 64 27 L64 37 C46 37 32 41 22 47 C18 44 18 42 18 39 Z" fill="url(#nv-g2)"/>
+        <!-- F : barre verticale -->
+        <rect x="4" y="4" width="11" height="38" rx="5.5" fill="url(#nv-g)"/>
+        <!-- F : barre haute -->
+        <rect x="4" y="4" width="34" height="13" rx="6.5" fill="url(#nv-g)"/>
+        <!-- F : barre milieu -->
+        <rect x="4" y="21" width="24" height="12" rx="6" fill="url(#nv-g)" opacity="0.92"/>
         <!-- Texte inooz -->
-        <text x="74" y="37" font-family="Sora,sans-serif" font-weight="800" font-size="26" letter-spacing="-0.5" fill="white">inooz</text>
+        <text x="48" y="37" font-family="Sora,sans-serif" font-weight="800" font-size="28" letter-spacing="-0.5" fill="white">inooz</text>
       </svg>
     </div>
     <div class="nav-links">
@@ -1964,20 +1963,18 @@
   <div class="footer-grid">
     <div class="footer-brand">
       <span class="logo" onclick="showPage('home')" style="cursor:pointer;display:inline-block;margin-bottom:12px;">
-        <svg width="162" height="42" viewBox="0 0 175 46" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg width="158" height="42" viewBox="0 0 172 46" fill="none" xmlns="http://www.w3.org/2000/svg">
           <defs>
-            <linearGradient id="ft-g1" x1="0" y1="0" x2="52" y2="46" gradientUnits="userSpaceOnUse">
+            <linearGradient id="ft-g" x1="0" y1="0" x2="38" y2="46" gradientUnits="userSpaceOnUse">
               <stop stop-color="#22D3A0"/>
-              <stop offset="1" stop-color="#06B6D4"/>
-            </linearGradient>
-            <linearGradient id="ft-g2" x1="14" y1="26" x2="64" y2="50" gradientUnits="userSpaceOnUse">
-              <stop stop-color="#0EA5E9"/>
+              <stop offset="0.5" stop-color="#06B6D4"/>
               <stop offset="1" stop-color="#2563EB"/>
             </linearGradient>
           </defs>
-          <path d="M6 42 C6 18 20 4 52 4 L52 14 C27 14 18 24 18 39 C18 43 13 45 6 42 Z" fill="url(#ft-g1)"/>
-          <path d="M18 39 C28 32 45 27 64 27 L64 37 C46 37 32 41 22 47 C18 44 18 42 18 39 Z" fill="url(#ft-g2)"/>
-          <text x="74" y="37" font-family="Sora,sans-serif" font-weight="800" font-size="26" letter-spacing="-0.5" fill="white">inooz</text>
+          <rect x="4" y="4" width="11" height="38" rx="5.5" fill="url(#ft-g)"/>
+          <rect x="4" y="4" width="34" height="13" rx="6.5" fill="url(#ft-g)"/>
+          <rect x="4" y="21" width="24" height="12" rx="6" fill="url(#ft-g)" opacity="0.92"/>
+          <text x="48" y="37" font-family="Sora,sans-serif" font-weight="800" font-size="28" letter-spacing="-0.5" fill="white">inooz</text>
         </svg>
       </span>
       <p class="footer-tagline">La plateforme de prêt en ligne de référence en Europe. Transparence, rapidité et sécurité pour tous vos projets.</p>

@@ -6,14 +6,16 @@
 <meta name="description" content="Finooz — Simulez votre prêt en ligne et obtenez une réponse immédiate. Immobilier, auto, personnel. Sans engagement, 100% en ligne.">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <title>Finooz — Financement en ligne, rapide et transparent</title>
-<!-- DNS prefetch pour les ressources externes -->
-<link rel="dns-prefetch" href="https://fonts.googleapis.com">
-<link rel="dns-prefetch" href="https://images.unsplash.com">
-<link rel="dns-prefetch" href="https://randomuser.me"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+<!-- Preconnect critique -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Sora:wght@700;800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-<noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Sora:wght@700;800&display=swap" rel="stylesheet"></noscript>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<!-- DNS prefetch secondaire -->
+<link rel="dns-prefetch" href="https://images.unsplash.com">
+<link rel="dns-prefetch" href="https://randomuser.me">
+<!-- Fonts : poids réduits au strict nécessaire -->
+<link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@700;800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@700;800&display=swap" rel="stylesheet"></noscript>
 <style>
   /* ─── RESET & BASE ─── */
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -72,14 +74,13 @@
   /* ─── ANIMATIONS ─── */
   @keyframes fadeUp { from { opacity:0; transform:translateY(28px); } to { opacity:1; transform:translateY(0); } }
   @keyframes pulse { 0%,100%{ box-shadow:0 0 0 0 rgba(0,200,150,0.35); } 50%{ box-shadow:0 0 0 14px rgba(0,200,150,0); } }
-  @keyframes float { 0%,100%{ transform:translateY(0); } 50%{ transform:translateY(-10px); } }
-  @keyframes gradShift { 0%{ background-position:0% 50%; } 50%{ background-position:100% 50%; } 100%{ background-position:0% 50%; } }
   @keyframes slideIn { from{ opacity:0; transform:translateX(-20px); } to{ opacity:1; transform:translateX(0); } }
   .fade-up { animation: fadeUp 0.7s ease both; }
   .delay-1 { animation-delay: 0.1s; }
   .delay-2 { animation-delay: 0.2s; }
   .delay-3 { animation-delay: 0.3s; }
   .delay-4 { animation-delay: 0.4s; }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; } }
 
   /* ─── NAVBAR ─── */
   nav {
@@ -158,8 +159,6 @@
   .hero {
     min-height: 100vh; padding: 120px 24px 80px;
     background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 50%, #0d3268 100%);
-    background-size: 200% 200%;
-    animation: gradShift 10s ease infinite;
     position: relative; overflow: hidden; display: flex; align-items: center;
   }
   .hero::before {
@@ -195,7 +194,6 @@
   .hero-sim-card {
     background: rgba(255,255,255,0.97); border-radius: 24px;
     padding: 36px; box-shadow: var(--shadow-lg);
-    animation: float 6s ease-in-out infinite;
     position: relative; overflow: hidden;
   }
   .hero-sim-card::before {
@@ -928,7 +926,7 @@
       </div>
       <div class="loan-cards">
         <div class="loan-card reveal" onclick="showPage('immobilier')">
-          <img class="loan-card-img" loading="lazy" src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=600&q=80&auto=format" alt="Prêt immobilier" onerror="this.style.background='linear-gradient(135deg,#0B1F45,#00C896)';this.src='';this.alt='';">
+          <img class="loan-card-img" loading="lazy" src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=600&q=70&auto=format&fm=webp" alt="Prêt immobilier" onerror="this.style.background='linear-gradient(135deg,#0B1F45,#00C896)';this.src='';this.alt='';">
           <h3>Prêt Immobilier</h3>
           <p>Financement de votre résidence principale, secondaire ou investissement locatif.</p>
           <div class="loan-card-rate">3,5 % <span>TAEG indicatif</span></div>
@@ -941,7 +939,7 @@
           <div class="loan-card-link">En savoir plus <span>→</span></div>
         </div>
         <div class="loan-card reveal delay-1" onclick="showPage('auto')">
-          <img class="loan-card-img" loading="lazy" src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=600&q=80&auto=format" alt="Prêt automobile" onerror="this.style.background='linear-gradient(135deg,#0B1F45,#1e3f7a)';this.src='';this.alt='';">
+          <img class="loan-card-img" loading="lazy" src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=600&q=70&auto=format&fm=webp" alt="Prêt automobile" onerror="this.style.background='linear-gradient(135deg,#0B1F45,#1e3f7a)';this.src='';this.alt='';">
           <h3>Prêt Automobile</h3>
           <p>Achetez votre voiture neuve ou d'occasion avec des mensualités adaptées à votre budget.</p>
           <div class="loan-card-rate">3,5 % <span>TAEG indicatif</span></div>
@@ -953,7 +951,7 @@
           <div class="loan-card-link">En savoir plus <span>→</span></div>
         </div>
         <div class="loan-card reveal delay-2" onclick="showPage('personnel')">
-          <img class="loan-card-img" loading="lazy" src="https://images.unsplash.com/photo-1553484771-371a605b060b?w=600&q=80&auto=format" alt="Prêt personnel" onerror="this.style.background='linear-gradient(135deg,#142e60,#00C896)';this.src='';this.alt='';">
+          <img class="loan-card-img" loading="lazy" src="https://images.unsplash.com/photo-1553484771-371a605b060b?w=600&q=70&auto=format&fm=webp" alt="Prêt personnel" onerror="this.style.background='linear-gradient(135deg,#142e60,#00C896)';this.src='';this.alt='';">
           <h3>Prêt Personnel</h3>
           <p>Travaux, voyages, études : financez librement vos projets, sans justificatif d'usage.</p>
           <div class="loan-card-rate">3,5 % <span>TAEG indicatif</span></div>
@@ -1387,7 +1385,7 @@
   <div class="loan-detail">
     <div class="detail-grid">
       <div>
-        <div class="detail-img"><img loading="lazy" src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&q=80&auto=format" alt="Prêt immobilier" style="width:100%;height:100%;object-fit:cover;"></div>
+        <div class="detail-img"><img loading="lazy" src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&q=70&auto=format&fm=webp" alt="Prêt immobilier" style="width:100%;height:100%;object-fit:cover;"></div>
       </div>
       <div>
         <div class="detail-label">Prêt Immobilier</div>
@@ -1763,7 +1761,7 @@
       <div style="background:var(--off-white);border-radius:var(--radius);padding:28px;text-align:center;border:1px solid var(--border);"><div style="font-size:2rem;font-weight:800;color:var(--navy);">12</div><div style="font-size:0.85rem;color:var(--slate);margin-top:6px;">Pays européens</div></div>
       <div style="background:var(--off-white);border-radius:var(--radius);padding:28px;text-align:center;border:1px solid var(--border);"><div style="font-size:2rem;font-weight:800;color:var(--navy);">4,8/5</div><div style="font-size:0.85rem;color:var(--slate);margin-top:6px;">Note Trustpilot</div></div>
     </div>
-    <img loading="lazy" src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=900&q=80&auto=format" alt="Équipe Finooz" style="width:100%;height:280px;object-fit:cover;border-radius:var(--radius);margin-bottom:40px;">
+    <img loading="lazy" src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=900&q=70&auto=format&fm=webp" alt="Équipe Finooz" style="width:100%;height:280px;object-fit:cover;border-radius:var(--radius);margin-bottom:40px;">
     <div class="detail-features">
       <div class="detail-feature"><div class="detail-feature-icon">🎯</div><div class="detail-feature-text"><strong>Transparence totale</strong><p>Tous nos taux, frais et conditions sont affichés clairement, sans surprise ni frais cachés.</p></div></div>
       <div class="detail-feature"><div class="detail-feature-icon">⚡</div><div class="detail-feature-text"><strong>Rapidité et efficacité</strong><p>Notre technologie de scoring automatisé permet une réponse de principe sous 24 heures.</p></div></div>
@@ -2086,8 +2084,8 @@ window.addEventListener('load', function() {
   initCookie();
 });
 </script>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script>
 try { emailjs.init('oZiWNC5z2M4rydJCT'); } catch(e) {}
 var SB_URL = 'https://fsflgwbcaietfwrtofbs.supabase.co';

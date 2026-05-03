@@ -768,22 +768,24 @@
 <nav id="navbar">
   <div class="nav-inner">
     <div class="logo" onclick="showPage('home')" style="cursor:pointer;">
-      <svg width="172" height="46" viewBox="0 0 172 46" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <svg width="148" height="38" viewBox="0 0 148 38" fill="none" xmlns="http://www.w3.org/2000/svg">
         <defs>
-          <linearGradient id="nv-g" x1="0" y1="0" x2="38" y2="46" gradientUnits="userSpaceOnUse">
-            <stop stop-color="#22D3A0"/>
-            <stop offset="0.5" stop-color="#06B6D4"/>
-            <stop offset="1" stop-color="#2563EB"/>
+          <linearGradient id="nv-band" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#22D3A0"/>
+            <stop offset="55%" stop-color="#2563EB"/>
+            <stop offset="100%" stop-color="#1E40AF"/>
+          </linearGradient>
+          <linearGradient id="nv-arrow" x1="0" y1="1" x2="0.5" y2="0">
+            <stop offset="0%" stop-color="#2563EB"/>
+            <stop offset="100%" stop-color="#4ADE80"/>
           </linearGradient>
         </defs>
-        <!-- F : barre verticale -->
-        <rect x="4" y="4" width="11" height="38" rx="5.5" fill="url(#nv-g)"/>
-        <!-- F : barre haute -->
-        <rect x="4" y="4" width="34" height="13" rx="6.5" fill="url(#nv-g)"/>
-        <!-- F : barre milieu -->
-        <rect x="4" y="21" width="24" height="12" rx="6" fill="url(#nv-g)" opacity="0.92"/>
-        <!-- Texte inooz -->
-        <text x="48" y="37" font-family="Sora,sans-serif" font-weight="800" font-size="28" letter-spacing="-0.5" fill="white">inooz</text>
+        <rect x="1" y="3" width="28" height="8" rx="4" fill="url(#nv-band)"/>
+        <rect x="1" y="15" width="20" height="8" rx="4" fill="url(#nv-band)" opacity="0.88"/>
+        <rect x="1" y="27" width="13" height="8" rx="4" fill="url(#nv-band)" opacity="0.72"/>
+        <path d="M21 36 L30 4" stroke="url(#nv-arrow)" stroke-width="2.5" stroke-linecap="round"/>
+        <path d="M26.5 8.5 L30 3 L33.5 8.5" stroke="url(#nv-arrow)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <text x="43" y="27" font-family="Sora,sans-serif" font-weight="800" font-size="21" letter-spacing="-0.5" fill="white">Finooz</text>
       </svg>
     </div>
     <div class="nav-links">
@@ -1963,18 +1965,24 @@
   <div class="footer-grid">
     <div class="footer-brand">
       <span class="logo" onclick="showPage('home')" style="cursor:pointer;display:inline-block;margin-bottom:12px;">
-        <svg width="158" height="42" viewBox="0 0 172 46" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg width="136" height="35" viewBox="0 0 148 38" fill="none" xmlns="http://www.w3.org/2000/svg">
           <defs>
-            <linearGradient id="ft-g" x1="0" y1="0" x2="38" y2="46" gradientUnits="userSpaceOnUse">
-              <stop stop-color="#22D3A0"/>
-              <stop offset="0.5" stop-color="#06B6D4"/>
-              <stop offset="1" stop-color="#2563EB"/>
+            <linearGradient id="ft-band" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#22D3A0"/>
+              <stop offset="55%" stop-color="#2563EB"/>
+              <stop offset="100%" stop-color="#1E40AF"/>
+            </linearGradient>
+            <linearGradient id="ft-arrow" x1="0" y1="1" x2="0.5" y2="0">
+              <stop offset="0%" stop-color="#2563EB"/>
+              <stop offset="100%" stop-color="#4ADE80"/>
             </linearGradient>
           </defs>
-          <rect x="4" y="4" width="11" height="38" rx="5.5" fill="url(#ft-g)"/>
-          <rect x="4" y="4" width="34" height="13" rx="6.5" fill="url(#ft-g)"/>
-          <rect x="4" y="21" width="24" height="12" rx="6" fill="url(#ft-g)" opacity="0.92"/>
-          <text x="48" y="37" font-family="Sora,sans-serif" font-weight="800" font-size="28" letter-spacing="-0.5" fill="white">inooz</text>
+          <rect x="1" y="3" width="28" height="8" rx="4" fill="url(#ft-band)"/>
+          <rect x="1" y="15" width="20" height="8" rx="4" fill="url(#ft-band)" opacity="0.88"/>
+          <rect x="1" y="27" width="13" height="8" rx="4" fill="url(#ft-band)" opacity="0.72"/>
+          <path d="M21 36 L30 4" stroke="url(#ft-arrow)" stroke-width="2.5" stroke-linecap="round"/>
+          <path d="M26.5 8.5 L30 3 L33.5 8.5" stroke="url(#ft-arrow)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <text x="43" y="27" font-family="Sora,sans-serif" font-weight="800" font-size="21" letter-spacing="-0.5" fill="white">Finooz</text>
         </svg>
       </span>
       <p class="footer-tagline">La plateforme de prêt en ligne de référence en Europe. Transparence, rapidité et sécurité pour tous vos projets.</p>

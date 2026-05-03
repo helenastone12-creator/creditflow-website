@@ -3,9 +3,19 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Finooz — Simulez votre prêt en ligne et obtenez une réponse immédiate. Immobilier, auto, personnel. Sans engagement, 100% en ligne.">
+<meta name="description" id="meta-desc" content="Finooz — Simulez votre prêt en ligne et obtenez une réponse immédiate. Immobilier, auto, personnel. Sans engagement, 100% en ligne.">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>Finooz — Financement en ligne, rapide et transparent</title>
+<title id="page-title">Finooz — Financement en ligne, rapide et transparent</title>
+<!-- hreflang SEO -->
+<link rel="alternate" hreflang="fr" href="https://finooz.com/fr/">
+<link rel="alternate" hreflang="en" href="https://finooz.com/en/">
+<link rel="alternate" hreflang="de" href="https://finooz.com/de/">
+<link rel="alternate" hreflang="fi" href="https://finooz.com/fi/">
+<link rel="alternate" hreflang="sv" href="https://finooz.com/sv/">
+<link rel="alternate" hreflang="pt" href="https://finooz.com/pt/">
+<link rel="alternate" hreflang="it" href="https://finooz.com/it/">
+<link rel="alternate" hreflang="es" href="https://finooz.com/es/">
+<link rel="alternate" hreflang="x-default" href="https://finooz.com/fr/">
 <!-- Preconnect critique -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -109,6 +119,24 @@
     transition: all 0.2s !important;
   }
   .btn-nav:hover { background: #00dfa8 !important; transform: translateY(-1px); box-shadow: 0 4px 16px rgba(0,200,150,0.4) !important; }
+  /* ─── LANGUAGE SWITCHER ─── */
+  .lang-switcher { display:flex; align-items:center; gap:2px; margin-left:8px; }
+  .lang-switcher a {
+    color:rgba(255,255,255,0.55); font-size:0.7rem; font-weight:600; letter-spacing:0.5px;
+    padding:4px 6px; border-radius:4px; text-decoration:none; transition:color 0.2s,background 0.2s;
+    text-transform:uppercase;
+  }
+  .lang-switcher a:hover { color:#fff; background:rgba(255,255,255,0.1); }
+  .lang-switcher a.active { color:#00C896; background:rgba(0,200,150,0.12); }
+  .lang-switcher span { color:rgba(255,255,255,0.2); font-size:0.65rem; }
+  @media (max-width:768px) { .lang-switcher { display:none; } }
+  .mobile-lang { display:flex; flex-wrap:wrap; gap:8px; padding:16px 0; border-top:1px solid rgba(255,255,255,0.08); margin-top:8px; }
+  .mobile-lang a {
+    color:rgba(255,255,255,0.6); font-size:0.8rem; font-weight:600; padding:6px 10px;
+    border:1px solid rgba(255,255,255,0.15); border-radius:6px; text-decoration:none;
+    text-transform:uppercase; transition:all 0.2s;
+  }
+  .mobile-lang a:hover, .mobile-lang a.active { color:#00C896; border-color:#00C896; }
   .hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; padding:4px; }
   .hamburger span { display:block; width:24px; height:2px; background:var(--white); border-radius:2px; transition:0.3s; }
   .mobile-menu {
@@ -783,21 +811,23 @@
       <a href="#" onclick="showPage('personnel');return false;">Personnel</a>
       <a href="#" onclick="showPage('partenaires');return false;">Partenaires</a>
       <a href="#" onclick="showPage('contact');return false;">Contact</a>
-      <a href="#" onclick="showPage('simulateur');return false;" class="btn-nav">Simuler gratuitement</a>
+      <a href="#" onclick="showPage('simulateur');return false;" class="btn-nav" data-i18n="nav.cta">Simuler gratuitement</a>
     </div>
-<div class="hamburger" onclick="toggleMenu()" id="hamburger">
+    <nav class="lang-switcher" id="langSwitcher" aria-label="Sélecteur de langue"></nav>
+    <div class="hamburger" onclick="toggleMenu()" id="hamburger">
       <span></span><span></span><span></span>
     </div>
   </div>
 </nav>
 <div class="mobile-menu" id="mobileMenu">
-  <a href="#" onclick="showPage('home');toggleMenu();return false;">Accueil</a>
-  <a href="#" onclick="showPage('simulateur');toggleMenu();return false;">Simulateur</a>
-  <a href="#" onclick="showPage('immobilier');toggleMenu();return false;">Prêt Immobilier</a>
-  <a href="#" onclick="showPage('auto');toggleMenu();return false;">Prêt Auto</a>
-  <a href="#" onclick="showPage('personnel');toggleMenu();return false;">Prêt Personnel</a>
-  <a href="#" onclick="showPage('comment');toggleMenu();return false;">Comment ça marche</a>
-  <a href="#" onclick="showPage('contact');toggleMenu();return false;">Contact</a>
+  <a href="#" onclick="showPage('home');toggleMenu();return false;" data-i18n="nav.home">Accueil</a>
+  <a href="#" onclick="showPage('simulateur');toggleMenu();return false;" data-i18n="nav.simulator">Simulateur</a>
+  <a href="#" onclick="showPage('immobilier');toggleMenu();return false;" data-i18n="nav.mortgage">Prêt Immobilier</a>
+  <a href="#" onclick="showPage('auto');toggleMenu();return false;" data-i18n="nav.auto">Prêt Auto</a>
+  <a href="#" onclick="showPage('personnel');toggleMenu();return false;" data-i18n="nav.personal">Prêt Personnel</a>
+  <a href="#" onclick="showPage('comment');toggleMenu();return false;" data-i18n="nav.how">Comment ça marche</a>
+  <a href="#" onclick="showPage('contact');toggleMenu();return false;" data-i18n="nav.contact">Contact</a>
+  <div class="mobile-lang" id="mobileLang"></div>
 </div>
 
 <!-- ═══════════ HOME PAGE ═══════════ -->
@@ -2013,10 +2043,10 @@
 
 <!-- ═══════════ COOKIE BANNER ═══════════ -->
 <div id="cookie-banner">
-  <p>🍪 Nous utilisons des cookies pour améliorer votre expérience et analyser notre trafic. En continuant, vous acceptez notre utilisation des cookies conformément à notre <a onclick="showPage('rgpd');closeCookie();">politique RGPD</a>.</p>
+  <p id="cookie-text">🍪 Nous utilisons des cookies pour améliorer votre expérience et analyser notre trafic. En continuant, vous acceptez notre utilisation des cookies conformément à notre <a onclick="showPage('rgpd');closeCookie();">politique RGPD</a>.</p>
   <div class="cookie-btns">
-    <button class="btn-cookie-decline" onclick="closeCookie()">Refuser</button>
-    <button class="btn-cookie-accept" onclick="acceptCookie()">Accepter ✓</button>
+    <button id="cookie-refuse" class="btn-cookie-decline" onclick="closeCookie()">Refuser</button>
+    <button id="cookie-accept" class="btn-cookie-accept" onclick="acceptCookie()">Accepter ✓</button>
   </div>
 </div>
 
@@ -2564,6 +2594,773 @@ function initCounters() {
 // INIT
 </script>
 
+<!-- ═══════════ I18N SYSTEM ═══════════ -->
+<script>
+var TRANSLATIONS = {
+  fr: {
+    lang: 'fr', dir: 'ltr',
+    title: 'Finooz — Financement en ligne, rapide et transparent',
+    metaDesc: 'Finooz — Simulez votre prêt en ligne et obtenez une réponse immédiate. Immobilier, auto, personnel. Sans engagement, 100% en ligne.',
+    nav: { home:'Accueil', simulator:'Simulateur', mortgage:'Prêt Immobilier', auto:'Prêt Auto', personal:'Prêt Personnel', partners:'Partenaires', contact:'Contact', how:'Comment ça marche', cta:'Simuler gratuitement' },
+    hero: {
+      title: 'Financez vos projets avec Finooz',
+      sub: 'Simulez votre projet et obtenez une réponse de principe immédiate. Sans engagement, 100% en ligne.',
+      startSim: 'Commencez votre simulation',
+      continue: 'Continuer →',
+      rateLabel: 'Taux indicatif',
+      rateNote: 'Pour 10 000 € sur 48 mois · Mensualités dès 220 €',
+      freeSim: 'Simulation gratuite · Sans engagement',
+      tiles: ['Immobilier','Auto / Moto','Prêt personnel','Travaux','Voyage','Autres']
+    },
+    loans: {
+      label: 'Nos solutions', title: 'Trouvez le financement adapté',
+      desc: 'Que vous souhaitiez acheter un bien immobilier, financer un véhicule ou faire face à un projet personnel, Finooz vous accompagne.',
+      more: 'En savoir plus →',
+      cards: [
+        { title:'Prêt Immobilier', desc:'Financement de votre résidence principale, secondaire ou investissement locatif.', features:['3,5 % TAEG indicatif','Jusqu\'à 500 000 €','Durée jusqu\'à 30 ans','Taux fixe ou variable','Remboursement anticipé'] },
+        { title:'Prêt Automobile', desc:'Achetez votre voiture neuve ou d\'occasion avec des mensualités adaptées à votre budget.', features:['3,5 % TAEG indicatif','Jusqu\'à 75 000 €','Véhicule neuf, occasion ou électrique','Réponse sous 24h'] },
+        { title:'Prêt Personnel', desc:'Travaux, voyages, études : financez librement vos projets, sans justificatif d\'usage.', features:['3,5 % TAEG indicatif','De 1 000 à 75 000 €','Aucun justificatif requis','Mensualités modulables'] }
+      ]
+    },
+    steps: {
+      title: 'En 4 étapes vers votre prêt',
+      desc: 'Un parcours entièrement guidé, de la simulation à l\'obtention des fonds, sans paperasse inutile.',
+      items: [
+        { n:'01', t:'Simulez', d:'Paramétrez votre prêt : montant, durée, type. Résultat instantané.' },
+        { n:'02', t:'Complétez', d:'Renseignez votre dossier en ligne en moins de 10 minutes.' },
+        { n:'03', t:'Recevez', d:'Une réponse de principe sous 24h. Aucun déplacement requis.' },
+        { n:'04', t:'Profitez', d:'Fonds virés sur votre compte. Gestion en ligne à tout moment.' }
+      ],
+      guide: 'Voir le guide complet'
+    },
+    testimonials: {
+      label: 'Témoignages clients', title: 'Ils nous font confiance',
+      desc: 'Plus de 2 400 avis vérifiés sur Trustpilot. Voici ce que disent nos clients.',
+      verified: '✓ Vérifié'
+    },
+    cta: {
+      title: 'Prêt à concrétiser votre projet ?',
+      desc: 'La simulation prend 2 minutes. Gratuite, sans inscription, sans engagement.',
+      btn: '⚡ Simuler gratuitement',
+      advisor: 'Parler à un conseiller'
+    },
+    faq: { title: 'Questions fréquentes' },
+    security: {
+      title: 'Votre sécurité, notre priorité',
+      desc: 'Plateforme certifiée et conforme aux réglementations européennes les plus strictes.',
+      items: [
+        { t:'Chiffrement SSL 256 bits', d:'Toutes vos données sont chiffrées avec le standard bancaire le plus élevé.' },
+        { t:'Conformité RGPD', d:'Vos données personnelles sont protégées conformément au règlement européen.' },
+        { t:'Agréé ACPR', d:'Établissement agréé par l\'Autorité de Contrôle Prudentiel et de Résolution.' }
+      ]
+    },
+    footer: {
+      tagline: 'La plateforme de prêt en ligne de référence en Europe. Transparence, rapidité et sécurité pour tous vos projets.',
+      rgpd: '🔒 Conforme RGPD · Données sécurisées',
+      products: 'Nos produits', info: 'Informations', legal: 'Légal',
+      disclaimer: 'Un crédit vous engage et doit être remboursé. Vérifiez vos capacités de remboursement avant de vous engager. Les taux affichés sont des TAEG indicatifs susceptibles de varier selon votre profil, la durée et le montant.'
+    },
+    form: {
+      firstName:'Prénom', lastName:'Nom', email:'Email', phone:'Téléphone',
+      send:'Envoyer ma demande →', rgpdConsent:'J\'accepte que mes données soient traitées conformément à la politique de confidentialité de Finooz.',
+      success: 'Demande envoyée !', successDesc: 'Un conseiller Finooz vous contactera dans les 24h ouvrées.',
+      backHome: 'Retour à l\'accueil', restart: '🔄 Recommencer'
+    },
+    errors: {
+      required: 'Veuillez remplir tous les champs obligatoires.',
+      email: 'Veuillez saisir une adresse email valide.',
+      consent: 'Veuillez accepter la politique de confidentialité.',
+      minAmount: 'Montant minimum : 500 €',
+      maxAmount: 'Montant maximum : 1 000 000 €',
+      selectType: 'Veuillez sélectionner un type de financement.'
+    },
+    cookie: {
+      text: '🍪 Nous utilisons des cookies pour améliorer votre expérience et analyser notre trafic.',
+      accept: 'Accepter ✓', refuse: 'Refuser'
+    }
+  },
+
+  en: {
+    lang: 'en', dir: 'ltr',
+    title: 'Finooz — Fast & Transparent Online Financing',
+    metaDesc: 'Finooz — Simulate your loan online and get an instant decision. Mortgage, car loan, personal loan. No commitment, 100% online.',
+    nav: { home:'Home', simulator:'Simulator', mortgage:'Mortgage', auto:'Car Loan', personal:'Personal Loan', partners:'Partners', contact:'Contact', how:'How It Works', cta:'Simulate for free' },
+    hero: {
+      title: 'Finance your projects with Finooz',
+      sub: 'Simulate your project and get an instant decision. No commitment, 100% online.',
+      startSim: 'Start your simulation',
+      continue: 'Continue →',
+      rateLabel: 'Indicative rate',
+      rateNote: 'For €10,000 over 48 months · From €220/month',
+      freeSim: 'Free simulation · No commitment',
+      tiles: ['Mortgage','Car / Motorcycle','Personal loan','Home improvements','Travel','Other']
+    },
+    loans: {
+      label: 'Our solutions', title: 'Find the right financing',
+      desc: 'Whether you want to buy property, finance a vehicle or fund a personal project, Finooz is here to guide you.',
+      more: 'Learn more →',
+      cards: [
+        { title:'Mortgage Loan', desc:'Finance your primary residence, holiday home or rental investment.', features:['3.5% indicative APR','Up to €500,000','Up to 30 years','Fixed or variable rate','Early repayment'] },
+        { title:'Car Loan', desc:'Buy your new or used car with monthly payments tailored to your budget.', features:['3.5% indicative APR','Up to €75,000','New, used or electric vehicle','Decision within 24h'] },
+        { title:'Personal Loan', desc:'Home improvements, travel, studies: fund your projects freely, no proof of use required.', features:['3.5% indicative APR','From €1,000 to €75,000','No proof required','Flexible monthly payments'] }
+      ]
+    },
+    steps: {
+      title: '4 steps to your loan',
+      desc: 'A fully guided journey, from simulation to funding, with no unnecessary paperwork.',
+      items: [
+        { n:'01', t:'Simulate', d:'Configure your loan: amount, duration, type. Instant result.' },
+        { n:'02', t:'Complete', d:'Fill in your application online in less than 10 minutes.' },
+        { n:'03', t:'Receive', d:'A decision in principle within 24 hours. No travel required.' },
+        { n:'04', t:'Enjoy', d:'Funds transferred to your account. Manage online at any time.' }
+      ],
+      guide: 'View the complete guide'
+    },
+    testimonials: {
+      label: 'Customer reviews', title: 'They trust us',
+      desc: 'Over 2,400 verified reviews on Trustpilot. Here\'s what our customers say.',
+      verified: '✓ Verified'
+    },
+    cta: {
+      title: 'Ready to make your project happen?',
+      desc: 'The simulation takes 2 minutes. Free, no sign-up, no commitment.',
+      btn: '⚡ Simulate for free',
+      advisor: 'Speak to an advisor'
+    },
+    faq: { title: 'Frequently asked questions' },
+    security: {
+      title: 'Your security, our priority',
+      desc: 'Certified platform compliant with the strictest European regulations.',
+      items: [
+        { t:'SSL 256-bit encryption', d:'All your data is encrypted to the highest banking standard.' },
+        { t:'GDPR compliant', d:'Your personal data is protected in accordance with European regulations.' },
+        { t:'ACPR approved', d:'Establishment approved by the French Prudential Supervisory Authority.' }
+      ]
+    },
+    footer: {
+      tagline: 'Europe\'s leading online lending platform. Transparency, speed and security for all your projects.',
+      rgpd: '🔒 GDPR compliant · Secure data',
+      products: 'Our products', info: 'Information', legal: 'Legal',
+      disclaimer: 'A loan is a commitment and must be repaid. Check your repayment capacity before committing. Rates shown are indicative APRs subject to change based on your profile, duration and amount.'
+    },
+    form: {
+      firstName:'First name', lastName:'Last name', email:'Email', phone:'Phone',
+      send:'Send my request →', rgpdConsent:'I agree that my data will be processed in accordance with Finooz\'s privacy policy.',
+      success: 'Request sent!', successDesc: 'A Finooz advisor will contact you within 24 working hours.',
+      backHome: 'Back to home', restart: '🔄 Start over'
+    },
+    errors: {
+      required: 'Please fill in all required fields.',
+      email: 'Please enter a valid email address.',
+      consent: 'Please accept the privacy policy.',
+      minAmount: 'Minimum amount: €500',
+      maxAmount: 'Maximum amount: €1,000,000',
+      selectType: 'Please select a type of financing.'
+    },
+    cookie: {
+      text: '🍪 We use cookies to improve your experience and analyse our traffic.',
+      accept: 'Accept ✓', refuse: 'Decline'
+    }
+  },
+
+  de: {
+    lang: 'de', dir: 'ltr',
+    title: 'Finooz — Schnelle & transparente Online-Finanzierung',
+    metaDesc: 'Finooz — Simulieren Sie Ihren Kredit online und erhalten Sie sofortige Antwort. Immobilien, Auto, Privatkredit. Ohne Verpflichtung, 100% online.',
+    nav: { home:'Startseite', simulator:'Simulator', mortgage:'Immobilienkredit', auto:'Autokredit', personal:'Privatkredit', partners:'Partner', contact:'Kontakt', how:'So funktioniert\'s', cta:'Kostenlos simulieren' },
+    hero: {
+      title: 'Finanzieren Sie Ihre Projekte mit Finooz',
+      sub: 'Simulieren Sie Ihr Projekt und erhalten Sie sofort eine Vorabentscheidung. Ohne Verpflichtung, 100% online.',
+      startSim: 'Simulation starten',
+      continue: 'Weiter →',
+      rateLabel: 'Richtzins',
+      rateNote: 'Für 10.000 € über 48 Monate · Ab 220 €/Monat',
+      freeSim: 'Kostenlose Simulation · Unverbindlich',
+      tiles: ['Immobilien','Auto / Motorrad','Privatkredit','Renovierung','Reise','Sonstiges']
+    },
+    loans: {
+      label: 'Unsere Lösungen', title: 'Die passende Finanzierung finden',
+      desc: 'Ob Sie eine Immobilie kaufen, ein Fahrzeug finanzieren oder ein persönliches Projekt umsetzen möchten – Finooz begleitet Sie.',
+      more: 'Mehr erfahren →',
+      cards: [
+        { title:'Immobilienkredit', desc:'Finanzierung Ihres Hauptwohnsitzes, Ferienhauses oder einer Kapitalanlage.', features:['3,5 % effektiver Jahreszins','Bis zu 500.000 €','Laufzeit bis 30 Jahre','Fester oder variabler Zinssatz','Vorzeitige Rückzahlung möglich'] },
+        { title:'Autokredit', desc:'Kaufen Sie Ihr neues oder gebrauchtes Auto mit monatlichen Raten, die zu Ihrem Budget passen.', features:['3,5 % effektiver Jahreszins','Bis zu 75.000 €','Neu, gebraucht oder elektrisch','Entscheidung innerhalb 24h'] },
+        { title:'Privatkredit', desc:'Renovierung, Reise, Studium: Finanzieren Sie Ihre Projekte frei, ohne Verwendungsnachweis.', features:['3,5 % effektiver Jahreszins','Von 1.000 bis 75.000 €','Kein Nachweis erforderlich','Flexible Monatsraten'] }
+      ]
+    },
+    steps: {
+      title: 'In 4 Schritten zu Ihrem Kredit',
+      desc: 'Eine vollständig geführte Reise von der Simulation bis zur Auszahlung – ohne unnötige Bürokratie.',
+      items: [
+        { n:'01', t:'Simulieren', d:'Konfigurieren Sie Ihren Kredit: Betrag, Laufzeit, Typ. Sofortiges Ergebnis.' },
+        { n:'02', t:'Ergänzen', d:'Füllen Sie Ihren Antrag online in weniger als 10 Minuten aus.' },
+        { n:'03', t:'Erhalten', d:'Vorabentscheidung innerhalb von 24 Stunden. Kein Besuch erforderlich.' },
+        { n:'04', t:'Genießen', d:'Geld auf Ihrem Konto. Online-Verwaltung jederzeit möglich.' }
+      ],
+      guide: 'Vollständigen Leitfaden ansehen'
+    },
+    testimonials: {
+      label: 'Kundenbewertungen', title: 'Sie vertrauen uns',
+      desc: 'Über 2.400 verifizierte Bewertungen auf Trustpilot. Das sagen unsere Kunden.',
+      verified: '✓ Verifiziert'
+    },
+    cta: {
+      title: 'Bereit, Ihr Projekt zu verwirklichen?',
+      desc: 'Die Simulation dauert 2 Minuten. Kostenlos, ohne Registrierung, ohne Verpflichtung.',
+      btn: '⚡ Kostenlos simulieren',
+      advisor: 'Mit einem Berater sprechen'
+    },
+    faq: { title: 'Häufig gestellte Fragen' },
+    security: {
+      title: 'Ihre Sicherheit, unsere Priorität',
+      desc: 'Zertifizierte Plattform, konform mit den strengsten europäischen Vorschriften.',
+      items: [
+        { t:'SSL-256-Bit-Verschlüsselung', d:'Alle Ihre Daten sind nach dem höchsten Bankstandard verschlüsselt.' },
+        { t:'DSGVO-konform', d:'Ihre personenbezogenen Daten werden gemäß der europäischen Datenschutzverordnung geschützt.' },
+        { t:'ACPR-zugelassen', d:'Von der französischen Aufsichtsbehörde für Finanzdienstleistungen zugelassenes Institut.' }
+      ]
+    },
+    footer: {
+      tagline: 'Europas führende Online-Kreditplattform. Transparenz, Schnelligkeit und Sicherheit für alle Ihre Projekte.',
+      rgpd: '🔒 DSGVO-konform · Sichere Daten',
+      products: 'Unsere Produkte', info: 'Informationen', legal: 'Rechtliches',
+      disclaimer: 'Ein Kredit ist eine Verpflichtung und muss zurückgezahlt werden. Prüfen Sie Ihre Rückzahlungsfähigkeit. Die angezeigten Zinssätze sind indikative Jahreszinssätze.'
+    },
+    form: {
+      firstName:'Vorname', lastName:'Nachname', email:'E-Mail', phone:'Telefon',
+      send:'Anfrage senden →', rgpdConsent:'Ich stimme zu, dass meine Daten gemäß der Datenschutzrichtlinie von Finooz verarbeitet werden.',
+      success: 'Anfrage gesendet!', successDesc: 'Ein Finooz-Berater wird Sie innerhalb von 24 Werktagen kontaktieren.',
+      backHome: 'Zurück zur Startseite', restart: '🔄 Neu starten'
+    },
+    errors: {
+      required: 'Bitte füllen Sie alle Pflichtfelder aus.',
+      email: 'Bitte geben Sie eine gültige E-Mail-Adresse ein.',
+      consent: 'Bitte akzeptieren Sie die Datenschutzrichtlinie.',
+      minAmount: 'Mindestbetrag: 500 €',
+      maxAmount: 'Höchstbetrag: 1.000.000 €',
+      selectType: 'Bitte wählen Sie eine Finanzierungsart aus.'
+    },
+    cookie: {
+      text: '🍪 Wir verwenden Cookies, um Ihre Erfahrung zu verbessern und unseren Datenverkehr zu analysieren.',
+      accept: 'Akzeptieren ✓', refuse: 'Ablehnen'
+    }
+  },
+
+  fi: {
+    lang: 'fi', dir: 'ltr',
+    title: 'Finooz — Nopea ja läpinäkyvä verkkolaina',
+    metaDesc: 'Finooz — Simuloi lainasi verkossa ja saa välitön vastaus. Asuntolaina, autolaina, henkilökohtainen laina. Sitoumuksetta, 100% verkossa.',
+    nav: { home:'Etusivu', simulator:'Simulaattori', mortgage:'Asuntolaina', auto:'Autolaina', personal:'Henkilökohtainen laina', partners:'Kumppanit', contact:'Yhteystiedot', how:'Miten se toimii', cta:'Simuloi ilmaiseksi' },
+    hero: {
+      title: 'Rahoita projektisi Finoozin avulla',
+      sub: 'Simuloi projektisi ja saa alustava päätös välittömästi. Sitoumuksetta, 100% verkossa.',
+      startSim: 'Aloita simulaatio',
+      continue: 'Jatka →',
+      rateLabel: 'Viitekorko',
+      rateNote: '10 000 € 48 kuukauden ajan · Alkaen 220 €/kk',
+      freeSim: 'Ilmainen simulaatio · Sitoumukseton',
+      tiles: ['Asunto','Auto / Moottoripyörä','Henkilökohtainen laina','Remontti','Matka','Muu']
+    },
+    loans: {
+      label: 'Ratkaisumme', title: 'Löydä sopiva rahoitus',
+      desc: 'Halusitpa ostaa asunnon, rahoittaa ajoneuvon tai toteuttaa henkilökohtaisen projektin – Finooz on tukenasi.',
+      more: 'Lue lisää →',
+      cards: [
+        { title:'Asuntolaina', desc:'Rahoita vakituinen asuntosi, lomakotisi tai sijoitusasuntosi.', features:['3,5 % viitteellinen kokonaiskorko','Jopa 500 000 €','Jopa 30 vuotta','Kiinteä tai vaihtuva korko','Ennenaikainen takaisinmaksu mahdollinen'] },
+        { title:'Autolaina', desc:'Osta uusi tai käytetty auto budjettisi mukaisilla kuukausierillä.', features:['3,5 % viitteellinen kokonaiskorko','Jopa 75 000 €','Uusi, käytetty tai sähköauto','Päätös 24 tunnissa'] },
+        { title:'Henkilökohtainen laina', desc:'Remontti, matka, opinnot: rahoita projektisi vapaasti ilman käyttötarkoituksen todistamista.', features:['3,5 % viitteellinen kokonaiskorko','1 000–75 000 €','Ei todistusvaatimusta','Joustavat kuukausierät'] }
+      ]
+    },
+    steps: {
+      title: '4 askelta lainaasi',
+      desc: 'Täysin ohjattu matka simulaatiosta rahoitukseen – ilman turhaa paperityötä.',
+      items: [
+        { n:'01', t:'Simuloi', d:'Määritä lainasi: summa, kesto, tyyppi. Välitön tulos.' },
+        { n:'02', t:'Täytä', d:'Täytä hakemuksesi verkossa alle 10 minuutissa.' },
+        { n:'03', t:'Vastaanota', d:'Alustava päätös 24 tunnissa. Ei käyntiä vaadita.' },
+        { n:'04', t:'Nauti', d:'Varat tilillesi. Hallinnoi verkossa milloin tahansa.' }
+      ],
+      guide: 'Katso koko opas'
+    },
+    testimonials: {
+      label: 'Asiakasarvostelut', title: 'He luottavat meihin',
+      desc: 'Yli 2 400 vahvistettua arvostelua Trustpilotissa. Tässä mitä asiakkaamme sanovat.',
+      verified: '✓ Vahvistettu'
+    },
+    cta: {
+      title: 'Valmis toteuttamaan projektisi?',
+      desc: 'Simulaatio kestää 2 minuuttia. Ilmainen, ei rekisteröintiä, ei sitoumuksia.',
+      btn: '⚡ Simuloi ilmaiseksi',
+      advisor: 'Puhu neuvonantajalle'
+    },
+    faq: { title: 'Usein kysytyt kysymykset' },
+    security: {
+      title: 'Turvallisuutesi on prioriteettimme',
+      desc: 'Sertifioitu alusta, joka täyttää Euroopan tiukimmat säädökset.',
+      items: [
+        { t:'SSL 256-bittinen salaus', d:'Kaikki tietosi salataan korkeimmalla pankkistandardilla.' },
+        { t:'GDPR-yhteensopiva', d:'Henkilötietosi suojataan Euroopan tietosuoja-asetuksen mukaisesti.' },
+        { t:'ACPR-hyväksytty', d:'Ranskan vakavaraisuusvalvontaviranomaisen hyväksymä laitos.' }
+      ]
+    },
+    footer: {
+      tagline: 'Euroopan johtava verkkolainausalusta. Läpinäkyvyys, nopeus ja turvallisuus kaikissa projekteissasi.',
+      rgpd: '🔒 GDPR-yhteensopiva · Turvalliset tiedot',
+      products: 'Tuotteemme', info: 'Tietoa', legal: 'Juridiikka',
+      disclaimer: 'Laina on sitoumus ja se on maksettava takaisin. Tarkista takaisinmaksukykysi ennen sitoutumista. Näytetyt korot ovat viitteellisiä kokonaiskorkoja.'
+    },
+    form: {
+      firstName:'Etunimi', lastName:'Sukunimi', email:'Sähköposti', phone:'Puhelin',
+      send:'Lähetä pyyntö →', rgpdConsent:'Hyväksyn, että tietojani käsitellään Finoozin tietosuojakäytännön mukaisesti.',
+      success: 'Pyyntö lähetetty!', successDesc: 'Finooz-neuvonantaja ottaa sinuun yhteyttä 24 työtunnin kuluessa.',
+      backHome: 'Takaisin etusivulle', restart: '🔄 Aloita uudelleen'
+    },
+    errors: {
+      required: 'Täytä kaikki pakolliset kentät.',
+      email: 'Syötä kelvollinen sähköpostiosoite.',
+      consent: 'Hyväksy tietosuojakäytäntö.',
+      minAmount: 'Vähimmäissumma: 500 €',
+      maxAmount: 'Enimmäissumma: 1 000 000 €',
+      selectType: 'Valitse rahoitustyyppi.'
+    },
+    cookie: {
+      text: '🍪 Käytämme evästeitä kokemuksesi parantamiseksi ja liikenteemme analysoimiseksi.',
+      accept: 'Hyväksy ✓', refuse: 'Hylkää'
+    }
+  },
+
+  sv: {
+    lang: 'sv', dir: 'ltr',
+    title: 'Finooz — Snabb och transparent onlinefinansiering',
+    metaDesc: 'Finooz — Simulera ditt lån online och få ett omedelbart beslut. Bolån, billån, privatlån. Utan åtagande, 100% online.',
+    nav: { home:'Hem', simulator:'Simulator', mortgage:'Bolån', auto:'Billån', personal:'Privatlån', partners:'Partners', contact:'Kontakt', how:'Så fungerar det', cta:'Simulera gratis' },
+    hero: {
+      title: 'Finansiera dina projekt med Finooz',
+      sub: 'Simulera ditt projekt och få ett principbeslut direkt. Utan åtagande, 100% online.',
+      startSim: 'Starta din simulering',
+      continue: 'Fortsätt →',
+      rateLabel: 'Indikativ ränta',
+      rateNote: 'För 10 000 € på 48 månader · Från 220 €/månad',
+      freeSim: 'Gratis simulering · Utan åtagande',
+      tiles: ['Bostad','Bil / Motorcykel','Privatlån','Renovering','Resa','Övrigt']
+    },
+    loans: {
+      label: 'Våra lösningar', title: 'Hitta rätt finansiering',
+      desc: 'Oavsett om du vill köpa en fastighet, finansiera ett fordon eller genomföra ett personligt projekt – Finooz guidar dig.',
+      more: 'Läs mer →',
+      cards: [
+        { title:'Bolån', desc:'Finansiera din permanenta bostad, fritidshus eller hyresinvestering.', features:['3,5 % indikativ effektiv ränta','Upp till 500 000 €','Upp till 30 år','Fast eller rörlig ränta','Förtidslösen möjligt'] },
+        { title:'Billån', desc:'Köp din nya eller begagnade bil med månadskostnader anpassade efter din budget.', features:['3,5 % indikativ effektiv ränta','Upp till 75 000 €','Ny, begagnad eller elbil','Beslut inom 24h'] },
+        { title:'Privatlån', desc:'Renovering, resa, studier: finansiera dina projekt fritt utan att ange ändamål.', features:['3,5 % indikativ effektiv ränta','Från 1 000 till 75 000 €','Inget syfteskrav','Flexibla månadskostnader'] }
+      ]
+    },
+    steps: {
+      title: '4 steg till ditt lån',
+      desc: 'En helt guidad resa från simulering till utbetalning – utan onödigt pappersarbete.',
+      items: [
+        { n:'01', t:'Simulera', d:'Konfigurera ditt lån: belopp, löptid, typ. Omedelbart resultat.' },
+        { n:'02', t:'Komplettera', d:'Fyll i din ansökan online på under 10 minuter.' },
+        { n:'03', t:'Ta emot', d:'Principbeslut inom 24 timmar. Inget besök krävs.' },
+        { n:'04', t:'Njut', d:'Pengar överförda till ditt konto. Hantera online när som helst.' }
+      ],
+      guide: 'Se hela guiden'
+    },
+    testimonials: {
+      label: 'Kundrecensioner', title: 'De litar på oss',
+      desc: 'Över 2 400 verifierade recensioner på Trustpilot. Här är vad våra kunder säger.',
+      verified: '✓ Verifierad'
+    },
+    cta: {
+      title: 'Redo att förverkliga ditt projekt?',
+      desc: 'Simuleringen tar 2 minuter. Gratis, ingen registrering, inget åtagande.',
+      btn: '⚡ Simulera gratis',
+      advisor: 'Tala med en rådgivare'
+    },
+    faq: { title: 'Vanliga frågor' },
+    security: {
+      title: 'Din säkerhet, vår prioritet',
+      desc: 'Certifierad plattform som uppfyller de strängaste europeiska reglerna.',
+      items: [
+        { t:'SSL 256-bitars kryptering', d:'All din data krypteras till den högsta bankstandarden.' },
+        { t:'GDPR-kompatibel', d:'Dina personuppgifter skyddas i enlighet med EU:s dataskyddsförordning.' },
+        { t:'ACPR-godkänd', d:'Institut godkänt av den franska tillsynsmyndigheten.' }
+      ]
+    },
+    footer: {
+      tagline: 'Europas ledande plattform för onlinelån. Transparens, snabbhet och säkerhet för alla dina projekt.',
+      rgpd: '🔒 GDPR-kompatibel · Säker data',
+      products: 'Våra produkter', info: 'Information', legal: 'Juridik',
+      disclaimer: 'Ett lån är ett åtagande och måste återbetalas. Kontrollera din återbetalningsförmåga innan du förbinder dig. Visade räntor är indikativa effektiva räntor.'
+    },
+    form: {
+      firstName:'Förnamn', lastName:'Efternamn', email:'E-post', phone:'Telefon',
+      send:'Skicka min förfrågan →', rgpdConsent:'Jag godkänner att mina uppgifter behandlas i enlighet med Finooz integritetspolicy.',
+      success: 'Förfrågan skickad!', successDesc: 'En Finooz-rådgivare kontaktar dig inom 24 arbetstimmar.',
+      backHome: 'Tillbaka till startsidan', restart: '🔄 Börja om'
+    },
+    errors: {
+      required: 'Vänligen fyll i alla obligatoriska fält.',
+      email: 'Vänligen ange en giltig e-postadress.',
+      consent: 'Vänligen godkänn integritetspolicyn.',
+      minAmount: 'Minimibelopp: 500 €',
+      maxAmount: 'Maximibelopp: 1 000 000 €',
+      selectType: 'Välj en typ av finansiering.'
+    },
+    cookie: {
+      text: '🍪 Vi använder cookies för att förbättra din upplevelse och analysera vår trafik.',
+      accept: 'Acceptera ✓', refuse: 'Avvisa'
+    }
+  },
+
+  pt: {
+    lang: 'pt', dir: 'ltr',
+    title: 'Finooz — Financiamento online rápido e transparente',
+    metaDesc: 'Finooz — Simule o seu empréstimo online e obtenha uma resposta imediata. Crédito habitação, automóvel, pessoal. Sem compromisso, 100% online.',
+    nav: { home:'Início', simulator:'Simulador', mortgage:'Crédito Habitação', auto:'Crédito Auto', personal:'Crédito Pessoal', partners:'Parceiros', contact:'Contacto', how:'Como Funciona', cta:'Simular gratuitamente' },
+    hero: {
+      title: 'Finance os seus projetos com a Finooz',
+      sub: 'Simule o seu projeto e obtenha uma resposta de princípio imediata. Sem compromisso, 100% online.',
+      startSim: 'Iniciar a sua simulação',
+      continue: 'Continuar →',
+      rateLabel: 'Taxa indicativa',
+      rateNote: 'Para 10 000 € em 48 meses · A partir de 220 €/mês',
+      freeSim: 'Simulação gratuita · Sem compromisso',
+      tiles: ['Habitação','Automóvel / Moto','Crédito pessoal','Obras','Viagem','Outros']
+    },
+    loans: {
+      label: 'As nossas soluções', title: 'Encontre o financiamento adequado',
+      desc: 'Quer queira comprar um imóvel, financiar um veículo ou realizar um projeto pessoal, a Finooz acompanha-o.',
+      more: 'Saber mais →',
+      cards: [
+        { title:'Crédito Habitação', desc:'Financiamento da sua residência principal, secundária ou investimento para arrendamento.', features:['3,5% TAEG indicativa','Até 500 000 €','Prazo até 30 anos','Taxa fixa ou variável','Reembolso antecipado'] },
+        { title:'Crédito Automóvel', desc:'Compre o seu carro novo ou usado com prestações mensais adaptadas ao seu orçamento.', features:['3,5% TAEG indicativa','Até 75 000 €','Veículo novo, usado ou elétrico','Resposta em 24h'] },
+        { title:'Crédito Pessoal', desc:'Obras, viagens, estudos: financie livremente os seus projetos, sem justificativo de utilização.', features:['3,5% TAEG indicativa','De 1 000 a 75 000 €','Sem justificativo necessário','Prestações moduláveis'] }
+      ]
+    },
+    steps: {
+      title: '4 passos para o seu empréstimo',
+      desc: 'Um percurso totalmente guiado, da simulação à obtenção dos fundos, sem burocracia desnecessária.',
+      items: [
+        { n:'01', t:'Simule', d:'Configure o seu empréstimo: montante, prazo, tipo. Resultado instantâneo.' },
+        { n:'02', t:'Complete', d:'Preencha o seu processo online em menos de 10 minutos.' },
+        { n:'03', t:'Receba', d:'Uma resposta de princípio em 24h. Sem deslocações necessárias.' },
+        { n:'04', t:'Desfrute', d:'Fundos transferidos para a sua conta. Gestão online a qualquer momento.' }
+      ],
+      guide: 'Ver o guia completo'
+    },
+    testimonials: {
+      label: 'Testemunhos de clientes', title: 'Confiam em nós',
+      desc: 'Mais de 2 400 avaliações verificadas no Trustpilot. Aqui está o que dizem os nossos clientes.',
+      verified: '✓ Verificado'
+    },
+    cta: {
+      title: 'Pronto para concretizar o seu projeto?',
+      desc: 'A simulação demora 2 minutos. Gratuita, sem registo, sem compromisso.',
+      btn: '⚡ Simular gratuitamente',
+      advisor: 'Falar com um consultor'
+    },
+    faq: { title: 'Perguntas frequentes' },
+    security: {
+      title: 'A sua segurança, a nossa prioridade',
+      desc: 'Plataforma certificada e em conformidade com as regulamentações europeias mais rigorosas.',
+      items: [
+        { t:'Encriptação SSL 256 bits', d:'Todos os seus dados são encriptados com o mais alto padrão bancário.' },
+        { t:'Conformidade RGPD', d:'Os seus dados pessoais são protegidos em conformidade com o regulamento europeu.' },
+        { t:'Aprovado pela ACPR', d:'Estabelecimento aprovado pela Autoridade de Supervisão Prudencial francesa.' }
+      ]
+    },
+    footer: {
+      tagline: 'A plataforma de empréstimo online de referência na Europa. Transparência, rapidez e segurança para todos os seus projetos.',
+      rgpd: '🔒 Conforme RGPD · Dados seguros',
+      products: 'Os nossos produtos', info: 'Informações', legal: 'Legal',
+      disclaimer: 'Um crédito implica um compromisso e deve ser reembolsado. Verifique a sua capacidade de reembolso antes de se comprometer. As taxas apresentadas são TAEG indicativas sujeitas a variação.'
+    },
+    form: {
+      firstName:'Nome próprio', lastName:'Apelido', email:'Email', phone:'Telefone',
+      send:'Enviar o meu pedido →', rgpdConsent:'Aceito que os meus dados sejam tratados em conformidade com a política de privacidade da Finooz.',
+      success: 'Pedido enviado!', successDesc: 'Um consultor Finooz entrará em contacto consigo nas próximas 24 horas úteis.',
+      backHome: 'Voltar ao início', restart: '🔄 Recomeçar'
+    },
+    errors: {
+      required: 'Por favor, preencha todos os campos obrigatórios.',
+      email: 'Por favor, introduza um endereço de email válido.',
+      consent: 'Por favor, aceite a política de privacidade.',
+      minAmount: 'Montante mínimo: 500 €',
+      maxAmount: 'Montante máximo: 1 000 000 €',
+      selectType: 'Por favor, selecione um tipo de financiamento.'
+    },
+    cookie: {
+      text: '🍪 Utilizamos cookies para melhorar a sua experiência e analisar o nosso tráfego.',
+      accept: 'Aceitar ✓', refuse: 'Recusar'
+    }
+  },
+
+  it: {
+    lang: 'it', dir: 'ltr',
+    title: 'Finooz — Finanziamento online veloce e trasparente',
+    metaDesc: 'Finooz — Simula il tuo prestito online e ottieni una risposta immediata. Mutuo, prestito auto, prestito personale. Senza impegno, 100% online.',
+    nav: { home:'Home', simulator:'Simulatore', mortgage:'Mutuo', auto:'Prestito Auto', personal:'Prestito Personale', partners:'Partner', contact:'Contatti', how:'Come funziona', cta:'Simula gratuitamente' },
+    hero: {
+      title: 'Finanzia i tuoi progetti con Finooz',
+      sub: 'Simula il tuo progetto e ottieni una risposta di principio immediata. Senza impegno, 100% online.',
+      startSim: 'Inizia la tua simulazione',
+      continue: 'Continua →',
+      rateLabel: 'Tasso indicativo',
+      rateNote: 'Per 10.000 € in 48 mesi · A partire da 220 €/mese',
+      freeSim: 'Simulazione gratuita · Senza impegno',
+      tiles: ['Immobiliare','Auto / Moto','Prestito personale','Ristrutturazione','Viaggio','Altro']
+    },
+    loans: {
+      label: 'Le nostre soluzioni', title: 'Trova il finanziamento giusto',
+      desc: 'Che tu voglia acquistare un immobile, finanziare un veicolo o realizzare un progetto personale, Finooz ti accompagna.',
+      more: 'Scopri di più →',
+      cards: [
+        { title:'Mutuo Immobiliare', desc:'Finanziamento della tua residenza principale, secondaria o investimento locativo.', features:['3,5% TAEG indicativo','Fino a 500.000 €','Durata fino a 30 anni','Tasso fisso o variabile','Rimborso anticipato'] },
+        { title:'Prestito Auto', desc:'Acquista la tua auto nuova o usata con rate mensili adatte al tuo budget.', features:['3,5% TAEG indicativo','Fino a 75.000 €','Veicolo nuovo, usato o elettrico','Risposta entro 24h'] },
+        { title:'Prestito Personale', desc:'Ristrutturazione, viaggi, studi: finanzia liberamente i tuoi progetti, senza giustificativo d\'uso.', features:['3,5% TAEG indicativo','Da 1.000 a 75.000 €','Nessun giustificativo richiesto','Rate mensili modulabili'] }
+      ]
+    },
+    steps: {
+      title: '4 passi verso il tuo prestito',
+      desc: 'Un percorso completamente guidato, dalla simulazione all\'erogazione dei fondi, senza burocrazia inutile.',
+      items: [
+        { n:'01', t:'Simula', d:'Configura il tuo prestito: importo, durata, tipo. Risultato istantaneo.' },
+        { n:'02', t:'Completa', d:'Compila la tua pratica online in meno di 10 minuti.' },
+        { n:'03', t:'Ricevi', d:'Una risposta di principio entro 24 ore. Nessuno spostamento richiesto.' },
+        { n:'04', t:'Goditi', d:'Fondi accreditati sul tuo conto. Gestione online in qualsiasi momento.' }
+      ],
+      guide: 'Vedi la guida completa'
+    },
+    testimonials: {
+      label: 'Testimonianze clienti', title: 'Si fidano di noi',
+      desc: 'Oltre 2.400 recensioni verificate su Trustpilot. Ecco cosa dicono i nostri clienti.',
+      verified: '✓ Verificato'
+    },
+    cta: {
+      title: 'Pronto a realizzare il tuo progetto?',
+      desc: 'La simulazione richiede 2 minuti. Gratuita, senza registrazione, senza impegno.',
+      btn: '⚡ Simula gratuitamente',
+      advisor: 'Parla con un consulente'
+    },
+    faq: { title: 'Domande frequenti' },
+    security: {
+      title: 'La tua sicurezza, la nostra priorità',
+      desc: 'Piattaforma certificata e conforme alle normative europee più severe.',
+      items: [
+        { t:'Crittografia SSL 256 bit', d:'Tutti i tuoi dati sono crittografati con il più alto standard bancario.' },
+        { t:'Conformità GDPR', d:'I tuoi dati personali sono protetti conformemente al regolamento europeo.' },
+        { t:'Autorizzato ACPR', d:'Istituto autorizzato dall\'Autorità di Vigilanza Prudenziale francese.' }
+      ]
+    },
+    footer: {
+      tagline: 'La piattaforma di prestiti online di riferimento in Europa. Trasparenza, rapidità e sicurezza per tutti i tuoi progetti.',
+      rgpd: '🔒 Conforme GDPR · Dati sicuri',
+      products: 'I nostri prodotti', info: 'Informazioni', legal: 'Legale',
+      disclaimer: 'Un prestito è un impegno e deve essere rimborsato. Verifica la tua capacità di rimborso prima di impegnarti. I tassi mostrati sono TAEG indicativi soggetti a variazione.'
+    },
+    form: {
+      firstName:'Nome', lastName:'Cognome', email:'Email', phone:'Telefono',
+      send:'Invia la mia richiesta →', rgpdConsent:'Accetto che i miei dati vengano trattati in conformità con la politica sulla privacy di Finooz.',
+      success: 'Richiesta inviata!', successDesc: 'Un consulente Finooz ti contatterà entro 24 ore lavorative.',
+      backHome: 'Torna alla home', restart: '🔄 Ricomincia'
+    },
+    errors: {
+      required: 'Si prega di compilare tutti i campi obbligatori.',
+      email: 'Si prega di inserire un indirizzo email valido.',
+      consent: 'Si prega di accettare l\'informativa sulla privacy.',
+      minAmount: 'Importo minimo: 500 €',
+      maxAmount: 'Importo massimo: 1.000.000 €',
+      selectType: 'Si prega di selezionare un tipo di finanziamento.'
+    },
+    cookie: {
+      text: '🍪 Utilizziamo i cookie per migliorare la tua esperienza e analizzare il nostro traffico.',
+      accept: 'Accetta ✓', refuse: 'Rifiuta'
+    }
+  },
+
+  es: {
+    lang: 'es', dir: 'ltr',
+    title: 'Finooz — Financiación online rápida y transparente',
+    metaDesc: 'Finooz — Simula tu préstamo online y obtén una respuesta inmediata. Hipoteca, préstamo auto, préstamo personal. Sin compromiso, 100% online.',
+    nav: { home:'Inicio', simulator:'Simulador', mortgage:'Hipoteca', auto:'Préstamo Auto', personal:'Préstamo Personal', partners:'Socios', contact:'Contacto', how:'Cómo funciona', cta:'Simular gratis' },
+    hero: {
+      title: 'Financia tus proyectos con Finooz',
+      sub: 'Simula tu proyecto y obtén una respuesta de principio inmediata. Sin compromiso, 100% online.',
+      startSim: 'Empieza tu simulación',
+      continue: 'Continuar →',
+      rateLabel: 'Tasa indicativa',
+      rateNote: 'Para 10.000 € en 48 meses · Desde 220 €/mes',
+      freeSim: 'Simulación gratuita · Sin compromiso',
+      tiles: ['Inmobiliario','Coche / Moto','Préstamo personal','Reformas','Viaje','Otros']
+    },
+    loans: {
+      label: 'Nuestras soluciones', title: 'Encuentra la financiación adecuada',
+      desc: 'Ya sea que quieras comprar un inmueble, financiar un vehículo o llevar a cabo un proyecto personal, Finooz te acompaña.',
+      more: 'Más información →',
+      cards: [
+        { title:'Hipoteca', desc:'Financiación de tu residencia principal, secundaria o inversión en alquiler.', features:['3,5% TAE indicativa','Hasta 500.000 €','Hasta 30 años','Tipo fijo o variable','Amortización anticipada'] },
+        { title:'Préstamo Auto', desc:'Compra tu coche nuevo o de segunda mano con cuotas mensuales adaptadas a tu presupuesto.', features:['3,5% TAE indicativa','Hasta 75.000 €','Vehículo nuevo, usado o eléctrico','Respuesta en 24h'] },
+        { title:'Préstamo Personal', desc:'Reformas, viajes, estudios: financia libremente tus proyectos, sin justificante de uso.', features:['3,5% TAE indicativa','De 1.000 a 75.000 €','Sin justificante requerido','Cuotas modulables'] }
+      ]
+    },
+    steps: {
+      title: '4 pasos hacia tu préstamo',
+      desc: 'Un recorrido totalmente guiado, desde la simulación hasta la obtención de fondos, sin papeleo innecesario.',
+      items: [
+        { n:'01', t:'Simula', d:'Configura tu préstamo: importe, duración, tipo. Resultado instantáneo.' },
+        { n:'02', t:'Completa', d:'Rellena tu solicitud online en menos de 10 minutos.' },
+        { n:'03', t:'Recibe', d:'Una respuesta de principio en 24h. Sin desplazamientos.' },
+        { n:'04', t:'Disfruta', d:'Fondos transferidos a tu cuenta. Gestión online en cualquier momento.' }
+      ],
+      guide: 'Ver la guía completa'
+    },
+    testimonials: {
+      label: 'Testimonios de clientes', title: 'Confían en nosotros',
+      desc: 'Más de 2.400 reseñas verificadas en Trustpilot. Esto es lo que dicen nuestros clientes.',
+      verified: '✓ Verificado'
+    },
+    cta: {
+      title: '¿Listo para hacer realidad tu proyecto?',
+      desc: 'La simulación tarda 2 minutos. Gratuita, sin registro, sin compromiso.',
+      btn: '⚡ Simular gratis',
+      advisor: 'Hablar con un asesor'
+    },
+    faq: { title: 'Preguntas frecuentes' },
+    security: {
+      title: 'Tu seguridad, nuestra prioridad',
+      desc: 'Plataforma certificada y conforme con las normativas europeas más estrictas.',
+      items: [
+        { t:'Cifrado SSL de 256 bits', d:'Todos tus datos están cifrados con el estándar bancario más alto.' },
+        { t:'Cumplimiento RGPD', d:'Tus datos personales están protegidos conforme al reglamento europeo.' },
+        { t:'Aprobado por ACPR', d:'Entidad aprobada por la Autoridad de Control Prudencial y de Resolución francesa.' }
+      ]
+    },
+    footer: {
+      tagline: 'La plataforma de préstamos online de referencia en Europa. Transparencia, rapidez y seguridad para todos tus proyectos.',
+      rgpd: '🔒 Conforme RGPD · Datos seguros',
+      products: 'Nuestros productos', info: 'Información', legal: 'Legal',
+      disclaimer: 'Un crédito es un compromiso y debe ser reembolsado. Verifica tu capacidad de devolución antes de comprometerte. Las tasas mostradas son TAE indicativas sujetas a variación.'
+    },
+    form: {
+      firstName:'Nombre', lastName:'Apellido', email:'Email', phone:'Teléfono',
+      send:'Enviar mi solicitud →', rgpdConsent:'Acepto que mis datos sean tratados de acuerdo con la política de privacidad de Finooz.',
+      success: '¡Solicitud enviada!', successDesc: 'Un asesor de Finooz te contactará en las próximas 24 horas hábiles.',
+      backHome: 'Volver al inicio', restart: '🔄 Empezar de nuevo'
+    },
+    errors: {
+      required: 'Por favor, rellena todos los campos obligatorios.',
+      email: 'Por favor, introduce una dirección de email válida.',
+      consent: 'Por favor, acepta la política de privacidad.',
+      minAmount: 'Importe mínimo: 500 €',
+      maxAmount: 'Importe máximo: 1.000.000 €',
+      selectType: 'Por favor, selecciona un tipo de financiación.'
+    },
+    cookie: {
+      text: '🍪 Usamos cookies para mejorar tu experiencia y analizar nuestro tráfico.',
+      accept: 'Aceptar ✓', refuse: 'Rechazar'
+    }
+  }
+};
+
+// ─── LANGUAGE ENGINE ───
+var LANGS = ['fr','en','de','fi','sv','pt','it','es'];
+var LANG_LABELS = { fr:'FR', en:'EN', de:'DE', fi:'FI', sv:'SV', pt:'PT', it:'IT', es:'ES' };
+
+function detectLang() {
+  // 1. Query param ?lang=xx
+  var qs = new URLSearchParams(window.location.search);
+  var qLang = qs.get('lang');
+  if (qLang && TRANSLATIONS[qLang]) { localStorage.setItem('finooz-lang', qLang); return qLang; }
+  // 2. URL path /xx/
+  var path = window.location.pathname;
+  for (var i=0; i<LANGS.length; i++) {
+    if (path.indexOf('/'+LANGS[i]+'/') !== -1 || path.indexOf('/'+LANGS[i]) !== -1) return LANGS[i];
+  }
+  // 3. localStorage
+  var stored = localStorage.getItem('finooz-lang');
+  if (stored && TRANSLATIONS[stored]) return stored;
+  // 4. Browser language
+  var browser = (navigator.language || navigator.userLanguage || 'fr').split('-')[0].toLowerCase();
+  return TRANSLATIONS[browser] ? browser : 'fr';
+}
+
+function applyLang(code) {
+  var t = TRANSLATIONS[code];
+  if (!t) return;
+  localStorage.setItem('finooz-lang', code);
+  document.documentElement.lang = code;
+  document.documentElement.dir = t.dir || 'ltr';
+
+  // Title & meta
+  document.title = t.title;
+  var md = document.getElementById('meta-desc');
+  if (md) md.setAttribute('content', t.metaDesc);
+
+  // Nav links
+  var navMap = {
+    '[data-i18n="nav.home"]': t.nav.home,
+    '[data-i18n="nav.simulator"]': t.nav.simulator,
+    '[data-i18n="nav.mortgage"]': t.nav.mortgage,
+    '[data-i18n="nav.auto"]': t.nav.auto,
+    '[data-i18n="nav.personal"]': t.nav.personal,
+    '[data-i18n="nav.partners"]': t.nav.partners,
+    '[data-i18n="nav.contact"]': t.nav.contact,
+    '[data-i18n="nav.how"]': t.nav.how,
+    '[data-i18n="nav.cta"]': t.nav.cta
+  };
+  for (var sel in navMap) {
+    document.querySelectorAll(sel).forEach(function(el) { el.textContent = navMap[sel]; });
+  }
+
+  // Language switcher
+  buildSwitcher(code);
+
+  // Cookie banner
+  var cb = document.getElementById('cookie-text');
+  if (cb) cb.textContent = t.cookie.text;
+  var ca = document.getElementById('cookie-accept');
+  if (ca) ca.textContent = t.cookie.accept;
+  var cr = document.getElementById('cookie-refuse');
+  if (cr) cr.textContent = t.cookie.refuse;
+}
+
+function buildSwitcher(active) {
+  var html = '';
+  LANGS.forEach(function(l, i) {
+    var cls = l === active ? 'active' : '';
+    html += '<a href="javascript:void(0)" class="'+cls+'" onclick="switchLang(\''+l+'\')" aria-label="'+l+'">'+LANG_LABELS[l]+'</a>';
+    if (i < LANGS.length-1) html += '<span>|</span>';
+  });
+  var s = document.getElementById('langSwitcher');
+  if (s) s.innerHTML = html;
+  var m = document.getElementById('mobileLang');
+  if (m) {
+    var mhtml = '';
+    LANGS.forEach(function(l) {
+      var cls = l === active ? 'active' : '';
+      mhtml += '<a href="javascript:void(0)" class="'+cls+'" onclick="switchLang(\''+l+'\');toggleMenu()">'+LANG_LABELS[l]+'</a>';
+    });
+    m.innerHTML = mhtml;
+  }
+}
+
+function switchLang(code) {
+  applyLang(code);
+  var newPath = window.location.pathname.replace(/^\/(fr|en|de|fi|sv|pt|it|es)(\/|$)/, '/'+code+'/');
+  if (newPath === window.location.pathname) newPath = '/'+code+'/';
+  history.pushState({ lang: code }, '', newPath);
+}
+
+// Init on load
+(function() {
+  var lang = detectLang();
+  applyLang(lang);
+})();
+
+window.addEventListener('popstate', function(e) {
+  if (e.state && e.state.lang) applyLang(e.state.lang);
+});
+</script>
 
 </body>
 </html>

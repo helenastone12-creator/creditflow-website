@@ -2723,6 +2723,18 @@ var TRANSLATIONS = {
         h1:'Comment ça marche ?', hero:'De la simulation à l\'obtention de vos fonds — un processus simple, transparent et 100 % digital.',
         steps:[{t:'Simulez votre prêt',d:'Paramétrez votre prêt selon vos besoins : type de financement, montant souhaité et durée de remboursement. Le résultat est instantané.',items:['Simulation gratuite et illimitée','Taux indicatif affiché transparentement','Aucun engagement à cette étape']},{t:'Constituez votre dossier',d:'Si la simulation vous convient, créez votre espace personnel sécurisé et renseignez vos informations.',items:['Pièce d\'identité valide','3 derniers bulletins de salaire','3 derniers relevés bancaires','Justificatif de domicile de moins de 3 mois']},{t:'Recevez votre réponse de principe',d:'Notre équipe analyse votre dossier et vous envoie une réponse de principe sous 24 heures. En cas d\'accord, une offre de prêt officielle vous est transmise.',items:['Analyse automatisée et humaine','Offre de prêt conforme à la directive européenne','Délai légal de réflexion respecté']},{t:'Signez et débloquez vos fonds',d:'Après votre délai de réflexion, signez électroniquement votre contrat. Les fonds sont virés sous 3 à 5 jours ouvrés.',items:['Signature électronique sécurisée eIDAS','Virement bancaire sous 3 à 5 jours ouvrés','Espace client pour gérer vos remboursements']},{t:'Gérez votre prêt en ligne',d:'Suivez vos remboursements, consultez votre tableau d\'amortissement et effectuez des remboursements anticipés depuis votre espace client.',items:['Tableau d\'amortissement interactif','Remboursement anticipé possible à tout moment','Service client disponible 6j/7']}],
         ctaTitle:'Prêt à commencer ?', ctaDesc:'La simulation prend moins de 2 minutes. Gratuit, sans inscription, sans engagement.', ctaBtn:'⚡ Démarrer ma simulation'
+      },
+      simulator: {
+        h1: 'Votre crédit instantané', hero: '3 étapes simples pour obtenir votre simulation personnalisée.',
+        stepTitle: 'Votre projet', stepSubtitle: 'Sélectionnez le type de financement',
+        choices: [{t:'Immobilier',d:'Résidence principale, secondaire ou investissement'},{t:'Auto / Moto',d:'Véhicule neuf, occasion ou électrique'},{t:'Prêt personnel',d:'Travaux, voyage, études, équipements...'},{t:'Travaux',d:'Rénovation, extension, aménagement'},{t:'Voyage',d:'Vacances, voyage de noces, aventure'},{t:'Autres',d:'Études, mariage, équipements, santé...'}],
+        continueBtn: 'CONTINUER (SANS ENGAGEMENT) →', backBtn: '← Retour',
+        amountLabel: 'Montant souhaité', monthlyTitle: 'Je souhaite une mensualité de :',
+        monthlyDesc: 'Pour un emprunt de', recapTitle: 'Récapitulatif de votre simulation',
+        capital: '(Capital)', interets: '(Intérêts)', total: '(Total dû)',
+        rowMensualites: 'Mensualités :', rowTaeg: 'TAEG fixe :', rowDuree: 'Durée de remboursement :',
+        requestBtn: 'DEMANDEZ SANS ENGAGEMENT →', formTitle: 'Faites votre demande',
+        formDesc: 'Renseignez vos coordonnées, un conseiller vous contacte sous 24h.'
       }
     }
   },
@@ -2853,6 +2865,18 @@ var TRANSLATIONS = {
         h1:'How does it work?', hero:'From simulation to receiving your funds — a simple, transparent and 100% digital process.',
         steps:[{t:'Simulate your loan',d:'Configure your loan: type of financing, desired amount and repayment period. The result is instant.',items:['Free and unlimited simulation','Indicative rate shown transparently','No commitment at this stage']},{t:'Build your application',d:'If the simulation suits you, create your secure personal space and fill in your information. Upload your supporting documents online.',items:['Valid ID document','Last 3 pay slips or proof of income','Last 3 bank statements','Proof of address less than 3 months old']},{t:'Receive your decision in principle',d:'Our team reviews your application and sends you a decision in principle within 24 hours. If approved, an official loan offer is sent electronically.',items:['Automated and human review','Loan offer compliant with European directive','14-day legal reflection period']},{t:'Sign and unlock your funds',d:'After your reflection period, sign your contract electronically. Funds are transferred within 3 to 5 working days.',items:['Secure eIDAS electronic signature','Bank transfer within 3 to 5 working days','Personal space to manage repayments']},{t:'Manage your loan online',d:'Track your repayments, view your amortisation schedule and make early repayments from your secure personal space.',items:['Interactive amortisation schedule','Early repayment possible at any time','Customer service available 6 days/7']}],
         ctaTitle:'Ready to get started?', ctaDesc:'The simulation takes less than 2 minutes. Free, no sign-up, no commitment.', ctaBtn:'⚡ Start my simulation'
+      },
+      simulator: {
+        h1: 'Your instant credit', hero: '3 simple steps to get your personalised simulation.',
+        stepTitle: 'Your project', stepSubtitle: 'Select the type of financing',
+        choices: [{t:'Mortgage',d:'Primary residence, holiday home or investment'},{t:'Car / Motorcycle',d:'New, used or electric vehicle'},{t:'Personal loan',d:'Home improvements, travel, studies, equipment...'},{t:'Home improvements',d:'Renovation, extension, fittings'},{t:'Travel',d:'Holidays, honeymoon, adventure'},{t:'Other',d:'Studies, wedding, equipment, health...'}],
+        continueBtn: 'CONTINUE (NO COMMITMENT) →', backBtn: '← Back',
+        amountLabel: 'Desired amount', monthlyTitle: 'I want a monthly payment of:',
+        monthlyDesc: 'For a loan of', recapTitle: 'Your simulation summary',
+        capital: '(Capital)', interets: '(Interest)', total: '(Total)',
+        rowMensualites: 'Monthly payments:', rowTaeg: 'Fixed APR:', rowDuree: 'Repayment period:',
+        requestBtn: 'APPLY WITH NO COMMITMENT →', formTitle: 'Make your application',
+        formDesc: 'Enter your details, an advisor will contact you within 24h.'
       }
     }
   },
@@ -2983,6 +3007,18 @@ var TRANSLATIONS = {
         h1:'Wie funktioniert es?', hero:'Von der Simulation bis zur Auszahlung — ein einfacher, transparenter und 100 % digitaler Prozess.',
         steps:[{t:'Simulieren Sie Ihren Kredit',d:'Konfigurieren Sie Ihren Kredit: Finanzierungsart, Wunschbetrag und Laufzeit. Das Ergebnis ist sofort.',items:['Kostenlose und unbegrenzte Simulation','Richtzins transparent angezeigt','Keine Verpflichtung in dieser Phase']},{t:'Stellen Sie Ihren Antrag zusammen',d:'Wenn die Simulation passt, erstellen Sie Ihren sicheren persönlichen Bereich und geben Ihre Daten ein.',items:['Gültiger Ausweis','Letzte 3 Gehaltsabrechnungen','Letzte 3 Kontoauszüge','Wohnsitznachweis jünger als 3 Monate']},{t:'Erhalten Sie Ihre Vorabentscheidung',d:'Unser Team analysiert Ihren Antrag und sendet Ihnen innerhalb von 24 Stunden eine Grundsatzentscheidung.',items:['Automatisierte und menschliche Analyse','Kreditangebot gemäß europäischer Richtlinie','Gesetzliche Bedenkzeit eingehalten']},{t:'Unterzeichnen und Mittel freischalten',d:'Nach Ihrer Bedenkzeit unterzeichnen Sie Ihren Vertrag elektronisch. Die Mittel werden innerhalb von 3 bis 5 Werktagen überwiesen.',items:['Sichere eIDAS-Elektronikunterschrift','Banküberweisung innerhalb 3–5 Werktagen','Kundenbereich zur Verwaltung Ihrer Rückzahlungen']},{t:'Verwalten Sie Ihren Kredit online',d:'Verfolgen Sie Ihre Rückzahlungen und kontaktieren Sie Ihren Berater aus Ihrem sicheren Kundenbereich.',items:['Interaktiver Tilgungsplan','Vorzeitige Rückzahlung jederzeit möglich','Kundendienst 6 Tage/7 verfügbar']}],
         ctaTitle:'Bereit anzufangen?', ctaDesc:'Die Simulation dauert weniger als 2 Minuten. Kostenlos, ohne Registrierung, ohne Verpflichtung.', ctaBtn:'⚡ Meine Simulation starten'
+      },
+      simulator: {
+        h1: 'Ihr Sofortkredit', hero: '3 einfache Schritte für Ihre persönliche Simulation.',
+        stepTitle: 'Ihr Vorhaben', stepSubtitle: 'Wählen Sie die Art der Finanzierung',
+        choices: [{t:'Immobilien',d:'Erstwohnsitz, Ferienhaus oder Investition'},{t:'Auto / Motorrad',d:'Neuwagen, Gebrauchtwagen oder Elektrofahrzeug'},{t:'Privatkredit',d:'Renovierung, Reise, Studium, Ausstattung...'},{t:'Renovierung',d:'Umbau, Erweiterung, Einrichtung'},{t:'Reise',d:'Urlaub, Hochzeitsreise, Abenteuer'},{t:'Sonstiges',d:'Studium, Hochzeit, Ausstattung, Gesundheit...'}],
+        continueBtn: 'WEITER (UNVERBINDLICH) →', backBtn: '← Zurück',
+        amountLabel: 'Gewünschter Betrag', monthlyTitle: 'Ich möchte eine monatliche Rate von:',
+        monthlyDesc: 'Für einen Kredit von', recapTitle: 'Übersicht Ihrer Simulation',
+        capital: '(Kapital)', interets: '(Zinsen)', total: '(Gesamt)',
+        rowMensualites: 'Monatsraten:', rowTaeg: 'Effektivzins:', rowDuree: 'Laufzeit:',
+        requestBtn: 'UNVERBINDLICH ANFRAGEN →', formTitle: 'Stellen Sie Ihren Antrag',
+        formDesc: 'Geben Sie Ihre Daten ein, ein Berater meldet sich innerhalb von 24h bei Ihnen.'
       }
     }
   },
@@ -3113,6 +3149,18 @@ var TRANSLATIONS = {
         h1:'Miten se toimii?', hero:'Simulaatiosta varojen saamiseen — yksinkertainen, läpinäkyvä ja 100 % digitaalinen prosessi.',
         steps:[{t:'Simuloi lainasi',d:'Määritä lainasi: rahoitustyyppi, haluamasi summa ja takaisinmaksuaika. Tulos on välitön.',items:['Ilmainen ja rajoittamaton simulaatio','Viitekorko näytetään läpinäkyvästi','Ei sitoumusta tässä vaiheessa']},{t:'Koosta hakemuksesi',d:'Jos simulaatio sopii, luo suojattu henkilökohtainen tilasi ja täytä tietosi.',items:['Voimassa oleva henkilöllisyystodistus','3 viimeistä palkkatodistusta','3 viimeistä tiliottetta','Alle 3 kuukauden vanha asuintodistus']},{t:'Vastaanota periaatepäätöksesi',d:'Tiimimme analysoi hakemuksesi ja lähettää periaatepäätöksen 24 tunnissa. Hyväksynnän jälkeen virallinen lainatarjous toimitetaan sähköisesti.',items:['Automatisoitu ja inhimillinen analyysi','Eurooppalaisen direktiivin mukainen lainatarjous','Lakisääteinen harkinta-aika noudatettu']},{t:'Allekirjoita ja avaa varasi',d:'Harkinta-ajan jälkeen allekirjoita sopimuksesi sähköisesti. Varat siirretään tilillesi 3–5 arkipäivässä.',items:['Suojattu eIDAS-sähköinen allekirjoitus','Pankkisiirto 3–5 arkipäivässä','Asiakastila takaisinmaksujesi hallintaan']},{t:'Hallinnoi lainaasi verkossa',d:'Seuraa takaisinmaksujasi ja ota yhteyttä neuvonantajaasi suojatusta asiakastilastasi.',items:['Interaktiivinen lyhennystaulukko','Ennenaikainen takaisinmaksu mahdollista milloin tahansa','Asiakaspalvelu käytettävissä 6 pv/7']}],
         ctaTitle:'Valmis aloittamaan?', ctaDesc:'Simulaatio kestää alle 2 minuuttia. Ilmainen, ei rekisteröintiä, ei sitoumuksia.', ctaBtn:'⚡ Aloita simulaationi'
+      },
+      simulator: {
+        h1: 'Välitön luottosi', hero: '3 yksinkertaista vaihetta henkilökohtaisen simulaation saamiseksi.',
+        stepTitle: 'Projektisi', stepSubtitle: 'Valitse rahoitustyyppi',
+        choices: [{t:'Kiinteistö',d:'Ensisijainen asuinpaikka, loma-asunto tai sijoitus'},{t:'Auto / Moottoripyörä',d:'Uusi, käytetty tai sähköajoneuvo'},{t:'Henkilökohtainen laina',d:'Remontti, matka, opinnot, varusteet...'},{t:'Remontti',d:'Kunnostus, laajennus, sisustus'},{t:'Matka',d:'Loma, häämatka, seikkailu'},{t:'Muut',d:'Opinnot, häät, varusteet, terveys...'}],
+        continueBtn: 'JATKA (SITOUMUSVAPAASTI) →', backBtn: '← Takaisin',
+        amountLabel: 'Haluttu summa', monthlyTitle: 'Haluan kuukausierän:',
+        monthlyDesc: 'Lainalle', recapTitle: 'Simulaatiosi yhteenveto',
+        capital: '(Pääoma)', interets: '(Korot)', total: '(Yhteensä)',
+        rowMensualites: 'Kuukausierät:', rowTaeg: 'Kiinteä korko:', rowDuree: 'Takaisinmaksuaika:',
+        requestBtn: 'PYYDÄ SITOUMUSVAPAASTI →', formTitle: 'Tee hakemuksesi',
+        formDesc: 'Syötä tietosi, neuvonantaja ottaa sinuun yhteyttä 24h kuluessa.'
       }
     }
   },
@@ -3243,6 +3291,18 @@ var TRANSLATIONS = {
         h1:'Hur fungerar det?', hero:'Från simulering till att ta emot dina medel — en enkel, transparent och 100 % digital process.',
         steps:[{t:'Simulera ditt lån',d:'Konfigurera ditt lån: finansieringstyp, önskat belopp och återbetalningstid. Resultatet är omedelbart.',items:['Gratis och obegränsad simulering','Indikativ ränta visas transparent','Inget åtagande i detta skede']},{t:'Sammanställ din ansökan',d:'Om simuleringen passar dig, skapa ditt säkra personliga utrymme och fyll i dina uppgifter.',items:['Giltigt ID-dokument','3 senaste lönespecifikationerna','3 senaste kontoutdragen','Hemvistbevis yngre än 3 månader']},{t:'Ta emot ditt principbeslut',d:'Vårt team granskar din ansökan och skickar ett principbeslut inom 24 timmar.',items:['Automatiserad och mänsklig analys','Låneerbjudande i enlighet med EU-direktivet','Lagstadgad betänketid respekterad']},{t:'Signera och frigör dina medel',d:'Efter din betänketid signerar du ditt avtal elektroniskt. Medlen överförs inom 3 till 5 arbetsdagar.',items:['Säker eIDAS elektronisk signatur','Banköverföring inom 3–5 arbetsdagar','Kundkonto för hantering av återbetalningar']},{t:'Hantera ditt lån online',d:'Följ dina återbetalningar och kontakta din rådgivare från ditt säkra kundkonto.',items:['Interaktiv amorteringsplan','Förtidslösen möjlig när som helst','Kundservice tillgänglig 6 dagar/7']}],
         ctaTitle:'Redo att börja?', ctaDesc:'Simuleringen tar mindre än 2 minuter. Gratis, ingen registrering, inget åtagande.', ctaBtn:'⚡ Starta min simulering'
+      },
+      simulator: {
+        h1: 'Ditt direktlån', hero: '3 enkla steg för att få din personliga simulering.',
+        stepTitle: 'Ditt projekt', stepSubtitle: 'Välj typ av finansiering',
+        choices: [{t:'Bostad',d:'Permanentbostad, fritidshus eller investering'},{t:'Bil / Motorcykel',d:'Ny, begagnad eller elbil'},{t:'Privatlån',d:'Renovering, resa, studier, utrustning...'},{t:'Renovering',d:'Ombyggnad, tillbyggnad, inredning'},{t:'Resa',d:'Semester, bröllopsresa, äventyr'},{t:'Övrigt',d:'Studier, bröllop, utrustning, hälsa...'}],
+        continueBtn: 'FORTSÄTT (UTAN ÅTAGANDE) →', backBtn: '← Tillbaka',
+        amountLabel: 'Önskat belopp', monthlyTitle: 'Jag vill ha en månadsbetalning på:',
+        monthlyDesc: 'För ett lån på', recapTitle: 'Sammanfattning av din simulering',
+        capital: '(Kapital)', interets: '(Ränta)', total: '(Totalt)',
+        rowMensualites: 'Månadsbetalningar:', rowTaeg: 'Fast ränta:', rowDuree: 'Återbetalningstid:',
+        requestBtn: 'ANSÖK UTAN ÅTAGANDE →', formTitle: 'Gör din ansökan',
+        formDesc: 'Ange dina uppgifter, en rådgivare kontaktar dig inom 24h.'
       }
     }
   },
@@ -3373,6 +3433,18 @@ var TRANSLATIONS = {
         h1:'Como funciona?', hero:'Da simulação à obtenção dos seus fundos — um processo simples, transparente e 100 % digital.',
         steps:[{t:'Simule o seu empréstimo',d:'Configure o seu empréstimo: tipo de financiamento, montante desejado e prazo de reembolso. O resultado é instantâneo.',items:['Simulação gratuita e ilimitada','Taxa indicativa apresentada de forma transparente','Sem compromisso nesta fase']},{t:'Constitua o seu processo',d:'Se a simulação lhe convém, crie a sua área pessoal segura e preencha as suas informações.',items:['Documento de identidade válido','3 últimos recibos de vencimento','3 últimos extratos bancários','Comprovativo de morada com menos de 3 meses']},{t:'Receba a sua resposta de princípio',d:'A nossa equipa analisa o seu processo e envia uma resposta de princípio em 24 horas.',items:['Análise automatizada e humana','Oferta de crédito conforme à diretiva europeia','Prazo legal de reflexão respeitado']},{t:'Assine e desbloqueie os seus fundos',d:'Após o seu prazo de reflexão, assine eletronicamente o seu contrato. Os fundos são transferidos em 3 a 5 dias úteis.',items:['Assinatura eletrónica segura eIDAS','Transferência bancária em 3 a 5 dias úteis','Área de cliente para gerir os seus reembolsos']},{t:'Gira o seu empréstimo online',d:'Acompanhe os seus reembolsos e contacte o seu consultor a partir da sua área de cliente segura.',items:['Quadro de amortização interativo','Reembolso antecipado possível a qualquer momento','Serviço de apoio ao cliente disponível 6 dias/7']}],
         ctaTitle:'Pronto para começar?', ctaDesc:'A simulação demora menos de 2 minutos. Gratuita, sem registo, sem compromisso.', ctaBtn:'⚡ Iniciar a minha simulação'
+      },
+      simulator: {
+        h1: 'O seu crédito imediato', hero: '3 passos simples para obter a sua simulação personalizada.',
+        stepTitle: 'O seu projeto', stepSubtitle: 'Selecione o tipo de financiamento',
+        choices: [{t:'Imobiliário',d:'Residência principal, secundária ou investimento'},{t:'Auto / Moto',d:'Veículo novo, usado ou elétrico'},{t:'Crédito pessoal',d:'Obras, viagem, estudos, equipamentos...'},{t:'Obras',d:'Renovação, extensão, arranjo'},{t:'Viagem',d:'Férias, lua de mel, aventura'},{t:'Outros',d:'Estudos, casamento, equipamentos, saúde...'}],
+        continueBtn: 'CONTINUAR (SEM COMPROMISSO) →', backBtn: '← Voltar',
+        amountLabel: 'Montante pretendido', monthlyTitle: 'Pretendo uma prestação mensal de:',
+        monthlyDesc: 'Para um empréstimo de', recapTitle: 'Resumo da sua simulação',
+        capital: '(Capital)', interets: '(Juros)', total: '(Total)',
+        rowMensualites: 'Prestações mensais:', rowTaeg: 'TAN fixa:', rowDuree: 'Prazo de reembolso:',
+        requestBtn: 'PEDIR SEM COMPROMISSO →', formTitle: 'Faça o seu pedido',
+        formDesc: 'Preencha os seus dados, um consultor entrará em contacto em 24h.'
       }
     }
   },
@@ -3503,6 +3575,18 @@ var TRANSLATIONS = {
         h1:'Come funziona?', hero:'Dalla simulazione all\'ottenimento dei fondi — un processo semplice, trasparente e 100 % digitale.',
         steps:[{t:'Simula il tuo prestito',d:'Configura il tuo prestito: tipo di finanziamento, importo desiderato e durata di rimborso. Il risultato è istantaneo.',items:['Simulazione gratuita e illimitata','Tasso indicativo presentato in modo trasparente','Senza impegno in questa fase']},{t:'Costituisci la tua pratica',d:'Se la simulazione ti convince, crea la tua area personale sicura e compila le tue informazioni.',items:['Documento d\'identità valido','Ultime 3 buste paga','Ultimi 3 estratti conto','Prova di residenza di meno di 3 mesi']},{t:'Ricevi la tua risposta di principio',d:'Il nostro team analizza la tua pratica e invia una risposta di principio entro 24 ore.',items:['Analisi automatizzata e umana','Offerta di credito conforme alla direttiva europea','Periodo legale di riflessione rispettato']},{t:'Firma e sblocca i tuoi fondi',d:'Dopo il tuo periodo di riflessione, firma elettronicamente il tuo contratto. I fondi vengono trasferiti in 3-5 giorni lavorativi.',items:['Firma elettronica sicura eIDAS','Bonifico bancario in 3-5 giorni lavorativi','Area clienti per gestire i rimborsi']},{t:'Gestisci il tuo prestito online',d:'Segui i tuoi rimborsi e contatta il tuo consulente dalla tua area clienti sicura.',items:['Piano di ammortamento interattivo','Rimborso anticipato possibile in qualsiasi momento','Servizio clienti disponibile 6 giorni/7']}],
         ctaTitle:'Pronti per iniziare?', ctaDesc:'La simulazione richiede meno di 2 minuti. Gratuita, senza registrazione, senza impegno.', ctaBtn:'⚡ Avvia la mia simulazione'
+      },
+      simulator: {
+        h1: 'Il vostro credito istantaneo', hero: '3 semplici passi per ottenere la vostra simulazione personalizzata.',
+        stepTitle: 'Il vostro progetto', stepSubtitle: 'Selezionate il tipo di finanziamento',
+        choices: [{t:'Immobiliare',d:'Residenza principale, secondaria o investimento'},{t:'Auto / Moto',d:'Veicolo nuovo, usato o elettrico'},{t:'Prestito personale',d:'Lavori, viaggio, studi, attrezzatura...'},{t:'Lavori',d:'Ristrutturazione, ampliamento, arredamento'},{t:'Viaggio',d:'Vacanze, viaggio di nozze, avventura'},{t:'Altro',d:'Studi, matrimonio, attrezzatura, salute...'}],
+        continueBtn: 'CONTINUA (SENZA IMPEGNO) →', backBtn: '← Indietro',
+        amountLabel: 'Importo desiderato', monthlyTitle: 'Desidero una rata mensile di:',
+        monthlyDesc: 'Per un prestito di', recapTitle: 'Riepilogo della vostra simulazione',
+        capital: '(Capitale)', interets: '(Interessi)', total: '(Totale)',
+        rowMensualites: 'Rate mensili:', rowTaeg: 'TAEG fisso:', rowDuree: 'Durata del rimborso:',
+        requestBtn: 'RICHIEDI SENZA IMPEGNO →', formTitle: 'Fate la vostra richiesta',
+        formDesc: 'Inserite i vostri dati, un consulente vi contatterà entro 24h.'
       }
     }
   },
@@ -3633,6 +3717,18 @@ var TRANSLATIONS = {
         h1:'¿Cómo funciona?', hero:'De la simulación a la obtención de sus fondos — un proceso sencillo, transparente y 100 % digital.',
         steps:[{t:'Simule su préstamo',d:'Configure su préstamo: tipo de financiación, importe deseado y plazo de amortización. El resultado es instantáneo.',items:['Simulación gratuita e ilimitada','Tasa indicativa presentada de forma transparente','Sin compromiso en esta fase']},{t:'Prepare su expediente',d:'Si la simulación le convence, cree su área personal segura y cumplimente su información.',items:['Documento de identidad válido','3 últimas nóminas','3 últimos extractos bancarios','Justificante de domicilio de menos de 3 meses']},{t:'Reciba su respuesta de principio',d:'Nuestro equipo analiza su expediente y envía una respuesta de principio en 24 horas.',items:['Análisis automatizado y humano','Oferta de crédito conforme a la directiva europea','Plazo legal de reflexión respetado']},{t:'Firme y desbloquee sus fondos',d:'Tras su plazo de reflexión, firme electrónicamente su contrato. Los fondos se transfieren en 3-5 días hábiles.',items:['Firma electrónica segura eIDAS','Transferencia bancaria en 3-5 días hábiles','Área de cliente para gestionar sus reembolsos']},{t:'Gestione su préstamo online',d:'Siga sus amortizaciones y contacte con su asesor desde su área de cliente segura.',items:['Cuadro de amortización interactivo','Amortización anticipada posible en cualquier momento','Servicio de atención al cliente disponible 6 días/7']}],
         ctaTitle:'¿Listo para empezar?', ctaDesc:'La simulación dura menos de 2 minutos. Gratuita, sin registro, sin compromiso.', ctaBtn:'⚡ Iniciar mi simulación'
+      },
+      simulator: {
+        h1: 'Su crédito instantáneo', hero: '3 pasos sencillos para obtener su simulación personalizada.',
+        stepTitle: 'Su proyecto', stepSubtitle: 'Seleccione el tipo de financiación',
+        choices: [{t:'Inmobiliario',d:'Residencia principal, secundaria o inversión'},{t:'Auto / Moto',d:'Vehículo nuevo, de segunda mano o eléctrico'},{t:'Préstamo personal',d:'Reformas, viaje, estudios, equipamiento...'},{t:'Reformas',d:'Renovación, ampliación, acondicionamiento'},{t:'Viaje',d:'Vacaciones, luna de miel, aventura'},{t:'Otros',d:'Estudios, boda, equipamiento, salud...'}],
+        continueBtn: 'CONTINUAR (SIN COMPROMISO) →', backBtn: '← Atrás',
+        amountLabel: 'Importe deseado', monthlyTitle: 'Quiero una cuota mensual de:',
+        monthlyDesc: 'Para un préstamo de', recapTitle: 'Resumen de su simulación',
+        capital: '(Capital)', interets: '(Intereses)', total: '(Total)',
+        rowMensualites: 'Cuotas mensuales:', rowTaeg: 'TAE fija:', rowDuree: 'Plazo de amortización:',
+        requestBtn: 'SOLICITAR SIN COMPROMISO →', formTitle: 'Haga su solicitud',
+        formDesc: 'Introduzca sus datos, un asesor le contactará en 24h.'
       }
     }
   }
@@ -3857,6 +3953,65 @@ function applyPageTranslations(t) {
       });
     }
   }
+  var ps = document.getElementById('page-simulateur');
+  if (ps && p.simulator) {
+    var s = p.simulator;
+    function ps_qt(sel, txt) { var e=ps.querySelector(sel); if(e) e.textContent=txt; }
+    ps_qt('.page-hero h1', s.h1);
+    ps_qt('.page-hero p', s.hero);
+    var stitle = document.getElementById('step-title');
+    if (stitle) stitle.textContent = s.stepTitle;
+    var ssub = document.getElementById('step-subtitle');
+    if (ssub) ssub.textContent = s.stepSubtitle;
+    if (s.choices) {
+      ps.querySelectorAll('#step-1 .sim-choice').forEach(function(ch, i) {
+        if (!s.choices[i]) return;
+        var st = ch.querySelector('strong'); var sp = ch.querySelector('p');
+        if (st) st.textContent = s.choices[i].t;
+        if (sp) sp.textContent = s.choices[i].d;
+      });
+    }
+    var bs1 = document.getElementById('btn-step1');
+    if (bs1) bs1.textContent = s.continueBtn;
+    var bs2 = document.getElementById('btn-step2');
+    if (bs2) bs2.textContent = s.continueBtn;
+    var bs3 = document.getElementById('btn-step3');
+    if (bs3) bs3.textContent = s.requestBtn;
+    ps_qt('#step-2 label', s.amountLabel);
+    ps.querySelectorAll('#step-2 button:last-of-type, #step-3 button:last-of-type').forEach(function(b) { b.textContent = s.backBtn; });
+    ps_qt('#step-3 h3', s.monthlyTitle);
+    var st3p = ps.querySelector('#step-3 > p');
+    if (st3p) { var tn = st3p.firstChild; if (tn && tn.nodeType === 3) tn.nodeValue = s.monthlyDesc + ' '; }
+    var rTitle = ps.querySelector('#recap-sim p');
+    if (rTitle) rTitle.textContent = s.recapTitle;
+    var capLabels = ps.querySelectorAll('#recap-sim .flex-wrap > div:nth-child(1) > div:nth-child(2), #recap-sim .flex-wrap > div:nth-child(3) > div:nth-child(2), #recap-sim .flex-wrap > div:nth-child(5) > div:nth-child(2)');
+    var labelTexts = [s.capital, s.interets, s.total];
+    capLabels.forEach(function(el, i) { if (labelTexts[i]) el.textContent = labelTexts[i]; });
+    var rowSpans = ps.querySelectorAll('#recap-sim > div:last-child > div > span:first-child');
+    var rowLabels = [s.rowMensualites, s.rowTaeg, s.rowDuree];
+    rowSpans.forEach(function(el, i) { if (rowLabels[i]) el.textContent = rowLabels[i]; });
+    var fh3 = ps.querySelector('#step-result h3');
+    if (fh3) fh3.textContent = s.formTitle;
+    var fdesc = ps.querySelector('#step-result > p');
+    if (fdesc) fdesc.textContent = s.formDesc;
+    var fsubmit = document.getElementById('btn-lead-submit');
+    if (fsubmit) fsubmit.textContent = t.form.send;
+    ps.querySelectorAll('#sim-lead-form label:not([for="lead-rgpd"])').forEach(function(lbl, i) {
+      var labels = [t.form.firstName+' *', t.form.lastName+' *', t.form.email+' *', t.form.phone+' *'];
+      if (labels[i]) lbl.textContent = labels[i];
+    });
+    var rgpdLbl = ps.querySelector('label[for="lead-rgpd"]');
+    if (rgpdLbl) { var sp2 = rgpdLbl.querySelector('span'); if (sp2) { var tn2=rgpdLbl.firstChild; if(tn2&&tn2.nodeType===3) tn2.nodeValue=t.form.rgpdConsent.split('politique')[0]||t.form.rgpdConsent; } }
+    var resetBtn = ps.querySelector('#sim-lead-form button:last-of-type');
+    if (resetBtn) resetBtn.textContent = t.form.restart;
+    var succH3 = ps.querySelector('#sim-lead-success h3');
+    if (succH3) succH3.textContent = t.form.success;
+    var succP = ps.querySelector('#sim-lead-success p');
+    if (succP) succP.textContent = t.form.successDesc;
+    var backHomeBtn = ps.querySelector('#sim-lead-success button');
+    if (backHomeBtn) backHomeBtn.textContent = t.form.backHome;
+  }
+
   applyProductPage('page-immobilier', p.immobilier);
   applyProductPage('page-auto', p.auto);
   applyProductPage('page-personnel', p.personnel);

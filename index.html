@@ -4175,8 +4175,7 @@ function applyLang(code) {
   document.querySelectorAll('.testi-badge').forEach(function(el){ el.textContent = t.testimonials.verified; });
   var _testiTypes = [t.nav.mortgage, t.nav.auto, t.nav.personal, t.nav.mortgage, t.nav.auto, t.testimonials.travaux || 'Travaux'];
   document.querySelectorAll('.testi-info').forEach(function(info, i) {
-    var tn = info.firstChild;
-    if (tn && tn.nodeType === 3) tn.nodeValue = (_testiTypes[i] || '') + ' ';
+    info.innerHTML = (_testiTypes[i] || '') + ' <span class="testi-badge">' + t.testimonials.verified + '</span>';
   });
 
   // Trust bar (9 items × 2 sets, DOM manipulation)

@@ -2329,6 +2329,7 @@ var stepTitles = {
   2: { title: 'Montant souhaité', subtitle: 'Saisissez le montant de votre crédit' },
   3: { title: 'Durée de remboursement', subtitle: 'Choisissez la durée souhaitée' }
 };
+var simLang = { durationFor:'sur', durationMonths:'mois', perMonth:'/ mois', formStepTitle:'Votre demande', formStepSubtitle:'Plus qu\'une étape pour votre offre' };
 
 function selectChoice(el, type, value) {
   var parent = el.parentElement;
@@ -2374,8 +2375,8 @@ function showResultat() {
   if (res) res.style.display = 'block';
   var t = document.getElementById('step-title');
   var s = document.getElementById('step-subtitle');
-  if (t) t.textContent = 'Votre demande';
-  if (s) s.textContent = 'Plus qu\'une étape pour votre offre';
+  if (t) t.textContent = simLang.formStepTitle;
+  if (s) s.textContent = simLang.formStepSubtitle;
   // Récap compact
   var recap = document.getElementById('res-recap');
   if (recap) {
@@ -2526,7 +2527,7 @@ function buildStep3() {
     var m = calcMensualite(P, n);
     var opt = document.createElement('option');
     opt.value = n;
-    opt.textContent = m.toLocaleString('fr-FR', {minimumFractionDigits:2,maximumFractionDigits:2}) + ' € sur ' + n + ' mois';
+    opt.textContent = m.toLocaleString('fr-FR', {minimumFractionDigits:2,maximumFractionDigits:2}) + ' € ' + simLang.durationFor + ' ' + n + ' ' + simLang.durationMonths;
     sel.appendChild(opt);
   });
   onMensualiteChange();
@@ -2555,14 +2556,14 @@ function onMensualiteChange() {
   var firstPayment = new Date(today.getFullYear(), today.getMonth()+2, 5);
   var dateStr = firstPayment.toLocaleDateString('fr-FR');
   var mStr = m.toLocaleString('fr-FR',{minimumFractionDigits:2,maximumFractionDigits:2});
-  if (el) el.textContent = mStr + ' € / mois';
+  if (el) el.textContent = mStr + ' € ' + simLang.perMonth;
   el = document.getElementById('r-duree');
-  if (el) el.textContent = n + ' mois';
+  if (el) el.textContent = n + ' ' + simLang.durationMonths;
   // Afficher le bon TAEG
   var taegEl = document.querySelector('#step-3 .taeg-value');
   if (taegEl) taegEl.textContent = '3,5 %';
   // Sauvegarder
-  simData.duree = m.toLocaleString('fr-FR',{minimumFractionDigits:2,maximumFractionDigits:2}) + ' € / mois sur ' + n + ' mois';
+  simData.duree = mStr + ' € ' + simLang.perMonth + ' ' + simLang.durationFor + ' ' + n + ' ' + simLang.durationMonths;
   var btn = document.getElementById('btn-step3');
   if (btn) btn.disabled = false;
 }
@@ -2643,7 +2644,7 @@ var TRANSLATIONS = {
     testimonials: {
       label: 'Témoignages clients', title: 'Ils nous font confiance',
       desc: 'Plus de 2 400 avis vérifiés sur Trustpilot. Voici ce que disent nos clients.',
-      verified: '✓ Vérifié'
+      verified: '✓ Vérifié', travaux: 'Travaux'
     },
     cta: {
       title: 'Prêt à concrétiser votre projet ?',
@@ -2734,6 +2735,10 @@ var TRANSLATIONS = {
       simulator: {
         h1: 'Votre crédit instantané', hero: '3 étapes simples pour obtenir votre simulation personnalisée.',
         stepTitle: 'Votre projet', stepSubtitle: 'Sélectionnez le type de financement',
+        step2Title: 'Montant souhaité', step2Subtitle: 'Saisissez le montant de votre crédit',
+        step3Title: 'Durée de remboursement', step3Subtitle: 'Choisissez la durée souhaitée',
+        formStepTitle: 'Votre demande', formStepSubtitle: 'Plus qu\'une étape pour votre offre',
+        durationFor: 'sur', durationMonths: 'mois', perMonth: '/ mois',
         choices: [{t:'Immobilier',d:'Résidence principale, secondaire ou investissement'},{t:'Auto / Moto',d:'Véhicule neuf, occasion ou électrique'},{t:'Prêt personnel',d:'Travaux, voyage, études, équipements...'},{t:'Travaux',d:'Rénovation, extension, aménagement'},{t:'Voyage',d:'Vacances, voyage de noces, aventure'},{t:'Autres',d:'Études, mariage, équipements, santé...'}],
         continueBtn: 'CONTINUER (SANS ENGAGEMENT) →', backBtn: '← Retour',
         amountLabel: 'Montant souhaité', monthlyTitle: 'Je souhaite une mensualité de :',
@@ -2825,7 +2830,7 @@ var TRANSLATIONS = {
     testimonials: {
       label: 'Customer reviews', title: 'They trust us',
       desc: 'Over 2,400 verified reviews on Trustpilot. Here\'s what our customers say.',
-      verified: '✓ Verified'
+      verified: '✓ Verified', travaux: 'Home improvements'
     },
     cta: {
       title: 'Ready to make your project happen?',
@@ -2916,6 +2921,10 @@ var TRANSLATIONS = {
       simulator: {
         h1: 'Your instant credit', hero: '3 simple steps to get your personalised simulation.',
         stepTitle: 'Your project', stepSubtitle: 'Select the type of financing',
+        step2Title: 'Desired amount', step2Subtitle: 'Enter your desired loan amount',
+        step3Title: 'Repayment period', step3Subtitle: 'Choose your preferred duration',
+        formStepTitle: 'Your application', formStepSubtitle: 'One more step for your offer',
+        durationFor: 'over', durationMonths: 'months', perMonth: '/ month',
         choices: [{t:'Mortgage',d:'Primary residence, holiday home or investment'},{t:'Car / Motorcycle',d:'New, used or electric vehicle'},{t:'Personal loan',d:'Home improvements, travel, studies, equipment...'},{t:'Home improvements',d:'Renovation, extension, fittings'},{t:'Travel',d:'Holidays, honeymoon, adventure'},{t:'Other',d:'Studies, wedding, equipment, health...'}],
         continueBtn: 'CONTINUE (NO COMMITMENT) →', backBtn: '← Back',
         amountLabel: 'Desired amount', monthlyTitle: 'I want a monthly payment of:',
@@ -3007,7 +3016,7 @@ var TRANSLATIONS = {
     testimonials: {
       label: 'Kundenbewertungen', title: 'Sie vertrauen uns',
       desc: 'Über 2.400 verifizierte Bewertungen auf Trustpilot. Das sagen unsere Kunden.',
-      verified: '✓ Verifiziert'
+      verified: '✓ Verifiziert', travaux: 'Renovierung'
     },
     cta: {
       title: 'Bereit, Ihr Projekt zu verwirklichen?',
@@ -3098,6 +3107,10 @@ var TRANSLATIONS = {
       simulator: {
         h1: 'Ihr Sofortkredit', hero: '3 einfache Schritte für Ihre persönliche Simulation.',
         stepTitle: 'Ihr Vorhaben', stepSubtitle: 'Wählen Sie die Art der Finanzierung',
+        step2Title: 'Gewünschter Betrag', step2Subtitle: 'Geben Sie Ihren gewünschten Kreditbetrag ein',
+        step3Title: 'Laufzeit', step3Subtitle: 'Wählen Sie Ihre bevorzugte Laufzeit',
+        formStepTitle: 'Ihr Antrag', formStepSubtitle: 'Noch ein Schritt für Ihr Angebot',
+        durationFor: 'über', durationMonths: 'Monate', perMonth: '/ Monat',
         choices: [{t:'Immobilien',d:'Erstwohnsitz, Ferienhaus oder Investition'},{t:'Auto / Motorrad',d:'Neuwagen, Gebrauchtwagen oder Elektrofahrzeug'},{t:'Privatkredit',d:'Renovierung, Reise, Studium, Ausstattung...'},{t:'Renovierung',d:'Umbau, Erweiterung, Einrichtung'},{t:'Reise',d:'Urlaub, Hochzeitsreise, Abenteuer'},{t:'Sonstiges',d:'Studium, Hochzeit, Ausstattung, Gesundheit...'}],
         continueBtn: 'WEITER (UNVERBINDLICH) →', backBtn: '← Zurück',
         amountLabel: 'Gewünschter Betrag', monthlyTitle: 'Ich möchte eine monatliche Rate von:',
@@ -3189,7 +3202,7 @@ var TRANSLATIONS = {
     testimonials: {
       label: 'Asiakasarvostelut', title: 'He luottavat meihin',
       desc: 'Yli 2 400 vahvistettua arvostelua Trustpilotissa. Tässä mitä asiakkaamme sanovat.',
-      verified: '✓ Vahvistettu'
+      verified: '✓ Vahvistettu', travaux: 'Remontti'
     },
     cta: {
       title: 'Valmis toteuttamaan projektisi?',
@@ -3280,6 +3293,10 @@ var TRANSLATIONS = {
       simulator: {
         h1: 'Välitön luottosi', hero: '3 yksinkertaista vaihetta henkilökohtaisen simulaation saamiseksi.',
         stepTitle: 'Projektisi', stepSubtitle: 'Valitse rahoitustyyppi',
+        step2Title: 'Haluttu summa', step2Subtitle: 'Syötä haluamasi lainasumma',
+        step3Title: 'Takaisinmaksuaika', step3Subtitle: 'Valitse haluamasi kesto',
+        formStepTitle: 'Hakemuksesi', formStepSubtitle: 'Vielä yksi vaihe tarjouksesi saamiseksi',
+        durationFor: 'yli', durationMonths: 'kk', perMonth: '/ kk',
         choices: [{t:'Kiinteistö',d:'Ensisijainen asuinpaikka, loma-asunto tai sijoitus'},{t:'Auto / Moottoripyörä',d:'Uusi, käytetty tai sähköajoneuvo'},{t:'Henkilökohtainen laina',d:'Remontti, matka, opinnot, varusteet...'},{t:'Remontti',d:'Kunnostus, laajennus, sisustus'},{t:'Matka',d:'Loma, häämatka, seikkailu'},{t:'Muut',d:'Opinnot, häät, varusteet, terveys...'}],
         continueBtn: 'JATKA (SITOUMUSVAPAASTI) →', backBtn: '← Takaisin',
         amountLabel: 'Haluttu summa', monthlyTitle: 'Haluan kuukausierän:',
@@ -3371,7 +3388,7 @@ var TRANSLATIONS = {
     testimonials: {
       label: 'Kundrecensioner', title: 'De litar på oss',
       desc: 'Över 2 400 verifierade recensioner på Trustpilot. Här är vad våra kunder säger.',
-      verified: '✓ Verifierad'
+      verified: '✓ Verifierad', travaux: 'Renovering'
     },
     cta: {
       title: 'Redo att förverkliga ditt projekt?',
@@ -3462,6 +3479,10 @@ var TRANSLATIONS = {
       simulator: {
         h1: 'Ditt direktlån', hero: '3 enkla steg för att få din personliga simulering.',
         stepTitle: 'Ditt projekt', stepSubtitle: 'Välj typ av finansiering',
+        step2Title: 'Önskat belopp', step2Subtitle: 'Ange önskat lånebelopp',
+        step3Title: 'Återbetalningstid', step3Subtitle: 'Välj din önskade löptid',
+        formStepTitle: 'Din ansökan', formStepSubtitle: 'Ett steg till för ditt erbjudande',
+        durationFor: 'på', durationMonths: 'månader', perMonth: '/ månad',
         choices: [{t:'Bostad',d:'Permanentbostad, fritidshus eller investering'},{t:'Bil / Motorcykel',d:'Ny, begagnad eller elbil'},{t:'Privatlån',d:'Renovering, resa, studier, utrustning...'},{t:'Renovering',d:'Ombyggnad, tillbyggnad, inredning'},{t:'Resa',d:'Semester, bröllopsresa, äventyr'},{t:'Övrigt',d:'Studier, bröllop, utrustning, hälsa...'}],
         continueBtn: 'FORTSÄTT (UTAN ÅTAGANDE) →', backBtn: '← Tillbaka',
         amountLabel: 'Önskat belopp', monthlyTitle: 'Jag vill ha en månadsbetalning på:',
@@ -3553,7 +3574,7 @@ var TRANSLATIONS = {
     testimonials: {
       label: 'Testemunhos de clientes', title: 'Confiam em nós',
       desc: 'Mais de 2 400 avaliações verificadas no Trustpilot. Aqui está o que dizem os nossos clientes.',
-      verified: '✓ Verificado'
+      verified: '✓ Verificado', travaux: 'Obras'
     },
     cta: {
       title: 'Pronto para concretizar o seu projeto?',
@@ -3644,6 +3665,10 @@ var TRANSLATIONS = {
       simulator: {
         h1: 'O seu crédito imediato', hero: '3 passos simples para obter a sua simulação personalizada.',
         stepTitle: 'O seu projeto', stepSubtitle: 'Selecione o tipo de financiamento',
+        step2Title: 'Montante pretendido', step2Subtitle: 'Introduza o montante pretendido',
+        step3Title: 'Prazo de amortização', step3Subtitle: 'Escolha o prazo pretendido',
+        formStepTitle: 'O seu pedido', formStepSubtitle: 'Mais um passo para a sua oferta',
+        durationFor: 'em', durationMonths: 'meses', perMonth: '/ mês',
         choices: [{t:'Imobiliário',d:'Residência principal, secundária ou investimento'},{t:'Auto / Moto',d:'Veículo novo, usado ou elétrico'},{t:'Crédito pessoal',d:'Obras, viagem, estudos, equipamentos...'},{t:'Obras',d:'Renovação, extensão, arranjo'},{t:'Viagem',d:'Férias, lua de mel, aventura'},{t:'Outros',d:'Estudos, casamento, equipamentos, saúde...'}],
         continueBtn: 'CONTINUAR (SEM COMPROMISSO) →', backBtn: '← Voltar',
         amountLabel: 'Montante pretendido', monthlyTitle: 'Pretendo uma prestação mensal de:',
@@ -3735,7 +3760,7 @@ var TRANSLATIONS = {
     testimonials: {
       label: 'Testimonianze clienti', title: 'Si fidano di noi',
       desc: 'Oltre 2.400 recensioni verificate su Trustpilot. Ecco cosa dicono i nostri clienti.',
-      verified: '✓ Verificato'
+      verified: '✓ Verificato', travaux: 'Lavori'
     },
     cta: {
       title: 'Pronto a realizzare il tuo progetto?',
@@ -3826,6 +3851,10 @@ var TRANSLATIONS = {
       simulator: {
         h1: 'Il vostro credito istantaneo', hero: '3 semplici passi per ottenere la vostra simulazione personalizzata.',
         stepTitle: 'Il vostro progetto', stepSubtitle: 'Selezionate il tipo di finanziamento',
+        step2Title: 'Importo desiderato', step2Subtitle: 'Inserite l\'importo desiderato',
+        step3Title: 'Durata del rimborso', step3Subtitle: 'Scegliete la durata desiderata',
+        formStepTitle: 'La vostra richiesta', formStepSubtitle: 'Un ulteriore passo per la vostra offerta',
+        durationFor: 'su', durationMonths: 'mesi', perMonth: '/ mese',
         choices: [{t:'Immobiliare',d:'Residenza principale, secondaria o investimento'},{t:'Auto / Moto',d:'Veicolo nuovo, usato o elettrico'},{t:'Prestito personale',d:'Lavori, viaggio, studi, attrezzatura...'},{t:'Lavori',d:'Ristrutturazione, ampliamento, arredamento'},{t:'Viaggio',d:'Vacanze, viaggio di nozze, avventura'},{t:'Altro',d:'Studi, matrimonio, attrezzatura, salute...'}],
         continueBtn: 'CONTINUA (SENZA IMPEGNO) →', backBtn: '← Indietro',
         amountLabel: 'Importo desiderato', monthlyTitle: 'Desidero una rata mensile di:',
@@ -3917,7 +3946,7 @@ var TRANSLATIONS = {
     testimonials: {
       label: 'Testimonios de clientes', title: 'Confían en nosotros',
       desc: 'Más de 2.400 reseñas verificadas en Trustpilot. Esto es lo que dicen nuestros clientes.',
-      verified: '✓ Verificado'
+      verified: '✓ Verificado', travaux: 'Reformas'
     },
     cta: {
       title: '¿Listo para hacer realidad tu proyecto?',
@@ -4008,6 +4037,10 @@ var TRANSLATIONS = {
       simulator: {
         h1: 'Su crédito instantáneo', hero: '3 pasos sencillos para obtener su simulación personalizada.',
         stepTitle: 'Su proyecto', stepSubtitle: 'Seleccione el tipo de financiación',
+        step2Title: 'Importe deseado', step2Subtitle: 'Introduzca el importe deseado',
+        step3Title: 'Plazo de amortización', step3Subtitle: 'Elija el plazo deseado',
+        formStepTitle: 'Su solicitud', formStepSubtitle: 'Un paso más para su oferta',
+        durationFor: 'en', durationMonths: 'meses', perMonth: '/ mes',
         choices: [{t:'Inmobiliario',d:'Residencia principal, secundaria o inversión'},{t:'Auto / Moto',d:'Vehículo nuevo, de segunda mano o eléctrico'},{t:'Préstamo personal',d:'Reformas, viaje, estudios, equipamiento...'},{t:'Reformas',d:'Renovación, ampliación, acondicionamiento'},{t:'Viaje',d:'Vacaciones, luna de miel, aventura'},{t:'Otros',d:'Estudios, boda, equipamiento, salud...'}],
         continueBtn: 'CONTINUAR (SIN COMPROMISO) →', backBtn: '← Atrás',
         amountLabel: 'Importe deseado', monthlyTitle: 'Quiero una cuota mensual de:',
@@ -4140,6 +4173,11 @@ function applyLang(code) {
   set('testi-title', t.testimonials.title);
   set('testi-desc', t.testimonials.desc);
   document.querySelectorAll('.testi-badge').forEach(function(el){ el.textContent = t.testimonials.verified; });
+  var _testiTypes = [t.nav.mortgage, t.nav.auto, t.nav.personal, t.nav.mortgage, t.nav.auto, t.testimonials.travaux || 'Travaux'];
+  document.querySelectorAll('.testi-info').forEach(function(info, i) {
+    var tn = info.firstChild;
+    if (tn && tn.nodeType === 3) tn.nodeValue = (_testiTypes[i] || '') + ' ';
+  });
 
   // Trust bar (9 items × 2 sets, DOM manipulation)
   if (t.trust) {
@@ -4311,6 +4349,13 @@ function applyPageTranslations(t) {
     if (succP) succP.textContent = t.form.successDesc;
     var backHomeBtn = ps.querySelector('#sim-lead-success button');
     if (backHomeBtn) backHomeBtn.textContent = t.form.backHome;
+    if (s.step2Title) stepTitles[2] = { title: s.step2Title, subtitle: s.step2Subtitle || '' };
+    if (s.step3Title) stepTitles[3] = { title: s.step3Title, subtitle: s.step3Subtitle || '' };
+    simLang.durationFor = s.durationFor || 'sur';
+    simLang.durationMonths = s.durationMonths || 'mois';
+    simLang.perMonth = s.perMonth || '/ mois';
+    simLang.formStepTitle = s.formStepTitle || 'Votre demande';
+    simLang.formStepSubtitle = s.formStepSubtitle || 'Plus qu\'une étape pour votre offre';
   }
 
   applyProductPage('page-immobilier', p.immobilier);

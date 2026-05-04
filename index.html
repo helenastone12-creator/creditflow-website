@@ -2021,9 +2021,9 @@
   <div class="footer-bottom">
     <p id="footer-copy">© 2025 Finooz SAS — RCS Paris 123 456 789</p>
     <div class="footer-legal">
-      <a href="#" onclick="showPage('mentions');return false;">Mentions légales</a>
-      <a href="#" onclick="showPage('cgu');return false;">CGU</a>
-      <a href="#" onclick="showPage('rgpd');return false;">Cookies</a>
+      <a id="fl2-mentions" href="#" onclick="showPage('mentions');return false;">Mentions légales</a>
+      <a id="fl2-cgu" href="#" onclick="showPage('cgu');return false;">CGU</a>
+      <a id="fl2-rgpd" href="#" onclick="showPage('rgpd');return false;">RGPD</a>
     </div>
   </div>
   <div style="max-width:1180px;margin:16px auto 0;padding:16px 0;border-top:1px solid rgba(255,255,255,0.08);">
@@ -4197,6 +4197,7 @@ function applyLang(code) {
     set('fl-partners', fl.partners); set('fl-presse', fl.presse);
     set('fl-mentions', fl.mentions); set('fl-privacy', fl.privacy);
     set('fl-cgu', fl.cgu); set('fl-rgpdlnk', fl.rgpdlnk);
+    set('fl2-mentions', fl.mentions); set('fl2-cgu', fl.cgu); set('fl2-rgpd', fl.rgpdlnk);
   }
 
   applyPageTranslations(t);

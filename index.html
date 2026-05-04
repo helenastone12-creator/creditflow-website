@@ -2218,6 +2218,13 @@ function showPage(pageId, fromPopState) {
   }
   if (pageId === 'simulateur' && !window._simFromTile) { resetSim(); }
   window._simFromTile = false;
+  // Re-appliquer les traductions des pages secondaires à chaque navigation
+  var _secPages = ['contact','about','partenaires','presse','mentions','confidentialite','cgu','rgpd'];
+  if (_secPages.indexOf(pageId) !== -1 && typeof applySecondaryPages === 'function') {
+    var _lang = localStorage.getItem('finooz-lang') || 'fr';
+    var _t = TRANSLATIONS[_lang];
+    if (_t && _t.pages && _t.pages.secondary) applySecondaryPages(_t, _t.pages.secondary);
+  }
 }
 
 // Bouton retour du navigateur / téléphone

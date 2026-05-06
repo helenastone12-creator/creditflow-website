@@ -788,8 +788,40 @@
   }
   @media (min-width: 901px) { .hero-mobile { display: none !important; } }
   @media (max-width: 900px) { .hero-desktop { display: none !important; } }
+
+  /* ─── LANG LOADER ─── */
+  html.lang-loading body { visibility: hidden; }
+  #lang-loader {
+    display: none;
+    position: fixed; inset: 0; z-index: 99999;
+    background: #fff;
+    align-items: center; justify-content: center;
+  }
+  html.lang-loading #lang-loader { display: flex; visibility: visible; }
+  .lang-loader-spinner {
+    width: 36px; height: 36px;
+    border: 3px solid #e8edf5;
+    border-top-color: #00C896;
+    border-radius: 50%;
+    animation: langSpin 0.55s linear infinite;
+  }
+  @keyframes langSpin { to { transform: rotate(360deg); } }
 </style>
+<script>
+(function(){
+  var SUPPORTED = ['fr','en','de','fi','sv','pt','it','es'];
+  var stored = localStorage.getItem('finooz-lang');
+  if (stored && SUPPORTED.indexOf(stored) !== -1) {
+    document.documentElement.lang = stored;
+  } else {
+    var browser = (navigator.language || navigator.userLanguage || 'fr').split('-')[0].toLowerCase();
+    document.documentElement.lang = SUPPORTED.indexOf(browser) !== -1 ? browser : 'fr';
+  }
+  document.documentElement.classList.add('lang-loading');
+})();
+</script>
 <body>
+<div id="lang-loader" aria-hidden="true"><div class="lang-loader-spinner"></div></div>
 
 <!-- ═══════════ NAV ═══════════ -->
 <nav id="navbar">
@@ -4616,6 +4648,7 @@ function switchLang(code) {
 (function() {
   var lang = detectLang();
   applyLang(lang);
+  document.documentElement.classList.remove('lang-loading');
 })();
 
 window.addEventListener('popstate', function(e) {

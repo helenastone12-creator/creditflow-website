@@ -2014,7 +2014,7 @@
   </div>
   <div class="footer-langs" id="footerLangs"></div>
   <div class="footer-bottom">
-    <p id="footer-copy">© 2025 Finooz S.r.l. — Registro delle Imprese — Italia</p>
+    <p id="footer-copy">© 2026 Finooz S.r.l. — Registro delle Imprese — Italia</p>
     <div class="footer-legal">
       <a id="fl2-mentions" href="#" onclick="showPage('mentions');return false;">Mentions légales</a>
       <a id="fl2-cgu" href="#" onclick="showPage('cgu');return false;">CGU</a>
@@ -2109,29 +2109,32 @@ window.addEventListener('load', function() {
   initCookie();
 });
 </script>
-<script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script defer src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script>
-try { emailjs.init('oZiWNC5z2M4rydJCT'); } catch(e) {}
+var EMAILJS_READY = false;
+if (window.emailjs) { emailjs.init('oZiWNC5z2M4rydJCT'); EMAILJS_READY = true; }
 var SB_URL = 'https://fsflgwbcaietfwrtofbs.supabase.co';
 var SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZzZmxnd2JjYWlldGZ3cnRvZmJzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzcxOTkyODMsImV4cCI6MjA5Mjc3NTI4M30.60v27ULp8h8IgvJWjC473etnfNZoZ3GBxK5Aq74mkbU';
 var sbClient = null;
-try { sbClient = supabase.createClient(SB_URL, SB_KEY); } catch(e) {}
+if (window.supabase) { sbClient = supabase.createClient(SB_URL, SB_KEY); }
 
 async function demanderSansEngagement() {
   var btn = document.getElementById('btn-step3');
   if (btn) { btn.disabled = true; btn.textContent = 'Envoi en cours...'; }
   try {
-    if(sbClient) await sbClient.from('simulations').insert({
+    if (!sbClient) throw new Error('Supabase indisponible');
+    var { error } = await sbClient.from('simulations').insert({
       projet: simData.projet || '--',
       montant: simData.montant || '--',
-      mensualite: simData.duree || '--',
-      duree: document.getElementById('r-duree') ? document.getElementById('r-duree').textContent : '--'
+      mensualite: simData.mensualite || '--',
+      duree: simData.duree || '--'
     });
+    if (error) throw error;
+    showResultat();
   } catch(e) {
-    // Erreur silencieuse — l'UX continue normalement
+    showToast('Impossible d’enregistrer la simulation. Veuillez réessayer.', 'error');
   }
-  showResultat();
   if (btn) { btn.disabled = false; btn.textContent = 'DEMANDEZ SANS ENGAGEMENT →'; }
 }
 
@@ -2258,24 +2261,27 @@ function toggleFaq(btn) {
 
 // CONTACT FORM
 async function submitForm() {
-  var check = document.getElementById('rgpdCheck');
-  if (!check || !check.checked) { showToast('Veuillez accepter la politique de confidentialité.', 'error'); return; }
   var prenom = document.getElementById('contact-prenom');
   var nom = document.getElementById('contact-nom');
   var email = document.getElementById('contact-email');
   var tel = document.getElementById('contact-tel');
   var objet = document.getElementById('contact-objet');
   var message = document.getElementById('contact-message');
+  var rgpd = document.getElementById('rgpdCheck');
   if (!prenom.value.trim() || !nom.value.trim() || !email.value.trim() || !message.value.trim()) {
     showToast('Veuillez remplir tous les champs obligatoires.', 'error'); return;
   }
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim())) {
     showToast('Veuillez saisir une adresse email valide.', 'error'); return;
   }
+  if (!rgpd.checked) {
+    showToast('Veuillez accepter la politique de confidentialité.', 'error'); return;
+  }
   var btn = document.querySelector('#contactForm .form-submit');
   if (btn) { btn.disabled = true; btn.textContent = 'Envoi en cours...'; }
   try {
-    if(sbClient) await sbClient.from('contacts').insert({
+    if (!sbClient) throw new Error('Supabase indisponible');
+    var { error } = await sbClient.from('contacts').insert({
       prenom: prenom.value.trim(),
       nom: nom.value.trim(),
       email: email.value.trim(),
@@ -2286,12 +2292,13 @@ async function submitForm() {
       montant_sim: simData.montant || '',
       duree_sim: simData.duree || ''
     });
+    if (error) throw error;
+    document.getElementById('contactForm').style.display = 'none';
+    document.getElementById('formSuccess').style.display = 'block';
   } catch(e) {
-    // Erreur silencieuse
+    showToast('Impossible d’envoyer le message. Veuillez réessayer.', 'error');
   }
   if (btn) { btn.disabled = false; btn.textContent = 'Envoyer le message →'; }
-  document.getElementById('contactForm').style.display = 'none';
-  document.getElementById('formSuccess').style.display = 'block';
 }
 
 // SCROLL REVEAL
@@ -2318,7 +2325,7 @@ function initReveal() {
 }
 
 // SIMULAT€ 3 ETAPES
-var simData = { projet: null, montant: null, duree: null };
+var simData = { projet: null, montant: null, mensualite: null, duree: null };
 var stepTitles = {
   1: { title: 'Votre projet', subtitle: 'Sélectionnez le type de financement' },
   2: { title: 'Montant souhaité', subtitle: 'Saisissez le montant de votre crédit' },
@@ -2411,24 +2418,30 @@ async function submitLead() {
   var btn = document.getElementById('btn-lead-submit');
   if (btn) { btn.disabled = true; btn.textContent = 'Envoi en cours...'; }
   try {
-    if(sbClient) await sbClient.from('demandes').insert({
+    if (!sbClient) throw new Error('Supabase indisponible');
+    var { error } = await sbClient.from('demandes').insert({
       prenom: prenom.value.trim(),
       nom: nom.value.trim(),
       email: email.value.trim(),
       telephone: tel.value.trim(),
       projet: simData.projet || '--',
       montant: simData.montant || '--',
+      mensualite: simData.mensualite || '--',
       duree: simData.duree || '--'
     });
+    if (error) throw error;
   } catch(e) {
-    // Erreur silencieuse
+    if (btn) { btn.disabled = false; btn.textContent = 'Envoyer ma demande →'; }
+    showToast('Impossible d’envoyer votre demande. Veuillez réessayer.', 'error');
+    return;
   }
   try {
+    if (!EMAILJS_READY) throw new Error('EmailJS indisponible');
     await emailjs.send('service_l9w70lh', 'template_7d7q34j', {
       title: 'Nouvelle simulation — ' + (simData.projet || '--'),
       name: prenom.value.trim() + ' ' + nom.value.trim(),
       email: email.value.trim(),
-      message: 'Projet : ' + (simData.projet || '--') + '\nMontant : ' + (simData.montant || '--') + '\nMensualité : ' + (simData.duree || '--') + '\nTéléphone : ' + tel.value.trim()
+      message: 'Projet : ' + (simData.projet || '--') + '\nMontant : ' + (simData.montant || '--') + '\nMensualité : ' + (simData.mensualite || '--') + '\nDurée : ' + (simData.duree || '--') + '\nTéléphone : ' + tel.value.trim()
     });
   } catch(e) {
     console.error('EmailJS erreur:', e);
@@ -2463,7 +2476,7 @@ function setSuggestion(val) {
 }
 
 function resetSim() {
-  simData = { projet: null, montant: null, duree: null };
+  simData = { projet: null, montant: null, mensualite: null, duree: null };
   var inp = document.getElementById('montant-input');
   if (inp) inp.value = '';
   [1,2,3].forEach(function(i) {
@@ -2558,7 +2571,8 @@ function onMensualiteChange() {
   var taegEl = document.querySelector('#step-3 .taeg-value');
   if (taegEl) taegEl.textContent = '3,5 %';
   // Sauvegarder
-  simData.duree = mStr + ' € ' + simLang.perMonth + ' ' + simLang.durationFor + ' ' + n + ' ' + simLang.durationMonths;
+  simData.mensualite = mStr + ' € ' + simLang.perMonth;
+  simData.duree = n + ' ' + simLang.durationMonths;
   var btn = document.getElementById('btn-step3');
   if (btn) btn.disabled = false;
 }

@@ -2109,30 +2109,14 @@ window.addEventListener('load', function() {
   initCookie();
 });
 </script>
-<script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script defer src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script>
-try { emailjs.init('oZiWNC5z2M4rydJCT'); } catch(e) {}
-var SB_URL = 'https://fsflgwbcaietfwrtofbs.supabase.co';
-var SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZzZmxnd2JjYWlldGZ3cnRvZmJzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzcxOTkyODMsImV4cCI6MjA5Mjc3NTI4M30.60v27ULp8h8IgvJWjC473etnfNZoZ3GBxK5Aq74mkbU';
-var sbClient = null;
-try { sbClient = supabase.createClient(SB_URL, SB_KEY); } catch(e) {}
+var EMAILJS_SERVICE = 'service_l9w70lh';
+var EMAILJS_TEMPLATE = 'template_7d7q34j';
+var EMAILJS_KEY = 'oZiWNC5z2M4rydJCT';
 
 async function demanderSansEngagement() {
-  var btn = document.getElementById('btn-step3');
-  if (btn) { btn.disabled = true; btn.textContent = 'Envoi en cours...'; }
-  try {
-    if(sbClient) await sbClient.from('simulations').insert({
-      projet: simData.projet || '--',
-      montant: simData.montant || '--',
-      mensualite: simData.duree || '--',
-      duree: document.getElementById('r-duree') ? document.getElementById('r-duree').textContent : '--'
-    });
-  } catch(e) {
-    // Erreur silencieuse — l'UX continue normalement
-  }
   showResultat();
-  if (btn) { btn.disabled = false; btn.textContent = 'DEMANDEZ SANS ENGAGEMENT →'; }
 }
 
 // HERO TILES
@@ -2275,21 +2259,19 @@ async function submitForm() {
   var btn = document.querySelector('#contactForm .form-submit');
   if (btn) { btn.disabled = true; btn.textContent = 'Envoi en cours...'; }
   try {
-    if(sbClient) await sbClient.from('contacts').insert({
-      prenom: prenom.value.trim(),
-      nom: nom.value.trim(),
+    await emailjs.send(EMAILJS_SERVICE, EMAILJS_TEMPLATE, {
+      title: 'Nouveau message — ' + (objet ? objet.value : 'Contact'),
+      name: prenom.value.trim() + ' ' + nom.value.trim(),
       email: email.value.trim(),
-      telephone: tel ? tel.value.trim() : '',
-      objet: objet ? objet.value : '',
-      message: message.value.trim(),
-      projet_sim: simData.projet || '',
-      montant_sim: simData.montant || '',
-      duree_sim: simData.duree || ''
-    });
+      message: (objet ? 'Objet : ' + objet.value + '\n\n' : '') + message.value.trim() + (tel && tel.value.trim() ? '\n\nTéléphone : ' + tel.value.trim() : '')
+    }, {publicKey: EMAILJS_KEY});
   } catch(e) {
-    // Erreur silencieuse
+    console.error('EmailJS erreur:', e);
+    showToast('Erreur lors de l\'envoi. Veuillez réessayer.', 'error');
+    if (btn) { btn.disabled = false; btn.textContent = 'Envoyer le message →'; }
+    return;
   }
-  if (btn) { btn.disabled = false; btn.textContent = 'Envoyer le message →'; }
+  if (btn) { btn.disabled = false; }
   document.getElementById('contactForm').style.display = 'none';
   document.getElementById('formSuccess').style.display = 'block';
 }
@@ -2411,29 +2393,19 @@ async function submitLead() {
   var btn = document.getElementById('btn-lead-submit');
   if (btn) { btn.disabled = true; btn.textContent = 'Envoi en cours...'; }
   try {
-    if(sbClient) await sbClient.from('demandes').insert({
-      prenom: prenom.value.trim(),
-      nom: nom.value.trim(),
-      email: email.value.trim(),
-      telephone: tel.value.trim(),
-      projet: simData.projet || '--',
-      montant: simData.montant || '--',
-      duree: simData.duree || '--'
-    });
-  } catch(e) {
-    // Erreur silencieuse
-  }
-  try {
-    await emailjs.send('service_l9w70lh', 'template_7d7q34j', {
+    await emailjs.send(EMAILJS_SERVICE, EMAILJS_TEMPLATE, {
       title: 'Nouvelle simulation — ' + (simData.projet || '--'),
       name: prenom.value.trim() + ' ' + nom.value.trim(),
       email: email.value.trim(),
       message: 'Projet : ' + (simData.projet || '--') + '\nMontant : ' + (simData.montant || '--') + '\nMensualité : ' + (simData.duree || '--') + '\nTéléphone : ' + tel.value.trim()
-    });
+    }, {publicKey: EMAILJS_KEY});
   } catch(e) {
     console.error('EmailJS erreur:', e);
+    showToast('Erreur lors de l\'envoi. Veuillez réessayer.', 'error');
+    if (btn) { btn.disabled = false; btn.textContent = 'Envoyer ma demande →'; }
+    return;
   }
-  if (btn) { btn.disabled = false; btn.textContent = 'Envoyer ma demande →'; }
+  if (btn) { btn.disabled = false; }
   document.getElementById('sim-lead-form').style.display = 'none';
   document.getElementById('sim-lead-success').style.display = 'block';
 }

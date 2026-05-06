@@ -441,7 +441,7 @@
   .footer-lang-btn {
     display: inline-flex; align-items: center; justify-content: center;
     background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
-    padding: 6px 8px; border-radius: 8px; cursor: pointer;
+    padding: 4px 6px; border-radius: 6px; cursor: pointer;
     transition: all 0.2s; text-decoration: none;
   }
   .footer-lang-btn img { border-radius: 3px; display: block; }
@@ -4073,8 +4073,9 @@ var LANG_LABELS = { fr:'FR', en:'EN', de:'DE', fi:'FI', sv:'SV', pt:'PT', it:'IT
 var FLAG_CODE = { fr:'fr', en:'gb', de:'de', fi:'fi', sv:'se', pt:'pt', it:'it', es:'es' };
 function flagImg(l, sz) {
   sz = sz || '20x15';
-  var w = sz === '20x15' ? 20 : 24, h = sz === '20x15' ? 15 : 18;
-  return '<img src="https://flagcdn.com/'+sz+'/'+FLAG_CODE[l]+'.png" width="'+w+'" height="'+h+'" alt="'+LANG_LABELS[l]+'" style="border-radius:2px;display:inline-block;vertical-align:middle;">';
+  var dims = { '20x15':[20,15], '24x18':[24,18], '16x12':[16,12] };
+  var d = dims[sz] || [20,15];
+  return '<img src="https://flagcdn.com/'+sz+'/'+FLAG_CODE[l]+'.png" width="'+d[0]+'" height="'+d[1]+'" alt="'+LANG_LABELS[l]+'" style="border-radius:2px;display:inline-block;vertical-align:middle;">';
 }
 var LANG_NAMES = { fr:'Français', en:'English', de:'Deutsch', fi:'Suomi', sv:'Svenska', pt:'Português', it:'Italiano', es:'Español' };
 
@@ -4624,7 +4625,7 @@ function buildSwitcher(active) {
     var flhtml = '';
     LANGS.forEach(function(l) {
       var cls = l === active ? 'active' : '';
-      flhtml += '<a href="javascript:void(0)" class="footer-lang-btn '+cls+'" onclick="switchLang(\''+l+'\')" title="'+LANG_NAMES[l]+'">'+flagImg(l, '24x18')+'</a>';
+      flhtml += '<a href="javascript:void(0)" class="footer-lang-btn '+cls+'" onclick="switchLang(\''+l+'\')" title="'+LANG_NAMES[l]+'">'+flagImg(l, '16x12')+'</a>';
     });
     fl.innerHTML = flhtml;
   }

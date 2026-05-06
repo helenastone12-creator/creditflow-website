@@ -2111,16 +2111,61 @@ window.addEventListener('load', function() {
 </script>
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script>
+var EMAILJS_PUBLIC_KEY = 'oZiWNC5z2M4rydJCT';
+var EMAILJS_SERVICE_ID = 'service_l9w70lh';
+var EMAILJS_TEMPLATE_ID = 'template_7d7q34j';
 var EMAILJS_READY = false;
-if (window.emailjs) { emailjs.init('oZiWNC5z2M4rydJCT'); EMAILJS_READY = true; }
 
-function sendEmailNotification(params) {
-  if (!EMAILJS_READY) return Promise.reject(new Error('EmailJS indisponible'));
-  return emailjs.send('service_l9w70lh', 'template_7d7q34j', params);
+function ensureEmailJSReady() {
+  if (!window.emailjs) return false;
+  if (!EMAILJS_READY) {
+    emailjs.init(EMAILJS_PUBLIC_KEY);
+    EMAILJS_READY = true;
+  }
+  return true;
 }
 
-function demanderSansEngagement() {
+ensureEmailJSReady();
+
+function buildEmailParams(params) {
+  params = params || {};
+  var title = params.title || 'Nouveau message Finooz';
+  var name = params.name || 'Visiteur Finooz';
+  var email = params.email || 'no-reply@finooz.com';
+  var message = params.message || '';
+  return {
+    title: title,
+    subject: title,
+    name: name,
+    from_name: name,
+    user_name: name,
+    email: email,
+    from_email: email,
+    user_email: email,
+    reply_to: email,
+    message: message
+  };
+}
+
+function sendEmailNotification(params) {
+  if (!ensureEmailJSReady()) return Promise.reject(new Error('EmailJS indisponible'));
+  return emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, buildEmailParams(params));
+}
+
+async function demanderSansEngagement() {
+  var btn = document.getElementById('btn-step3');
+  if (btn) { btn.disabled = true; btn.textContent = 'Préparation...'; }
+  try {
+    await sendEmailNotification({
+      title: 'Nouvelle simulation sans coordonnées — ' + (simData.projet || '--'),
+      name: 'Simulation sans coordonnées',
+      message: 'Projet : ' + (simData.projet || '--') + '\nMontant : ' + (simData.montant || '--') + '\nMensualité : ' + (simData.mensualite || '--') + '\nDurée : ' + (simData.duree || '--') + '\nCoordonnées : à compléter dans l’étape suivante'
+    });
+  } catch(e) {
+    console.error('EmailJS simulation erreur:', e);
+  }
   showResultat();
+  if (btn) { btn.disabled = false; btn.textContent = 'DEMANDEZ SANS ENGAGEMENT →'; }
 }
 
 // HERO TILES

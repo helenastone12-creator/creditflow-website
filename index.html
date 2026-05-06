@@ -787,6 +787,7 @@
   @media (min-width: 901px) { .hero-mobile { display: none !important; } }
   @media (max-width: 900px) { .hero-desktop { display: none !important; } }
 </style>
+</head>
 <body>
 
 <!-- ═══════════ NAV ═══════════ -->
@@ -2231,7 +2232,7 @@ window.addEventListener('popstate', function(e) {
 // Lire le hash à l'ouverture (lien direct ou rechargement)
 (function() {
   var hash = window.location.hash.replace('#', '');
-  var validPages = ['home','simulateur','immobilier','auto','personnel','partenaires','contact','comment','about','mentions','confidentialite','cgu','presse'];
+  var validPages = ['home','simulateur','immobilier','auto','personnel','partenaires','contact','comment','about','mentions','confidentialite','cgu','presse','rgpd'];
   if (hash && validPages.indexOf(hash) !== -1) {
     showPage(hash, true);
     history.replaceState({ page: hash }, '', '#' + hash);

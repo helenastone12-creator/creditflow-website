@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CréditFlow — Panel Admin</title>
+<title>Finooz — Panel Admin</title>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
@@ -157,7 +157,7 @@ body{background:var(--bg);color:var(--text);min-height:100vh;}
 <body>
 
 <div class="loading-screen" id="loadingScreen">
-  <div class="loading-logo">Crédit<span>Flow</span> <span style="font-size:0.9rem;color:rgba(255,255,255,0.5);">Admin</span></div>
+  <div class="loading-logo">Finooz <span style="font-size:0.9rem;color:rgba(255,255,255,0.5);">Admin</span></div>
   <div class="dots"><span></span><span></span><span></span></div>
 </div>
 
@@ -166,10 +166,10 @@ body{background:var(--bg);color:var(--text);min-height:100vh;}
 <!-- AUTH -->
 <div id="screen-auth" class="screen">
   <div class="auth-box">
-    <div class="auth-logo">Crédit<span>Flow</span></div>
+    <div class="auth-logo">Finooz</div>
     <div class="auth-badge">🔐 Accès Administrateur</div>
     <div class="alert alert-error" id="auth-error"></div>
-    <div class="form-field"><label>Email administrateur</label><input type="email" id="a-email" placeholder="admin@creditflow.eu" onkeydown="if(event.key==='Enter')doAdminLogin()"></div>
+    <div class="form-field"><label>Email administrateur</label><input type="email" id="a-email" placeholder="admin@finooz.com" onkeydown="if(event.key==='Enter')doAdminLogin()"></div>
     <div class="form-field"><label>Mot de passe</label><input type="password" id="a-pass" placeholder="••••••••" onkeydown="if(event.key==='Enter')doAdminLogin()"></div>
     <button class="btn-auth" id="btn-login" onclick="doAdminLogin()">
       <div class="spinner" id="login-sp"></div>
@@ -182,7 +182,7 @@ body{background:var(--bg);color:var(--text);min-height:100vh;}
 <div id="screen-admin" class="screen">
   <div class="topbar">
     <div style="display:flex;align-items:center;">
-      <div class="topbar-logo">Crédit<span>Flow</span></div>
+      <div class="topbar-logo">Finooz</div>
       <span class="admin-badge">ADMIN</span>
     </div>
     <div class="topbar-right">
@@ -195,9 +195,8 @@ body{background:var(--bg);color:var(--text);min-height:100vh;}
     <div class="sidebar">
       <div class="sidebar-label">Vue générale</div>
       <div class="nav-item active" onclick="showSection('dashboard')"><span class="nav-icon">📊</span> Dashboard</div>
-      <div class="nav-item" onclick="showSection('simulations')"><span class="nav-icon">📊</span> Simulations<span class="nav-count" id="sim-count" style="display:none;"></span></div>
-      <div class="sidebar-label">Gestion</div>
       <div class="nav-item" onclick="showSection('simulations')"><span class="nav-icon">🧮</span> Simulations<span class="nav-count" id="sim-count" style="display:none;"></span></div>
+      <div class="sidebar-label">Gestion</div>
       <div class="nav-item" onclick="showSection('clients')"><span class="nav-icon">👥</span> Clients<span class="nav-count" id="clients-count" style="display:none;"></span></div>
       <div class="nav-item" onclick="showSection('dossiers')"><span class="nav-icon">📋</span> Dossiers</div>
       <div class="nav-item" onclick="showSection('messages')"><span class="nav-icon">💬</span> Messages<span class="nav-count" id="msg-count" style="display:none;"></span></div>
@@ -235,16 +234,6 @@ body{background:var(--bg);color:var(--text);min-height:100vh;}
         </div>
       </div>
 
-      <!-- SIMULATIONS -->
-      <div class="dash-section" id="section-simulations">
-        <div class="page-header">
-          <div><h1>Simulations reçues</h1><p>Toutes les demandes envoyées par les clients</p></div>
-          <button class="btn-sm btn-green" onclick="loadSimulations()">🔄 Actualiser</button>
-        </div>
-        <div class="table-card">
-          <div id="simulations-table"><div class="empty"><div class="icon">⏳</div><p>Chargement...</p></div></div>
-        </div>
-      </div>
 
       <!-- CLIENTS -->
       <div class="dash-section" id="section-clients">
@@ -340,7 +329,6 @@ async function initAdmin(user) {
   showAdminPanel();
   await loadAll();
   await loadSimulations();
-  await loadSimulations();
 }
 
 // AUTH
@@ -368,46 +356,16 @@ function setBtn(loading) {
 }
 function showErr(id, msg) { const el = document.getElementById(id); el.textContent = msg; el.style.display = 'block'; }
 
-// NOUVEAU SUPABASE POUR SIMULATIONS
-const SIM_URL = 'https://fsflgwbcaietfwrtofbs.supabase.co';
-const SIM_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZzZmxnd2JjYWlldGZ3cnRvZmJzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzcxOTkyODMsImV4cCI6MjA5Mjc3NTI4M30.60v27ULp8h8IgvJWjC473etnfNZoZ3GBxK5Aq74mkbU';
-
-async function loadSimulations() {
-  const res = await fetch(SIM_URL + '/rest/v1/simulations?select=*&order=created_at.desc', {
-    headers: { 'apikey': SIM_KEY, 'Authorization': 'Bearer ' + SIM_KEY }
-  });
-  const data = await res.json();
-  const container = document.getElementById('simulations-table');
-  if (!data || !data.length) {
-    container.innerHTML = '<div class="empty"><div class="icon">📭</div><p>Aucune simulation reçue pour le moment.</p></div>';
-    return;
-  }
-  // Badge count
-  document.getElementById('sim-count').textContent = data.length;
-  document.getElementById('sim-count').style.display = 'inline';
-  // Render table
-  container.innerHTML = `
-  <table class="data-table">
-    <thead><tr><th>Date</th><th>Projet</th><th>Montant</th><th>Mensualité</th><th>Durée</th></tr></thead>
-    <tbody>${data.map(s => `<tr>
-      <td>${fmtDate(s.created_at)}</td>
-      <td><strong>${s.projet || '--'}</strong></td>
-      <td style="color:var(--navy);font-weight:600;">${s.montant || '--'}</td>
-      <td>${s.mensualite || '--'}</td>
-      <td>${s.duree || '--'}</td>
-    </tr>`).join('')}</tbody>
-  </table>`;
-}
-
-
 // LOAD SIMULATIONS
 var allSimulations = [];
 async function loadSimulations() {
-  const { data: sims } = await sb.from('simulations').select('*').order('created_at', { ascending: false });
+  const { data: sims, error } = await sb.from('simulations').select('*').order('created_at', { ascending: false });
+  if (error) { showNotif('❌ Impossible de charger les simulations'); return; }
   allSimulations = sims || [];
-  if (allSimulations.length > 0) {
-    document.getElementById('sim-count').textContent = allSimulations.length;
-    document.getElementById('sim-count').style.display = 'inline';
+  const simCount = document.getElementById('sim-count');
+  if (simCount) {
+    simCount.textContent = allSimulations.length;
+    simCount.style.display = allSimulations.length > 0 ? 'inline' : 'none';
   }
   if (!allSimulations.length) {
     document.getElementById('simulations-table').innerHTML = '<div class="empty"><div class="icon">📭</div><p>Aucune simulation reçue pour le moment</p></div>';
@@ -418,10 +376,10 @@ async function loadSimulations() {
     <thead><tr><th>Date</th><th>Projet</th><th>Montant</th><th>Mensualité</th><th>Durée</th></tr></thead>
     <tbody>${allSimulations.map(s => `<tr>
       <td>${fmtDate(s.created_at)}</td>
-      <td><span class="badge badge-en_cours">${s.projet || '--'}</span></td>
-      <td style="font-weight:700;color:var(--navy);">${s.montant || '--'}</td>
-      <td style="color:var(--green);font-weight:600;">${s.mensualite || '--'}</td>
-      <td>${s.duree || '--'}</td>
+      <td><span class="badge badge-en_cours">${esc(s.projet || '--')}</span></td>
+      <td style="font-weight:700;color:var(--navy);">${esc(s.montant || '--')}</td>
+      <td style="color:var(--green);font-weight:600;">${esc(s.mensualite || '--')}</td>
+      <td>${esc(s.duree || '--')}</td>
     </tr>`).join('')}</tbody>
   </table>`;
 }
@@ -460,11 +418,11 @@ function renderRecentDossiers() {
   document.getElementById('recent-dossiers').innerHTML = `
   <table class="data-table">
     <thead><tr><th>Client</th><th>Type</th><th>Montant</th><th>Statut</th><th>Date</th></tr></thead>
-    <tbody>${d.map(dos => `<tr onclick="openDossier('${dos.id}')">
-      <td><strong>${dos.profiles?.prenom || '--'} ${dos.profiles?.nom || ''}</strong></td>
-      <td>${dos.type_pret || '--'}</td>
+    <tbody>${d.map(dos => `<tr onclick="openDossier('${escAttr(dos.id)}')">
+      <td><strong>${esc(dos.profiles?.prenom || '--')} ${esc(dos.profiles?.nom || '')}</strong></td>
+      <td>${esc(dos.type_pret || '--')}</td>
       <td>${num(dos.montant)} €</td>
-      <td><span class="badge badge-${dos.statut}">${labelS(dos.statut)}</span></td>
+      <td><span class="badge badge-${escAttr(dos.statut)}">${esc(labelS(dos.statut))}</span></td>
       <td>${fmtDate(dos.created_at)}</td>
     </tr>`).join('')}</tbody>
   </table>`;
@@ -479,10 +437,10 @@ function renderClientsTable(clients) {
     <tbody>${clients.map(c => {
       const dos = allDossiers.filter(d => d.user_id === c.id);
       return `<tr>
-        <td><strong>${c.prenom || '--'} ${c.nom || ''}</strong></td>
-        <td>${c.telephone || '--'}</td>
-        <td>${dos.length > 0 ? `<span class="badge badge-${dos[0].statut}">${dos.length} dossier${dos.length>1?'s':''}</span>` : '<span style="color:var(--slate);font-size:0.78rem;">Aucun</span>'}</td>
-        <td><button class="btn-sm btn-navy" onclick="openClientDossiers('${c.id}')">Voir dossiers</button></td>
+        <td><strong>${esc(c.prenom || '--')} ${esc(c.nom || '')}</strong></td>
+        <td>${esc(c.telephone || '--')}</td>
+        <td>${dos.length > 0 ? `<span class="badge badge-${escAttr(dos[0].statut)}">${dos.length} dossier${dos.length>1?'s':''}</span>` : '<span style="color:var(--slate);font-size:0.78rem;">Aucun</span>'}</td>
+        <td><button class="btn-sm btn-navy" onclick="openClientDossiers('${escAttr(c.id)}')">Voir dossiers</button></td>
       </tr>`;
     }).join('')}</tbody>
   </table>`;
@@ -502,13 +460,13 @@ function renderDossiersTable(dossiers) {
   <table class="data-table">
     <thead><tr><th>Client</th><th>Type</th><th>Montant</th><th>Durée</th><th>Statut</th><th>Date</th><th>Actions</th></tr></thead>
     <tbody>${dossiers.map(dos => `<tr>
-      <td><strong>${dos.profiles?.prenom || '--'} ${dos.profiles?.nom || ''}</strong></td>
-      <td>${dos.type_pret || '--'}</td>
+      <td><strong>${esc(dos.profiles?.prenom || '--')} ${esc(dos.profiles?.nom || '')}</strong></td>
+      <td>${esc(dos.type_pret || '--')}</td>
       <td>${num(dos.montant)} €</td>
-      <td>${dos.duree} ans</td>
-      <td><span class="badge badge-${dos.statut}">${labelS(dos.statut)}</span></td>
+      <td>${esc(dos.duree || '--')} ans</td>
+      <td><span class="badge badge-${escAttr(dos.statut)}">${esc(labelS(dos.statut))}</span></td>
       <td>${fmtDate(dos.created_at)}</td>
-      <td><button class="btn-sm btn-navy" onclick="openDossier('${dos.id}')">Gérer</button></td>
+      <td><button class="btn-sm btn-navy" onclick="openDossier('${escAttr(dos.id)}')">Gérer</button></td>
     </tr>`).join('')}</tbody>
   </table>`;
 }
@@ -528,11 +486,11 @@ function openDossier(id) {
   document.getElementById('modal-title').textContent = `Dossier — ${dos.profiles?.prenom || ''} ${dos.profiles?.nom || ''}`;
   document.getElementById('modal-body').innerHTML = `
     <div id="view-info" class="info-grid">
-      <div class="info-item"><label>Type de prêt</label><span>${dos.type_pret || '--'}</span></div>
+      <div class="info-item"><label>Type de prêt</label><span>${esc(dos.type_pret || '--')}</span></div>
       <div class="info-item"><label>Montant</label><span>${num(dos.montant)} €</span></div>
-      <div class="info-item"><label>Durée</label><span>${dos.duree} ans</span></div>
+      <div class="info-item"><label>Durée</label><span>${esc(dos.duree || '--')} ans</span></div>
       <div class="info-item"><label>Mensualité estimée</label><span>${num(Math.round(M))} €/mois</span></div>
-      <div class="info-item"><label>Statut actuel</label><span><span class="badge badge-${dos.statut}">${labelS(dos.statut)}</span></span></div>
+      <div class="info-item"><label>Statut actuel</label><span><span class="badge badge-${escAttr(dos.statut)}">${esc(labelS(dos.statut))}</span></span></div>
       <div class="info-item"><label>Date de création</label><span>${fmtDate(dos.created_at)}</span></div>
     </div>
     <div id="edit-info" style="display:none;margin-bottom:20px;padding:16px;background:var(--bg);border-radius:var(--radius);">
@@ -541,7 +499,7 @@ function openDossier(id) {
         <div>
           <label style="display:block;font-size:0.7rem;font-weight:700;color:var(--slate);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.5px;">Type de prêt</label>
           <select id="edit-type-pret" class="status-select" style="width:100%;">
-            <option value="Immobilier" ${dos.type_pret==='Immobilier'?'selected':''}>Immobilier</option>
+            <option value="Immobilier" ${String(dos.type_pret)==='Immobilier'?'selected':''}>Immobilier</option>
             <option value="Auto / Moto" ${dos.type_pret==='Auto / Moto'?'selected':''}>Auto / Moto</option>
             <option value="Prêt personnel" ${dos.type_pret==='Prêt personnel'?'selected':''}>Prêt personnel</option>
             <option value="Travaux" ${dos.type_pret==='Travaux'?'selected':''}>Travaux</option>
@@ -551,11 +509,11 @@ function openDossier(id) {
         </div>
         <div>
           <label style="display:block;font-size:0.7rem;font-weight:700;color:var(--slate);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.5px;">Montant (€)</label>
-          <input type="number" id="edit-montant" value="${dos.montant || ''}" min="1000" style="width:100%;padding:8px 14px;border:1.5px solid var(--border);border-radius:8px;font-size:0.85rem;outline:none;background:#fff;color:var(--navy);">
+          <input type="number" id="edit-montant" value="${escAttr(dos.montant || '')}" min="1000" style="width:100%;padding:8px 14px;border:1.5px solid var(--border);border-radius:8px;font-size:0.85rem;outline:none;background:#fff;color:var(--navy);">
         </div>
         <div>
           <label style="display:block;font-size:0.7rem;font-weight:700;color:var(--slate);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.5px;">Durée (ans)</label>
-          <input type="number" id="edit-duree" value="${dos.duree || ''}" min="1" max="30" style="width:100%;padding:8px 14px;border:1.5px solid var(--border);border-radius:8px;font-size:0.85rem;outline:none;background:#fff;color:var(--navy);">
+          <input type="number" id="edit-duree" value="${escAttr(dos.duree || '')}" min="1" max="30" style="width:100%;padding:8px 14px;border:1.5px solid var(--border);border-radius:8px;font-size:0.85rem;outline:none;background:#fff;color:var(--navy);">
         </div>
       </div>
     </div>
@@ -569,7 +527,7 @@ function openDossier(id) {
           <option value="signe" ${dos.statut==='signe'?'selected':''}>🖊️ Signé</option>
           <option value="verse" ${dos.statut==='verse'?'selected':''}>💶 Fonds versés</option>
         </select>
-        <button class="btn-sm btn-green" onclick="updateStatut('${id}')">Mettre à jour</button>
+        <button class="btn-sm btn-green" onclick="updateStatut('${escAttr(id)}')">Mettre à jour</button>
       </div>
     </div>
     <div>
@@ -580,19 +538,19 @@ function openDossier(id) {
             const mine = m.expediteur === 'conseiller';
             return `<div class="msg ${mine?'mine':'other'}">
               <div class="msg-av" style="${mine?'background:linear-gradient(135deg,#0B1F45,#142e60);color:#fff;':'background:linear-gradient(135deg,var(--green),#00a87d);color:#0B1F45;'}">${mine?'SL':'C'}</div>
-              <div><div class="bubble">${m.contenu}</div><div class="msg-time">${fmtTime(m.created_at)}</div></div>
+              <div><div class="bubble">${esc(m.contenu || '')}</div><div class="msg-time">${fmtTime(m.created_at)}</div></div>
             </div>`;
           }).join('')}
       </div>
       <div class="chat-inp-row" style="margin-top:12px;">
-        <input class="chat-inp" id="modal-reply" placeholder="Répondre au client..." onkeydown="if(event.key==='Enter')replyFromModal('${id}')">
-        <button class="btn-send" onclick="replyFromModal('${id}')">➤</button>
+        <input class="chat-inp" id="modal-reply" placeholder="Répondre au client..." onkeydown="if(event.key==='Enter')replyFromModal('${escAttr(id)}')">
+        <button class="btn-send" onclick="replyFromModal('${escAttr(id)}')">➤</button>
       </div>
     </div>`;
 
   document.getElementById('modal-footer').innerHTML = `
-    <button class="btn-sm btn-navy" id="btn-modifier" onclick="toggleEditDossier('${id}')">✏️ Modifier</button>
-    <button class="btn-sm btn-green" id="btn-save" style="display:none;" onclick="saveDossierEdit('${id}')">💾 Sauvegarder</button>
+    <button class="btn-sm btn-navy" id="btn-modifier" onclick="toggleEditDossier('${escAttr(id)}')">✏️ Modifier</button>
+    <button class="btn-sm btn-green" id="btn-save" style="display:none;" onclick="saveDossierEdit('${escAttr(id)}')">💾 Sauvegarder</button>
     <button class="btn-sm btn-outline" onclick="closeModal('modal-dossier')">Fermer</button>`;
   document.getElementById('modal-dossier').classList.add('open');
 
@@ -623,7 +581,7 @@ async function replyFromModal(dossierId) {
     const chat = document.getElementById('modal-chat');
     const div = document.createElement('div');
     div.className = 'msg mine';
-    div.innerHTML = `<div class="msg-av" style="background:linear-gradient(135deg,#0B1F45,#142e60);color:#fff;">SL</div><div><div class="bubble">${text}</div><div class="msg-time">À l'instant</div></div>`;
+    div.innerHTML = `<div class="msg-av" style="background:linear-gradient(135deg,#0B1F45,#142e60);color:#fff;">SL</div><div><div class="bubble">${esc(text)}</div><div class="msg-time">À l'instant</div></div>`;
     chat.appendChild(div);
     chat.scrollTop = chat.scrollHeight;
     showNotif('✅ Message envoyé !', 'green');
@@ -638,11 +596,11 @@ function renderConvList() {
     const dos = allDossiers.find(d => d.id === did);
     const lastMsg = allMessages.filter(m => m.dossier_id === did).pop();
     const clientMsgs = allMessages.filter(m => m.dossier_id === did && m.expediteur === 'client').length;
-    return `<div style="display:flex;align-items:center;gap:12px;padding:14px 16px;border-bottom:1px solid var(--border);cursor:pointer;transition:background 0.2s;" onmouseover="this.style.background='var(--bg)'" onmouseout="this.style.background=''" onclick="openConv('${did}')">
-      <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--green),#00a87d);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.75rem;color:var(--navy);flex-shrink:0;">${(dos?.profiles?.prenom?.[0]||'?')+(dos?.profiles?.nom?.[0]||'')}</div>
+    return `<div style="display:flex;align-items:center;gap:12px;padding:14px 16px;border-bottom:1px solid var(--border);cursor:pointer;transition:background 0.2s;" onmouseover="this.style.background='var(--bg)'" onmouseout="this.style.background=''" onclick="openConv('${escAttr(did)}')">
+      <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--green),#00a87d);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.75rem;color:var(--navy);flex-shrink:0;">${esc((dos?.profiles?.prenom?.[0] || '?') + (dos?.profiles?.nom?.[0] || ''))}</div>
       <div style="flex:1;min-width:0;">
-        <div style="font-size:0.83rem;font-weight:700;color:var(--navy);">${dos?.profiles?.prenom||'--'} ${dos?.profiles?.nom||''}</div>
-        <div style="font-size:0.72rem;color:var(--slate);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${lastMsg?.contenu||''}</div>
+        <div style="font-size:0.83rem;font-weight:700;color:var(--navy);">${esc(dos?.profiles?.prenom || '--')} ${esc(dos?.profiles?.nom || '')}</div>
+        <div style="font-size:0.72rem;color:var(--slate);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${esc(lastMsg?.contenu || '')}</div>
       </div>
       ${clientMsgs>0?`<div style="background:var(--red);color:#fff;font-size:0.65rem;font-weight:800;width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;">${clientMsgs}</div>`:''}
     </div>`;
@@ -654,14 +612,14 @@ function openConv(dossierId) {
   const dos = allDossiers.find(d => d.id === dossierId);
   const msgs = allMessages.filter(m => m.dossier_id === dossierId);
   document.getElementById('chat-client-header').innerHTML = `
-    <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--green),#00a87d);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.75rem;color:var(--navy);">${(dos?.profiles?.prenom?.[0]||'?')+(dos?.profiles?.nom?.[0]||'')}</div>
-    <div><div style="font-size:0.88rem;font-weight:700;color:var(--navy);">${dos?.profiles?.prenom||'--'} ${dos?.profiles?.nom||''}</div><div style="font-size:0.72rem;color:var(--green);">● Actif</div></div>`;
+    <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--green),#00a87d);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.75rem;color:var(--navy);">${esc((dos?.profiles?.prenom?.[0] || '?') + (dos?.profiles?.nom?.[0] || ''))}</div>
+    <div><div style="font-size:0.88rem;font-weight:700;color:var(--navy);">${esc(dos?.profiles?.prenom || '--')} ${esc(dos?.profiles?.nom || '')}</div><div style="font-size:0.72rem;color:var(--green);">● Actif</div></div>`;
   const container = document.getElementById('admin-chat-msgs');
   container.innerHTML = msgs.map(m => {
     const mine = m.expediteur === 'conseiller';
     return `<div class="msg ${mine?'mine':'other'}">
-      <div class="msg-av" style="${mine?'background:linear-gradient(135deg,#0B1F45,#142e60);color:#fff;':'background:linear-gradient(135deg,var(--green),#00a87d);color:#0B1F45;'}">${mine?'SL':(dos?.profiles?.prenom?.[0]||'C')}</div>
-      <div><div class="bubble">${m.contenu}</div><div class="msg-time">${fmtTime(m.created_at)}</div></div>
+      <div class="msg-av" style="${mine?'background:linear-gradient(135deg,#0B1F45,#142e60);color:#fff;':'background:linear-gradient(135deg,var(--green),#00a87d);color:#0B1F45;'}">${mine?'SL':esc(dos?.profiles?.prenom?.[0] || 'C')}</div>
+      <div><div class="bubble">${esc(m.contenu || '')}</div><div class="msg-time">${fmtTime(m.created_at)}</div></div>
     </div>`;
   }).join('') || '<div style="text-align:center;color:var(--slate);font-size:0.83rem;padding:20px;">Aucun message</div>';
   container.scrollTop = container.scrollHeight;
@@ -679,7 +637,7 @@ async function sendAdminMsg() {
     const container = document.getElementById('admin-chat-msgs');
     const div = document.createElement('div');
     div.className = 'msg mine';
-    div.innerHTML = `<div class="msg-av" style="background:linear-gradient(135deg,#0B1F45,#142e60);color:#fff;">SL</div><div><div class="bubble">${text}</div><div class="msg-time">À l'instant</div></div>`;
+    div.innerHTML = `<div class="msg-av" style="background:linear-gradient(135deg,#0B1F45,#142e60);color:#fff;">SL</div><div><div class="bubble">${esc(text)}</div><div class="msg-time">À l'instant</div></div>`;
     container.appendChild(div);
     container.scrollTop = container.scrollHeight;
     showNotif('✅ Message envoyé !', 'green');
@@ -736,9 +694,14 @@ async function saveDossierEdit(dossierId) {
 }
 
 // HELPERS
+function esc(value) {
+  return String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+function escAttr(value) { return esc(value); }
 function closeModal(id) { document.getElementById(id).classList.remove('open'); }
-function calcM(P, dur) { const n=dur*12, r=0.035/12; return P*(r*Math.pow(1+r,n))/(Math.pow(1+r,n)-1); }
-function num(n) { return Number(n).toLocaleString('fr-FR'); }
+function parseAmount(value) { return Number(String(value ?? '').replace(/[^0-9.-]/g, '')) || 0; }
+function calcM(P, dur) { const principal=parseAmount(P), n=parseAmount(dur)*12, r=0.035/12; return n ? principal*(r*Math.pow(1+r,n))/(Math.pow(1+r,n)-1) : 0; }
+function num(n) { return parseAmount(n).toLocaleString('fr-FR'); }
 function labelS(s) { return {en_cours:"En cours",accepte:'Accepté',refuse:'Refusé',signe:'Signé',verse:'Versé'}[s]||s; }
 function fmtDate(d) { return new Date(d).toLocaleDateString('fr-FR',{day:'2-digit',month:'2-digit',year:'numeric'}); }
 function fmtTime(d) { return new Date(d).toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'}); }
@@ -750,9 +713,9 @@ function showNotif(msg, type='') {
 function showSection(id) {
   document.querySelectorAll('.dash-section').forEach(s => s.classList.remove('active'));
   document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-  document.getElementById('section-'+id).classList.add('active');
-  const map = {dashboard:0,simulations:1,clients:2,dossiers:3,messages:4};
-  document.querySelectorAll('.nav-item')[map[id]]?.classList.add('active');
+  const section = document.getElementById('section-'+id);
+  if (section) section.classList.add('active');
+  document.querySelector(`.nav-item[onclick="showSection('${id}')"]`)?.classList.add('active');
 }
 </script>
 </body>

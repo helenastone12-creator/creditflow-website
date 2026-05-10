@@ -2019,7 +2019,7 @@
           </text>
         </svg>
       </span>
-      <p id="footer-tagline" class="footer-tagline">La plateforme de prêt en ligne de référence en Europe. Transparence, rapidité et sécurité pour tous vos projets.</p>
+      <p id="footer-tagline" class="footer-tagline">Intermédiaire en opérations bancaires<br>de référence en Europe.<br>Simulation gratuite et accompagnement personnalisé.</p>
       <div id="footer-rgpd-badge" class="rgpd-badge"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 1 1 8 0v4"/></svg> Conforme RGPD · Données sécurisées</div>
     </div>
     <div class="footer-col">
@@ -2669,7 +2669,7 @@ var TRANSLATIONS = {
       ]
     },
     footer: {
-      tagline: 'Intermédiaire en opérations bancaires de référence en Europe. Simulation gratuite, accompagnement personnalisé, transparence et sécurité pour tous vos projets.',
+      tagline: 'Intermédiaire en opérations bancaires<br>de référence en Europe.<br>Simulation gratuite et accompagnement personnalisé.',
       rgpd: '🔒 Conforme RGPD · Données sécurisées',
       products: 'Nos produits', info: 'Informations', legal: 'Légal',
       orias: 'Intermédiaire en opérations bancaires inscrit à l\'<strong style="color:#00c896;">OAM</strong>',
@@ -4238,7 +4238,7 @@ function applyLang(code) {
   }
 
   // Footer
-  set('footer-tagline', t.footer.tagline);
+  var ftEl = document.getElementById('footer-tagline'); if(ftEl) ftEl.innerHTML = t.footer.tagline;
   set('footer-products-h', t.footer.products);
   set('footer-info-h', t.footer.info);
   set('footer-legal-h', t.footer.legal);

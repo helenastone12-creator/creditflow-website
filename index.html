@@ -4712,7 +4712,7 @@ function switchLang(code) {
 (function() {
   var lang = detectLang();
   if (lang !== 'fr') applyLang(lang);
-  else localStorage.setItem('finooz-lang', 'fr');
+  else { localStorage.setItem('finooz-lang', 'fr'); buildSwitcher('fr'); }
   document.documentElement.classList.remove('lang-loading');
 })();
 

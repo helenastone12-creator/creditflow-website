@@ -2214,9 +2214,6 @@ function showPage(pageId, fromPopState) {
     var banner = document.getElementById('sim-prefill-banner');
     var msgEl = document.getElementById('contact-message');
     var objetEl = document.getElementById('contact-objet');
-    if (msgEl && !msgEl.value) {
-      msgEl.value = 'Bonjour,\n\nJ\'ai effectué une simulation sur votre site :\n- Projet : ' + (simData.projet||'--') + '\n- Montant : ' + (simData.montant||'--') + '\n- ' + (simData.duree||'') + '\n\nJe souhaite obtenir plus d\'informations sur cette offre.\n\nCordialement';
-    }
     if (objetEl && simData.projet) {
       var projetMap = { 'Immobilier':'Prêt Immobilier','Auto':'Prêt Automobile','Personnel':'Prêt Personnel' };
       var objet = projetMap[simData.projet] || 'Question sur le simulateur';

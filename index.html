@@ -4679,9 +4679,10 @@ document.addEventListener('click', function() { closeLangDD(); });
 
 function switchLang(code) {
   applyLang(code);
+  showPage('home');
   var newPath = window.location.pathname.replace(/^\/(fr|en|de|fi|sv|pt|it|es)(\/|$)/, '/'+code+'/');
   if (newPath === window.location.pathname) newPath = '/'+code+'/';
-  history.pushState({ lang: code }, '', newPath);
+  history.replaceState({ lang: code, page: 'home' }, '', newPath);
 }
 
 // Init on load

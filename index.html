@@ -902,11 +902,11 @@
           </div>
           <div class="sim-tile" onclick="selectTile(this,'auto')" style="padding:16px 10px;border-radius:12px;display:flex;flex-direction:column;align-items:center;gap:8px;">
             <div class="sim-tile-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h4l3 5v3h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div>
-            <div class="sim-tile-label">Auto / Moto</div>
+            <div class="sim-tile-label">Auto</div>
           </div>
           <div class="sim-tile" onclick="selectTile(this,'personnel')" style="padding:16px 10px;border-radius:12px;display:flex;flex-direction:column;align-items:center;gap:8px;">
             <div class="sim-tile-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/><path d="M16 11h2"/></svg></div>
-            <div class="sim-tile-label">Prêt personnel</div>
+            <div class="sim-tile-label">Personnel</div>
           </div>
           <div class="sim-tile" onclick="selectTile(this,'travaux')" style="padding:16px 10px;border-radius:12px;display:flex;flex-direction:column;align-items:center;gap:8px;">
             <div class="sim-tile-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div>
@@ -954,11 +954,11 @@
             </div>
             <div class="sim-tile" onclick="selectTile(this,'auto')" style="padding:12px 8px;border-radius:10px;display:flex;flex-direction:column;align-items:center;gap:5px;">
               <div class="sim-tile-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h4l3 5v3h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div>
-              <div class="sim-tile-label" style="font-size:0.75rem;">Auto / Moto</div>
+              <div class="sim-tile-label" style="font-size:0.75rem;">Auto</div>
             </div>
             <div class="sim-tile" onclick="selectTile(this,'personnel')" style="padding:12px 8px;border-radius:10px;display:flex;flex-direction:column;align-items:center;gap:5px;">
               <div class="sim-tile-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/><path d="M16 11h2"/></svg></div>
-              <div class="sim-tile-label" style="font-size:0.75rem;">Prêt personnel</div>
+              <div class="sim-tile-label" style="font-size:0.75rem;">Personnel</div>
             </div>
             <div class="sim-tile" onclick="selectTile(this,'voyage')" style="padding:12px 8px;border-radius:10px;display:flex;flex-direction:column;align-items:center;gap:5px;">
               <div class="sim-tile-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/></svg></div>
@@ -1308,14 +1308,14 @@
             <div><strong>Immobilier</strong><p>Résidence principale, secondaire ou investissement</p></div>
             <span class="choice-check">✓</span>
           </div>
-          <div class="sim-choice" onclick="selectChoice(this,'projet','Auto / Moto','🚗')">
+          <div class="sim-choice" onclick="selectChoice(this,'projet','Auto','🚗')">
             <span style="font-size:1.5rem;">🚗</span>
-            <div><strong>Auto / Moto</strong><p>Véhicule neuf, occasion ou électrique</p></div>
+            <div><strong>Auto</strong><p>Véhicule neuf, occasion ou électrique</p></div>
             <span class="choice-check">✓</span>
           </div>
-          <div class="sim-choice" onclick="selectChoice(this,'projet','Prêt personnel','👤')">
+          <div class="sim-choice" onclick="selectChoice(this,'projet','Personnel','👤')">
             <span style="font-size:1.5rem;">👤</span>
-            <div><strong>Prêt personnel</strong><p>Travaux, voyage, études, équipements...</p></div>
+            <div><strong>Personnel</strong><p>Travaux, voyage, études, équipements...</p></div>
             <span class="choice-check">✓</span>
           </div>
           <div class="sim-choice" onclick="selectChoice(this,'projet','Travaux','🔧')">
@@ -2181,12 +2181,12 @@ function continuerSim() {
   document.getElementById('page-simulateur').classList.add('active');
   window.scrollTo({ top: 0, behavior: 'smooth' });
   // Pré-remplir le projet et aller directement à l'étape 2
-  var labels = { immobilier: 'Immobilier', auto: 'Auto / Moto', personnel: 'Prêt personnel', travaux: 'Travaux', voyage: 'Voyage', autres: 'Autres' };
+  var labels = { immobilier: 'Immobilier', auto: 'Auto', personnel: 'Personnel', travaux: 'Travaux', voyage: 'Voyage', autres: 'Autres' };
   simData.projet = labels[selectedTileType] || selectedTileType;
   // Cocher la bonne tuile à l'étape 1
   setTimeout(function() {
     var choices = document.querySelectorAll('#step-1 .sim-choice');
-    var labelMap = { immobilier: 'Immobilier', auto: 'Auto / Moto', personnel: 'Prêt personnel', travaux: 'Travaux', voyage: 'Voyage', autres: 'Autres' };
+    var labelMap = { immobilier: 'Immobilier', auto: 'Auto', personnel: 'Personnel', travaux: 'Travaux', voyage: 'Voyage', autres: 'Autres' };
     var targetLabel = labelMap[selectedTileType] || selectedTileType;
     choices.forEach(function(c) {
       c.classList.remove('selected');
@@ -2230,7 +2230,7 @@ function showPage(pageId, fromPopState) {
       msgEl.value = 'Bonjour,\n\nJ\'ai effectué une simulation sur votre site :\n- Projet : ' + (simData.projet||'--') + '\n- Montant : ' + (simData.montant||'--') + '\n- ' + (simData.duree||'') + '\n\nJe souhaite obtenir plus d\'informations sur cette offre.\n\nCordialement';
     }
     if (objetEl && simData.projet) {
-      var projetMap = { 'Immobilier':'Prêt Immobilier','Auto / Moto':'Prêt Automobile','Prêt personnel':'Prêt Personnel' };
+      var projetMap = { 'Immobilier':'Prêt Immobilier','Auto':'Prêt Automobile','Personnel':'Prêt Personnel' };
       var objet = projetMap[simData.projet] || 'Question sur le simulateur';
       for (var i = 0; i < objetEl.options.length; i++) {
         if (objetEl.options[i].text === objet) { objetEl.selectedIndex = i; break; }
@@ -2503,16 +2503,16 @@ function resetSim() {
 // TAUX PAR TYPE DE PROJET
 var TAUX_MAP = {
   'Immobilier': 0.035,
-  'Auto / Moto': 0.035,
-  'Prêt personnel': 0.035,
+  'Auto': 0.035,
+  'Personnel': 0.035,
   'Travaux': 0.035,
   'Voyage': 0.035,
   'Autres': 0.035
 };
 var TAUX_LABELS = {
   'Immobilier': '3,5 %',
-  'Auto / Moto': '3,5 %',
-  'Prêt personnel': '3,5 %',
+  'Auto': '3,5 %',
+  'Personnel': '3,5 %',
   'Travaux': '3,5 %',
   'Voyage': '3,5 %',
   'Autres': '3,5 %'
@@ -2632,7 +2632,7 @@ var TRANSLATIONS = {
       rateLabel: 'Taux indicatif',
       rateNote: 'Pour 10 000 € sur 48 mois · Mensualités dès 220 €',
       freeSim: 'Simulation gratuite · Sans engagement',
-      tiles: ['Immobilier','Auto / Moto','Prêt personnel','Travaux','Voyage','Autres']
+      tiles: ['Immobilier','Auto','Personnel','Travaux','Voyage','Autres']
     },
     loans: {
       label: 'Nos solutions', title: 'Trouvez le financement adapté',
@@ -2754,7 +2754,7 @@ var TRANSLATIONS = {
         step3Title: 'Durée de remboursement', step3Subtitle: 'Choisissez la durée souhaitée',
         formStepTitle: 'Votre demande', formStepSubtitle: 'Plus qu\'une étape pour votre offre',
         durationFor: 'sur', durationMonths: 'mois', perMonth: '/ mois',
-        choices: [{t:'Immobilier',d:'Résidence principale, secondaire ou investissement'},{t:'Auto / Moto',d:'Véhicule neuf, occasion ou électrique'},{t:'Prêt personnel',d:'Travaux, voyage, études, équipements...'},{t:'Travaux',d:'Rénovation, extension, aménagement'},{t:'Voyage',d:'Vacances, voyage de noces, aventure'},{t:'Autres',d:'Études, mariage, équipements, santé...'}],
+        choices: [{t:'Immobilier',d:'Résidence principale, secondaire ou investissement'},{t:'Auto',d:'Véhicule neuf, occasion ou électrique'},{t:'Personnel',d:'Travaux, voyage, études, équipements...'},{t:'Travaux',d:'Rénovation, extension, aménagement'},{t:'Voyage',d:'Vacances, voyage de noces, aventure'},{t:'Autres',d:'Études, mariage, équipements, santé...'}],
         continueBtn: 'SIMULER SANS ENGAGEMENT →', backBtn: '← Retour',
         amountLabel: 'Montant souhaité', monthlyTitle: 'Je souhaite une mensualité de :',
         monthlyDesc: 'Pour un emprunt de', recapTitle: 'Récapitulatif de votre simulation',

@@ -485,6 +485,17 @@
   }
   .lang-dd-opt:hover { background: rgba(0,200,150,0.1); border-color: rgba(0,200,150,0.3); color: #fff; }
   .lang-dd-opt.active { border-color: rgba(0,200,150,0.5); color: var(--green); box-shadow: 0 0 0 1px rgba(0,200,150,0.2); }
+  .footer-lang-btn {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+    padding: 6px 10px; border-radius: 8px; cursor: pointer;
+    transition: all 0.2s; text-decoration: none;
+    font-size: 0.72rem; color: rgba(255,255,255,0.65); font-weight: 500; letter-spacing: 0.3px;
+  }
+  .footer-lang-btn img { border-radius: 2px; display: block; flex-shrink: 0; }
+  .footer-lang-name { line-height: 1; }
+  .footer-lang-btn:hover { background: rgba(0,200,150,0.1); border-color: rgba(0,200,150,0.4); }
+  .footer-lang-btn.active { border-color: rgba(0,200,150,0.5); box-shadow: 0 0 0 2px rgba(0,200,150,0.3); color: var(--green); }
   .footer-bottom {
     max-width:1180px; margin: 24px auto 0; padding-top: 24px;
     border-top: 1px solid rgba(255,255,255,0.1);
@@ -880,6 +891,7 @@
   <a href="#" onclick="showPage('personnel');toggleMenu();return false;" data-i18n="nav.personal">Prêt Personnel</a>
   <a href="#" onclick="showPage('comment');toggleMenu();return false;" data-i18n="nav.how">Comment ça marche</a>
   <a href="#" onclick="showPage('contact');toggleMenu();return false;" data-i18n="nav.contact">Contact</a>
+  <div id="mobileLangs" style="margin-top:16px;padding-top:16px;border-top:1px solid rgba(255,255,255,0.08);display:flex;flex-wrap:wrap;gap:8px;"></div>
 </div>
 
 <!-- ═══════════ HOME PAGE ═══════════ -->
@@ -4644,22 +4656,33 @@ function applySecondaryPages(t, sec) {
 }
 
 function buildSwitcher(active) {
+  // Footer dropdown
   var fl = document.getElementById('footerLangs');
-  if (!fl) return;
-  var opts = LANGS.map(function(l) {
-    var cls = l === active ? 'active' : '';
-    return '<a href="javascript:void(0)" class="lang-dd-opt '+cls+'" onclick="switchLang(\''+l+'\');closeLangDD()">'
-      + flagImg(l,'16x12') + '<span>'+LANG_NAMES[l]+'</span></a>';
-  }).join('');
-  fl.innerHTML =
-    '<div class="lang-dd-wrap" id="langDDWrap">'
-    + '<button class="lang-dd-btn" id="langDDBtn" onclick="toggleLangDD(event)">'
-    + flagImg(active,'20x15')
-    + '<span>'+LANG_NAMES[active]+'</span>'
-    + '<span class="lang-dd-arrow">▾</span>'
-    + '</button>'
-    + '<div class="lang-dd-menu" id="langDDMenu">'+opts+'</div>'
-    + '</div>';
+  if (fl) {
+    var opts = LANGS.map(function(l) {
+      var cls = l === active ? 'active' : '';
+      return '<a href="javascript:void(0)" class="lang-dd-opt '+cls+'" onclick="switchLang(\''+l+'\');closeLangDD()">'
+        + flagImg(l,'16x12') + '<span>'+LANG_NAMES[l]+'</span></a>';
+    }).join('');
+    fl.innerHTML =
+      '<div class="lang-dd-wrap" id="langDDWrap">'
+      + '<button class="lang-dd-btn" id="langDDBtn" onclick="toggleLangDD(event)">'
+      + flagImg(active,'20x15')
+      + '<span>'+LANG_NAMES[active]+'</span>'
+      + '<span class="lang-dd-arrow">▾</span>'
+      + '</button>'
+      + '<div class="lang-dd-menu" id="langDDMenu">'+opts+'</div>'
+      + '</div>';
+  }
+  // Mobile menu : boutons directs
+  var ml = document.getElementById('mobileLangs');
+  if (ml) {
+    ml.innerHTML = LANGS.map(function(l) {
+      var cls = l === active ? 'active' : '';
+      return '<a href="javascript:void(0)" class="footer-lang-btn '+cls+'" onclick="switchLang(\''+l+'\');toggleMenu()">'
+        + flagImg(l,'20x15') + '<span class="footer-lang-name">'+LANG_NAMES[l]+'</span></a>';
+    }).join('');
+  }
 }
 function toggleLangDD(e) {
   e.stopPropagation();

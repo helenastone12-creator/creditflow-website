@@ -891,7 +891,6 @@
   <a href="#" onclick="showPage('personnel');toggleMenu();return false;" data-i18n="nav.personal">Prêt Personnel</a>
   <a href="#" onclick="showPage('comment');toggleMenu();return false;" data-i18n="nav.how">Comment ça marche</a>
   <a href="#" onclick="showPage('contact');toggleMenu();return false;" data-i18n="nav.contact">Contact</a>
-  <div id="mobileLangs" style="margin-top:16px;padding-top:16px;border-top:1px solid rgba(255,255,255,0.08);display:flex;flex-wrap:wrap;gap:8px;"></div>
 </div>
 
 <!-- ═══════════ HOME PAGE ═══════════ -->
@@ -4673,15 +4672,6 @@ function buildSwitcher(active) {
       + '</button>'
       + '<div class="lang-dd-menu" id="langDDMenu">'+opts+'</div>'
       + '</div>';
-  }
-  // Mobile menu : boutons directs
-  var ml = document.getElementById('mobileLangs');
-  if (ml) {
-    ml.innerHTML = LANGS.map(function(l) {
-      var cls = l === active ? 'active' : '';
-      return '<a href="javascript:void(0)" class="footer-lang-btn '+cls+'" onclick="switchLang(\''+l+'\');toggleMenu()">'
-        + flagImg(l,'20x15') + '<span class="footer-lang-name">'+LANG_NAMES[l]+'</span></a>';
-    }).join('');
   }
 }
 function toggleLangDD(e) {

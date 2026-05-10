@@ -454,20 +454,37 @@
   .footer-langs {
     max-width:1180px; margin: 32px auto 0; padding: 20px 0;
     border-top: 1px solid rgba(255,255,255,0.08);
-    display: flex; flex-wrap: wrap; gap: 8px; align-items: center;
+    display: flex; align-items: center;
   }
-  .footer-lang-btn {
-    display: inline-flex; align-items: center; gap: 6px;
-    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
-    padding: 6px 10px; border-radius: 8px; cursor: pointer;
-    transition: all 0.2s; text-decoration: none;
-    font-size: 0.72rem; color: rgba(255,255,255,0.65);
-    font-weight: 500; letter-spacing: 0.3px;
+  .lang-dd-wrap { position: relative; display: inline-block; }
+  .lang-dd-btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.15);
+    padding: 8px 14px; border-radius: 10px; cursor: pointer;
+    color: rgba(255,255,255,0.8); font-size: 0.82rem; font-weight: 500;
+    transition: all 0.2s; letter-spacing: 0.3px; outline: none;
   }
-  .footer-lang-btn img { border-radius: 2px; display: block; flex-shrink: 0; }
-  .footer-lang-name { line-height: 1; }
-  .footer-lang-btn:hover { background: rgba(0,200,150,0.1); border-color: rgba(0,200,150,0.4); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,200,150,0.2); }
-  .footer-lang-btn.active { border-color: rgba(0,200,150,0.5); box-shadow: 0 0 0 2px rgba(0,200,150,0.3); }
+  .lang-dd-btn:hover { background: rgba(0,200,150,0.1); border-color: rgba(0,200,150,0.4); }
+  .lang-dd-btn.dd-open { border-color: rgba(0,200,150,0.5); box-shadow: 0 0 0 2px rgba(0,200,150,0.2); }
+  .lang-dd-arrow { font-size: 0.65rem; transition: transform 0.2s; opacity: 0.6; }
+  .lang-dd-btn.dd-open .lang-dd-arrow { transform: rotate(180deg); }
+  .lang-dd-menu {
+    position: absolute; bottom: calc(100% + 8px); left: 0;
+    background: #0d2655; border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 12px; padding: 6px;
+    display: none; flex-direction: column; gap: 2px;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.4); min-width: 170px; z-index: 2000;
+  }
+  .lang-dd-menu.open { display: flex; }
+  .lang-dd-opt {
+    display: flex; align-items: center; gap: 8px;
+    padding: 7px 10px; border-radius: 8px; cursor: pointer;
+    color: rgba(255,255,255,0.7); font-size: 0.8rem; font-weight: 500;
+    transition: all 0.15s; text-decoration: none;
+    border: 1px solid transparent;
+  }
+  .lang-dd-opt:hover { background: rgba(0,200,150,0.1); border-color: rgba(0,200,150,0.3); color: #fff; }
+  .lang-dd-opt.active { border-color: rgba(0,200,150,0.5); color: var(--green); box-shadow: 0 0 0 1px rgba(0,200,150,0.2); }
   .footer-bottom {
     max-width:1180px; margin: 24px auto 0; padding-top: 24px;
     border-top: 1px solid rgba(255,255,255,0.1);
@@ -4627,17 +4644,38 @@ function applySecondaryPages(t, sec) {
 }
 
 function buildSwitcher(active) {
-  // Footer uniquement : drapeaux images
   var fl = document.getElementById('footerLangs');
-  if (fl) {
-    var flhtml = '';
-    LANGS.forEach(function(l) {
-      var cls = l === active ? 'active' : '';
-      flhtml += '<a href="javascript:void(0)" class="footer-lang-btn '+cls+'" onclick="switchLang(\''+l+'\')" title="'+LANG_NAMES[l]+'">'+flagImg(l, '20x15')+'<span class="footer-lang-name">'+LANG_NAMES[l]+'</span></a>';
-    });
-    fl.innerHTML = flhtml;
-  }
+  if (!fl) return;
+  var opts = LANGS.map(function(l) {
+    var cls = l === active ? 'active' : '';
+    return '<a href="javascript:void(0)" class="lang-dd-opt '+cls+'" onclick="switchLang(\''+l+'\');closeLangDD()">'
+      + flagImg(l,'16x12') + '<span>'+LANG_NAMES[l]+'</span></a>';
+  }).join('');
+  fl.innerHTML =
+    '<div class="lang-dd-wrap" id="langDDWrap">'
+    + '<button class="lang-dd-btn" id="langDDBtn" onclick="toggleLangDD(event)">'
+    + flagImg(active,'20x15')
+    + '<span>'+LANG_NAMES[active]+'</span>'
+    + '<span class="lang-dd-arrow">▾</span>'
+    + '</button>'
+    + '<div class="lang-dd-menu" id="langDDMenu">'+opts+'</div>'
+    + '</div>';
 }
+function toggleLangDD(e) {
+  e.stopPropagation();
+  var btn = document.getElementById('langDDBtn');
+  var menu = document.getElementById('langDDMenu');
+  if (!menu) return;
+  var open = menu.classList.toggle('open');
+  if (btn) btn.classList.toggle('dd-open', open);
+}
+function closeLangDD() {
+  var btn = document.getElementById('langDDBtn');
+  var menu = document.getElementById('langDDMenu');
+  if (menu) menu.classList.remove('open');
+  if (btn) btn.classList.remove('dd-open');
+}
+document.addEventListener('click', function() { closeLangDD(); });
 
 function switchLang(code) {
   applyLang(code);

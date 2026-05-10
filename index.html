@@ -25,6 +25,7 @@
 <!-- DNS prefetch secondaire -->
 <link rel="dns-prefetch" href="https://images.unsplash.com">
 <link rel="dns-prefetch" href="https://randomuser.me">
+<link rel="dns-prefetch" href="https://flagcdn.com">
 <!-- Fonts : poids réduits au strict nécessaire -->
 <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@700;800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@700;800&display=swap" rel="stylesheet"></noscript>
@@ -2140,11 +2141,24 @@ window.addEventListener('load', function() {
   initCookie();
 });
 </script>
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script>
 var EMAILJS_SERVICE = 'service_l9w70lh';
 var EMAILJS_TEMPLATE = 'template_7d7q34j';
 var EMAILJS_KEY = 'oZiWNC5z2M4rydJCT';
+var _emailjsReady = null;
+function ensureEmailJS() {
+  if (!_emailjsReady) {
+    _emailjsReady = new Promise(function(resolve, reject) {
+      if (typeof emailjs !== 'undefined') { resolve(); return; }
+      var s = document.createElement('script');
+      s.src = 'https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js';
+      s.onload = resolve;
+      s.onerror = reject;
+      document.head.appendChild(s);
+    });
+  }
+  return _emailjsReady;
+}
 
 async function demanderSansEngagement() {
   showResultat();
@@ -2282,6 +2296,7 @@ async function submitForm() {
   var btn = document.querySelector('#contactForm .form-submit');
   if (btn) { btn.disabled = true; btn.textContent = 'Envoi en cours...'; }
   try {
+    await ensureEmailJS();
     await emailjs.send(EMAILJS_SERVICE, EMAILJS_TEMPLATE, {
       title: 'Nouveau message — ' + (objet ? objet.value : 'Contact'),
       name: prenom.value.trim() + ' ' + nom.value.trim(),
@@ -2416,6 +2431,7 @@ async function submitLead() {
   var btn = document.getElementById('btn-lead-submit');
   if (btn) { btn.disabled = true; btn.textContent = 'Envoi en cours...'; }
   try {
+    await ensureEmailJS();
     await emailjs.send(EMAILJS_SERVICE, EMAILJS_TEMPLATE, {
       title: 'Nouvelle simulation — ' + (simData.projet || '--'),
       name: prenom.value.trim() + ' ' + nom.value.trim(),

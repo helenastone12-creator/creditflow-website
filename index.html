@@ -2148,6 +2148,8 @@ window.addEventListener('load', function() {
 var EMAILJS_SERVICE = 'service_l9w70lh';
 var EMAILJS_TEMPLATE = 'template_7d7q34j';
 var EMAILJS_KEY = 'oZiWNC5z2M4rydJCT';
+var SENDING_TEXT = { fr:'Envoi en cours...', en:'Sending...', de:'Wird gesendet...', fi:'Lähetetään...', sv:'Skickar...', pt:'A enviar...', it:'Invio in corso...', es:'Enviando...' };
+function getSendingText() { return SENDING_TEXT[document.documentElement.lang] || SENDING_TEXT['fr']; }
 var _emailjsReady = null;
 function ensureEmailJS() {
   if (!_emailjsReady) {
@@ -2297,7 +2299,8 @@ async function submitForm() {
     showToast('Veuillez saisir une adresse email valide.', 'error'); return;
   }
   var btn = document.querySelector('#contactForm .form-submit');
-  if (btn) { btn.disabled = true; btn.textContent = 'Envoi en cours...'; }
+  var btnOrigText = btn ? btn.textContent : '';
+  if (btn) { btn.disabled = true; btn.textContent = getSendingText(); }
   try {
     await ensureEmailJS();
     await emailjs.send(EMAILJS_SERVICE, EMAILJS_TEMPLATE, {
@@ -2309,7 +2312,7 @@ async function submitForm() {
   } catch(e) {
     console.error('EmailJS erreur:', e);
     showToast('Erreur lors de l\'envoi. Veuillez réessayer.', 'error');
-    if (btn) { btn.disabled = false; btn.textContent = 'Envoyer le message →'; }
+    if (btn) { btn.disabled = false; btn.textContent = btnOrigText; }
     return;
   }
   if (btn) { btn.disabled = false; }
@@ -2432,7 +2435,8 @@ async function submitLead() {
     showToast('Veuillez accepter la politique de confidentialité.', 'error'); return;
   }
   var btn = document.getElementById('btn-lead-submit');
-  if (btn) { btn.disabled = true; btn.textContent = 'Envoi en cours...'; }
+  var btnOrigText = btn ? btn.textContent : '';
+  if (btn) { btn.disabled = true; btn.textContent = getSendingText(); }
   try {
     await ensureEmailJS();
     await emailjs.send(EMAILJS_SERVICE, EMAILJS_TEMPLATE, {
@@ -2444,7 +2448,7 @@ async function submitLead() {
   } catch(e) {
     console.error('EmailJS erreur:', e);
     showToast('Erreur lors de l\'envoi. Veuillez réessayer.', 'error');
-    if (btn) { btn.disabled = false; btn.textContent = 'Envoyer ma demande →'; }
+    if (btn) { btn.disabled = false; btn.textContent = btnOrigText; }
     return;
   }
   if (btn) { btn.disabled = false; }

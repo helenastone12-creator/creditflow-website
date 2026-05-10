@@ -1869,7 +1869,7 @@
     </div>
     <h3 style="color:var(--navy);margin-bottom:12px;font-size:1.3rem;">Kit presse</h3>
     <p style="color:var(--slate);margin-bottom:20px;">Téléchargez notre kit presse complet : logos, visuels, biographies des dirigeants et fiche entreprise.</p>
-    <button class="btn-primary" onclick="showPage('contact')">Demander le kit presse</button>
+    <button id="presse-kit-btn" class="btn-primary" onclick="showPage('contact')">Demander le kit presse</button>
   </div>
 </div>
 
@@ -4653,7 +4653,7 @@ function applySecondaryPages(t, sec) {
     var pressePs = ppresse.querySelectorAll('div[style*="max-width"] > p');
     if (pressePs[0] && prs.contactDesc) pressePs[0].innerHTML = prs.contactDesc;
     if (pressePs[1] && prs.kitDesc) pressePs[1].textContent = prs.kitDesc;
-    var presseBtn = ppresse.querySelector('button');
+    var presseBtn = document.getElementById('presse-kit-btn');
     if (presseBtn && prs.kitBtn) presseBtn.textContent = prs.kitBtn;
     if (prs.news) {
       for (var ni = 1; ni <= 3; ni++) {

@@ -2371,6 +2371,8 @@ function goStep(n) {
     var line = document.getElementById('step-line-'+i);
     if (line) line.style.background = (i < n) ? 'var(--green)' : 'rgba(255,255,255,0.2)';
   });
+  var simCard = document.querySelector('#page-simulateur [style*="background:#fff"]');
+  if (simCard) simCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
 function showResultat() {

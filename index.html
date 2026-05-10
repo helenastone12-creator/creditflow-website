@@ -1966,22 +1966,22 @@
     <!-- Engagements -->
     <div class="engage-box" style="background:linear-gradient(135deg,var(--navy),var(--navy-mid));border-radius:var(--radius);padding:40px;margin-bottom:40px;">
       <h3 style="color:#fff;font-family:'Sora',sans-serif;font-size:1.2rem;margin-bottom:24px;">Nos engagements envers vous</h3>
-      <div class="grid-2col" style="gap:16px;">
+      <div class="engage-items" style="display:flex;flex-direction:column;gap:16px;">
         <div style="display:flex;gap:12px;align-items:flex-start;">
-          <div style="width:28px;height:28px;border-radius:50%;background:rgba(0,200,150,0.2);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:0.8rem;">✓</div>
-          <div><div style="font-size:0.88rem;font-weight:600;color:#fff;margin-bottom:3px;">Sélection rigoureuse</div><div style="font-size:0.78rem;color:rgba(255,255,255,0.5);">Chaque partenaire est audité annuellement sur 40+ critères de qualité.</div></div>
+          <div style="width:28px;height:28px;border-radius:50%;background:rgba(0,200,150,0.2);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:0.8rem;color:#fff;">✓</div>
+          <div><div style="font-size:0.88rem;font-weight:600;color:#fff;margin-bottom:3px;">Sélection rigoureuse</div><div style="font-size:0.78rem;color:rgba(255,255,255,0.6);">Chaque partenaire est audité annuellement sur 40+ critères de qualité.</div></div>
         </div>
         <div style="display:flex;gap:12px;align-items:flex-start;">
-          <div style="width:28px;height:28px;border-radius:50%;background:rgba(0,200,150,0.2);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:0.8rem;">✓</div>
-          <div><div style="font-size:0.88rem;font-weight:600;color:#fff;margin-bottom:3px;">Meilleur taux garanti</div><div style="font-size:0.78rem;color:rgba(255,255,255,0.5);">Nous comparons les offres de tous nos partenaires pour vous proposer le meilleur taux.</div></div>
+          <div style="width:28px;height:28px;border-radius:50%;background:rgba(0,200,150,0.2);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:0.8rem;color:#fff;">✓</div>
+          <div><div style="font-size:0.88rem;font-weight:600;color:#fff;margin-bottom:3px;">Meilleur taux garanti</div><div style="font-size:0.78rem;color:rgba(255,255,255,0.6);">Nous comparons les offres de tous nos partenaires pour vous proposer le meilleur taux.</div></div>
         </div>
         <div style="display:flex;gap:12px;align-items:flex-start;">
-          <div style="width:28px;height:28px;border-radius:50%;background:rgba(0,200,150,0.2);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:0.8rem;">✓</div>
-          <div><div style="font-size:0.88rem;font-weight:600;color:#fff;margin-bottom:3px;">Transparence totale</div><div style="font-size:0.78rem;color:rgba(255,255,255,0.5);">Aucune commission cachée. Nos honoraires sont clairement indiqués dès le départ.</div></div>
+          <div style="width:28px;height:28px;border-radius:50%;background:rgba(0,200,150,0.2);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:0.8rem;color:#fff;">✓</div>
+          <div><div style="font-size:0.88rem;font-weight:600;color:#fff;margin-bottom:3px;">Transparence totale</div><div style="font-size:0.78rem;color:rgba(255,255,255,0.6);">Aucune commission cachée. Nos honoraires sont clairement indiqués dès le départ.</div></div>
         </div>
         <div style="display:flex;gap:12px;align-items:flex-start;">
-          <div style="width:28px;height:28px;border-radius:50%;background:rgba(0,200,150,0.2);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:0.8rem;">✓</div>
-          <div><div style="font-size:0.88rem;font-weight:600;color:#fff;margin-bottom:3px;">Protection du client</div><div style="font-size:0.78rem;color:rgba(255,255,255,0.5);">Toutes nos offres respectent les règles de protection des emprunteurs (loi Lagarde).</div></div>
+          <div style="width:28px;height:28px;border-radius:50%;background:rgba(0,200,150,0.2);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:0.8rem;color:#fff;">✓</div>
+          <div><div style="font-size:0.88rem;font-weight:600;color:#fff;margin-bottom:3px;">Protection du client</div><div style="font-size:0.78rem;color:rgba(255,255,255,0.6);">Toutes nos offres respectent les règles de protection des emprunteurs (loi Lagarde).</div></div>
         </div>
       </div>
     </div>
@@ -4607,7 +4607,7 @@ function applySecondaryPages(t, sec) {
     }
     ppart_qt('.engage-box h3', pr.engTitle);
     if (pr.engItems) {
-      ppart.querySelectorAll('.engage-box .grid-2col > div').forEach(function(item, i) {
+      ppart.querySelectorAll('.engage-box .engage-items > div').forEach(function(item, i) {
         if (!pr.engItems[i]) return;
         var tEl = item.querySelector('div:nth-child(2) > div:first-child');
         var dEl = item.querySelector('div:nth-child(2) > div:last-child');

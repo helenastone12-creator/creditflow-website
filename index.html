@@ -938,7 +938,7 @@
             <div class="sim-tile-label">Autres</div>
           </div>
         </div>
-        <button class="btn-sim-continue" onclick="continuerSim()" style="width:100%;padding:14px;font-size:0.95rem;">Lancer ma simulation →</button>
+        <button id="btn-sim-hero-m" class="btn-sim-continue" onclick="continuerSim()" style="width:100%;padding:14px;font-size:0.95rem;">Lancer ma simulation →</button>
       </div>
     </div>
 
@@ -986,7 +986,7 @@
               <div class="sim-tile-label" style="font-size:0.75rem;">Autres</div>
             </div>
           </div>
-          <button class="btn-sim-continue" onclick="continuerSim()" style="width:100%;padding:13px;font-size:0.9rem;font-family:'Inter',sans-serif;">Lancer ma simulation →</button>
+          <button id="btn-sim-hero-d" class="btn-sim-continue" onclick="continuerSim()" style="width:100%;padding:13px;font-size:0.9rem;font-family:'Inter',sans-serif;">Lancer ma simulation →</button>
           <div style="display:flex;align-items:center;justify-content:center;gap:6px;margin-top:14px;">
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#8a9bbf" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
             <span style="font-size:0.7rem;color:#8a9bbf;font-family:'Inter',sans-serif;">Simulation gratuite · Sans engagement · Sous réserve d'acceptation</span>
@@ -4174,6 +4174,8 @@ function applyLang(code) {
   set('hero-sub-d', t.hero.sub);
   set('hero-start-m', t.hero.startSim);
   set('hero-start-d', t.hero.startSim);
+  set('btn-sim-hero-m', t.hero.continue);
+  set('btn-sim-hero-d', t.hero.continue);
   set('hero-rate-label', t.hero.rateLabel);
   set('hero-rate-note', t.hero.rateNote);
 

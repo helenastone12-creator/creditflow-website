@@ -811,6 +811,7 @@
   @media (max-width: 900px) { .hero-desktop { display: none !important; } }
 
   /* ─── LANG LOADER ─── */
+  html.lang-loading body { visibility: hidden; }
   #lang-loader { display: none; }
 </style>
 <script>
@@ -823,6 +824,7 @@
     var browser = (navigator.language || navigator.userLanguage || 'fr').split('-')[0].toLowerCase();
     document.documentElement.lang = SUPPORTED.indexOf(browser) !== -1 ? browser : 'fr';
   }
+  document.documentElement.classList.add('lang-loading');
 })();
 </script>
 <body>
@@ -4094,7 +4096,7 @@ function detectLang() {
   // 3. localStorage
   var stored = localStorage.getItem('finooz-lang');
   if (stored && TRANSLATIONS[stored]) return stored;
-  // 4. Browser language
+  // 4. Langue du navigateur
   var browser = (navigator.language || navigator.userLanguage || 'fr').split('-')[0].toLowerCase();
   return TRANSLATIONS[browser] ? browser : 'fr';
 }
@@ -4645,11 +4647,9 @@ function switchLang(code) {
 // Init on load
 (function() {
   var lang = detectLang();
-  if (lang !== 'fr') {
-    requestAnimationFrame(function() { applyLang(lang); });
-  } else {
-    localStorage.setItem('finooz-lang', 'fr');
-  }
+  if (lang !== 'fr') applyLang(lang);
+  else localStorage.setItem('finooz-lang', 'fr');
+  document.documentElement.classList.remove('lang-loading');
 })();
 
 window.addEventListener('popstate', function(e) {

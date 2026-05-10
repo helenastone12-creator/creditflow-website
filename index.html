@@ -200,7 +200,7 @@
   .hero-cta { display: flex; gap: 16px; flex-wrap: wrap; }
   .hero-stats { display: flex; gap: 32px; margin-top: 48px; padding-top: 40px; border-top: 1px solid rgba(255,255,255,0.12); }
   .hero-stat-num { font-family: var(--font-display); font-weight: 800; font-size: 1.8rem; color: var(--white); }
-  .hero-stat-label { color: rgba(255,255,255,0.5); font-size: 0.82rem; margin-top: 2px; }
+  .hero-stat-label { color: rgba(255,255,255,0.72); font-size: 0.82rem; margin-top: 2px; }
 
   /* ─── HERO SIMULATOR CARD ─── */
   .hero-sim-card {
@@ -245,7 +245,7 @@
   .sim-results-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
   .sim-result-item { text-align: center; }
   .sim-result-num { font-family: var(--font-display); font-weight: 700; font-size: 1.1rem; color: var(--white); }
-  .sim-result-label { font-size: 0.7rem; color: rgba(255,255,255,0.55); margin-top: 2px; line-height: 1.3; }
+  .sim-result-label { font-size: 0.7rem; color: rgba(255,255,255,0.75); margin-top: 2px; line-height: 1.3; }
   /* ─── SIM TILES ─── */
   .sim-tiles-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px; }
   .sim-tile {
@@ -314,7 +314,7 @@
 
   /* ─── SECTION COMMONS ─── */
   .section { padding: 64px 24px; }
-  .section-dark { background: var(--navy); color: var(--white); }
+  .section-dark { background: linear-gradient(160deg, #0B1F45 0%, #0e2552 100%); color: var(--white); }
   .section-alt { background: var(--section-bg); }
   .section-label {
     display: inline-block; font-size: 0.72rem; font-weight: 700; letter-spacing: 2px;
@@ -378,13 +378,14 @@
     position: relative; z-index:1;
   }
   .step h3 { font-family: var(--font-display); font-weight: 700; font-size: 1rem; color: var(--white); margin-bottom: 8px; }
-  .step p { font-size: 0.85rem; color: rgba(255,255,255,0.55); line-height: 1.6; }
+  .step p { font-size: 0.85rem; color: rgba(255,255,255,0.75); line-height: 1.6; }
 
   /* ─── TESTIMONIALS ─── */
   .testimonials-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; }
   .testi-card {
     background: var(--white); border-radius: var(--radius); padding: 28px 24px;
-    box-shadow: var(--shadow); border: 1px solid var(--border);
+    box-shadow: 0 2px 16px rgba(11,31,69,0.09), 0 1px 4px rgba(11,31,69,0.06);
+    border: 1px solid var(--border);
     transition: transform 0.3s, box-shadow 0.3s;
   }
   .testi-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
@@ -403,9 +404,21 @@
   /* ─── SECURITY ─── */
   .security-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 32px; max-width: 860px; margin: 0 auto; }
   .sec-item { text-align: center; padding: 32px 20px; }
-  .sec-icon { font-size: 2.4rem; margin-bottom: 16px; }
+  .sec-icon {
+    width: 64px; height: 64px;
+    background: rgba(0,200,150,0.08);
+    border: 1px solid rgba(0,200,150,0.18);
+    border-radius: 16px;
+    margin: 0 auto 20px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .sec-item {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 16px;
+  }
   .sec-item h4 { font-family: var(--font-display); font-weight: 700; font-size: 1rem; color: var(--white); margin-bottom: 8px; }
-  .sec-item p { font-size: 0.82rem; color: rgba(255,255,255,0.5); line-height: 1.6; }
+  .sec-item p { font-size: 0.82rem; color: rgba(255,255,255,0.75); line-height: 1.6; }
 
   /* ─── CTA SECTION ─── */
   .cta-section {
@@ -425,15 +438,15 @@
 
   /* ─── FOOTER ─── */
   footer {
-    background: var(--navy); color: rgba(255,255,255,0.6); padding: 56px 24px 32px;
-    border-top: 1px solid rgba(255,255,255,0.06);
+    background: var(--navy); color: rgba(255,255,255,0.72); padding: 64px 24px 40px;
+    border-top: 1px solid rgba(0,200,150,0.15);
   }
   .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; max-width:1180px; margin:0 auto; }
   .footer-brand .logo { font-size: 1.3rem; display: block; margin-bottom: 12px; }
-  .footer-tagline { font-size: 0.875rem; line-height: 1.7; color: rgba(255,255,255,0.45); max-width: 240px; font-weight: 400; }
+  .footer-tagline { font-size: 0.875rem; line-height: 1.7; color: rgba(255,255,255,0.68); max-width: 240px; font-weight: 400; }
   .footer-col h5 { font-family: var(--font-display); font-weight: 700; font-size: 0.75rem; color: var(--white); margin-bottom: 16px; letter-spacing: 1px; text-transform: uppercase; }
   .footer-col ul li { margin-bottom: 10px; }
-  .footer-col ul li a { font-size: 0.875rem; color: rgba(255,255,255,0.5); transition: color 0.2s; font-weight: 400; }
+  .footer-col ul li a { font-size: 0.875rem; color: rgba(255,255,255,0.68); transition: color 0.2s; font-weight: 400; }
   .footer-col ul li a:hover { color: var(--green); }
   .footer-langs {
     max-width:1180px; margin: 32px auto 0; padding: 20px 0;
@@ -441,23 +454,26 @@
     display: flex; flex-wrap: wrap; gap: 8px; align-items: center;
   }
   .footer-lang-btn {
-    display: inline-flex; align-items: center; justify-content: center;
+    display: inline-flex; align-items: center; gap: 6px;
     background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
-    padding: 4px 6px; border-radius: 6px; cursor: pointer;
+    padding: 6px 10px; border-radius: 8px; cursor: pointer;
     transition: all 0.2s; text-decoration: none;
+    font-size: 0.72rem; color: rgba(255,255,255,0.65);
+    font-weight: 500; letter-spacing: 0.3px;
   }
-  .footer-lang-btn img { border-radius: 3px; display: block; }
+  .footer-lang-btn img { border-radius: 2px; display: block; flex-shrink: 0; }
+  .footer-lang-name { line-height: 1; }
   .footer-lang-btn:hover { background: rgba(0,200,150,0.1); border-color: rgba(0,200,150,0.4); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,200,150,0.2); }
   .footer-lang-btn.active { border-color: rgba(0,200,150,0.5); box-shadow: 0 0 0 2px rgba(0,200,150,0.3); }
   .footer-bottom {
     max-width:1180px; margin: 24px auto 0; padding-top: 24px;
-    border-top: 1px solid rgba(255,255,255,0.08);
+    border-top: 1px solid rgba(255,255,255,0.1);
     display: flex; align-items: center; justify-content: space-between;
     flex-wrap: wrap; gap: 12px;
   }
   .footer-bottom p { font-size: 0.78rem; }
   .footer-legal { display: flex; gap: 20px; }
-  .footer-legal a { font-size: 0.78rem; color: rgba(255,255,255,0.4); transition: color 0.2s; }
+  .footer-legal a { font-size: 0.78rem; color: rgba(255,255,255,0.62); transition: color 0.2s; }
   .footer-legal a:hover { color: var(--green); }
   .rgpd-badge {
     background: rgba(0,200,150,0.1); border: 1px solid rgba(0,200,150,0.25);
@@ -1194,17 +1210,17 @@
       </div>
       <div class="security-grid">
         <div class="sec-item reveal">
-          <div class="sec-icon">🔐</div>
+          <div class="sec-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="5" y="11" width="14" height="10" rx="2" stroke="#00C896" stroke-width="1.6"/><path d="M8 11V7a4 4 0 1 1 8 0v4" stroke="#00C896" stroke-width="1.6" stroke-linecap="round"/><circle cx="12" cy="16" r="1.5" fill="#00C896"/></svg></div>
           <h4>Chiffrement SSL 256 bits</h4>
           <p>Toutes vos données sont chiffrées avec le standard bancaire le plus élevé.</p>
         </div>
         <div class="sec-item reveal delay-1">
-          <div class="sec-icon">🇪🇺</div>
+          <div class="sec-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 3L4 7v5c0 4.5 3.4 8.7 8 9.9 4.6-1.2 8-5.4 8-9.9V7L12 3z" stroke="#00C896" stroke-width="1.6" stroke-linejoin="round"/><path d="M9 12l2 2 4-4" stroke="#00C896" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
           <h4>Conformité RGPD</h4>
           <p>Vos données personnelles sont protégées conformément au règlement européen.</p>
         </div>
         <div class="sec-item reveal delay-2">
-          <div class="sec-icon">🏛️</div>
+          <div class="sec-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 21h18M3 10h18M5 10V21M9 10V21M15 10V21M19 10V21M12 3L3 10h18L12 3z" stroke="#00C896" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
           <h4>Vigilato Banca d'Italia</h4>
           <p>Istituto sotto la vigilanza della Banca d'Italia.</p>
         </div>
@@ -2015,7 +2031,7 @@
         </svg>
       </span>
       <p id="footer-tagline" class="footer-tagline">La plateforme de prêt en ligne de référence en Europe. Transparence, rapidité et sécurité pour tous vos projets.</p>
-      <div id="footer-rgpd-badge" class="rgpd-badge">🔒 Conforme RGPD · Données sécurisées</div>
+      <div id="footer-rgpd-badge" class="rgpd-badge"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 1 1 8 0v4"/></svg> Conforme RGPD · Données sécurisées</div>
     </div>
     <div class="footer-col">
       <h5 id="footer-products-h">Nos produits</h5>
@@ -4631,7 +4647,7 @@ function buildSwitcher(active) {
     var flhtml = '';
     LANGS.forEach(function(l) {
       var cls = l === active ? 'active' : '';
-      flhtml += '<a href="javascript:void(0)" class="footer-lang-btn '+cls+'" onclick="switchLang(\''+l+'\')" title="'+LANG_NAMES[l]+'">'+flagImg(l, '16x12')+'</a>';
+      flhtml += '<a href="javascript:void(0)" class="footer-lang-btn '+cls+'" onclick="switchLang(\''+l+'\')" title="'+LANG_NAMES[l]+'">'+flagImg(l, '20x15')+'<span class="footer-lang-name">'+LANG_NAMES[l]+'</span></a>';
     });
     fl.innerHTML = flhtml;
   }

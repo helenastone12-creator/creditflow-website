@@ -2103,11 +2103,10 @@
 // TOAST
 function showToast(msg, type) {
   type = type || 'success';
-  var icons = { success: '✅', error: '❌', info: 'ℹ️' };
   var container = document.getElementById('toast-container');
   var toast = document.createElement('div');
   toast.className = 'toast ' + type;
-  toast.innerHTML = '<span>' + (icons[type]||'') + '</span><span>' + msg + '</span>';
+  toast.innerHTML = '<span>' + msg + '</span>';
   container.appendChild(toast);
   toast.onclick = function() { dismissToast(toast); };
   setTimeout(function() { dismissToast(toast); }, 4000);
@@ -2139,10 +2138,11 @@ function initCookie() {
     }, 1500);
   }
 }
+var COOKIE_SAVED = { fr:'Préférences cookies enregistrées.', en:'Cookie preferences saved.', de:'Cookie-Einstellungen gespeichert.', fi:'Evästeasetukset tallennettu.', sv:'Cookieinställningar sparade.', pt:'Preferências de cookies guardadas.', it:'Preferenze cookie salvate.', es:'Preferencias de cookies guardadas.' };
 function acceptCookie() {
   localStorage.setItem('cf_cookie', 'accepted');
   closeCookie();
-  showToast('Préférences cookies enregistrées.', 'success');
+  showToast(COOKIE_SAVED[document.documentElement.lang] || COOKIE_SAVED['fr'], 'success');
 }
 function closeCookie() {
   var banner = document.getElementById('cookie-banner');

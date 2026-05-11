@@ -1398,12 +1398,12 @@
             <div style="display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap;margin-bottom:12px;">
               <div style="text-align:center;">
                 <div id="r-capital" style="font-size:0.82rem;font-weight:700;color:var(--navy);">--</div>
-                <div style="font-size:0.62rem;color:var(--slate);">(Capital)</div>
+                <div id="r-capital-label" style="font-size:0.62rem;color:var(--slate);">(Capital)</div>
               </div>
               <div style="font-size:1rem;color:var(--slate);">+</div>
               <div style="text-align:center;">
                 <div id="r-interets" style="font-size:0.82rem;font-weight:700;color:var(--navy);">--</div>
-                <div style="font-size:0.62rem;color:var(--slate);">(Intérêts)</div>
+                <div id="r-interets-label" style="font-size:0.62rem;color:var(--slate);">(Intérêts)</div>
               </div>
             </div>
             <div style="border-top:1px dashed var(--border);padding-top:10px;">
@@ -4406,12 +4406,10 @@ function applyPageTranslations(t) {
     if (rTitle) rTitle.textContent = s.recapTitle;
     var rTotalLbl = document.getElementById('r-total-label');
     if (rTotalLbl && s.total) rTotalLbl.textContent = s.total.replace(/[()]/g, '').trim();
-    var flexCont = ps.querySelector('#recap-sim > div:first-child > div:last-child');
-    if (flexCont) {
-      var capDivs = flexCont.querySelectorAll('div > div:last-child');
-      var labelTexts = [s.capital, s.interets];
-      capDivs.forEach(function(el, i) { if (labelTexts[i]) el.textContent = labelTexts[i]; });
-    }
+    var rCapLbl = document.getElementById('r-capital-label');
+    if (rCapLbl && s.capital) rCapLbl.textContent = s.capital;
+    var rIntLbl = document.getElementById('r-interets-label');
+    if (rIntLbl && s.interets) rIntLbl.textContent = s.interets;
     var rowSpans = ps.querySelectorAll('#recap-sim > div:last-child > div > span:first-child');
     var rowLabels = [s.rowMensualites, s.rowTaeg, s.rowDuree];
     rowSpans.forEach(function(el, i) { if (rowLabels[i]) el.textContent = rowLabels[i]; });

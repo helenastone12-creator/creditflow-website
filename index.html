@@ -1396,7 +1396,7 @@
           <div style="padding:16px;text-align:center;border-bottom:1px solid var(--border);">
             <p style="font-size:0.82rem;font-weight:700;color:var(--green);margin-bottom:12px;">Récapitulatif de votre simulation</p>
             <div id="r-total" style="font-size:1.6rem;font-weight:800;color:var(--green);margin-bottom:4px;">--</div>
-            <div style="font-size:0.7rem;color:var(--slate);margin-bottom:12px;">Total dû</div>
+            <div id="r-total-label" style="font-size:0.7rem;color:var(--slate);margin-bottom:12px;">Total dû</div>
             <div style="display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap;">
               <div style="text-align:center;">
                 <div id="r-capital" style="font-size:0.82rem;font-weight:700;color:var(--navy);">--</div>
@@ -4402,10 +4402,12 @@ function applyPageTranslations(t) {
     if (st3p) { var tn = st3p.firstChild; if (tn && tn.nodeType === 3) tn.nodeValue = s.monthlyDesc + ' '; }
     var rTitle = ps.querySelector('#recap-sim p');
     if (rTitle) rTitle.textContent = s.recapTitle;
+    var rTotalLbl = document.getElementById('r-total-label');
+    if (rTotalLbl && s.total) rTotalLbl.textContent = s.total.replace(/[()]/g, '').trim();
     var flexCont = ps.querySelector('#recap-sim > div:first-child > div:last-child');
     if (flexCont) {
       var capDivs = flexCont.querySelectorAll('div > div:last-child');
-      var labelTexts = [s.capital, s.interets, s.total];
+      var labelTexts = [s.capital, s.interets];
       capDivs.forEach(function(el, i) { if (labelTexts[i]) el.textContent = labelTexts[i]; });
     }
     var rowSpans = ps.querySelectorAll('#recap-sim > div:last-child > div > span:first-child');

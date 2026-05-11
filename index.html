@@ -2104,6 +2104,12 @@
 <div id="toast-container"></div>
 
 <script>
+function getErr(key) {
+  var lang = document.documentElement.lang || 'fr';
+  var t = TRANSLATIONS[lang];
+  return (t && t.errors && t.errors[key]) || (TRANSLATIONS['fr'].errors && TRANSLATIONS['fr'].errors[key]) || '';
+}
+
 // TOAST
 function showToast(msg, type) {
   type = type || 'success';
@@ -2302,7 +2308,7 @@ function toggleFaq(btn) {
 // CONTACT FORM
 async function submitForm() {
   var check = document.getElementById('rgpdCheck');
-  if (!check || !check.checked) { showToast('Veuillez accepter la politique de confidentialité.', 'error'); return; }
+  if (!check || !check.checked) { showToast(getErr('consent'), 'error'); return; }
   var prenom = document.getElementById('contact-prenom');
   var nom = document.getElementById('contact-nom');
   var email = document.getElementById('contact-email');
@@ -2310,10 +2316,10 @@ async function submitForm() {
   var objet = document.getElementById('contact-objet');
   var message = document.getElementById('contact-message');
   if (!prenom.value.trim() || !nom.value.trim() || !email.value.trim() || !message.value.trim()) {
-    showToast('Veuillez remplir tous les champs obligatoires.', 'error'); return;
+    showToast(getErr('required'), 'error'); return;
   }
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim())) {
-    showToast('Veuillez saisir une adresse email valide.', 'error'); return;
+    showToast(getErr('email'), 'error'); return;
   }
   var btn = document.querySelector('#contactForm .form-submit');
   var btnOrigText = btn ? btn.textContent : '';
@@ -2328,7 +2334,7 @@ async function submitForm() {
     }, {publicKey: EMAILJS_KEY});
   } catch(e) {
     console.error('EmailJS erreur:', e);
-    showToast('Erreur lors de l\'envoi. Veuillez réessayer.', 'error');
+    showToast(getErr('sendError'), 'error');
     if (btn) { btn.disabled = false; btn.textContent = btnOrigText; }
     return;
   }
@@ -2445,13 +2451,13 @@ async function submitLead() {
   var tel = document.getElementById('lead-tel');
   var rgpd = document.getElementById('lead-rgpd');
   if (!prenom.value.trim() || !nom.value.trim() || !email.value.trim() || !tel.value.trim()) {
-    showToast('Veuillez remplir tous les champs obligatoires.', 'error'); return;
+    showToast(getErr('required'), 'error'); return;
   }
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim())) {
-    showToast('Veuillez saisir une adresse email valide.', 'error'); return;
+    showToast(getErr('email'), 'error'); return;
   }
   if (!rgpd.checked) {
-    showToast('Veuillez accepter la politique de confidentialité.', 'error'); return;
+    showToast(getErr('consent'), 'error'); return;
   }
   var btn = document.getElementById('btn-lead-submit');
   var btnOrigText = btn ? btn.textContent : '';
@@ -2466,7 +2472,7 @@ async function submitLead() {
     }, {publicKey: EMAILJS_KEY});
   } catch(e) {
     console.error('EmailJS erreur:', e);
-    showToast('Erreur lors de l\'envoi. Veuillez réessayer.', 'error');
+    showToast(getErr('sendError'), 'error');
     if (btn) { btn.disabled = false; btn.textContent = btnOrigText; }
     return;
   }
@@ -2725,6 +2731,7 @@ var TRANSLATIONS = {
       required: 'Veuillez remplir tous les champs obligatoires.',
       email: 'Veuillez saisir une adresse email valide.',
       consent: 'Veuillez accepter la politique de confidentialité.',
+      sendError: 'Erreur lors de l\'envoi. Veuillez réessayer.',
       minAmount: 'Montant minimum : 500 €',
       maxAmount: 'Montant maximum : 1 000 000 €',
       selectType: 'Veuillez sélectionner un type de financement.'
@@ -2913,6 +2920,7 @@ var TRANSLATIONS = {
       required: 'Please fill in all required fields.',
       email: 'Please enter a valid email address.',
       consent: 'Please accept the privacy policy.',
+      sendError: 'Error sending message. Please try again.',
       minAmount: 'Minimum amount: €500',
       maxAmount: 'Maximum amount: €1,000,000',
       selectType: 'Please select a type of financing.'
@@ -3101,6 +3109,7 @@ var TRANSLATIONS = {
       required: 'Bitte füllen Sie alle Pflichtfelder aus.',
       email: 'Bitte geben Sie eine gültige E-Mail-Adresse ein.',
       consent: 'Bitte akzeptieren Sie die Datenschutzrichtlinie.',
+      sendError: 'Fehler beim Senden. Bitte versuchen Sie es erneut.',
       minAmount: 'Mindestbetrag: 500 €',
       maxAmount: 'Höchstbetrag: 1.000.000 €',
       selectType: 'Bitte wählen Sie eine Finanzierungsart aus.'
@@ -3289,6 +3298,7 @@ var TRANSLATIONS = {
       required: 'Täytä kaikki pakolliset kentät.',
       email: 'Syötä kelvollinen sähköpostiosoite.',
       consent: 'Hyväksy tietosuojakäytäntö.',
+      sendError: 'Lähetysvirhe. Yritä uudelleen.',
       minAmount: 'Vähimmäissumma: 500 €',
       maxAmount: 'Enimmäissumma: 1 000 000 €',
       selectType: 'Valitse rahoitustyyppi.'
@@ -3477,6 +3487,7 @@ var TRANSLATIONS = {
       required: 'Vänligen fyll i alla obligatoriska fält.',
       email: 'Vänligen ange en giltig e-postadress.',
       consent: 'Vänligen godkänn integritetspolicyn.',
+      sendError: 'Fel vid sändning. Försök igen.',
       minAmount: 'Minimibelopp: 500 €',
       maxAmount: 'Maximibelopp: 1 000 000 €',
       selectType: 'Välj en typ av finansiering.'
@@ -3665,6 +3676,7 @@ var TRANSLATIONS = {
       required: 'Por favor, preencha todos os campos obrigatórios.',
       email: 'Por favor, introduza um endereço de email válido.',
       consent: 'Por favor, aceite a política de privacidade.',
+      sendError: 'Erro ao enviar. Por favor, tente novamente.',
       minAmount: 'Montante mínimo: 500 €',
       maxAmount: 'Montante máximo: 1 000 000 €',
       selectType: 'Por favor, selecione um tipo de financiamento.'
@@ -3853,6 +3865,7 @@ var TRANSLATIONS = {
       required: 'Si prega di compilare tutti i campi obbligatori.',
       email: 'Si prega di inserire un indirizzo email valido.',
       consent: 'Si prega di accettare l\'informativa sulla privacy.',
+      sendError: 'Errore durante l\'invio. Riprovare.',
       minAmount: 'Importo minimo: 500 €',
       maxAmount: 'Importo massimo: 1.000.000 €',
       selectType: 'Si prega di selezionare un tipo di finanziamento.'
@@ -4041,6 +4054,7 @@ var TRANSLATIONS = {
       required: 'Por favor, rellena todos los campos obligatorios.',
       email: 'Por favor, introduce una dirección de email válida.',
       consent: 'Por favor, acepta la política de privacidad.',
+      sendError: 'Error al enviar. Por favor, inténtalo de nuevo.',
       minAmount: 'Importe mínimo: 500 €',
       maxAmount: 'Importe máximo: 1.000.000 €',
       selectType: 'Por favor, selecciona un tipo de financiación.'

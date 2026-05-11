@@ -4352,6 +4352,11 @@ function applyPageTranslations(t) {
     if (stitle) stitle.textContent = s.stepTitle;
     var ssub = document.getElementById('step-subtitle');
     if (ssub) ssub.textContent = s.stepSubtitle;
+    stepTitles[1] = { title: s.stepTitle, subtitle: s.stepSubtitle };
+    if (s.step2Title) stepTitles[2] = { title: s.step2Title, subtitle: s.step2Subtitle };
+    if (s.step3Title) stepTitles[3] = { title: s.step3Title, subtitle: s.step3Subtitle };
+    if (s.durationFor) { simLang.durationFor = s.durationFor; simLang.durationMonths = s.durationMonths; simLang.perMonth = s.perMonth; }
+    if (s.formStepTitle) { simLang.formStepTitle = s.formStepTitle; simLang.formStepSubtitle = s.formStepSubtitle; }
     if (s.choices) {
       ps.querySelectorAll('#step-1 .sim-choice').forEach(function(ch, i) {
         if (!s.choices[i]) return;

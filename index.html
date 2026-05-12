@@ -2463,26 +2463,35 @@ async function submitLead() {
   if (!rgpd.checked) {
     showToast(getErr('consent'), 'error'); return;
   }
-  var btn = document.getElementById('btn-lead-submit');
-  var btnOrigText = btn ? btn.textContent : '';
-  if (btn) { btn.disabled = true; btn.textContent = getSendingText(); }
-  try {
-    await ensureEmailJS();
-    await emailjs.send(EMAILJS_SERVICE, EMAILJS_TEMPLATE, {
-      title: 'Nouvelle simulation — ' + (simData.projet || '--'),
-      name: prenom.value.trim() + ' ' + nom.value.trim(),
-      email: email.value.trim(),
-      message: 'Projet : ' + (simData.projet || '--') + '\nMontant : ' + (simData.montant || '--') + '\nMensualité : ' + (simData.duree || '--') + '\nTéléphone : ' + tel.value.trim()
-    }, {publicKey: EMAILJS_KEY});
-  } catch(e) {
-    console.error('EmailJS erreur:', e);
-    showToast(getErr('sendError'), 'error');
-    if (btn) { btn.disabled = false; btn.textContent = btnOrigText; }
-    return;
-  }
-  if (btn) { btn.disabled = false; }
-  document.getElementById('sim-lead-form').style.display = 'none';
-  document.getElementById('sim-lead-success').style.display = 'block';
+    var lang = document.documentElement.lang || 'fr';
+    var simT = (TRANSLATIONS[lang] && TRANSLATIONS[lang].primary) ? TRANSLATIONS[lang].primary : null;
+    var simS = simT ? simT.sim : null;
+    var simF = simT ? simT.form : null;
+    var lblSimTitle = {fr:'Nouvelle simulation',en:'New simulation',de:'Neue Simulation',fi:'Uusi simulaatio',sv:'Ny simulering',pt:'Nova simulação',it:'Nuova simulazione',es:'Nueva simulación'}[lang] || 'Nouvelle simulation';
+    var lblProjet   = {fr:'Projet',en:'Project',de:'Projekt',fi:'Projekti',sv:'Projekt',pt:'Projeto',it:'Progetto',es:'Proyecto'}[lang] || 'Projet';
+    var lblMontant  = {fr:'Montant',en:'Amount',de:'Betrag',fi:'Summa',sv:'Belopp',pt:'Montante',it:'Importo',es:'Importe'}[lang] || 'Montant';
+    var lblMensual  = (simS && simS.rowMensualites) ? simS.rowMensualites : 'Mensualité :';
+    var lblTel      = (simF && simF.phone) ? simF.phone : 'Téléphone';
+    var btn = document.getElementById('btn-lead-submit');
+    var btnOrigText = btn ? btn.textContent : '';
+    if (btn) { btn.disabled = true; btn.textContent = getSendingText(); }
+    try {
+      await ensureEmailJS();
+      await emailjs.send(EMAILJS_SERVICE, EMAILJS_TEMPLATE, {
+        title: lblSimTitle + ' — ' + (simData.projet || '--'),
+        name: prenom.value.trim() + ' ' + nom.value.trim(),
+        email: email.value.trim(),
+        message: lblProjet + ' : ' + (simData.projet || '--') + '\n' + lblMontant + ' : ' + (simData.montant || '--') + '\n' + lblMensual + ' ' + (simData.duree || '--') + '\n' + lblTel + ' : ' + tel.value.trim()
+      }, {publicKey: EMAILJS_KEY});
+    } catch(e) {
+      console.error('EmailJS erreur:', e);
+      showToast(getErr('sendError'), 'error');
+      if (btn) { btn.disabled = false; btn.textContent = btnOrigText; }
+      return;
+    }
+    if (btn) { btn.disabled = false; }
+    document.getElementById('sim-lead-form').style.display = 'none';
+    document.getElementById('sim-lead-success').style.display = 'block';
 }
 
 function validateMontant() {

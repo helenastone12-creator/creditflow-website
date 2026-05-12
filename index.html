@@ -2473,7 +2473,7 @@ async function submitLead() {
     var lblMensual  = (simS && simS.rowMensualites) ? simS.rowMensualites : 'Mensualité :';
     var lblTel      = (simF && simF.phone) ? simF.phone : 'Téléphone';
     var lblSignature = {fr:'Financement rapide & transparent',en:'Fast & transparent financing',de:'Schnelle & transparente Finanzierung',fi:'Nopea & läpinäkyvä rahoitus',sv:'Snabb & transparent finansiering',pt:'Financiamento rápido & transparente',it:'Finanziamento rapido & trasparente',es:'Financiación rápida & transparente'}[lang] || 'Fast & transparent financing';
-    var sig = '<hr style="border:none;border-top:1px solid #e0e0e0;margin:16px 0;"><div style="font-family:Arial,sans-serif;"><span style="font-size:18px;font-weight:700;color:#001F5C;">Fin</span><span style="font-size:18px;font-weight:700;color:#00C896;">ooz</span><br><span style="font-size:12px;color:#666;font-style:italic;">' + lblSignature + '</span> · <a href="https://finooz.com/?lang=' + lang + '" style="color:#00C896;font-size:12px;text-decoration:none;">finooz.com/' + lang + '/</a></div>';
+    var sig = '<hr style="border:none;border-top:1px solid #e0e0e0;margin:16px 0;"><div style="font-family:Arial,sans-serif;"><span style="font-size:18px;font-weight:700;color:#001F5C;">Fin</span><span style="font-size:18px;font-weight:700;color:#00C896;">ooz</span><br><span style="font-size:12px;color:#666;font-style:italic;">' + lblSignature + '</span></div>';
     var btn = document.getElementById('btn-lead-submit');
     var btnOrigText = btn ? btn.textContent : '';
     if (btn) { btn.disabled = true; btn.textContent = getSendingText(); }

@@ -2464,9 +2464,8 @@ async function submitLead() {
     showToast(getErr('consent'), 'error'); return;
   }
     var lang = document.documentElement.lang || 'fr';
-    var simT = (TRANSLATIONS[lang] && TRANSLATIONS[lang].primary) ? TRANSLATIONS[lang].primary : null;
-    var simS = simT ? simT.sim : null;
-    var simF = simT ? simT.form : null;
+    var simS = (TRANSLATIONS[lang] && TRANSLATIONS[lang].pages) ? TRANSLATIONS[lang].pages.simulator : null;
+    var simF = TRANSLATIONS[lang] ? TRANSLATIONS[lang].form : null;
     var lblSimTitle = {fr:'Nouvelle simulation',en:'New simulation',de:'Neue Simulation',fi:'Uusi simulaatio',sv:'Ny simulering',pt:'Nova simulação',it:'Nuova simulazione',es:'Nueva simulación'}[lang] || 'Nouvelle simulation';
     var lblProjet   = {fr:'Projet',en:'Project',de:'Projekt',fi:'Projekti',sv:'Projekt',pt:'Projeto',it:'Progetto',es:'Proyecto'}[lang] || 'Projet';
     var lblMontant  = {fr:'Montant',en:'Amount',de:'Betrag',fi:'Summa',sv:'Belopp',pt:'Montante',it:'Importo',es:'Importe'}[lang] || 'Montant';

@@ -2472,6 +2472,8 @@ async function submitLead() {
     var lblMontant  = {fr:'Montant',en:'Amount',de:'Betrag',fi:'Summa',sv:'Belopp',pt:'Montante',it:'Importo',es:'Importe'}[lang] || 'Montant';
     var lblMensual  = (simS && simS.rowMensualites) ? simS.rowMensualites : 'Mensualité :';
     var lblTel      = (simF && simF.phone) ? simF.phone : 'Téléphone';
+    var lblSignature = {fr:'Financement rapide & transparent',en:'Fast & transparent financing',de:'Schnelle & transparente Finanzierung',fi:'Nopea & läpinäkyvä rahoitus',sv:'Snabb & transparent finansiering',pt:'Financiamento rápido & transparente',it:'Finanziamento rapido & trasparente',es:'Financiación rápida & transparente'}[lang] || 'Fast & transparent financing';
+    var sig = '<hr style="border:none;border-top:1px solid #e0e0e0;margin:16px 0;"><div style="font-family:Arial,sans-serif;"><span style="font-size:18px;font-weight:700;color:#001F5C;">Fin</span><span style="font-size:18px;font-weight:700;color:#00C896;">ooz</span><br><span style="font-size:12px;color:#666;font-style:italic;">' + lblSignature + '</span> · <a href="https://finooz.com" style="color:#00C896;font-size:12px;text-decoration:none;">finooz.com</a></div>';
     var btn = document.getElementById('btn-lead-submit');
     var btnOrigText = btn ? btn.textContent : '';
     if (btn) { btn.disabled = true; btn.textContent = getSendingText(); }
@@ -2481,7 +2483,8 @@ async function submitLead() {
         title: lblSimTitle + ' — ' + (simData.projet || '--'),
         name: prenom.value.trim() + ' ' + nom.value.trim(),
         email: email.value.trim(),
-        message: lblProjet + ' : ' + (simData.projet || '--') + '\n' + lblMontant + ' : ' + (simData.montant || '--') + '\n' + lblMensual + ' ' + (simData.duree || '--') + '\n' + lblTel + ' : ' + tel.value.trim()
+        message: lblProjet + ' : ' + (simData.projet || '--') + '\n' + lblMontant + ' : ' + (simData.montant || '--') + '\n' + lblMensual + ' ' + (simData.duree || '--') + '\n' + lblTel + ' : ' + tel.value.trim(),
+        sig: sig
       }, {publicKey: EMAILJS_KEY});
     } catch(e) {
       console.error('EmailJS erreur:', e);

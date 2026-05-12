@@ -2211,19 +2211,19 @@ function continuerSim() {
   document.getElementById('page-simulateur').classList.add('active');
   window.scrollTo({ top: 0, behavior: 'smooth' });
   // Pré-remplir le projet et aller directement à l'étape 2
-  var labels = { immobilier: 'Immobilier', auto: 'Auto', personnel: 'Personnel', travaux: 'Travaux', voyage: 'Voyage', autres: 'Autres' };
-  simData.projet = labels[selectedTileType] || selectedTileType;
+  var tileIndex = { immobilier:0, auto:1, personnel:2, travaux:3, voyage:4, autres:5 };
+  var lang = document.documentElement.lang || 'fr';
+  var simChoices = (TRANSLATIONS[lang] && TRANSLATIONS[lang].pages && TRANSLATIONS[lang].pages.simulator) ? TRANSLATIONS[lang].pages.simulator.choices : null;
+  var idx = tileIndex[selectedTileType];
+  simData.projet = (simChoices && idx !== undefined && simChoices[idx]) ? simChoices[idx].t : selectedTileType;
   // Cocher la bonne tuile à l'étape 1
   setTimeout(function() {
     var choices = document.querySelectorAll('#step-1 .sim-choice');
-    var labelMap = { immobilier: 'Immobilier', auto: 'Auto', personnel: 'Personnel', travaux: 'Travaux', voyage: 'Voyage', autres: 'Autres' };
-    var targetLabel = labelMap[selectedTileType] || selectedTileType;
     choices.forEach(function(c) {
       c.classList.remove('selected');
       var strongEl = c.querySelector('strong');
-      if (strongEl && strongEl.textContent.trim() === targetLabel) {
+      if (strongEl && strongEl.textContent.trim() === simData.projet) {
         c.classList.add('selected');
-        simData.projet = targetLabel;
       }
     });
     var btn1 = document.getElementById('btn-step1');
@@ -2383,7 +2383,8 @@ function selectChoice(el, type, value) {
   var parent = el.parentElement;
   parent.querySelectorAll('.sim-choice').forEach(function(c) { c.classList.remove('selected'); });
   el.classList.add('selected');
-  simData[type] = value;
+  var strongEl = el.querySelector('strong');
+  simData[type] = strongEl ? strongEl.textContent.trim() : value;
   var btnMap = { projet: 'btn-step1', duree: 'btn-step3' };
   var btnId = btnMap[type];
   if (btnId) { document.getElementById(btnId).disabled = false; }

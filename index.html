@@ -2464,7 +2464,8 @@ async function submitLead() {
   if (!rgpd.checked) {
     showToast(getErr('consent'), 'error'); return;
   }
-    var lang = document.documentElement.lang || 'fr';
+    var lang = document.documentElement.lang || localStorage.getItem('finooz-lang') || 'fr';
+    if (!TRANSLATIONS[lang]) lang = 'fr';
     var simS = (TRANSLATIONS[lang] && TRANSLATIONS[lang].pages) ? TRANSLATIONS[lang].pages.simulator : null;
     var simF = TRANSLATIONS[lang] ? TRANSLATIONS[lang].form : null;
     var lblSimTitle = {fr:'Nouvelle simulation',en:'New simulation',de:'Neue Simulation',fi:'Uusi simulaatio',sv:'Ny simulering',pt:'Nova simulação',it:'Nuova simulazione',es:'Nueva simulación'}[lang] || 'Nouvelle simulation';
